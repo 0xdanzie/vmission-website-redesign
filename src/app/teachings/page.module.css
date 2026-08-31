@@ -1,0 +1,63 @@
+/* TEACHINGS PAGE STYLES */
+
+.hero {
+  padding-block: var(--space-20) var(--space-16);
+  background: linear-gradient(175deg, var(--vm-bg-sand) 0%, var(--vm-bg-muted) 100%);
+  border-bottom: 1px solid var(--vm-border-light);
+}
+
+.badge {
+  display: inline-block;
+  font-size: var(--text-meta);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vm-saffron);
+  margin-bottom: var(--space-2);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-hero);
+  font-weight: 600;
+  color: var(--vm-text);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-4);
+}
+
+.lead {
+  font-size: var(--text-lead);
+  color: var(--vm-text-muted);
+  line-height: var(--lh-body);
+}
+
+/* Search Row */
+.searchRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.countText {
+  font-size: 0.875rem;
+  color: var(--vm-text-faint);
+}
+
+.countText strong {
+  color: var(--vm-text);
+}
+
+/* Filters Group */
+.filtersGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+  padding: var(--space-4);
+  background: var(--vm-bg-muted);
+  border-radius: var(--vm-radius-lg);
+  border: 1px solid var(--vm-border-light);
+}

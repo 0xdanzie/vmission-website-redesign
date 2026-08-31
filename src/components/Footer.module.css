@@ -1,0 +1,262 @@
+.footer {
+  background: var(--vm-bg-dark);
+  color: var(--vm-text-inverse);
+  padding-block: var(--space-16) var(--space-8);
+  margin-top: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: var(--space-10);
+  margin-bottom: var(--space-10);
+}
+
+/* Brand Column */
+.brand {}
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.om {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--vm-saffron);
+  line-height: 1;
+}
+
+.logoName {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--vm-text-inverse);
+}
+
+.mission {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.65;
+  margin-bottom: var(--space-5);
+}
+
+.address {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.50);
+  line-height: 1.75;
+  margin-bottom: var(--space-4);
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.contactLink {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.55);
+  transition: color var(--vm-ease-fast);
+}
+
+.contactLink:hover {
+  color: var(--vm-saffron-light);
+}
+
+/* Nav Column */
+.colHead {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: var(--space-4);
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.navLink {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.60);
+  transition: color var(--vm-ease-fast);
+  line-height: 1.4;
+}
+
+.navLink:hover {
+  color: var(--vm-text-inverse);
+}
+
+/* Trust Column */
+.trust {
+  margin-bottom: var(--space-6);
+}
+
+.trustName {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.80);
+  margin-bottom: var(--space-2);
+  line-height: 1.4;
+}
+
+.trustDetail {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.6;
+  margin-bottom: var(--space-1);
+}
+
+.taxBadge {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--vm-brass);
+  margin-top: 4px;
+}
+
+/* Actions Column */
+.actionsCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.donateBtn {
+  display: block;
+  text-align: center;
+  padding: 11px var(--space-5);
+  background: var(--vm-saffron);
+  color: var(--vm-text-inverse);
+  border-radius: var(--vm-radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background var(--vm-ease-fast);
+}
+
+.donateBtn:hover {
+  background: var(--vm-saffron-hover);
+}
+
+.waBtn {
+  display: block;
+  text-align: center;
+  padding: 11px var(--space-5);
+  border: 1px solid rgba(255,255,255,0.20);
+  color: rgba(255,255,255,0.70);
+  border-radius: var(--vm-radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: border-color var(--vm-ease-fast), color var(--vm-ease-fast);
+}
+
+.waBtn:hover {
+  border-color: rgba(255,255,255,0.50);
+  color: var(--vm-text-inverse);
+}
+
+.publication {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.pubLabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.30);
+  margin-bottom: var(--space-1);
+}
+
+.pubLink {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.50);
+  transition: color var(--vm-ease-fast);
+}
+
+.pubLink:hover {
+  color: var(--vm-saffron-light);
+}
+
+.adminGate {
+  margin-top: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.adminSectionHead {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 4px;
+}
+
+.adminLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--vm-brass);
+  text-decoration: none;
+  transition: all var(--vm-ease-fast);
+}
+
+.adminLink:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+/* Bottom Bar */
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-top: var(--space-8);
+  border-top: 1px solid rgba(255,255,255,0.10);
+}
+
+.copy {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.35);
+}
+
+.legalLinks {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.30);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

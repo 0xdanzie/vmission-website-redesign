@@ -1,0 +1,73 @@
+.item {
+  display: flex;
+  gap: var(--space-6);
+  position: relative;
+}
+
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 100px;
+}
+
+.timeBadge {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--vm-saffron);
+  background: var(--vm-saffron-light);
+  padding: 4px 12px;
+  border-radius: var(--vm-radius-pill);
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.line {
+  flex: 1;
+  width: 2px;
+  background: var(--vm-border);
+  margin-block: var(--space-2);
+  min-height: 48px;
+}
+
+.last .line {
+  display: none;
+}
+
+.content {
+  padding-bottom: var(--space-8);
+  flex: 1;
+}
+
+.last .content {
+  padding-bottom: 0;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--vm-text);
+  margin-bottom: var(--space-2);
+}
+
+.description {
+  font-size: 0.9375rem;
+  color: var(--vm-text-muted);
+  line-height: var(--lh-relaxed);
+}
+
+@media (max-width: 640px) {
+  .item {
+    gap: var(--space-4);
+  }
+  .leftCol {
+    width: 75px;
+  }
+  .timeBadge {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+  }
+}

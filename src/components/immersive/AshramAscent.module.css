@@ -1,0 +1,592 @@
+/* ============================================================
+   ASHRAM ASCENT — SPATIAL 3D CONTINUOUS ARRIVAL SYSTEM
+   Real V-Mission Photography + CSS 3D Transforms + Perspective
+   No WebGL/Three.js overhead. 60fps GPU acceleration.
+   ============================================================ */
+
+.root {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: #110D0A;
+  overflow: hidden;
+  --ascend-duration: 850ms;
+  --threshold-duration: 750ms;
+  --enter-duration: 600ms;
+  transition: opacity 500ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.rootFading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.viewport3D {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+/* ---------- Shared Scene Architecture ---------- */
+.scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform-style: preserve-3d;
+  transition: opacity 500ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform var(--ascend-duration) cubic-bezier(0.22, 0.61, 0.23, 1);
+  will-change: opacity, transform;
+}
+
+.sceneActive {
+  opacity: 1;
+}
+
+.sceneSpent {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 350ms ease;
+}
+
+.sceneImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 65%;
+  display: block;
+  filter: contrast(1.04) saturate(1.04) brightness(0.98);
+}
+
+/* ---------- SCENE 1-4: Unified Cinematic Environment with Continuous Camera Push ---------- */
+.sceneCinematicEntrance {
+  transform: translate3d(0, 0, 0) scale(1);
+  z-index: 1;
+  transform-origin: 50% 55%;
+  animation: cameraDrift 16s ease-out alternate infinite;
+}
+
+@keyframes cameraDrift {
+  0% { transform: scale(1) translate3d(0, 0, 0); }
+  100% { transform: scale(1.03) translate3d(0, -1%, 0); }
+}
+
+.sceneCinematicEntrance.sceneAscending {
+  animation: none;
+  transform: translate3d(0, -6%, 90px) scale(1.32);
+  transition: transform var(--ascend-duration) cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sceneCinematicEntrance.sceneThreshold,
+.sceneCinematicEntrance.sceneThresholdStage {
+  animation: none;
+  transform: translate3d(0, -10%, 190px) scale(1.88);
+  transition: transform var(--threshold-duration) cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sceneCinematicEntrance.sceneEntering {
+  animation: none;
+  transform: translate3d(0, -14%, 320px) scale(2.7);
+  filter: contrast(1.1) brightness(1.3);
+  transition: transform var(--enter-duration) cubic-bezier(0.7, 0, 0.3, 1),
+              filter var(--enter-duration) ease;
+}
+
+.facadeDepthVignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 45%,
+    rgba(20, 16, 13, 0) 35%,
+    rgba(20, 16, 13, 0.35) 75%,
+    rgba(20, 16, 13, 0.75) 100%
+  );
+  pointer-events: none;
+}
+
+.sanctumWarmthGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 55%,
+    rgba(255, 215, 140, 0.25) 0%,
+    rgba(217, 93, 57, 0.1) 45%,
+    transparent 75%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.domeCaption {
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  transform: translate(-50%, 14px);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  transition: opacity 700ms ease 300ms, transform 700ms cubic-bezier(0.16, 1, 0.3, 1) 300ms;
+  pointer-events: none;
+}
+
+.domeCaptionVisible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.domeSanskrit {
+  font-family: var(--font-serif-body, serif);
+  font-size: 1.15rem;
+  color: #F8DFC0;
+  letter-spacing: 0.06em;
+}
+
+.domeName {
+  font-family: var(--font-serif, serif);
+  font-size: clamp(1.3rem, 2.8vw, 2rem);
+  color: #FFFBF4;
+  font-weight: 600;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
+}
+
+.domeSub {
+  font-size: 0.8125rem;
+  color: rgba(255, 247, 235, 0.75);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- SCENE 4 & 5: Spatial 3D Carved Sanctum Doors with Outward Hinge ---------- */
+.sceneThreshold {
+  z-index: 4;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+
+.innerSanctumWrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.beyondImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  transform: translate3d(0, 0, -50px) scale(1.08);
+  transition: transform 1600ms cubic-bezier(0.16, 1, 0.3, 1);
+  filter: contrast(1.05) brightness(0.95);
+}
+
+.sceneThreshold.sceneActive .beyondImg {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.sceneEntering .beyondImg {
+  transform: translate3d(0, 0, 80px) scale(1.15);
+  filter: contrast(1.08) brightness(1.08);
+}
+
+.sanctumWarmthGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 215, 140, 0.28) 0%,
+    rgba(217, 93, 57, 0.12) 50%,
+    transparent 80%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* 3D Door Portal */
+.doorPortal3D {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  transform-style: preserve-3d;
+  perspective: 1500px;
+}
+
+.doorLeaf {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform var(--enter-duration) cubic-bezier(0.7, 0, 0.25, 1);
+}
+
+.doorLeafLeft {
+  transform-origin: left center;
+  transform: rotateY(0deg) translateZ(0);
+}
+
+.doorLeafRight {
+  transform-origin: right center;
+  transform: rotateY(0deg) translateZ(0);
+}
+
+.doorLeafLeft.doorLeafOpen {
+  transform: rotateY(-88deg) translateZ(20px);
+}
+
+.doorLeafRight.doorLeafOpen {
+  transform: rotateY(88deg) translateZ(20px);
+}
+
+.doorLeafTexture {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.75);
+}
+
+.doorLeafLeft .doorLeafTexture {
+  background-position: left top;
+  border-right: 2px solid rgba(197, 160, 89, 0.4);
+}
+
+.doorLeafRight .doorLeafTexture {
+  background-position: right top;
+  border-left: 2px solid rgba(197, 160, 89, 0.4);
+}
+
+.doorShadowOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.5) 100%);
+  pointer-events: none;
+}
+
+.doorArchTrim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(90deg, #9B783E 0%, #E6C87C 50%, #9B783E 100%);
+  z-index: 3;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- Dynamic Light Bloom Flare ---------- */
+.lightBloom {
+  position: absolute;
+  inset: -25%;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(255, 225, 175, 0.4) 0%,
+    rgba(227, 163, 97, 0.15) 30%,
+    transparent 65%
+  );
+  opacity: 0;
+  mix-blend-mode: screen;
+  transition: opacity 1200ms ease;
+}
+
+.lightBloomActive {
+  opacity: 1;
+}
+
+.lightBloomFlash {
+  opacity: 1;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 245, 220, 0.8) 0%,
+    rgba(235, 175, 110, 0.35) 40%,
+    transparent 80%
+  );
+}
+
+/* ---------- HUD / UI Overlay ---------- */
+.hud {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  background: linear-gradient(
+    180deg,
+    rgba(17, 13, 10, 0.65) 0%,
+    rgba(17, 13, 10, 0.05) 32%,
+    rgba(17, 13, 10, 0.15) 60%,
+    rgba(17, 13, 10, 0.8) 100%
+  );
+  transition: opacity 650ms ease, transform 650ms ease;
+}
+
+.hudFading {
+  opacity: 0;
+  transform: translateY(-16px);
+  pointer-events: none;
+}
+
+.hudTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hudBrandBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: #FFFBF4;
+}
+
+.omMark {
+  font-family: var(--font-serif, serif);
+  font-size: 1.75rem;
+  color: #E3A361;
+  line-height: 1;
+  text-shadow: 0 0 16px rgba(227, 163, 97, 0.4);
+}
+
+.hudMission {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin: 0;
+  color: #FFFBF4;
+}
+
+.hudLocation {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: rgba(255, 247, 235, 0.75);
+  margin: 2px 0 0;
+}
+
+.hudCenter {
+  margin: auto;
+  text-align: center;
+  max-width: 680px;
+  padding-bottom: 3vh;
+}
+
+.hudSanskrit {
+  font-family: var(--font-serif-body, serif);
+  font-size: 1.15rem;
+  color: #F8DFC0;
+  margin: 0 0 0.6rem;
+  letter-spacing: 0.04em;
+}
+
+.hudTitle {
+  font-family: var(--font-serif, serif);
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  color: #FFFBF4;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.55);
+}
+
+.hudTagline {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  color: rgba(255, 247, 235, 0.85);
+  margin: 0 auto 2rem;
+  max-width: 520px;
+  line-height: 1.5;
+}
+
+.hudActionWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btnEnter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 2.4rem;
+  background: linear-gradient(135deg, #D95D39 0%, #BF4D2B 100%);
+  color: #FFF7EE;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(217, 93, 57, 0.45);
+  transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
+}
+
+.btnEnter:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 36px rgba(217, 93, 57, 0.55);
+  filter: brightness(1.08);
+}
+
+.hudHint {
+  font-size: 0.78rem;
+  color: rgba(255, 247, 235, 0.6);
+  letter-spacing: 0.04em;
+}
+
+.hudBottomBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: rgba(255, 247, 235, 0.5);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------- Skip Button ---------- */
+.btnSkip {
+  position: absolute;
+  top: clamp(1rem, 3vw, 1.75rem);
+  right: clamp(1rem, 3vw, 1.75rem);
+  z-index: 20;
+  padding: 0.55rem 1.2rem;
+  background: rgba(20, 16, 13, 0.55);
+  border: 1px solid rgba(255, 247, 235, 0.35);
+  color: #FFFBF4;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+.btnSkip:hover,
+.btnSkip:focus-visible {
+  background: rgba(20, 16, 13, 0.85);
+  border-color: rgba(255, 247, 235, 0.65);
+  transform: scale(1.04);
+}
+
+/* ---------- Reduced-Motion Fallback ---------- */
+.stillLayer {
+  position: absolute;
+  inset: 0;
+  transition: opacity 500ms ease;
+}
+
+.stillFading {
+  opacity: 0;
+}
+
+.stillImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stillOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 16, 13, 0.4) 0%, rgba(20, 16, 13, 0.75) 100%);
+}
+
+.stillContent {
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #FFFBF4;
+  width: 90%;
+  max-width: 500px;
+}
+
+.brandKicker {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  margin: 0 0 0.5rem;
+  color: #F8DFC0;
+}
+
+.brandTitle {
+  font-family: var(--font-serif, serif);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  margin: 0 0 1.5rem;
+}
+
+/* ---------- MOBILE OPTIMIZATIONS (375px - 640px) ---------- */
+@media (max-width: 640px) {
+  .root {
+    --ascend-duration: 700ms;
+    --threshold-duration: 600ms;
+    --enter-duration: 500ms;
+  }
+
+  .viewport3D {
+    perspective: 800px;
+  }
+
+  .sceneFacade.sceneAscending {
+    transform: translate3d(0, -9%, 80px) scale(1.18);
+  }
+
+  .sceneElevated.sceneActive {
+    transform: translate3d(0, -5%, 50px) scale(1.12);
+  }
+
+  .doorLeafLeft.doorLeafOpen {
+    transform: rotateY(-78deg);
+  }
+
+  .doorLeafRight.doorLeafOpen {
+    transform: rotateY(78deg);
+  }
+
+  .hud {
+    padding: 1.25rem;
+  }
+
+  .hudBottomBar {
+    display: none;
+  }
+
+  .hudTitle {
+    font-size: 2.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .hudTagline {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .btnEnter {
+    padding: 0.85rem 1.8rem;
+    font-size: 0.9375rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene,
+  .doorLeaf,
+  .lightBloom,
+  .hud {
+    transition-duration: 1ms !important;
+  }
+}

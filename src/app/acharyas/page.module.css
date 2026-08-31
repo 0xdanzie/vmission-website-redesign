@@ -1,0 +1,68 @@
+/* ACHARYAS PAGE STYLES */
+
+.hero {
+  padding-block: var(--space-20) var(--space-16);
+  background: linear-gradient(175deg, var(--vm-bg-sand) 0%, var(--vm-bg-muted) 100%);
+  border-bottom: 1px solid var(--vm-border-light);
+}
+
+.badge {
+  display: inline-block;
+  font-size: var(--text-meta);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vm-saffron);
+  margin-bottom: var(--space-2);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-hero);
+  font-weight: 600;
+  color: var(--vm-text);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-4);
+}
+
+.lead {
+  font-size: var(--text-lead);
+  color: var(--vm-text-muted);
+  line-height: var(--lh-body);
+}
+
+/* Lineage Card */
+.lineageCard {
+  background: var(--vm-bg-surface);
+  border: 1px solid var(--vm-border-light);
+  border-radius: var(--vm-radius-xl);
+  padding: var(--space-8);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  box-shadow: var(--vm-shadow-sm);
+}
+
+.omSymbol {
+  font-family: var(--font-serif);
+  font-size: 2.75rem;
+  color: var(--vm-saffron);
+  line-height: 1;
+  opacity: 0.35;
+}
+
+.lineageTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-h3);
+  font-weight: 600;
+  color: var(--vm-text);
+}
+
+.lineageText {
+  font-size: 0.9375rem;
+  color: var(--vm-text-muted);
+  line-height: var(--lh-relaxed);
+  max-width: 600px;
+}

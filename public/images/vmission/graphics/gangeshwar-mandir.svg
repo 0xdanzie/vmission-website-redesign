@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="sanctumBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2D231E" />
+      <stop offset="60%" stop-color="#4A3B32" />
+      <stop offset="100%" stop-color="#342822" />
+    </linearGradient>
+    <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFA834" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#E86E1C" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#2D231E" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="brassGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8D28A" />
+      <stop offset="50%" stop-color="#C5A059" />
+      <stop offset="100%" stop-color="#8C682A" />
+    </linearGradient>
+    <linearGradient id="lingamGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1A1817" />
+      <stop offset="50%" stop-color="#383533" />
+      <stop offset="100%" stop-color="#1A1817" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sanctum Backdrop -->
+  <rect width="800" height="600" fill="url(#sanctumBg)" />
+
+  <!-- Temple Stone Archway Framing -->
+  <path d="M100 600 L100 240 Q400 60 700 240 L700 600 Z" fill="#241B16" stroke="#C5A059" stroke-width="2" />
+  <path d="M120 600 L120 250 Q400 80 680 250 L680 600 Z" fill="none" stroke="#C5A059" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.6" />
+
+  <!-- Sanctum Golden Glow -->
+  <circle cx="400" cy="340" r="260" fill="url(#lampGlow)" />
+
+  <!-- Consecrated Shivalinga Peetham (Pedestal) -->
+  <!-- Base Plinth -->
+  <rect x="260" y="440" width="280" height="40" fill="#201C1A" rx="4" stroke="#4A3F38" stroke-width="2" />
+  <path d="M220 440 L580 440 L560 400 L240 400 Z" fill="#1C1816" stroke="#4A3F38" stroke-width="2" />
+  <!-- Yoni Peetham (Snana Peetha Spout) -->
+  <path d="M300 400 C300 370 500 370 500 400 L560 400 L560 415 L500 415 L500 420 L300 420 Z" fill="#25211E" />
+
+  <!-- Sri Shivalingam (Dark Polished Stone) -->
+  <path d="M360 400 L360 290 C360 225 440 225 440 290 L440 400 Z" fill="url(#lingamGrad)" />
+  
+  <!-- Sacred Tripundra (Three Horizontal White Vibhuti Lines with Kumkum Dot) -->
+  <g opacity="0.9">
+    <line x1="382" y1="280" x2="418" y2="280" stroke="#FAF5EE" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="380" y1="288" x2="420" y2="288" stroke="#FAF5EE" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="382" y1="296" x2="418" y2="296" stroke="#FAF5EE" stroke-width="3.5" stroke-linecap="round" />
+    <circle cx="400" cy="288" r="3.5" fill="#D95D39" />
+  </g>
+
+  <!-- Brass Abhisheka Patra / Dhara Vessel Suspended Above -->
+  <path d="M375 140 L425 140 L415 180 L385 180 Z" fill="url(#brassGrad)" />
+  <circle cx="400" cy="180" r="10" fill="url(#brassGrad)" />
+  <line x1="400" y1="60" x2="400" y2="140" stroke="#C5A059" stroke-width="2" />
+  <!-- Water Drops -->
+  <circle cx="400" cy="210" r="3" fill="#E8D28A" opacity="0.8" />
+  <circle cx="400" cy="235" r="2.5" fill="#E8D28A" opacity="0.8" />
+
+  <!-- Left Traditional Brass Kuthuvilakku (Deepam) -->
+  <g transform="translate(160, 320)">
+    <circle cx="0" cy="-20" r="40" fill="url(#lampGlow)" />
+    <!-- Flame -->
+    <path d="M0 -30 Q-6 -18 0 -8 Q6 -18 0 -30 Z" fill="#FFE599" />
+    <circle cx="0" cy="-14" r="3" fill="#D95D39" />
+    <!-- Lamp Stand -->
+    <ellipse cx="0" cy="0" rx="20" ry="6" fill="url(#brassGrad)" />
+    <rect x="-4" y="0" width="8" height="180" fill="url(#brassGrad)" />
+    <ellipse cx="0" cy="180" rx="30" ry="10" fill="url(#brassGrad)" />
+  </g>
+
+  <!-- Right Traditional Brass Kuthuvilakku (Deepam) -->
+  <g transform="translate(640, 320)">
+    <circle cx="0" cy="-20" r="40" fill="url(#lampGlow)" />
+    <path d="M0 -30 Q-6 -18 0 -8 Q6 -18 0 -30 Z" fill="#FFE599" />
+    <circle cx="0" cy="-14" r="3" fill="#D95D39" />
+    <ellipse cx="0" cy="0" rx="20" ry="6" fill="url(#brassGrad)" />
+    <rect x="-4" y="0" width="8" height="180" fill="url(#brassGrad)" />
+    <ellipse cx="0" cy="180" rx="30" ry="10" fill="url(#brassGrad)" />
+  </g>
+
+  <!-- Golden Bell and Sacred Sanskrit Chants -->
+  <text x="400" y="550" font-family="'Cinzel', Georgia, serif" font-size="20" font-weight="700" fill="#C5A059" text-anchor="middle" letter-spacing="4">
+    ॐ नमः शिवाय
+  </text>
+  <text x="400" y="575" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#FAF5EE" opacity="0.6" text-anchor="middle" letter-spacing="2">
+    SRI GANGESHWAR MAHADEV MANDIR · VEDANTA ASHRAM
+  </text>
+</svg>

@@ -1,0 +1,25 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--vm-radius-pill);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.default    { background: var(--vm-bg-muted);    color: var(--vm-text-muted); }
+.online     { background: #E6F0F9;               color: #1D5A8A; }
+.residential{ background: var(--vm-saffron-light);color: var(--vm-saffron-deep); }
+.camp       { background: #E6F5EC;               color: #2E6B45; }
+.study      { background: #F5EFF8;               color: #6B3D8F; }
+.audio      { background: var(--vm-saffron-light);color: var(--vm-saffron); }
+.video      { background: #E8EEF9;               color: #2B4BA3; }
+.pdf        { background: #FAEEE6;               color: #963C14; }
+.ebook      { background: #E6F0EC;               color: #265038; }
+.open       { background: var(--vm-success-bg);  color: var(--vm-success); }
+.limited    { background: var(--vm-warning-bg);  color: var(--vm-warning); }
+.closed     { background: var(--vm-bg-ashram);   color: var(--vm-text-faint); }
+.past       { background: var(--vm-bg-ashram);   color: var(--vm-text-faint); }

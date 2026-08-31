@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <!-- Sky & Golden Hour Atmosphere -->
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCEEE2" />
+      <stop offset="35%" stop-color="#FDF3E7" />
+      <stop offset="70%" stop-color="#FAF5EE" />
+      <stop offset="100%" stop-color="#F5EDE0" />
+    </linearGradient>
+
+    <!-- Warm Morning Sun Aura -->
+    <radialGradient id="sunGlow" cx="75%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#FFD6A5" stop-opacity="0.6" />
+      <stop offset="40%" stop-color="#FFC896" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#FAF5EE" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Sandstone Architectural Gradients -->
+    <linearGradient id="sandstoneWall" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EEDAC5" />
+      <stop offset="50%" stop-color="#E2CCA8" />
+      <stop offset="100%" stop-color="#D4BA92" />
+    </linearGradient>
+
+    <linearGradient id="sandstonePillar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#D4BA92" />
+      <stop offset="30%" stop-color="#EAD7B9" />
+      <stop offset="70%" stop-color="#DFCCA8" />
+      <stop offset="100%" stop-color="#C5A87C" />
+    </linearGradient>
+
+    <!-- Stone Floor Flagstones -->
+    <linearGradient id="stoneFloor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EFE2CE" />
+      <stop offset="40%" stop-color="#E6D3BA" />
+      <stop offset="100%" stop-color="#D6BE9E" />
+    </linearGradient>
+
+    <!-- Saffron Temple Banner -->
+    <linearGradient id="saffronFlag" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#D95D39" />
+      <stop offset="100%" stop-color="#BF4D2B" />
+    </linearGradient>
+
+    <!-- Foliage / Ashram Trees -->
+    <linearGradient id="treeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#55755E" />
+      <stop offset="100%" stop-color="#344D3C" />
+    </linearGradient>
+  </defs>
+
+  <!-- Base Sky -->
+  <rect width="1920" height="1080" fill="url(#skyGrad)" />
+  <rect width="1920" height="1080" fill="url(#sunGlow)" />
+
+  <!-- Background Ashram Trees & Flora -->
+  <path d="M1200 480 Q1300 320 1450 480 Q1550 300 1700 480 Q1800 360 1920 480 L1920 620 L1200 620 Z" fill="url(#treeGrad)" opacity="0.85" />
+  <path d="M0 500 Q120 360 250 500 Q380 340 500 500 L500 620 L0 620 Z" fill="url(#treeGrad)" opacity="0.65" />
+
+  <!-- Main Ashram Sanctuary Building Facade (Background) -->
+  <rect x="250" y="320" width="1420" height="300" fill="url(#sandstoneWall)" />
+  <rect x="230" y="300" width="1460" height="25" fill="#C5A87C" rx="4" />
+  
+  <!-- Upper Jharokhas & Decorative Arched Windows -->
+  <g fill="#B8976C" opacity="0.4">
+    <path d="M400 360 Q450 310 500 360 L500 430 L400 430 Z" />
+    <path d="M600 360 Q650 310 700 360 L700 430 L600 430 Z" />
+    <path d="M800 360 Q850 310 900 360 L900 430 L800 430 Z" />
+    <path d="M1020 360 Q1070 310 1120 360 L1120 430 L1020 430 Z" />
+    <path d="M1220 360 Q1270 310 1320 360 L1320 430 L1220 430 Z" />
+    <path d="M1420 360 Q1470 310 1520 360 L1520 430 L1420 430 Z" />
+  </g>
+
+  <!-- Sri Gangeshwar Mandir Shikhara (Temple Tower) in Sanctum Court -->
+  <path d="M860 300 Q960 120 1060 300 Z" fill="url(#sandstoneWall)" stroke="#C5A87C" stroke-width="3" />
+  <!-- Kalasha & Flag on Shikhara Top -->
+  <circle cx="960" cy="115" r="10" fill="#C5A059" />
+  <line x1="960" y1="115" x2="960" y2="70" stroke="#C5A059" stroke-width="3" />
+  <path d="M960 70 L1010 85 L960 100 Z" fill="url(#saffronFlag)" />
+
+  <!-- Ground Stone Courtyard Floor with Perspective Grid -->
+  <path d="M0 600 L1920 600 L1920 1080 L0 1080 Z" fill="url(#stoneFloor)" />
+  
+  <!-- Courtyard Stone Flagstone Tile Grooves -->
+  <g stroke="#C2A888" stroke-width="1.5" opacity="0.6">
+    <line x1="0" y1="680" x2="1920" y2="680" />
+    <line x1="0" y1="780" x2="1920" y2="780" />
+    <line x1="0" y1="900" x2="1920" y2="900" />
+    <line x1="0" y1="1040" x2="1920" y2="1040" />
+
+    <line x1="960" y1="600" x2="960" y2="1080" />
+    <line x1="720" y1="600" x2="600" y2="1080" />
+    <line x1="1200" y1="600" x2="1320" y2="1080" />
+    <line x1="480" y1="600" x2="240" y2="1080" />
+    <line x1="1440" y1="600" x2="1680" y2="1080" />
+  </g>
+
+  <!-- Central Sacred Courtyard Tulsi Vrindavan (Planter) -->
+  <g transform="translate(900, 680)">
+    <!-- Base Plinth -->
+    <rect x="-30" y="40" width="180" height="40" fill="#D4BA92" rx="4" stroke="#B8976C" stroke-width="2" />
+    <rect x="-10" y="0" width="140" height="40" fill="#EAD7B9" rx="3" stroke="#B8976C" stroke-width="2" />
+    <text x="60" y="28" font-family="'Cinzel', Georgia, serif" font-size="22" font-weight="700" fill="#9E381C" text-anchor="middle">ॐ</text>
+    <!-- Sacred Tulsi Plant & Greenery -->
+    <path d="M60 0 Q40 -40 20 -25 Q15 -60 60 -70 Q105 -60 100 -25 Q80 -40 60 0 Z" fill="#3F5E4D" />
+    <circle cx="60" cy="-45" r="30" fill="#4B6E59" opacity="0.8" />
+  </g>
+
+  <!-- Foreground Classical Indian Stone Colonnade (Arches & Pillars) -->
+  <!-- Left Pillar 1 -->
+  <rect x="60" y="180" width="100" height="900" fill="url(#sandstonePillar)" />
+  <rect x="40" y="150" width="140" height="30" fill="#C5A87C" rx="4" />
+  <rect x="40" y="1050" width="140" height="30" fill="#C5A87C" rx="4" />
+
+  <!-- Left Pillar 2 -->
+  <rect x="360" y="240" width="80" height="840" fill="url(#sandstonePillar)" />
+  <rect x="345" y="215" width="110" height="25" fill="#C5A87C" rx="4" />
+
+  <!-- Right Pillar 1 -->
+  <rect x="1760" y="180" width="100" height="900" fill="url(#sandstonePillar)" />
+  <rect x="1740" y="150" width="140" height="30" fill="#C5A87C" rx="4" />
+  <rect x="1740" y="1050" width="140" height="30" fill="#C5A87C" rx="4" />
+
+  <!-- Right Pillar 2 -->
+  <rect x="1480" y="240" width="80" height="840" fill="url(#sandstonePillar)" />
+  <rect x="1465" y="215" width="110" height="25" fill="#C5A87C" rx="4" />
+
+  <!-- Grand Sandstone Cusped Arch spanning between pillars (Framing the Scene) -->
+  <path d="M60 180 Q360 40 960 40 Q1560 40 1860 180 L1860 220 Q1560 90 960 90 Q360 90 60 220 Z" fill="#D4BA92" stroke="#C5A87C" stroke-width="2" />
+  <path d="M160 220 Q560 120 960 120 Q1360 120 1760 220" fill="none" stroke="#C5A059" stroke-width="3" stroke-dasharray="8 6" />
+
+  <!-- Gentle Golden Dust Particles & Morning Jyoti Ray Streaks -->
+  <g opacity="0.35">
+    <line x1="1400" y1="0" x2="800" y2="1080" stroke="#FFF5E0" stroke-width="70" stroke-linecap="round" />
+    <line x1="1650" y1="0" x2="1150" y2="1080" stroke="#FFF5E0" stroke-width="110" stroke-linecap="round" />
+  </g>
+</svg>

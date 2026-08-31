@@ -1,0 +1,99 @@
+/* EVENTS PAGE STYLES */
+
+.hero {
+  padding-block: var(--space-20) var(--space-16);
+  background: linear-gradient(175deg, var(--vm-bg-sand) 0%, var(--vm-bg-muted) 100%);
+  border-bottom: 1px solid var(--vm-border-light);
+}
+
+.badge {
+  display: inline-block;
+  font-size: var(--text-meta);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vm-saffron);
+  margin-bottom: var(--space-2);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-hero);
+  font-weight: 600;
+  color: var(--vm-text);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-4);
+}
+
+.lead {
+  font-size: var(--text-lead);
+  color: var(--vm-text-muted);
+  line-height: var(--lh-body);
+}
+
+.tabsRow {
+  margin-bottom: var(--space-8);
+}
+
+.pastNote {
+  font-size: 0.9375rem;
+  color: var(--vm-text-muted);
+  margin-bottom: var(--space-6);
+  font-style: italic;
+}
+
+/* Calendar Styles */
+.calendarWrapper {
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.calendarList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.calItem {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--space-6);
+  background: var(--vm-bg-surface);
+  border: 1px solid var(--vm-border-light);
+  border-radius: var(--vm-radius-lg);
+  padding: var(--space-5);
+  align-items: center;
+}
+
+.calDate {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--vm-saffron-deep);
+  background: var(--vm-saffron-light);
+  padding: 8px 14px;
+  border-radius: var(--vm-radius-md);
+  text-align: center;
+}
+
+.calContent h4 {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--vm-text);
+  margin-bottom: var(--space-1);
+}
+
+.calContent p {
+  font-size: 0.875rem;
+  color: var(--vm-text-muted);
+  line-height: var(--lh-relaxed);
+}
+
+@media (max-width: 640px) {
+  .calItem {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+}

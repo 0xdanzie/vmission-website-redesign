@@ -1,0 +1,32 @@
+{
+  "name": "vedanta-mission-website",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Vedanta Mission / Vedanta Ashram, Indore — Next.js redesign prototype (\"Ascending to the Dome\").",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "14.2.15",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.10",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.15",
+    "typescript": "5.5.3"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "overrides": {
+    "string.prototype.trim": "1.2.10"
+  }
+}

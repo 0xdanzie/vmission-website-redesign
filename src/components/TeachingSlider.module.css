@@ -1,0 +1,391 @@
+/* ============================================================
+   TEACHING TRADITION EDITORIAL SLIDER
+   Archival Restored Photographic Exhibition Component
+   ============================================================ */
+
+.wrapper {
+  position: relative;
+  background: linear-gradient(135deg, #1C1612 0%, #231C16 50%, #17120E 100%);
+  border: 1px solid rgba(217, 93, 57, 0.25);
+  border-radius: var(--vm-radius-xl, 16px);
+  padding: var(--space-8, 2rem);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  color: #FFFBF4;
+  overflow: hidden;
+  outline: none;
+  transition: border-color var(--transition-base, 0.25s ease);
+}
+
+.wrapper:focus-visible {
+  border-color: #D95D39;
+  box-shadow: 0 0 0 3px rgba(217, 93, 57, 0.35);
+}
+
+.editorialStage {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: var(--space-10, 2.5rem);
+  align-items: center;
+}
+
+/* ---------- LEFT COLUMN: VISUAL FRAME ---------- */
+.imageColumn {
+  position: relative;
+  width: 100%;
+}
+
+.imageFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--vm-radius-lg, 12px);
+  overflow: hidden;
+  background-color: #100C09;
+  border: 1px solid rgba(230, 163, 97, 0.3);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+}
+
+.imageSlide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.imageActive {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.imagePrev {
+  z-index: 1;
+}
+
+.archivalImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.imageVignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 12, 9, 0.15) 0%,
+    transparent 50%,
+    rgba(16, 12, 9, 0.6) 100%
+  );
+  pointer-events: none;
+}
+
+.imageHeaderBadge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #FFF7EE;
+  background: rgba(22, 17, 13, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 5px 12px;
+  border-radius: var(--vm-radius-pill, 9999px);
+  border: 1px solid rgba(230, 163, 97, 0.35);
+}
+
+.badgeIcon {
+  font-size: 0.85rem;
+}
+
+.scriptureBadge {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  z-index: 5;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #F8DFC0;
+  background: rgba(22, 17, 13, 0.8);
+  backdrop-filter: blur(8px);
+  padding: 4px 12px;
+  border-radius: var(--vm-radius-md, 6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ---------- RIGHT COLUMN: EDITORIAL CONTENT ---------- */
+.contentColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 1rem);
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3, 0.75rem);
+  flex-wrap: wrap;
+}
+
+.slideCounter {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.95rem;
+  color: #E3A361;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.counterDivider {
+  color: rgba(255, 255, 255, 0.3);
+  margin-inline: 4px;
+}
+
+.themeTag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #F8DFC0;
+  background: rgba(217, 93, 57, 0.18);
+  padding: 4px 10px;
+  border-radius: var(--vm-radius-pill, 9999px);
+  border: 1px solid rgba(217, 93, 57, 0.3);
+}
+
+.sanskritBox {
+  padding-block: var(--space-1, 0.25rem);
+}
+
+.sanskritText {
+  font-family: var(--font-serif-body, serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 700;
+  color: #F5B041;
+  line-height: 1.25;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 12px rgba(245, 176, 65, 0.2);
+}
+
+.quoteBox {
+  position: relative;
+  margin: 0;
+  padding: var(--space-4, 1rem) var(--space-4, 1rem) var(--space-4, 1rem) var(--space-5, 1.25rem);
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid #D95D39;
+  border-radius: 0 var(--vm-radius-md, 6px) var(--vm-radius-md, 6px) 0;
+}
+
+.openQuote {
+  position: absolute;
+  top: -10px;
+  left: 6px;
+  font-size: 2.2rem;
+  font-family: var(--font-serif, serif);
+  color: rgba(217, 93, 57, 0.35);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.quoteText {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+  font-style: italic;
+  line-height: 1.6;
+  color: #FFFBF4;
+}
+
+.attributionCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 0.75rem);
+  padding: var(--space-3, 0.75rem);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--vm-radius-md, 6px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.teacherAvatarWrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #D95D39 0%, #B84320 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(217, 93, 57, 0.3);
+}
+
+.teacherIcon {
+  font-size: 1.1rem;
+}
+
+.teacherInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.teacherName {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #FFFBF4;
+  line-height: 1.2;
+}
+
+.teacherRole {
+  font-size: 0.775rem;
+  color: #F8DFC0;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+/* ---------- CONTROLS BAR ---------- */
+.controlsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4, 1rem);
+  margin-top: var(--space-2, 0.5rem);
+  padding-top: var(--space-3, 0.75rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.btnGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+}
+
+.navBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--vm-radius-md, 6px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFBF4;
+  font-size: 1.15rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.navBtn:hover {
+  background: #D95D39;
+  border-color: #D95D39;
+  color: #FFF;
+  transform: translateY(-1px);
+}
+
+.navBtn:active {
+  transform: translateY(0);
+}
+
+.playPauseBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--vm-radius-md, 6px);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #E3A361;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.playPauseBtn:hover {
+  background: rgba(230, 163, 97, 0.15);
+  border-color: #E3A361;
+  color: #FFF;
+}
+
+.indicatorTrack {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.indicatorPill {
+  width: 18px;
+  height: 6px;
+  border-radius: var(--vm-radius-pill, 9999px);
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.2s ease);
+}
+
+.indicatorPill:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.indicatorActive {
+  width: 32px;
+  background: #D95D39;
+  box-shadow: 0 0 8px rgba(217, 93, 57, 0.6);
+}
+
+/* ---------- RESPONSIVE BREAKPOINTS ---------- */
+@media (max-width: 1024px) {
+  .editorialStage {
+    grid-template-columns: 1fr;
+    gap: var(--space-6, 1.5rem);
+  }
+
+  .imageFrame {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 640px) {
+  .wrapper {
+    padding: var(--space-4, 1rem);
+    border-radius: var(--vm-radius-lg, 12px);
+  }
+
+  .imageFrame {
+    aspect-ratio: 16 / 10;
+  }
+
+  .sanskritText {
+    font-size: 1.3rem;
+  }
+
+  .quoteText {
+    font-size: 1rem;
+  }
+
+  .controlsBar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3, 0.75rem);
+  }
+
+  .btnGroup {
+    justify-content: center;
+  }
+
+  .indicatorTrack {
+    justify-content: center;
+  }
+}

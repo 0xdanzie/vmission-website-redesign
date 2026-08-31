@@ -1,0 +1,97 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Portrait */
+.portrait {
+  position: relative;
+  height: 200px;
+  background: linear-gradient(135deg, var(--vm-bg-muted) 0%, var(--vm-bg-ashram) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.initials {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--vm-text-muted);
+  opacity: 0.35;
+  z-index: 1;
+  position: relative;
+}
+
+.portraitOverlay {
+  position: absolute;
+  bottom: var(--space-3);
+  right: var(--space-4);
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  color: var(--vm-saffron);
+  opacity: 0.20;
+  line-height: 1;
+}
+
+/* Content */
+.content {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.honorific {
+  font-size: var(--text-meta);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--vm-saffron);
+}
+
+.name {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--vm-text);
+  line-height: 1.30;
+}
+
+.role {
+  font-size: 0.8125rem;
+  color: var(--vm-text-muted);
+  line-height: 1.4;
+}
+
+.lineage {
+  font-size: 0.75rem;
+  color: var(--vm-text-faint);
+  font-style: italic;
+  padding: 6px 10px;
+  background: var(--vm-bg-muted);
+  border-radius: var(--vm-radius-sm);
+  border-left: 2px solid var(--vm-saffron-border);
+}
+
+.bio {
+  font-size: 0.875rem;
+  color: var(--vm-text-muted);
+  line-height: 1.60;
+  flex: 1;
+}
+
+.link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--vm-saffron);
+  transition: letter-spacing var(--vm-ease-fast);
+  margin-top: var(--space-2);
+}
+
+.link:hover {
+  letter-spacing: 0.01em;
+}

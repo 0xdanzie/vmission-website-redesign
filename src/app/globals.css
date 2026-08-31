@@ -1,0 +1,377 @@
+/* ============================================================
+   VEDANTA MISSION DESIGN SYSTEM — MODERN INDIAN GURUKULA
+   70% Timeless Indian Ashram & Gurukula + 30% Modern Editorial
+
+   Typography:
+   - Display serif: Fraunces (warm, organic, literary — not Roman-monument)
+   - Body serif: Cormorant Garamond (scholarly, manuscript-adjacent)
+   - UI sans: Inter (clean chrome)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* --- PALETTE: MODERN INDIAN GURUKULA --- */
+  /* Primary Background: Warm Ivory / Temple White */
+  --vm-bg: #FDFBF7;
+  --vm-bg-sand: #FAF6EE;
+  --vm-bg-surface: #FFFFFF;
+
+  /* Secondary Background: Sandalwood & Natural Parchment */
+  --vm-bg-sandalwood: #F5EDE0;
+  --vm-bg-sandalwood-dark: #EADBC8;
+  --vm-bg-muted: #F5EFE6;
+  --vm-bg-stone: #ECE3D4;
+  --vm-bg-dark: #1E1916;
+  --vm-bg-dark-stone: #2A231E;
+
+  /* Primary Accent: Muted Saffron & Terracotta */
+  --vm-saffron: #D95D39;
+  --vm-saffron-hover: #BF4D2B;
+  --vm-saffron-deep: #9E381C;
+  --vm-saffron-light: #FAF0EB;
+  --vm-saffron-border: rgba(217, 93, 57, 0.28);
+
+  /* Secondary Accent: Antique Brass / Muted Temple Gold */
+  --vm-brass: #C5A059;
+  --vm-brass-dark: #9B783E;
+  --vm-brass-light: #FAF5E8;
+  --vm-brass-border: #DBC082;
+  --vm-brass-glow: rgba(197, 160, 89, 0.25);
+
+  /* Natural Sacred Accent: Muted Forest Green */
+  --vm-forest: #3F5E4D;
+  --vm-forest-dark: #2E4839;
+  --vm-forest-light: #EBF2ED;
+
+  /* Typography Colors: Dark Walnut & Charcoal */
+  --vm-text: #221D1A;
+  --vm-text-muted: #5E564F;
+  --vm-text-faint: #8F857B;
+  --vm-text-inverse: #FAF6EE;
+
+  /* Status Colors */
+  --vm-success: #2E6B47;
+  --vm-success-bg: #EDF7F0;
+  --vm-error: #B93826;
+  --vm-error-bg: #FDF1EF;
+  --vm-warning: #C07D1E;
+  --vm-warning-bg: #FEF8ED;
+
+  /* Borders */
+  --vm-border-light: rgba(197, 160, 89, 0.18);
+  --vm-border: rgba(34, 29, 26, 0.12);
+  --vm-border-strong: rgba(34, 29, 26, 0.25);
+
+  /* --- TYPOGRAPHY SCALE --- */
+  --font-serif: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --font-serif-body: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --text-hero: clamp(2.4rem, 4.5vw, 3.75rem);
+  --text-h1: clamp(1.85rem, 3.5vw, 2.75rem);
+  --text-h2: clamp(1.4rem, 2.5vw, 2.0rem);
+  --text-h3: clamp(1.15rem, 1.8vw, 1.45rem);
+  --text-lead: clamp(1.0625rem, 1.25vw, 1.25rem);
+  --text-body: 1rem;
+  --text-meta: 0.8125rem;
+
+  --lh-tight: 1.15;
+  --lh-snug: 1.35;
+  --lh-body: 1.7;
+  --lh-relaxed: 1.85;
+
+  /* --- SPACING TOKENS --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* --- SHADOWS --- */
+  --vm-shadow-xs: 0 1px 3px rgba(34, 29, 26, 0.05);
+  --vm-shadow-sm: 0 3px 8px rgba(34, 29, 26, 0.06), 0 1px 2px rgba(197, 160, 89, 0.08);
+  --vm-shadow-md: 0 8px 24px rgba(34, 29, 26, 0.08), 0 2px 6px rgba(197, 160, 89, 0.06);
+  --vm-shadow-lg: 0 16px 40px rgba(34, 29, 26, 0.10);
+  --vm-shadow-xl: 0 24px 60px rgba(34, 29, 26, 0.14);
+
+  /* --- RADII --- */
+  --vm-radius-sm: 6px;
+  --vm-radius-md: 10px;
+  --vm-radius-lg: 16px;
+  --vm-radius-xl: 24px;
+  --vm-radius-arch: 140px 140px 16px 16px;
+  --vm-radius-pill: 9999px;
+
+  /* --- CONTAINERS --- */
+  --container-max: 1240px;
+  --container-md: 860px;
+  --container-sm: 680px;
+
+  /* --- TRANSITIONS --- */
+  --vm-ease-fast: 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  --vm-ease-base: 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  --vm-ease-slow: 450ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* RESET */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--vm-bg);
+  color: var(--vm-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--vm-text);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.01em;
+}
+
+/* Heading utility classes (used in JSX as className="text-h1" etc.) */
+.text-h1 {
+  font-family: var(--font-serif);
+  font-size: var(--text-h1);
+  font-weight: 600;
+  color: var(--vm-text);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.015em;
+}
+.text-h2 {
+  font-family: var(--font-serif);
+  font-size: var(--text-h2);
+  font-weight: 600;
+  color: var(--vm-text);
+  line-height: var(--lh-snug);
+}
+.text-lead {
+  font-size: var(--text-lead);
+  color: var(--vm-text-muted);
+  line-height: var(--lh-body);
+}
+
+p {
+  color: var(--vm-text-muted);
+  line-height: var(--lh-body);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- LAYOUT UTILITIES --- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+.container--md {
+  max-width: var(--container-md);
+}
+
+.container--sm {
+  max-width: var(--container-sm);
+}
+
+.section {
+  padding-block: var(--space-20);
+}
+
+.section--sm {
+  padding-block: var(--space-12);
+}
+
+.section--muted {
+  background-color: var(--vm-bg-sand);
+}
+
+.section--sandalwood {
+  background-color: var(--vm-bg-sandalwood);
+}
+
+.section--dark {
+  background-color: var(--vm-bg-dark);
+  color: var(--vm-text-inverse);
+}
+
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4 {
+  color: var(--vm-text-inverse);
+}
+
+.section--dark p {
+  color: rgba(250, 246, 238, 0.78);
+}
+
+/* Grids */
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .grid--4 { grid-template-columns: repeat(2, 1fr); }
+  .grid--3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .grid--4 { grid-template-columns: 1fr; }
+  .grid--3 { grid-template-columns: 1fr; }
+  .grid--2 { grid-template-columns: 1fr; }
+}
+
+/* --- GURUKULA THEMED CARDS & FRAMES --- */
+.card {
+  background: var(--vm-bg-surface);
+  border: 1px solid var(--vm-border-light);
+  border-radius: var(--vm-radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--vm-shadow-xs);
+  transition: transform var(--vm-ease-base), box-shadow var(--vm-ease-base), border-color var(--vm-ease-base);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--vm-shadow-md);
+  border-color: var(--vm-brass-border);
+}
+
+/* Indian Architectural Arch Frame */
+.arch-frame {
+  border-radius: var(--vm-radius-arch);
+  overflow: hidden;
+  border: 1.5px solid var(--vm-brass-border);
+  box-shadow: var(--vm-shadow-sm);
+}
+
+/* Parchment Card */
+.parchment-card {
+  background: var(--vm-bg-sandalwood);
+  border: 1px solid var(--vm-brass-border);
+  border-radius: var(--vm-radius-lg);
+  padding: var(--space-6);
+}
+
+/* Temple Border Trim */
+.temple-border {
+  border-top: 2px solid var(--vm-brass);
+  border-bottom: 2px solid var(--vm-brass);
+  padding-block: var(--space-4);
+}
+
+/* --- FORM CONTROLS --- */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.form-label {
+  font-size: var(--text-meta);
+  font-weight: 600;
+  color: var(--vm-text);
+  letter-spacing: 0.02em;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 11px 16px;
+  background: var(--vm-bg-surface);
+  border: 1.5px solid var(--vm-border);
+  border-radius: var(--vm-radius-md);
+  color: var(--vm-text);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  transition: border-color var(--vm-ease-fast), box-shadow var(--vm-ease-fast);
+  outline: none;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  border-color: var(--vm-saffron);
+  box-shadow: 0 0 0 3px rgba(217, 93, 57, 0.12);
+}
+
+.form-hint {
+  font-size: 0.75rem;
+  color: var(--vm-text-faint);
+}
+
+/* Micro-animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fadeUp {
+  animation: fadeUp var(--vm-ease-slow) both;
+}

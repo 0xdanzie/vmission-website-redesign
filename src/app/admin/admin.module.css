@@ -1,0 +1,369 @@
+/* ============================================================
+   ADMIN / CMS DESIGN SYSTEM — ASHRAM STAFF OPERATIONS PORTAL
+   Crisp, High-Density, Functional Institutional Interface
+   ============================================================ */
+
+.adminRoot {
+  min-height: 100vh;
+  background-color: #F4F6F8;
+  display: flex;
+  flex-direction: column;
+  color: #1A202C;
+  font-family: var(--font-sans);
+}
+
+/* Topbar */
+.topbar {
+  height: 64px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--space-6);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.topbarLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.menuToggle {
+  display: none;
+  font-size: 1.25rem;
+  color: #4A5568;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.brandLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+}
+
+.brandSeal {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #D95D39;
+  background: #FAF0EB;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(217, 93, 57, 0.3);
+}
+
+.brandTextWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandName {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #1A202C;
+}
+
+.portalTag {
+  font-size: 0.6875rem;
+  color: #718096;
+  letter-spacing: 0.02em;
+}
+
+.topbarRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.systemStatus {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: #F0FDF4;
+  border: 1px solid #DCFCE7;
+  border-radius: 6px;
+}
+
+.statusPulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16A34A;
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
+}
+
+.statusText {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #15803D;
+}
+
+.btnReset {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4A5568;
+  background: #EDF2F7;
+  border: 1px solid #CBD5E0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--vm-ease-fast);
+}
+
+.btnReset:hover {
+  background: #E2E8F0;
+  color: #1A202C;
+}
+
+.btnLiveSite {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #9E381C;
+  background: #FAF0EB;
+  border: 1px solid rgba(217, 93, 57, 0.3);
+  padding: 6px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all var(--vm-ease-fast);
+}
+
+.btnLiveSite:hover {
+  background: #D95D39;
+  color: #FFFFFF;
+}
+
+.userBadge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-left: var(--space-3);
+  border-left: 1px solid #E2E8F0;
+}
+
+.userAvatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #2D3748;
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.05em;
+}
+
+.userText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.userName {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #1A202C;
+}
+
+.userRole {
+  font-size: 0.6875rem;
+  color: #718096;
+}
+
+/* Workspace */
+.workspace {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: #FFFFFF;
+  border-right: 1px solid #E2E8F0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-4);
+  flex-shrink: 0;
+  min-height: calc(100vh - 64px);
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.navSectionLabel {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #A0AEC0;
+  padding: var(--space-1) var(--space-3);
+  text-transform: uppercase;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.84375rem;
+  font-weight: 500;
+  color: #4A5568;
+  text-decoration: none;
+  transition: all var(--vm-ease-fast);
+}
+
+.navItem:hover {
+  background: #F7FAFC;
+  color: #1A202C;
+}
+
+.navItemActive {
+  background: #FAF0EB;
+  color: #9E381C;
+  font-weight: 600;
+  border-left: 3px solid #D95D39;
+}
+
+.navIcon {
+  font-size: 1.05rem;
+}
+
+.navLabel {
+  flex: 1;
+}
+
+.navBadge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: #D95D39;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+.sidebarFooter {
+  padding: var(--space-3);
+  background: #F8FAFC;
+  border-radius: 8px;
+  border: 1px solid #E2E8F0;
+}
+
+.syncNotice {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #15803D;
+}
+
+.syncDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16A34A;
+}
+
+.syncDesc {
+  font-size: 0.6875rem;
+  color: #718096;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* Main Content Area */
+.mainContent {
+  flex: 1;
+  padding: var(--space-8);
+  max-width: 1260px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .menuToggle {
+    display: block;
+  }
+
+  .systemStatus {
+    display: none;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 64px;
+    left: -280px;
+    bottom: 0;
+    z-index: 999;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: left var(--vm-ease-base);
+  }
+
+  .sidebarOpen {
+    left: 0;
+  }
+
+  .mainContent {
+    padding: var(--space-4);
+  }
+
+  .userText {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar {
+    padding-inline: var(--space-3);
+  }
+
+  .portalTag {
+    display: none;
+  }
+
+  .btnReset {
+    display: none;
+  }
+
+  .btnLiveSite {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+
+  .userBadge {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .userAvatar {
+    width: 28px;
+    height: 28px;
+    font-size: 0.6875rem;
+  }
+}
+

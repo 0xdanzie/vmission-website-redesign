@@ -1,0 +1,347 @@
+.dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1200;
+  background: var(--vm-bg-surface);
+  border-top: 1.5px solid var(--vm-border);
+  box-shadow: 0 -6px 28px rgba(38, 35, 34, 0.12);
+  animation: slideUp 280ms var(--vm-ease-slow) both;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+/* Full Player Layout */
+.player {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr auto;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-3) var(--space-6);
+  max-width: var(--container-xl);
+  margin-inline: auto;
+}
+
+/* Track Info */
+.trackInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.trackIcon {
+  width: 44px;
+  height: 44px;
+  background: var(--vm-saffron-light);
+  color: var(--vm-saffron);
+  border-radius: var(--vm-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.iconPulse {
+  border: 1px solid var(--vm-saffron-border);
+}
+
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+}
+
+.equalizer span {
+  width: 3px;
+  background: var(--vm-saffron);
+  border-radius: var(--vm-radius-pill);
+  animation: eqBounce 800ms ease-in-out infinite alternate;
+}
+
+.equalizer span:nth-child(1) { height: 8px; animation-delay: 0ms; }
+.equalizer span:nth-child(2) { height: 16px; animation-delay: 200ms; }
+.equalizer span:nth-child(3) { height: 10px; animation-delay: 400ms; }
+
+@keyframes eqBounce {
+  0%   { height: 4px; }
+  100% { height: 16px; }
+}
+
+.trackMeta {
+  min-width: 0;
+}
+
+.trackTitle {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--vm-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trackTeacher {
+  font-size: 0.75rem;
+  color: var(--vm-text-faint);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topicBadge {
+  color: var(--vm-saffron-deep);
+  font-weight: 500;
+}
+
+/* Center Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  justify-content: center;
+}
+
+.playRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex: 1;
+}
+
+.playBtn {
+  width: 44px;
+  height: 44px;
+  background: var(--vm-saffron);
+  color: var(--vm-text-inverse);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--vm-ease-fast);
+}
+
+.playBtn:hover {
+  background: var(--vm-saffron-hover);
+  transform: scale(1.05);
+}
+
+/* Scrubber */
+.scrubber {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.time {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--vm-text-faint);
+  white-space: nowrap;
+  min-width: 36px;
+  font-variant-numeric: tabular-nums;
+}
+
+.track {
+  flex: 1;
+  height: 6px;
+  background: var(--vm-bg-muted);
+  border: 1px solid var(--vm-border-light);
+  border-radius: var(--vm-radius-pill);
+  position: relative;
+  cursor: pointer;
+}
+
+.fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--vm-saffron);
+  border-radius: var(--vm-radius-pill);
+  pointer-events: none;
+}
+
+.range {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+}
+
+/* Speed Controls */
+.speedGroup {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--vm-bg-muted);
+  border-radius: var(--vm-radius-md);
+  padding: 3px 6px;
+}
+
+.speedLabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--vm-text-faint);
+  margin-right: 4px;
+}
+
+.speedBtn {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--vm-text-muted);
+  padding: 4px 6px;
+  border-radius: var(--vm-radius-sm);
+  transition: all var(--vm-ease-fast);
+  white-space: nowrap;
+  min-height: 26px;
+}
+
+.speedBtn:hover {
+  color: var(--vm-text);
+}
+
+.activeSpeed {
+  background: var(--vm-bg-surface);
+  color: var(--vm-saffron);
+  box-shadow: var(--vm-shadow-xs);
+}
+
+/* Actions */
+.dockActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.actionBtn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--vm-radius-sm);
+  color: var(--vm-text-muted);
+  transition: all var(--vm-ease-fast);
+}
+
+.actionBtn:hover {
+  background: var(--vm-bg-muted);
+  color: var(--vm-text);
+}
+
+/* Minimized State */
+.minBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-6);
+  cursor: pointer;
+  max-width: var(--container-xl);
+  margin-inline: auto;
+}
+
+.playBtnSm {
+  width: 36px;
+  height: 36px;
+  background: var(--vm-saffron);
+  color: var(--vm-text-inverse);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.minTrack {
+  flex: 1;
+  min-width: 0;
+}
+
+.minTitle {
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--vm-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 3px;
+}
+
+.miniProgress {
+  height: 3px;
+  background: var(--vm-bg-muted);
+  border-radius: var(--vm-radius-pill);
+  overflow: hidden;
+}
+
+.miniBar {
+  height: 100%;
+  background: var(--vm-saffron);
+  border-radius: var(--vm-radius-pill);
+}
+
+.expandBtn,
+.closeBtn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--vm-radius-sm);
+  color: var(--vm-text-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all var(--vm-ease-fast);
+}
+
+.expandBtn:hover,
+.closeBtn:hover {
+  background: var(--vm-bg-muted);
+  color: var(--vm-text);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 900px) {
+  .player {
+    grid-template-columns: 1fr auto;
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-3);
+  }
+
+  .speedGroup {
+    display: none;
+  }
+
+  .controls {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .trackInfo {
+    grid-column: 1;
+  }
+
+  .dockActions {
+    grid-column: 2;
+  }
+
+  .minBar {
+    padding: var(--space-2) var(--space-4);
+  }
+}
