@@ -435,8 +435,9 @@
 
 .focalGrid {
   display: grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: 320px 1fr;
   gap: 0;
+  align-items: stretch;
 }
 
 /* Date Stele / Architectural Time Column */
@@ -446,16 +447,16 @@
   background: linear-gradient(180deg, #FBF8F3 0%, #F5EFE3 100%);
   border-right: 1px solid var(--vm-border-light, #E8E0D2);
   padding: var(--space-7) var(--space-6);
-  justify-content: space-between;
-  gap: var(--space-5);
+  gap: 0;
   position: relative;
 }
 
 .steleHeaderRow {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: var(--space-2);
   width: 100%;
+  margin-bottom: var(--space-3);
 }
 
 .steleFolioTag {
@@ -484,6 +485,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  margin-bottom: var(--space-4);
 }
 
 .steleMonth {
@@ -521,13 +523,14 @@
   width: 100%;
   height: 1px;
   background: linear-gradient(90deg, var(--vm-gold-brass, #C59B4B), rgba(197, 155, 75, 0.2));
-  margin-block: var(--space-2);
+  margin-bottom: var(--space-4);
 }
 
 .steleDetailsList {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  margin-bottom: var(--space-5);
 }
 
 .steleDetailItem {
@@ -552,7 +555,13 @@
 }
 
 .steleCadenceBadge {
-  padding: 6px 10px;
+  margin-top: auto;
+  padding: 10px 14px;
+  min-height: 44px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: rgba(197, 155, 75, 0.12);
   border-radius: 4px;
   font-size: 0.6875rem;
@@ -568,7 +577,7 @@
   display: flex;
   flex-direction: column;
   padding: var(--space-7) var(--space-8);
-  gap: var(--space-4);
+  gap: 0;
   background: var(--vm-bg-surface, #FFFFFF);
 }
 
@@ -580,7 +589,7 @@
   padding-bottom: 6px;
   border-bottom: 1px solid rgba(197, 155, 75, 0.25);
   width: fit-content;
-  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
 }
 
 .focalFacultyPrefix {
@@ -601,12 +610,13 @@
 
 .focalTitle {
   font-family: var(--font-serif, 'Cormorant Garamond', serif);
-  font-size: clamp(1.85rem, 3.4vw, 2.75rem);
+  font-size: clamp(1.75rem, 2.8vw, 2.45rem);
   font-weight: 600;
   color: var(--vm-text-charcoal, #21170F);
-  line-height: 1.15;
+  line-height: 1.18;
   letter-spacing: -0.015em;
-  margin: 0;
+  margin: 0 0 var(--space-3) 0;
+  max-width: 640px;
   overflow-wrap: break-word;
   word-break: break-word;
 }
@@ -626,7 +636,7 @@
   align-items: center;
   gap: var(--space-3);
   flex-wrap: wrap;
-  margin-block: 2px;
+  margin-bottom: var(--space-4);
 }
 
 .focalFormatBadge {
@@ -666,17 +676,17 @@
 
 .focalLead {
   font-size: 1.0625rem;
-  line-height: 1.75;
+  line-height: 1.7;
   color: #382F26;
-  margin: 0;
-  max-width: 760px;
+  margin: 0 0 var(--space-5) 0;
+  max-width: 680px;
 }
 
 .focalActionRow {
   display: flex;
   align-items: center;
-  gap: var(--space-6);
-  margin-top: var(--space-2);
+  gap: var(--space-5);
+  margin-bottom: var(--space-5);
   flex-wrap: wrap;
 }
 
@@ -684,7 +694,7 @@
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--vm-terracotta, #964228);
-  min-height: 48px;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   text-decoration: underline;
@@ -703,11 +713,13 @@
 }
 
 .focalEditorialFootnote {
+  margin-top: auto;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
-  margin-top: var(--space-2);
-  padding: 12px 18px;
+  padding: 10px 16px;
+  min-height: 44px;
+  box-sizing: border-box;
   background: #FAF7F0;
   border-left: 3px solid var(--vm-gold-brass, #C59B4B);
   border-radius: 0 var(--vm-radius-sm, 6px) var(--vm-radius-sm, 6px) 0;
@@ -773,6 +785,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: var(--space-2);
 }
 
@@ -1117,6 +1130,20 @@
 }
 
 /* Responsive Styles */
+@media (max-width: 1024px) {
+  .focalGrid {
+    grid-template-columns: 290px 1fr;
+  }
+
+  .focalInfoCol {
+    padding: var(--space-6) var(--space-6);
+  }
+
+  .focalDateCol {
+    padding: var(--space-6) var(--space-5);
+  }
+}
+
 @media (max-width: 860px) {
   .focalGrid {
     grid-template-columns: 1fr;
@@ -1127,17 +1154,39 @@
     border-right: none;
     border-bottom: 1px solid var(--vm-border-light, #E8E0D2);
     padding: var(--space-5) var(--space-6);
-    gap: var(--space-4);
+    gap: 0;
+  }
+
+  .steleHeaderRow {
+    margin-bottom: var(--space-2);
+  }
+
+  .steleDateBlock {
+    margin-bottom: var(--space-3);
+  }
+
+  .steleDivider {
+    margin-bottom: var(--space-3);
   }
 
   .steleDetailsList {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .steleCadenceBadge {
+    margin-top: 0;
+    width: 100%;
   }
 
   .focalInfoCol {
     padding: var(--space-6);
+  }
+
+  .focalEditorialFootnote {
+    margin-top: var(--space-3);
   }
 
   .timelineMetricsRow {
@@ -1223,7 +1272,7 @@
 
   .focalDateCol {
     padding: var(--space-4);
-    gap: var(--space-3);
+    gap: 0;
   }
 
   .steleHeaderRow {
@@ -1231,11 +1280,21 @@
     justify-content: flex-start;
     align-items: center;
     gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  .steleDateBlock {
+    margin-bottom: var(--space-3);
+  }
+
+  .steleDivider {
+    margin-bottom: var(--space-3);
   }
 
   .steleDetailsList {
     grid-template-columns: 1fr;
     gap: var(--space-2);
+    margin-bottom: var(--space-3);
   }
 
   .steleMonth {
@@ -1244,23 +1303,30 @@
 
   .focalInfoCol {
     padding: var(--space-4);
-    gap: var(--space-3);
+    gap: 0;
   }
 
   .focalTitle {
     font-size: 1.45rem;
     line-height: 1.22;
+    margin-bottom: var(--space-2);
+  }
+
+  .focalMetaRow {
+    margin-bottom: var(--space-3);
   }
 
   .focalLead {
     font-size: 0.95rem;
     line-height: 1.65;
+    margin-bottom: var(--space-4);
   }
 
   .focalActionRow {
     flex-direction: column;
     align-items: stretch;
     gap: var(--space-3);
+    margin-bottom: var(--space-4);
   }
 
   .focalActionRow > * {
@@ -1271,8 +1337,15 @@
   }
 
   .focalSecondaryLink {
-    min-height: 48px;
+    min-height: 44px;
     justify-content: center;
+  }
+
+  .focalEditorialFootnote {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 10px 12px;
   }
 
   .timelineBridge {
