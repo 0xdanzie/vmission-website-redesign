@@ -3,8 +3,7 @@
 [![Next.js](https://img.shields.io/badge/Next.js-14.2.15-black?style=flat&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-18.3.1-blue?style=flat&logo=react)](https://react.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5.3-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![Pages Prerendered](https://img.shields.io/badge/Static%20Pages-680%20Prerendered-darkgreen?style=flat)](scripts/test-final-qa.js)
-[![Cinematic Entry](https://img.shields.io/badge/Entry%20Verification-37%2F37%20Passed-brightgreen?style=flat)](scripts/verify-cinematic-entry.js)
+[![Static Pages](https://img.shields.io/badge/Static%20Pages-680%20Prerendered-darkgreen?style=flat)](https://vmission-website-redesign.vercel.app/)
 
 Official modern web portal and scriptural knowledge repository for **Vedanta Mission & Vedanta Ashram, Indore**, dedicated to the authentic study of Advaita Vedanta, the Upanishads, and the Bhagavad Gita under the traditional Shankaracharya lineage and guidance of Poojya Swami Atmananda Saraswati.
 
@@ -27,7 +26,7 @@ Official modern web portal and scriptural knowledge repository for **Vedanta Mis
 ## Project Structure
 
 ```
-V-Mission-CLEAN/
+.
 ├── src/
 │   ├── app/                    # Next.js App Router pages (public routes & admin)
 │   ├── components/             # Reusable UI components, modals, audio dock, branding
@@ -41,16 +40,11 @@ V-Mission-CLEAN/
 │   │   └── vmission/           # Curated canonical photography of Ashram and Acharyas
 │   ├── _headers                # Edge CDN security headers (CSP, HSTS, frame options)
 │   └── robots.txt              # Search engine directives (admin route disallow)
-├── scripts/                    # Headless Chrome test runners, verification suites & ledgers
-├── docs/                       # Project specifications, brand guidelines & QA audit records
-│   ├── architecture/           # System design & console architecture
-│   ├── brand/                  # Brand guidelines & asset integration register
-│   ├── migration/              # Media and data migration reports
-│   └── qa/                     # Full responsive and functional verification test logs
 ├── package.json                # Project dependencies and npm scripts
 ├── package-lock.json           # Deterministic dependency lockfile
 ├── tsconfig.json               # TypeScript configuration
 ├── next.config.js              # Next.js build configuration (export target)
+├── next-env.d.ts               # Next.js TypeScript declarations
 ├── .eslintrc.json              # ESLint rules
 ├── .gitignore                  # Git exclusion rules
 └── README.md                   # Repository overview and developer documentation
@@ -118,24 +112,13 @@ npm run build
 ```
 This compiles the application and generates the complete static website in the `out/` directory (680 HTML pages).
 
----
-
-## Quality Assurance & Verification
-
-The repository includes automated test runners to verify builds, visual responsiveness, and entry behavior:
-
+### 4. Code Quality
 ```bash
-# 1. Typecheck TypeScript without emitting JS
-npx tsc --noEmit
+# Validate TypeScript types
+npm run typecheck
 
-# 2. Run ESLint static analysis
+# Run ESLint validation
 npm run lint
-
-# 3. Verify Cinematic Entry in Headless Chrome (37 assertions)
-node scripts/verify-cinematic-entry.js
-
-# 4. Run Route & Photographic Asset Integration Suite (52 assertions)
-node scripts/test-final-qa.js 3000
 ```
 
 ---
