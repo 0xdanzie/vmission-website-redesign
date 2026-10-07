@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useData } from '@/context/DataContext';
 import { useToast } from '@/context/ToastContext';
+import BrandLogo from '@/components/BrandLogo';
 import styles from './admin.module.css';
 
 interface NavGroup {
@@ -14,25 +15,40 @@ interface NavGroup {
 
 const ADMIN_NAV_GROUPS: NavGroup[] = [
   {
-    group: 'OPERATIONS & SEVA',
+    group: 'DASHBOARD & OVERVIEW',
     items: [
       { href: '/admin', label: 'Overview Dashboard', icon: '📊' },
-      { href: '/admin/contact', label: 'Seeker Inquiries', icon: '✉️', countKey: 'inquiries' },
-      { href: '/admin/donations', label: 'Seva & 80-G Records', icon: '🧾', countKey: 'donations' },
+      { href: '/admin/content', label: 'Content Index', icon: '📁' },
     ],
   },
   {
-    group: 'ACADEMIC & RETREATS',
+    group: 'CONTENT MANAGEMENT',
     items: [
-      { href: '/admin/events', label: 'Camps & Satsang Events', icon: '📅' },
-      { href: '/admin/courses', label: 'Study Courses & Curricula', icon: '📚' },
+      { href: '/admin/publications', label: 'Publications & Ezines', icon: '📰' },
+      { href: '/admin/teachings', label: 'Teachings & Discourses', icon: '🎙️' },
+      { href: '/admin/events', label: 'Events & Study Camps', icon: '📅' },
+      { href: '/admin/courses', label: 'Gurukula Courses', icon: '📚' },
+      { href: '/admin/acharyas', label: 'Acharyas & Lineage', icon: '🪔' },
     ],
   },
   {
-    group: 'PUBLICATIONS & MEDIA',
+    group: 'MEDIA REPOSITORY',
     items: [
-      { href: '/admin/teachings', label: 'Audio Library & Discourses', icon: '🎙️' },
-      { href: '/admin/publications', label: 'Monthly Ezines & PDFs', icon: '📰' },
+      { href: '/admin/media', label: 'Audio / Video / Images', icon: '🎞️' },
+    ],
+  },
+  {
+    group: 'COMMUNICATION & SEVA',
+    items: [
+      { href: '/admin/enquiries', label: 'Seeker Enquiries', icon: '✉️', countKey: 'inquiries' },
+      { href: '/admin/seva', label: 'Seva & 80-G Records', icon: '🧾', countKey: 'donations' },
+    ],
+  },
+  {
+    group: 'SYSTEM & GOVERNANCE',
+    items: [
+      { href: '/admin/settings', label: 'Site Settings & Roles', icon: '⚙️' },
+      { href: '/admin/audit', label: 'Audit Log', icon: '📋' },
     ],
   },
 ];
@@ -53,9 +69,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     }
   };
 
+  // If viewing the login page, render the standalone login screen without the admin workspace shell
+  if (pathname === '/admin/login') {
+    return <>{children}</>;
+  }
+
   return (
     <div className={styles.adminRoot}>
       {/* Top Institutional Header Bar */}
+      <head>
+        <meta name="robots" content="noindex, nofollow, noarchive" />
+      </head>
       <header className={styles.topbar}>
         <div className={styles.topbarLeft}>
           <button
@@ -67,18 +91,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             ☰
           </button>
           <Link href="/admin" className={styles.brandLink}>
-            <span className={styles.brandSeal}>ॐ</span>
+            <BrandLogo variant="emblem" size="sm" />
             <div className={styles.brandTextWrap}>
               <span className={styles.brandName}>VEDANTA MISSION</span>
-              <span className={styles.portalTag}>Staff Operations &amp; CMS Portal</span>
+              <span className={styles.portalTag}>Staff Operations &amp; CMS Portal (Prototype)</span>
             </div>
           </Link>
         </div>
 
         <div className={styles.topbarRight}>
           <div className={styles.systemStatus}>
-            <span className={styles.statusPulse} />
-            <span className={styles.statusText}>Indore Ashram Server Online</span>
+            <span className={styles.statusPulse} style={{ background: '#d97706' }} />
+            <span className={styles.statusText}>Prototype Console · Client State</span>
           </div>
 
           <button
@@ -98,11 +122,29 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <div className={styles.userAvatar}>AS</div>
             <div className={styles.userText}>
               <span className={styles.userName}>Ashram Office</span>
-              <span className={styles.userRole}>Duty Coordinator · Day Shift</span>
+              <span className={styles.userRole}>Duty Coordinator · Demo Mode</span>
             </div>
           </div>
         </div>
       </header>
+
+      {/* Prototype Environment Notice */}
+      <div style={{
+        backgroundColor: '#FEF3C7',
+        borderBottom: '1px solid #F59E0B',
+        color: '#92400E',
+        fontSize: '0.8rem',
+        padding: '8px 24px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        fontWeight: 500
+      }}>
+        <span>
+          ⚠️ <strong>PROTOTYPE ENVIRONMENT / LOCAL CLIENT STATE:</strong> This administrative interface is an interactive prototype operating on client state for workflow demonstration. It is not connected to a server-side authentication system. Production deployments must either exclude /admin/ from the public artifact or enforce server-side hosting authentication.
+        </span>
+        <span style={{ fontSize: '0.75rem', opacity: 0.85 }}>Static Export · No Backend Connected</span>
+      </div>
 
       {/* Main Admin Workspace */}
       <div className={styles.workspace}>
@@ -139,11 +181,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           <div className={styles.sidebarFooter}>
             <div className={styles.syncNotice}>
-              <span className={styles.syncDot} />
-              <span>Real-Time State Synchronization</span>
+              <span className={styles.syncDot} style={{ background: '#d97706' }} />
+              <span>Local State Simulation</span>
             </div>
             <p className={styles.syncDesc}>
-              Form submissions from the public website instantly appear in staff queues.
+              Form submissions in this browser session are persisted to local storage for testing.
             </p>
           </div>
         </aside>

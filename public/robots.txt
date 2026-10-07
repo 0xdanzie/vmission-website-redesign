@@ -1,0 +1,5 @@
+# Vedanta Mission — robots.txt
+User-agent: *
+Disallow: /admin/
+Disallow: /admin/*
+Allow: /

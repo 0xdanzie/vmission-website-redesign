@@ -4,6 +4,7 @@
   gap: var(--space-3);
   margin-bottom: var(--space-6);
   flex-wrap: wrap;
+  max-width: 100%;
 }
 
 .label {
@@ -23,6 +24,9 @@
   padding-block: var(--space-1);
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  min-width: 0;
+  max-width: 100%;
+  flex: 1 1 auto;
 }
 
 .scrollWrapper::-webkit-scrollbar {

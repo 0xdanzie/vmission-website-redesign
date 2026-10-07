@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { useToast } from '@/context/ToastContext';
-import { Publication, PublicationType } from '@/data/publications';
+import { Publication, PublicationType, PublicationLanguage } from '@/data/publications';
 import styles from '../events/eventsAdmin.module.css';
 
 export default function AdminPublicationsPage() {
@@ -17,7 +17,7 @@ export default function AdminPublicationsPage() {
   const [type, setType] = useState<PublicationType>('Vedanta Sandesh');
   const [month, setMonth] = useState('September');
   const [year, setYear] = useState(2026);
-  const [language, setLanguage] = useState('English / Hindi');
+  const [language, setLanguage] = useState<PublicationLanguage>('English / Hindi');
   const [pageCount, setPageCount] = useState(36);
   const [isLatest, setIsLatest] = useState(true);
 
@@ -37,8 +37,8 @@ export default function AdminPublicationsPage() {
     setEditingId(p.id);
     setTitle(p.title);
     setType(p.type);
-    setMonth(p.month);
-    setYear(p.year);
+    setMonth(p.month || 'January');
+    setYear(p.year || 2026);
     setLanguage(p.language);
     setPageCount(p.pageCount || 36);
     setIsLatest(!!p.isLatest);
@@ -73,7 +73,7 @@ export default function AdminPublicationsPage() {
         pageCount,
         isLatest,
         description: `Monthly issue of ${type} containing scriptural reflections and ashram updates.`,
-        coverImage: type === 'Vedanta Sandesh' ? '/images/vmission/publications/vedanta-sandesh-jan21.jpg' : '/images/vmission/publications/vedanta-piyush-cover.svg',
+        coverImage: type === 'Vedanta Sandesh' ? '/images/vmission/publications/vedanta-sandesh-cover.svg' : '/images/vmission/publications/vedanta-piyush-cover.svg',
         downloadUrl: '#',
         archiveUrl: '#',
       });
@@ -203,7 +203,7 @@ export default function AdminPublicationsPage() {
                     type="text"
                     className="form-input"
                     value={language}
-                    onChange={(e) => setLanguage(e.target.value)}
+                    onChange={(e) => setLanguage(e.target.value as PublicationLanguage)}
                   />
                 </div>
               </div>

@@ -287,7 +287,7 @@ export default function AshramAscent({ onComplete }: Props) {
                 <p className={styles.hudSanskrit}>सत्यं ज्ञानमनन्तं ब्रह्म</p>
                 <h1 className={styles.hudTitle}>Enter the Ashram</h1>
                 <p className={styles.hudTagline}>
-                  Step into the serene Gurukula on the sacred soil of Central India
+                  Visit the residential Gurukula in Indore, Central India
                 </p>
 
                 <div className={styles.hudActionWrap}>

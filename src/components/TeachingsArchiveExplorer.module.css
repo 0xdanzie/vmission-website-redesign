@@ -1,0 +1,579 @@
+/* ==========================================================================
+   TEACHINGS ARCHIVE EXPLORER — SCHOLARLY DIGITAL REPOSITORY
+   Senior Art Direction: Warm Temple Ivory, Cormorant Garamond, Antique Brass
+   ========================================================================== */
+
+.explorerSection {
+  margin-top: clamp(48px, 6vw, 80px);
+  padding: clamp(28px, 4vw, 48px) clamp(20px, 3vw, 40px);
+  background: #FFFDF9;
+  border: 1px solid rgba(197, 160, 89, 0.32);
+  border-radius: 4px;
+  box-shadow: 0 4px 24px rgba(44, 34, 22, 0.04);
+  position: relative;
+}
+
+/* 01. Header Area */
+.explorerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-6, 1.5rem);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.22);
+  padding-bottom: clamp(20px, 2.5vw, 32px);
+  margin-bottom: clamp(24px, 3vw, 36px);
+  flex-wrap: wrap;
+}
+
+.headerLeft {
+  max-width: 620px;
+}
+
+.overline {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--vm-saffron-deep, #C85A17);
+  margin-bottom: 6px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.85rem, 2.8vw, 2.5rem);
+  font-weight: 500;
+  color: var(--vm-charcoal, #1C1613);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.015em;
+  line-height: 1.18;
+}
+
+.lead {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--vm-text-muted, #5C5245);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* 02. Media Tab Switcher */
+.tabSwitcher {
+  display: inline-flex;
+  background: #FAF6EE;
+  padding: 4px;
+  border-radius: var(--vm-radius-md, 6px);
+  gap: 4px;
+  border: 1px solid rgba(197, 160, 89, 0.28);
+}
+
+.tabBtn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  gap: 8px;
+  padding: 8px 18px;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--vm-text-muted, #5C5245);
+  background: transparent;
+  border: none;
+  border-radius: var(--vm-radius-sm, 4px);
+  cursor: pointer;
+  transition: all var(--vm-ease-fast, 0.2s ease);
+  white-space: nowrap;
+}
+
+.tabBtn:hover {
+  color: var(--vm-charcoal, #1C1613);
+}
+
+.tabBtnActive {
+  background: #FFFDF9 !important;
+  color: var(--vm-saffron-deep, #C85A17) !important;
+  box-shadow: 0 1px 4px rgba(44, 34, 22, 0.08) !important;
+}
+
+.tabBadge {
+  background: rgba(197, 160, 89, 0.16);
+  color: var(--vm-charcoal, #1C1613);
+  font-size: 0.6875rem;
+  padding: 2px 7px;
+  border-radius: var(--vm-radius-pill, 9999px);
+  font-weight: 600;
+}
+
+/* 03. Controls Bar */
+.controlsBar {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2vw, 22px);
+  margin-bottom: clamp(20px, 2.5vw, 30px);
+}
+
+/* Primary: Category Pills */
+.categoryPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pillBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--vm-charcoal, #2C2216);
+  background: #FAF6EE;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  border-radius: var(--vm-radius-pill, 9999px);
+  cursor: pointer;
+  transition: all var(--vm-ease-fast, 0.15s ease);
+}
+
+.pillBtn:hover {
+  border-color: var(--vm-saffron-deep, #C85A17);
+  color: var(--vm-saffron-deep, #C85A17);
+  background: #FFFDF9;
+}
+
+.pillActive {
+  background: var(--vm-saffron-deep, #C85A17) !important;
+  color: #FFFDF9 !important;
+  border-color: var(--vm-saffron-deep, #C85A17) !important;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(200, 90, 23, 0.25);
+}
+
+/* Secondary: Search & Sub-Filters Row */
+.searchRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filterGroup {
+  display: inline-flex;
+  gap: 3px;
+  background: #FAF6EE;
+  padding: 3px;
+  border-radius: var(--vm-radius-md, 6px);
+  border: 1px solid rgba(197, 160, 89, 0.25);
+}
+
+.subFilterBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--vm-text-muted, #5C5245);
+  background: transparent;
+  border: none;
+  border-radius: var(--vm-radius-sm, 4px);
+  cursor: pointer;
+  transition: all var(--vm-ease-fast, 0.15s ease);
+  white-space: nowrap;
+}
+
+.subFilterBtn:hover {
+  color: var(--vm-charcoal, #1C1613);
+}
+
+.subFilterActive {
+  background: #FFFDF9;
+  color: var(--vm-saffron-deep, #C85A17);
+  box-shadow: 0 1px 3px rgba(44, 34, 22, 0.08);
+}
+
+.searchWrapper {
+  position: relative;
+  flex: 1;
+  min-width: 280px;
+  max-width: 480px;
+}
+
+.searchInput {
+  width: 100%;
+  min-height: 48px;
+  padding: 8px 36px 8px 14px;
+  font-family: var(--font-body);
+  font-size: 0.84375rem;
+  border: 1px solid rgba(197, 160, 89, 0.32);
+  border-radius: var(--vm-radius-md, 6px);
+  background: #FFFDF9;
+  color: var(--vm-charcoal, #1C1613);
+  outline: none;
+  transition: border-color var(--vm-ease-fast, 0.2s), box-shadow var(--vm-ease-fast, 0.2s);
+}
+
+.searchInput:focus {
+  border-color: var(--vm-saffron-deep, #C85A17);
+  box-shadow: 0 0 0 3px rgba(200, 90, 23, 0.12);
+}
+
+.clearBtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  min-width: 48px;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  font-size: 0.875rem;
+  color: var(--vm-text-faint, #8C7E72);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.clearBtn:hover {
+  color: var(--vm-charcoal, #1C1613);
+}
+
+/* 04. Results Context Banner */
+.resultsBanner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--vm-text-muted, #5C5245);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+  margin-bottom: clamp(20px, 2.5vw, 28px);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.resultsBanner strong {
+  color: var(--vm-charcoal, #1C1613);
+  font-weight: 600;
+}
+
+.resultsBannerPage {
+  color: var(--vm-antique-brass, #A27C36);
+  font-weight: 500;
+}
+
+/* 05. Scholarly Folio Cards Grid */
+.itemsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: clamp(18px, 2.5vw, 26px);
+}
+
+.archiveCard {
+  background: #FFFDF9;
+  border: 1px solid rgba(197, 160, 89, 0.28);
+  border-radius: 4px;
+  padding: clamp(18px, 2vw, 24px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.2s ease;
+}
+
+.archiveCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(44, 34, 22, 0.07);
+  border-color: rgba(197, 160, 89, 0.55);
+}
+
+.cardPlaying {
+  border-color: var(--vm-bhagwa, #D4672A) !important;
+  background: linear-gradient(180deg, #FDFBF7 0%, #FAF6EE 100%) !important;
+  box-shadow: 0 4px 18px rgba(212, 103, 42, 0.12) !important;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.categoryOverline {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--vm-antique-brass, #A27C36);
+}
+
+.typeIndicator {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--vm-text-faint, #8C7E72);
+}
+
+.cardTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 1.4vw, 1.3rem);
+  font-weight: 600;
+  color: var(--vm-charcoal, #1C1613);
+  line-height: 1.32;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.01em;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: var(--vm-text-muted, #5C5245);
+  margin-bottom: 12px;
+}
+
+.metaSpeaker {
+  font-weight: 600;
+  color: var(--vm-charcoal, #2C2216);
+}
+
+.metaDivider {
+  color: var(--vm-antique-brass, #A27C36);
+  opacity: 0.6;
+}
+
+.metaLang {
+  color: var(--vm-text-muted, #5C5245);
+}
+
+.metaYear {
+  color: var(--vm-text-faint, #8C7E72);
+}
+
+.cardSourceRow {
+  padding-top: 10px;
+  border-top: 1px solid rgba(197, 160, 89, 0.18);
+  margin-bottom: 16px;
+}
+
+.collectionName {
+  font-size: 0.75rem;
+  color: var(--vm-text-faint, #8C7E72);
+  line-height: 1.4;
+  display: block;
+}
+
+/* Card Action Buttons */
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.playActionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  gap: 7px;
+  padding: 8px 18px;
+  background: var(--vm-saffron-deep, #C85A17);
+  color: #FFFDF9;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--vm-ease-fast, 0.2s);
+}
+
+.playActionBtn:hover {
+  background: var(--vm-bhagwa, #D4672A);
+  transform: translateY(-1px);
+}
+
+.playActive {
+  background: #1B5E20 !important;
+}
+
+.openLinkBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #FAF6EE;
+  color: var(--vm-charcoal, #1C1613);
+  border: 1px solid rgba(197, 160, 89, 0.38);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: all var(--vm-ease-fast, 0.2s);
+}
+
+.openLinkBtn:hover {
+  background: var(--vm-saffron-deep, #C85A17);
+  color: #FFFDF9;
+  border-color: var(--vm-saffron-deep, #C85A17);
+  transform: translateY(-1px);
+}
+
+.mirrorBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  font-size: 0.75rem;
+  color: var(--vm-text-muted, #5C5245);
+  text-decoration: none;
+  padding: 8px 12px;
+  border: 1px solid rgba(197, 160, 89, 0.24);
+  border-radius: 4px;
+  background: #FFFDF9;
+  transition: all var(--vm-ease-fast, 0.2s);
+  white-space: nowrap;
+}
+
+.mirrorBtn:hover {
+  color: var(--vm-saffron-deep, #C85A17);
+  border-color: var(--vm-saffron-deep, #C85A17);
+}
+
+/* 06. Empty State */
+.emptyResults {
+  text-align: center;
+  padding: clamp(36px, 5vw, 60px) clamp(16px, 2vw, 32px);
+  background: #FAF6EE;
+  border-radius: 4px;
+  border: 1px dashed rgba(197, 160, 89, 0.4);
+}
+
+.emptyText {
+  color: var(--vm-text-muted, #5C5245);
+  margin-bottom: 16px;
+  font-size: 0.9375rem;
+}
+
+.resetBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  gap: 6px;
+  padding: 8px 20px;
+  background: var(--vm-saffron-deep, #C85A17);
+  color: #FFFDF9;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--vm-ease-fast, 0.2s);
+}
+
+.resetBtn:hover {
+  background: var(--vm-bhagwa, #D4672A);
+}
+
+/* 07. Integrated Scholarly Pagination */
+.paginationBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(16px, 3vw, 28px);
+  margin-top: clamp(32px, 4vw, 48px);
+  padding-top: clamp(18px, 2.5vw, 24px);
+  border-top: 1px solid rgba(197, 160, 89, 0.22);
+}
+
+.pageNavBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 8px 20px;
+  background: #FFFDF9;
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--vm-charcoal, #1C1613);
+  cursor: pointer;
+  transition: all var(--vm-ease-fast, 0.15s);
+}
+
+.pageNavBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.pageNavBtn:not(:disabled):hover {
+  background: var(--vm-saffron-deep, #C85A17);
+  color: #FFFDF9;
+  border-color: var(--vm-saffron-deep, #C85A17);
+}
+
+.pageInfo {
+  font-size: 0.8125rem;
+  color: var(--vm-text-muted, #5C5245);
+  font-weight: 500;
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+  .explorerHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tabSwitcher {
+    width: 100%;
+  }
+
+  .tabBtn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .searchRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filterGroup {
+    width: 100%;
+  }
+
+  .subFilterBtn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .searchWrapper {
+    max-width: 100%;
+  }
+
+  .itemsGrid {
+    grid-template-columns: 1fr;
+  }
+}

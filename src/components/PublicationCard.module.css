@@ -7,12 +7,25 @@
 /* Cover */
 .cover {
   position: relative;
-  height: 180px;
+  height: 240px;
   background: linear-gradient(160deg, var(--vm-saffron-light) 0%, var(--vm-bg-ashram) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+
+.coverImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #2a1608;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .coverImg {
+  transform: scale(1.04);
 }
 
 .coverInner {

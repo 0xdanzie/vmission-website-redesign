@@ -1,0 +1,382 @@
+/* ============================================================
+   CINEMATIC ENTRY OVERLAY — FINAL VISUAL REFINEMENT
+   Total Duration: Desktop <= 1.70s (1.70s) | Mobile <= 1.50s (1.35s)
+   
+   Layering:
+     Layer 1: entry-atmosphere.webp (asymmetrical, softer, deeper edges)
+     Layer 2: shivling-master.webp (grounded on floor plane with soft contact shadow)
+     Layer 3: subtle vignette/overlay
+   
+   Viewport Coverage:
+     Full viewport immersion including existing navbar.
+     Zero UI bleed through during active intro.
+     Existing navbar remains underneath, returning naturally.
+   ============================================================ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999999;
+  background-color: #070503;
+  overflow: hidden;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  animation: overlayContainerDissolve 1.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  will-change: opacity, visibility;
+}
+
+@keyframes overlayContainerDissolve {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  61.76% { /* 1.05s — Brief hold concludes, continuous morph handoff commences (0.65s handoff) */
+    opacity: 1;
+    visibility: visible;
+  }
+  82.35% { /* 1.40s — Homepage hero begins becoming visible underneath */
+    opacity: 0.55;
+    visibility: visible;
+  }
+  98.5% {
+    opacity: 0.02;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ============================================================
+   LAYER 1: ATMOSPHERE CANVAS (entry-atmosphere.webp)
+   Refined: Softer, organic asymmetry, deeper edges, brighter center.
+   Calm filmic grade: contrast(0.98), brightness(0.90), saturate(0.92).
+   ============================================================ */
+.atmosphereLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.atmosphereImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  filter: contrast(0.98) brightness(0.90) saturate(0.92);
+  animation: atmosphereTimeline 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: opacity, transform;
+}
+
+/* Organic Asymmetry & Sanctum Illumination Refinement */
+.atmosphereRefinement {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    /* Deepen left amber flare to reduce symmetry */
+    radial-gradient(ellipse 48% 54% at 18% 66%, rgba(8, 6, 4, 0.62) 0%, rgba(8, 6, 4, 0.28) 60%, transparent 100%),
+    /* Soften right flare gently */
+    radial-gradient(ellipse 38% 44% at 82% 66%, rgba(8, 6, 4, 0.28) 0%, transparent 80%),
+    /* Sacred warm luminance concentrated behind the Shivling */
+    radial-gradient(circle 460px at 50% 52%, rgba(225, 180, 120, 0.18) 0%, rgba(195, 140, 80, 0.07) 45%, transparent 75%),
+    /* Deepen perimeter edges for temple sanctum intimacy */
+    radial-gradient(ellipse 100% 75% at 50% 55%, transparent 35%, rgba(7, 5, 3, 0.72) 70%, rgba(6, 4, 2, 0.98) 100%),
+    /* Top vault shadow so light rises from floor */
+    linear-gradient(180deg, rgba(6, 4, 2, 0.88) 0%, rgba(6, 4, 2, 0.35) 25%, transparent 50%);
+  animation: atmosphereRefinementTimeline 1.7s ease-out forwards;
+}
+
+@keyframes atmosphereTimeline {
+  0% {
+    opacity: 0.14;
+    transform: scale(1.00);
+  }
+  8.82% { /* 0.15s: Near-black atmosphere hold */
+    opacity: 0.18;
+    transform: scale(1.004);
+  }
+  32.35% { /* 0.55s: White Shivling appears */
+    opacity: 0.35;
+    transform: scale(1.012);
+  }
+  50.00% { /* 0.85s: Atmosphere illumination blooms */
+    opacity: 0.65;
+    transform: scale(1.02);
+  }
+  61.76% { /* 1.05s: Brief contemplative hold */
+    opacity: 0.65;
+    transform: scale(1.024);
+  }
+  82.35% { /* 1.40s: Subtly expands & recedes */
+    opacity: 0.35;
+    transform: scale(1.042);
+  }
+  100% { /* 1.70s: Forward glide morph into existing homepage hero */
+    opacity: 0;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes atmosphereRefinementTimeline {
+  0% { opacity: 0.95; }
+  61.76% { opacity: 0.95; }
+  82.35% { opacity: 0.50; }
+  100% { opacity: 0; }
+}
+
+/* ============================================================
+   LAYER 2: GROUNDED SHIVLING (shivling-master.webp)
+   Vertical placement meets floor plane + realistic contact shadow.
+   ============================================================ */
+.shivlingLayer {
+  position: absolute;
+  left: 50%;
+  bottom: 9.5vh;
+  transform: translateX(-50%);
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.shivlingWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: center bottom;
+  animation: shivlingTimeline 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.shivlingImg {
+  display: block;
+  width: min(500px, 46vh);
+  height: auto;
+  max-height: 62vh;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.36));
+}
+
+/* Realistic Grounded Contact Shadow (Soft, multi-stage physical occlusion) */
+.contactShadow {
+  position: relative;
+  width: min(420px, 40vh);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  margin-top: -12px;
+}
+
+.shadowCore {
+  width: 82%;
+  height: 8px;
+  border-radius: 50% / 40%;
+  background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(8, 6, 4, 0.44) 0%, rgba(8, 6, 4, 0.16) 60%, transparent 85%);
+  filter: blur(2.8px);
+}
+
+.shadowPenumbra {
+  width: 104%;
+  height: 18px;
+  border-radius: 50% / 35%;
+  margin-top: -10px;
+  background: radial-gradient(ellipse 75% 50% at 50% 50%, rgba(10, 7, 5, 0.26) 0%, rgba(10, 7, 5, 0.08) 60%, transparent 85%);
+  filter: blur(7px);
+}
+
+.shadowAmbient {
+  width: 124%;
+  height: 30px;
+  border-radius: 50% / 30%;
+  margin-top: -18px;
+  background: radial-gradient(ellipse 80% 45% at 50% 50%, rgba(12, 8, 5, 0.12) 0%, rgba(12, 8, 5, 0.03) 65%, transparent 90%);
+  filter: blur(14px);
+}
+
+@keyframes shivlingTimeline {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  8.82% { /* 0.15s: Hold in darkness */
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  32.35% { /* 0.55s: Consecrated White Shivling appears */
+    opacity: 1;
+    transform: scale(1.00);
+  }
+  50.00% { /* 0.85s: Presence sustained, light blooms */
+    opacity: 1;
+    transform: scale(1.006);
+  }
+  61.76% { /* 1.05s: Very brief hold concludes */
+    opacity: 1;
+    transform: scale(1.01);
+  }
+  82.35% { /* 1.40s: Viewer moves forward through scene */
+    opacity: 0.55;
+    transform: scale(1.045) translateY(-5px);
+  }
+  100% { /* 1.70s: Forward morph handoff into existing homepage hero */
+    opacity: 0;
+    transform: scale(1.08) translateY(-10px);
+  }
+}
+
+/* ============================================================
+   LAYER 3: VIGNETTE & CONTEMPLATIVE DEPTH
+   ============================================================ */
+.vignetteLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(7, 5, 3, 0) 38%,
+    rgba(7, 5, 3, 0.45) 72%,
+    rgba(7, 5, 3, 0.85) 100%
+  );
+  animation: vignetteTimeline 1.7s ease-out forwards;
+}
+
+@keyframes vignetteTimeline {
+  0% { opacity: 0.95; }
+  61.76% { opacity: 0.95; }
+  82.35% { opacity: 0.50; }
+  100% { opacity: 0; }
+}
+
+/* ============================================================
+   RESPONSIVE & MOBILE REFINEMENT
+   Ensures sacred markings (Tripundra & third eye) remain prominent.
+   Tested across 375, 390, 430, 768, 1024, 1280, 1440.
+   Mobile sequence duration: <= 1.50s (1.35s).
+   ============================================================ */
+@media (max-width: 1024px) {
+  .shivlingLayer {
+    bottom: 10.5vh;
+  }
+
+  .shivlingImg {
+    width: min(440px, 46vh);
+    max-height: 58vh;
+  }
+
+  .contactShadow {
+    width: min(380px, 40vh);
+  }
+}
+
+@media (max-width: 768px) {
+  .overlay {
+    animation-duration: 1.0s;
+  }
+
+  .atmosphereImg {
+    animation-duration: 1.0s;
+  }
+
+  .atmosphereRefinement {
+    animation-duration: 1.0s;
+  }
+
+  .shivlingWrapper {
+    animation-duration: 1.0s;
+  }
+
+  .vignetteLayer {
+    animation-duration: 1.0s;
+  }
+
+  .shivlingLayer {
+    bottom: 11vh;
+  }
+
+  .shivlingImg {
+    width: min(80vw, 340px);
+    max-height: 52vh;
+  }
+
+  .contactShadow {
+    width: min(72vw, 290px);
+    margin-top: -10px;
+  }
+}
+
+@media (max-width: 430px) {
+  .shivlingLayer {
+    bottom: 11.5vh;
+  }
+
+  .shivlingImg {
+    width: min(78vw, 300px);
+    max-height: 50vh;
+  }
+
+  .contactShadow {
+    width: min(70vw, 260px);
+    margin-top: -9px;
+  }
+}
+
+@media (max-width: 390px) {
+  .shivlingLayer {
+    bottom: 11.5vh;
+  }
+
+  .shivlingImg {
+    width: min(76vw, 290px);
+    max-height: 48vh;
+  }
+
+  .contactShadow {
+    width: min(68vw, 250px);
+    margin-top: -9px;
+  }
+}
+
+@media (max-width: 375px) {
+  .shivlingLayer {
+    bottom: 11vh;
+  }
+
+  .shivlingImg {
+    width: min(74vw, 270px);
+    max-height: 46vh;
+  }
+
+  .contactShadow {
+    width: min(66vw, 230px);
+    margin-top: -8px;
+  }
+}
+
+/* ============================================================
+   SESSION BYPASS & ACCESSIBILITY OVERRIDES
+   ============================================================ */
+:global(html.vm-entry-seen) .overlay {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    display: none !important;
+  }
+}

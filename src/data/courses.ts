@@ -12,9 +12,11 @@ export interface Lesson {
 export interface Course {
   id: string;
   slug: string;
+  canonicalId?: string;
   title: string;
   subtitle: string;
   format: CourseFormat;
+  status?: 'AVAILABLE' | 'ADMISSION_BASED' | 'PARTIAL_DIGITIZING' | 'STUDY_CIRCLE';
   teacher: string;
   duration: string;
   fee: string;
@@ -31,15 +33,17 @@ export const courses: Course[] = [
   {
     id: 'tattva-bodha',
     slug: 'tattva-bodha',
+    canonicalId: 'canonical-001169',
     title: 'Tattva Bodha',
     subtitle: 'An Introduction to Vedanta',
     format: 'Online',
+    status: 'AVAILABLE',
     teacher: 'Swami Atmananda Saraswati',
     duration: 'Self-paced (4 sessions × 10 lessons)',
     fee: 'Voluntary donation to continue after Lesson 1',
     eligibility: 'Open to all sincere seekers. No prior Vedanta background required.',
     description:
-      'Tattva Bodha is a classical introductory text written by Adi Shankaracharya that systematically introduces the fundamental concepts of Advaita Vedanta — the nature of the Self (Atman), the world, and the ultimate Reality (Brahman). This online lesson course makes these timeless teachings accessible to modern seekers through a structured lesson-and-questionnaire format.',
+      'Tattva Bodha is a classical introductory text written by Adi Shankaracharya that systematically introduces the fundamental concepts of Advaita Vedanta — the nature of the Self (Atman), the world, and the ultimate Reality (Brahman). This online lesson course presents the traditional Vedantic inquiry to seekers through a structured lesson-and-questionnaire format.',
     whatYouLearn: [
       'The fundamental concepts of Advaita Vedanta',
       'Viveka — discrimination between the real and the unreal',
@@ -81,9 +85,11 @@ export const courses: Course[] = [
   {
     id: 'gita-online',
     slug: 'gita-online',
+    canonicalId: 'canonical-000001',
     title: 'Bhagavad Gita Online Lesson Course',
     subtitle: 'A Complete Study of All 18 Chapters',
     format: 'Online',
+    status: 'PARTIAL_DIGITIZING',
     teacher: 'Swami Atmananda Saraswati',
     duration: 'Self-paced (4 sessions × 10 lessons = 40 lessons covering 18 chapters)',
     fee: 'Voluntary donation after completing Lesson 1',
@@ -101,16 +107,18 @@ export const courses: Course[] = [
   {
     id: 'residential-gita',
     slug: 'residential-gita',
+    canonicalId: 'canonical-000052',
     title: 'Residential Gita Course',
     subtitle: 'A 12-Month Full-Time Residential Study Program at Vedanta Ashram',
     format: 'Residential',
+    status: 'ADMISSION_BASED',
     teacher: 'Swami Atmananda Saraswati',
     duration: '12 months (full-time residential)',
-    fee: 'Rs 25,000 per month per person (inclusive of accommodation, meals, and course)',
+    fee: 'Contact the Ashram office for current guidelines regarding boarding and accommodation.',
     eligibility:
       'Devoted Sanatani individuals, men or women (couples welcome). Preferred age 45–60. Financially self-supporting, medically insured, and healthy. Must commit to staying for the full duration of the course.',
     description:
-      'An immersive twelve-month residential program conducted at Vedanta Ashram in Indore. Students live alongside the Acharyas and the resident monastic community, studying the Bhagavad Gita in its entirety, Sanskrit, chanting, meditation, and ritual. This is a full-time commitment with no external breaks.',
+      'An intensive twelve-month residential study program conducted at Vedanta Ashram in Indore. Students live alongside the Acharyas and the resident monastic community, studying the Bhagavad Gita in its entirety, Sanskrit, chanting, meditation, and ritual. This is a full-time commitment with no external breaks.',
     whatYouLearn: [
       'Bhagavad Gita — all 18 chapters with classical commentary',
       'Sanskrit fundamentals for scriptural study',
@@ -121,6 +129,28 @@ export const courses: Course[] = [
     ],
     structure: '12 months, full-time residential at Vedanta Ashram, Indore.',
     dressCode: 'Plain white Indian dress (dhoti/saree) throughout the course period.',
+  },
+  {
+    id: 'sangyan-sanatan-dharma',
+    slug: 'sangyan-sanatan-dharma',
+    canonicalId: 'canonical-000007',
+    title: 'Sangyan — Sanatan Dharma Awareness Series',
+    subtitle: 'Cultural & Scriptural Education on Sanatan Dharma',
+    format: 'Study Group',
+    status: 'STUDY_CIRCLE',
+    teacher: 'Poojya Guruji & Acharyas',
+    duration: 'Ongoing Topical Modules (Sangyan 1, 2 & Satsang Series)',
+    fee: 'Open / Free Cultural Awareness Program',
+    eligibility: 'Open to all sincere seekers, youths, and families seeking grounded understanding of Vedic Dharma.',
+    description:
+      'An authentic educational awareness initiative of Vedanta Ashram (canonical-000007 through canonical-000009) providing clarity on the philosophical tenets, temple upasana, sacred festivals, and practical values of Sanatan Dharma for daily life and spiritual practice.',
+    whatYouLearn: [
+      'Core philosophy and vision of Sanatan Dharma',
+      'Significance of Vedic festivals, samskaras, and temple upasana',
+      'Resolving common doubts regarding Vedic tradition and lifestyle',
+      'Integrating spiritual values into family and community life',
+    ],
+    structure: 'Topical lectures, question-and-answer satsangs, and reflective study materials.',
   },
 ];
 

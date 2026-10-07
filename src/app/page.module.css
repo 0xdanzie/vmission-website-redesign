@@ -1,19 +1,21 @@
 /* ============================================================
    HOMEPAGE STYLES — VEDANTA MISSION / INDORE ASHRAM
-   Rich Editorial Aesthetics, Cinematic Dominant First Viewport
+   Phase 3A.4 — Architectural & Spiritual Visual Journey
    ============================================================ */
 
-/* ---------- CINEMATIC HERO (FIRST VIEWPORT) ---------- */
+/* ============================================================
+   CHAPTER 1: THE SACRED ARRIVAL (MONUMENTAL & CONTEMPLATIVE)
+   ============================================================ */
 .heroCinematic {
   position: relative;
-  min-height: calc(100vh - 80px);
+  min-height: 92vh;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
   overflow: hidden;
-  background-color: #1A1410;
-  color: #FFFBF4;
-  border-bottom: 1px solid var(--vm-border-light);
+  background-color: #140F0C;
+  color: var(--vm-ivory);
+  padding-top: var(--nav-height);
+  padding-bottom: var(--space-16);
 }
 
 .heroBackdrop {
@@ -27,14 +29,20 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 35%;
-  filter: contrast(1.06) saturate(1.06) brightness(0.82);
-  transform: scale(1.02);
+  object-position: center 32%;
+  filter: contrast(1.08) brightness(0.74);
+  transform: scale(1.01);
   transition: transform 12s ease-out;
 }
 
+@media (max-width: 768px) {
+  .heroBackdropImg {
+    object-position: center 25%;
+  }
+}
+
 .heroCinematic:hover .heroBackdropImg {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .heroBackdropGradient {
@@ -43,17 +51,17 @@
   background:
     linear-gradient(
       90deg,
-      rgba(18, 14, 11, 0.94) 0%,
-      rgba(18, 14, 11, 0.78) 42%,
-      rgba(18, 14, 11, 0.28) 72%,
-      rgba(18, 14, 11, 0.55) 100%
+      rgba(20, 15, 12, 0.95) 0%,
+      rgba(20, 15, 12, 0.86) 44%,
+      rgba(20, 15, 12, 0.44) 72%,
+      rgba(20, 15, 12, 0.78) 100%
     ),
     linear-gradient(
       180deg,
-      rgba(18, 14, 11, 0.45) 0%,
-      transparent 35%,
-      rgba(18, 14, 11, 0.75) 75%,
-      rgba(18, 14, 11, 0.96) 100%
+      rgba(20, 15, 12, 0.40) 0%,
+      transparent 30%,
+      rgba(20, 15, 12, 0.65) 68%,
+      rgba(20, 15, 12, 0.96) 100%
     );
 }
 
@@ -62,474 +70,1063 @@
   inset: 0;
   background: radial-gradient(
     circle at 75% 35%,
-    rgba(217, 93, 57, 0.18) 0%,
-    transparent 50%
+    rgba(224, 99, 40, 0.16) 0%,
+    transparent 55%
   );
-  mix-blend-mode: screen;
+  pointer-events: none;
 }
 
-.heroContentGrid {
+/* Organic Dawn Horizon Descent into Chapter 2 (No blunt lines) */
+.heroBottomDawnTransition {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(20, 15, 12, 0.4) 35%,
+    rgba(253, 251, 247, 0.2) 75%,
+    var(--vm-ivory) 100%
+  );
+  z-index: 3;
+  pointer-events: none;
+}
+
+.heroContentWrap {
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: var(--space-12);
-  align-items: center;
-  padding-block: var(--space-16) var(--space-10);
-}
-
-.heroTextCol {
+  max-width: 780px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-4);
+  padding-block: var(--space-12) var(--space-8);
 }
 
-.heroBadgeRow {
+/* Quiet, Unified Identity Line (No pill shapes) */
+.heroIdentityCue {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vm-brass);
   flex-wrap: wrap;
 }
 
-.heroBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-size: 0.75rem;
+.heroIdentityDot {
+  color: var(--vm-bhagwa);
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #FFF7EE;
-  background: rgba(217, 93, 57, 0.85);
-  padding: 6px 14px;
-  border-radius: var(--vm-radius-pill);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 14px rgba(217, 93, 57, 0.3);
-}
-
-.heroParampara {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: #F8DFC0;
-  text-transform: uppercase;
 }
 
 .heroSanskrit {
-  font-family: var(--font-serif-body, serif);
-  font-size: 1.25rem;
-  color: #E3A361;
-  letter-spacing: 0.04em;
-  margin-top: var(--space-2);
+  font-family: var(--font-sanskrit);
+  font-size: 1.35rem;
+  color: #E2B770;
+  letter-spacing: normal;
+  line-height: 1.5;
+  margin-top: 2px;
 }
 
 .heroMainTitle {
-  font-family: var(--font-serif);
-  font-size: clamp(2.8rem, 5.2vw, 4.2rem);
-  font-weight: 700;
-  color: #FFFBF4;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 5.8vw, 5rem);
+  font-weight: 500;
+  line-height: 1.03;
+  color: var(--vm-ivory);
+  letter-spacing: -0.015em;
+  margin: 0;
 }
 
 .heroSubTitle {
   display: block;
-  font-family: var(--font-serif);
-  font-size: clamp(1.3rem, 2.4vw, 1.85rem);
-  font-weight: 400;
-  font-style: italic;
-  color: #F8DFC0;
-  margin-top: 4px;
-}
-
-.heroMottoQuote {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #FFF7EE;
-  border-left: 3px solid #D95D39;
-  padding-left: var(--space-4);
-  margin-block: var(--space-2);
-  font-style: italic;
-  line-height: 1.5;
-  background: rgba(255, 255, 255, 0.04);
-  padding-block: var(--space-2);
-  border-radius: 0 var(--vm-radius-md) var(--vm-radius-md) 0;
+  font-family: var(--font-ui);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--vm-bhagwa);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 8px;
 }
 
 .heroDescription {
-  font-size: clamp(0.95rem, 1.2vw, 1.0625rem);
-  color: rgba(255, 247, 235, 0.88);
+  font-size: 1.05rem;
+  color: #C8BFB5;
   line-height: 1.7;
-  max-width: 580px;
+  max-width: 660px;
+  margin: var(--space-2) 0 0;
 }
 
 .heroCtaGroup {
   display: flex;
-  gap: var(--space-3);
-  flex-wrap: wrap;
   align-items: center;
-  margin-top: var(--space-4);
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-top: var(--space-5);
 }
 
 .btnHeroAshram {
-  border-color: rgba(255, 255, 255, 0.4);
-  color: #FFFBF4 !important;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(6px);
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  color: var(--vm-ivory) !important;
 }
 
 .btnHeroAshram:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: #FFFBF4;
+  border-color: var(--vm-brass) !important;
+  color: var(--vm-brass) !important;
+  background: rgba(197, 160, 89, 0.12) !important;
 }
 
-.btnReplay {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: rgba(255, 247, 235, 0.85);
-  background: rgba(20, 16, 13, 0.6);
-  border: 1px solid rgba(255, 247, 235, 0.25);
-  padding: 11px 18px;
-  border-radius: var(--vm-radius-pill);
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  transition: all var(--vm-ease-fast);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+/* ============================================================
+   CHAPTER 2: THE SACRED GURUKULA & SANCTUM (THE PLACE)
+   ============================================================ */
+.sanctumChapter {
+  background-color: var(--vm-ivory);
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-20);
 }
 
-.btnReplay:hover {
-  background: rgba(217, 93, 57, 0.85);
-  color: #FFFFFF;
-  border-color: transparent;
-  transform: translateY(-2px);
+.ashramIntroHeader {
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto var(--space-12);
 }
 
-/* Right Highlights Column */
-.heroHighlightsCol {
-  display: flex;
-  flex-direction: column;
-}
-
-.sanctumFeatureCard {
-  background: rgba(28, 22, 18, 0.75);
-  border: 1.5px solid rgba(197, 160, 89, 0.35);
-  border-radius: var(--vm-radius-xl);
-  padding: var(--space-8);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  transition: border-color var(--vm-ease-fast);
-}
-
-.sanctumFeatureCard:hover {
-  border-color: rgba(227, 163, 97, 0.7);
-}
-
-.cardHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.sanctumTag {
-  font-size: 0.75rem;
+.ashramEyebrow {
+  font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #E3A361;
+  color: var(--vm-brass);
+  margin-bottom: var(--space-3);
+  display: inline-block;
 }
 
-.sanctumYear {
-  font-size: 0.75rem;
-  color: rgba(255, 247, 235, 0.6);
+.ashramTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.4vw, 3.6rem);
+  font-weight: 500;
+  color: var(--vm-text-dark);
+  margin-bottom: var(--space-3);
 }
 
-.cardTitle {
-  font-family: var(--font-serif);
-  font-size: 1.45rem;
-  font-weight: 600;
-  color: #FFFBF4;
-  line-height: 1.2;
+.ashramSubtitle {
+  font-size: 1.05rem;
+  color: var(--vm-text-muted);
+  line-height: 1.7;
 }
 
-.cardText {
-  font-size: 0.875rem;
-  color: rgba(255, 247, 235, 0.8);
-  line-height: 1.6;
-}
-
-.quickSchedule {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  background: rgba(0, 0, 0, 0.25);
-  padding: var(--space-4);
-  border-radius: var(--vm-radius-md);
-  border-left: 3px solid #E3A361;
-}
-
-.scheduleRow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  font-size: 0.8125rem;
-}
-
-.schedTime {
-  font-weight: 700;
-  color: #E3A361;
-  font-family: monospace;
-}
-
-.schedEvent {
-  color: #FFFBF4;
-}
-
-.cardFooter {
-  padding-top: var(--space-2);
-}
-
-.sanctumLink {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #E3A361;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: transform var(--vm-ease-fast), color var(--vm-ease-fast);
-}
-
-.sanctumLink:hover {
-  color: #FFFBF4;
-  transform: translateX(4px);
-}
-
-/* Bottom Atmospheric Ribbon */
-.heroRibbon {
-  position: relative;
-  z-index: 2;
-  background: rgba(14, 11, 8, 0.85);
-  border-top: 1px solid rgba(197, 160, 89, 0.2);
-  padding-block: var(--space-4);
-  backdrop-filter: blur(8px);
-}
-
-.ribbonGrid {
+/* Spatial Layout: Dominant Landmark Anchor + Integrated Narrative */
+.spatialLayoutGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-4);
-}
-
-.ribbonItem {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.ribbonIcon {
-  font-size: 1.35rem;
-  color: #E3A361;
-  flex-shrink: 0;
-}
-
-.ribbonItem div {
-  display: flex;
-  flex-direction: column;
-}
-
-.ribbonItem strong {
-  font-size: 0.8125rem;
-  color: #FFFBF4;
-  font-weight: 600;
-}
-
-.ribbonItem span {
-  font-size: 0.72rem;
-  color: rgba(255, 247, 235, 0.65);
-}
-
-/* ---------- SRI GANGESHWAR MAHADEV SPOTLIGHT ---------- */
-.mandirGrid {
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: 1.08fr 0.92fr;
   gap: var(--space-12);
-  align-items: center;
+  align-items: start;
 }
 
-.mandirCards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
-}
-
-.mandirCard {
-  background: var(--vm-bg-surface);
-  border: 1px solid var(--vm-border-light);
-  border-radius: var(--vm-radius-lg);
+.landmarkAnchorFrame {
+  border-radius: var(--vm-radius-md);
   overflow: hidden;
-  box-shadow: var(--vm-shadow-xs);
-  transition: transform var(--vm-ease-base), box-shadow var(--vm-ease-base), border-color var(--vm-ease-base);
+  box-shadow: 0 16px 36px rgba(30, 25, 22, 0.08);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  background: #ECE5DA;
 }
 
-.mandirCard:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--vm-shadow-md);
-  border-color: var(--vm-brass-border);
-}
-
-.mandirImgWrap {
+.landmarkImgWrap {
+  position: relative;
   width: 100%;
-  height: 150px;
+  aspect-ratio: 4 / 3.6;
   overflow: hidden;
 }
 
-.mandirCardImg {
+.landmarkImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 400ms ease;
-  filter: contrast(1.02) saturate(1.02);
+  transition: transform 1.2s ease-out;
 }
 
-.mandirCard:hover .mandirCardImg {
-  transform: scale(1.05);
+.landmarkAnchorFrame:hover .landmarkImg {
+  transform: scale(1.02);
 }
 
-.mandirCardBody {
-  padding: var(--space-4);
+.landmarkCaption {
+  padding: 16px 22px;
+  background: #FFFFFF;
+  border-top: 1px solid var(--vm-sand-border);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
-.mandirCardTitle {
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--vm-text);
-  margin-bottom: 4px;
+.landmarkCaption strong {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--vm-text-dark);
 }
 
-.mandirCardSub {
-  font-size: 0.75rem;
+.landmarkCaption span {
+  font-size: 0.82rem;
   color: var(--vm-text-muted);
-  line-height: 1.4;
 }
 
-.featureList {
+.ashramDetailCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.ashramNarrativeText p {
+  font-size: 1.02rem;
+  color: var(--vm-text-muted);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* Integrated Ashram Daily Rhythm (Typographic, Not a Box Card) */
+.mandirScheduleBlock {
+  background: rgba(243, 238, 230, 0.65);
+  border-left: 3px solid var(--vm-gerua);
+  border-top: 1px solid rgba(197, 160, 89, 0.25);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.25);
+  border-radius: var(--vm-radius-sm);
+  padding: var(--space-6);
+}
+
+.schedBlockHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.schedBlockHeading {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--vm-text-dark);
+  margin: 0;
+}
+
+.schedSeekersNotice {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--vm-forest);
+  letter-spacing: 0.04em;
+}
+
+.schedEntries {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  margin-block: var(--space-4) var(--space-6);
 }
 
-.featureItem {
+.schedEntry {
   display: flex;
-  align-items: flex-start;
-  gap: var(--space-3);
-  font-size: 0.9375rem;
-  color: var(--vm-text);
+  gap: var(--space-4);
+  align-items: baseline;
 }
 
-.featureIcon {
-  color: var(--vm-saffron);
+.schedTimeBadge {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
   font-weight: 700;
-  font-size: 1.125rem;
+  color: var(--vm-gerua);
+  min-width: 84px;
 }
 
-/* ---------- SECTION LINK ROWS ---------- */
-.sectionLinkRow {
+.schedEntryText strong {
+  display: block;
+  font-size: 0.94rem;
+  color: var(--vm-text-dark);
+  margin-bottom: 2px;
+}
+
+.schedEntryText span {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--vm-text-muted);
+  line-height: 1.45;
+}
+
+.schedDivider {
+  height: 1px;
+  background: rgba(197, 160, 89, 0.25);
+}
+
+/* Supporting Architectural Vignettes */
+.ashramVignetteRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.ashramVignetteCard {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+}
+
+.vignetteImgWrap {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--vm-radius-sm);
+  background: #ECE5DA;
+  border: 1px solid rgba(197, 160, 89, 0.25);
+}
+
+.vignetteImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s ease-out;
+}
+
+.ashramVignetteCard:hover .vignetteImg {
+  transform: scale(1.03);
+}
+
+.vignetteBody {
+  padding: 8px 0 0;
+}
+
+.vignetteBody h5 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--vm-text-dark);
+  margin: 0 0 2px;
+}
+
+.vignetteBody span {
+  font-size: 0.75rem;
+  color: var(--vm-text-faint);
+  display: block;
+}
+
+.ashramActionsRow {
   display: flex;
-  justify-content: center;
-  margin-top: var(--space-8);
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+  margin-top: var(--space-2);
 }
 
-.moreLink {
-  font-size: 0.9375rem;
+.linkDirections {
+  font-size: 0.9rem;
   font-weight: 600;
-  color: var(--vm-saffron);
+  color: var(--vm-text-muted);
+  text-decoration: none;
+  transition: color var(--vm-ease-fast);
+}
+
+.linkDirections:hover {
+  color: var(--vm-bhagwa);
+  text-decoration: underline;
+}
+
+/* ============================================================
+   CHAPTER 3: THE LIVING TRADITION & LINEAGE (THE VISION)
+   ============================================================ */
+.lineageChapter {
+  background: linear-gradient(180deg, #F7F3EB 0%, #F7F3EB 80%, #E8DFD0 92%, #221A15 100%);
+  padding-top: var(--space-20);
+  padding-bottom: var(--space-24);
+}
+
+.lineageIntroWrap {
+  text-align: center;
+  max-width: 840px;
+  margin: 0 auto var(--space-12);
+}
+
+.lineageEyebrow {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--vm-brass);
+  display: inline-block;
+  margin-bottom: var(--space-2);
+}
+
+.lineageTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-weight: 500;
+  color: var(--vm-text-dark);
+  margin-bottom: var(--space-4);
+}
+
+.lineageEmblemLine {
+  width: 44px;
+  height: 2px;
+  background: var(--vm-bhagwa);
+  margin: 0 auto var(--space-6);
+}
+
+.lineageQuote {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: #4A3E36;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Editorial Triptych: Classical Pedagogy (Zero Box Cards, Delicate Separators) */
+.triptychGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: var(--space-10);
+  border-top: 1px solid rgba(197, 160, 89, 0.35);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.35);
+  padding-block: var(--space-10);
+}
+
+.triptychPillar {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0 var(--space-8);
+  border-right: 1px solid rgba(197, 160, 89, 0.35);
+  display: flex;
+  flex-direction: column;
+}
+
+.triptychPillar:last-child {
+  border-right: none;
+}
+
+.triptychHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.triptychNumeral {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--vm-bhagwa);
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.triptychIconBox {
+  color: var(--vm-brass);
+  opacity: 0.85;
+}
+
+.triptychHeading {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--vm-text-dark);
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.01em;
+}
+
+.triptychDesc {
+  font-size: 0.92rem;
+  color: #5C5046;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Contemplative Bridge into Chapter 4 (Founder) */
+.lineageToFounderBridge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: var(--space-14);
+}
+
+.bridgeVerticalLine {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(180deg, var(--vm-bhagwa) 0%, rgba(224, 99, 40, 0.2) 100%);
+  margin-bottom: var(--space-4);
+}
+
+.bridgeInvitationText {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #5A4E45;
+  max-width: 620px;
+  margin: 0;
+}
+
+/* ============================================================
+   CHAPTER 4: FOUNDER CINEMATIC SECTION (CONCEPT A APPROVED)
+   ============================================================ */
+.founderCinematicSection {
+  position: relative;
+  width: 100%;
+  min-height: 680px;
+  height: 76vh;
+  max-height: 840px;
+  background-color: #171310;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.founderBgContainer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.founderBgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 78% 24%;
+  display: block;
+}
+
+.founderScrimLeft {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    rgba(18, 14, 12, 0.94) 0%,
+    rgba(18, 14, 12, 0.86) 38%,
+    rgba(18, 14, 12, 0.38) 62%,
+    transparent 84%
+  );
+  pointer-events: none;
+}
+
+.founderBottomFade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  z-index: 2;
+  background: linear-gradient(180deg, transparent 0%, rgba(22, 18, 16, 0.98) 100%);
+  pointer-events: none;
+}
+
+.founderEditorialCol {
+  position: relative;
+  z-index: 3;
+  max-width: 580px;
+}
+
+.founderEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vm-brass);
+  margin-bottom: var(--space-3);
+}
+
+.founderEyebrow::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: var(--vm-bhagwa);
+}
+
+.founderName {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 4.6vw, 4.2rem);
+  font-weight: 500;
+  line-height: 1.06;
+  color: var(--vm-ivory);
+  letter-spacing: -0.015em;
+  margin-bottom: 8px;
+}
+
+.founderHonorificRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--space-4);
+}
+
+.founderDevanagari {
+  font-family: var(--font-sanskrit);
+  font-size: 1.2rem;
+  color: var(--vm-bhagwa);
+}
+
+.founderHonorificSep {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.9rem;
+}
+
+.founderLatinHonorific {
+  font-size: 0.95rem;
+  color: #D4C9BD;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.founderBioLead {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: #D6CCC0;
+  margin-bottom: var(--space-6);
+}
+
+.founderBioLead strong {
+  color: var(--vm-ivory);
+  font-weight: 600;
+}
+
+/* Story Anchors */
+.storyAnchorsRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: 16px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  margin-bottom: var(--space-6);
+}
+
+.storyAnchorItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.storyAnchorYear {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--vm-bhagwa);
+  line-height: 1;
+}
+
+.storyAnchorLabel {
+  font-size: 0.72rem;
+  color: #A69E95;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.storyAnchorSep {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Founder Actions */
+.founderActionsRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.btnKnowGuruji {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--vm-gerua);
+  color: #FFF;
+  font-family: var(--font-ui);
+  font-size: 0.94rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: var(--vm-radius-sm);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 18px rgba(200, 78, 23, 0.35);
+  border: 1px solid var(--vm-gerua);
+  transition: all var(--vm-ease-fast);
+}
+
+.btnKnowGuruji:hover {
+  background: var(--vm-bhagwa);
+  border-color: var(--vm-bhagwa);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(224, 99, 40, 0.45);
+}
+
+.linkExploreTeachings {
+  color: var(--vm-ivory);
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity var(--vm-ease-fast), color var(--vm-ease-fast);
+}
+
+.linkExploreTeachings:hover {
+  opacity: 1;
+  color: var(--vm-brass);
+}
+
+.founderProvenanceTag {
+  position: absolute;
+  bottom: 20px;
+  right: 28px;
+  z-index: 3;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  background: rgba(18, 14, 12, 0.65);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: var(--vm-radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================================
+   CHAPTER 5: JNANA GANGA — TEACHINGS BRIDGE & SHASTRA PILLARS
+   ============================================================ */
+.teachingsBridgeSection {
+  background: linear-gradient(180deg, #171310 0%, #15110E 35%, #181310 100%);
+  padding: 90px 0 96px;
+}
+
+.bridgeHeaderWrap {
+  text-align: center;
+  max-width: 740px;
+  margin: 0 auto 52px;
+}
+
+.bridgeEyebrow {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--vm-brass);
+  margin-bottom: var(--space-3);
+  display: inline-block;
+}
+
+.bridgeTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 500;
+  color: var(--vm-ivory);
+  margin-bottom: var(--space-3);
+}
+
+.bridgeSubtitle {
+  font-size: 1.05rem;
+  color: #BDB3A7;
+  line-height: 1.65;
+}
+
+.shastraPillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+.pillarCard {
+  background: #221C18;
+  border: 1px solid rgba(197, 160, 89, 0.25);
+  border-radius: var(--vm-radius-sm);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform var(--vm-ease-base), border-color var(--vm-ease-base);
+}
+
+.pillarCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--vm-bhagwa);
+}
+
+.pillarNum {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--vm-bhagwa);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.pillarName {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--vm-ivory);
+  margin-bottom: 8px;
+}
+
+.pillarDesc {
+  font-size: 0.88rem;
+  color: #B5ABA0;
+  line-height: 1.6;
+  margin-bottom: var(--space-5);
+}
+
+.pillarLink {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--vm-brass);
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 18px;
-  background: var(--vm-bg-surface);
-  border: 1px solid var(--vm-saffron-border);
-  border-radius: var(--vm-radius-pill);
+}
+
+.pillarLink:hover {
+  color: var(--vm-bhagwa-hover);
+}
+
+/* Audio Row */
+.teachingsAudioRow {
+  padding-top: var(--space-8);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.audioRowHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.audioRowTitle {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--vm-ivory);
+}
+
+.allAudioLink {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--vm-bhagwa);
+  text-decoration: none;
+}
+
+.allAudioLink:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   CHAPTER 6: LITERARY HERITAGE — PUBLICATIONS & MONTHLY EZINES
+   ============================================================ */
+.publicationsChapter {
+  background-color: var(--vm-ivory);
+  padding-block: var(--space-20);
+}
+
+.pubsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8);
+}
+
+.pubCard {
+  background: #FFFFFF;
+  border: 1px solid rgba(197, 160, 89, 0.28);
+  border-radius: var(--vm-radius-md);
+  padding: var(--space-8);
+  display: flex;
+  gap: var(--space-8);
+  box-shadow: 0 8px 24px rgba(30, 25, 22, 0.04);
+  transition: transform var(--vm-ease-base), border-color var(--vm-ease-base);
+}
+
+.pubCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--vm-bhagwa);
+}
+
+.pubCoverFrame {
+  flex-shrink: 0;
+  width: 165px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pubBookBadge {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vm-ochre);
+  text-align: center;
+}
+
+.pubCoverMock {
+  background: linear-gradient(145deg, #2A211B 0%, #16120F 100%);
+  border: 1px solid var(--vm-brass-border);
+  border-left: 4px solid var(--vm-bhagwa);
+  border-radius: 4px;
+  padding: 20px 14px;
+  text-align: center;
+  color: #FFFFFF;
+  box-shadow: -4px 8px 24px rgba(0, 0, 0, 0.32), inset 2px 0 5px rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 205px;
+}
+
+.pubCoverEmblem {
+  font-family: var(--font-sanskrit);
+  font-size: 1.5rem;
+  color: var(--vm-bhagwa);
+  margin-bottom: 4px;
+}
+
+.pubCoverTitle {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--vm-ivory);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.pubCoverSub {
+  font-size: 0.65rem;
+  color: #BDB3A7;
+  line-height: 1.3;
+  margin: 4px 0;
+}
+
+.pubIssueTag {
+  display: inline-block;
+  font-size: 0.65rem;
+  color: var(--vm-brass);
+  background: rgba(197, 160, 89, 0.15);
+  padding: 2px 6px;
+  border-radius: 2px;
+  margin-top: auto;
+}
+
+.pubCardDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pubTitle {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  color: var(--vm-text-dark);
+  margin-bottom: var(--space-2);
+}
+
+.pubDesc {
+  font-size: 0.92rem;
+  color: var(--vm-text-muted);
+  line-height: 1.65;
+  margin-bottom: var(--space-4);
+}
+
+.pubMetaRow {
+  display: flex;
+  gap: var(--space-4);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--vm-forest);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pubMetaRow span + span::before {
+  content: '·';
+  margin-right: var(--space-4);
+  color: var(--vm-brass);
+  font-weight: 400;
+}
+
+.pubActionLink {
+  align-self: flex-start;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--vm-gerua);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pubActionLink:hover {
+  color: var(--vm-bhagwa);
+  text-decoration: underline;
+}
+
+/* ============================================================
+   CHAPTER 7: COMMUNAL SATSANG & RETREATS
+   ============================================================ */
+.eventsChapter {
+  background-color: #F8F4ED;
+  padding-block: var(--space-20);
+}
+
+.sectionLinkRow {
+  text-align: center;
+  margin-top: var(--space-10);
+}
+
+.moreLink {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--vm-gerua);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--vm-radius-sm);
+  border: 1px solid rgba(200, 78, 23, 0.3);
   transition: all var(--vm-ease-fast);
 }
 
 .moreLink:hover {
-  background: var(--vm-saffron-light);
-  color: var(--vm-saffron-deep);
-  transform: translateX(3px);
+  background: var(--vm-bhagwa-subtle);
+  border-color: var(--vm-bhagwa);
 }
 
-/* ---------- PUBLICATIONS SPOTLIGHT ---------- */
-.pubsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-6);
+/* ============================================================
+   CHAPTER 8: SACRED SEVA & STEWARDSHIP
+   ============================================================ */
+.sevaChapter {
+  background-color: var(--vm-walnut);
+  padding-block: var(--space-20);
 }
 
-.pubCard {
-  background: var(--vm-bg-surface);
-  border: 1px solid var(--vm-border-light);
-  border-radius: var(--vm-radius-lg);
-  padding: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  box-shadow: var(--vm-shadow-xs);
-  transition: transform var(--vm-ease-base), box-shadow var(--vm-ease-base);
-}
-
-.pubCard:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--vm-shadow-md);
-}
-
-.pubHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.pubTag {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--vm-saffron);
-}
-
-.pubTitle {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--vm-text);
-}
-
-.pubDesc {
-  font-size: 0.875rem;
-  color: var(--vm-text-muted);
-  line-height: var(--lh-relaxed);
-}
-
-/* ---------- INVITATION / SEVA BANNER ---------- */
 .ctaBanner {
-  background: linear-gradient(135deg, var(--vm-saffron-deep) 0%, #7E2912 100%);
-  color: #FFFFFF;
-  border-radius: var(--vm-radius-xl);
-  padding: var(--space-12) var(--space-8);
+  background: linear-gradient(135deg, #241D19 0%, #1A1512 100%);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: var(--vm-radius-lg);
+  padding: var(--space-12) var(--space-10);
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: var(--space-8);
-  box-shadow: var(--vm-shadow-lg);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
 .ctaContent {
@@ -537,114 +1134,204 @@
 }
 
 .ctaKicker {
-  font-size: var(--text-meta);
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--vm-brass-border);
-  margin-bottom: var(--space-2);
+  color: var(--vm-brass);
+  margin-bottom: 6px;
 }
 
 .ctaTitle {
-  font-family: var(--font-serif);
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
-  font-weight: 600;
-  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.4vw, 2.8rem);
+  font-weight: 500;
+  color: var(--vm-ivory);
   margin-bottom: var(--space-3);
 }
 
 .ctaText {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.88);
-  line-height: var(--lh-body);
+  color: #D4C9BD;
+  line-height: 1.65;
+  margin-bottom: var(--space-3);
+}
+
+.ctaTrustNotice {
+  font-size: 0.84rem;
+  color: var(--vm-brass);
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
 }
 
 .ctaBtns {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-4);
   flex-shrink: 0;
 }
 
 .btnCtaWhite {
-  background: #FFFFFF;
-  color: var(--vm-saffron-deep);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--vm-gerua);
+  color: #FFF;
+  font-family: var(--font-ui);
+  font-size: 0.94rem;
   font-weight: 600;
-  font-size: 0.9375rem;
-  padding: 12px 24px;
-  border-radius: var(--vm-radius-md);
-  text-align: center;
+  padding: 13px 26px;
+  border-radius: var(--vm-radius-sm);
+  text-decoration: none;
   transition: all var(--vm-ease-fast);
-  box-shadow: var(--vm-shadow-sm);
+  border: 1px solid var(--vm-gerua);
+  box-shadow: 0 4px 14px rgba(200, 78, 23, 0.35);
 }
 
 .btnCtaWhite:hover {
-  background: var(--vm-bg-sand);
-  transform: translateY(-2px);
+  background: var(--vm-bhagwa);
+  border-color: var(--vm-bhagwa);
+  transform: translateY(-1px);
 }
 
 .btnCtaOutline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: transparent;
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  font-weight: 500;
-  font-size: 0.9375rem;
+  color: var(--vm-ivory);
+  font-family: var(--font-ui);
+  font-size: 0.94rem;
+  font-weight: 600;
   padding: 12px 24px;
-  border-radius: var(--vm-radius-md);
-  text-align: center;
+  border-radius: var(--vm-radius-sm);
+  border: 1.5px solid rgba(197, 160, 89, 0.5);
+  text-decoration: none;
   transition: all var(--vm-ease-fast);
 }
 
 .btnCtaOutline:hover {
-  border-color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(197, 160, 89, 0.15);
+  border-color: var(--vm-brass);
 }
 
-/* ---------- RESPONSIVE BREAKPOINTS ---------- */
+/* ============================================================
+   RESPONSIVE ART DIRECTION
+   ============================================================ */
+
+/* Tablet (1024px) */
 @media (max-width: 1024px) {
-  .heroBackdropImg {
-    object-position: 70% center;
-  }
-
-  .heroBackdropGradient {
-    background: linear-gradient(
-      180deg,
-      rgba(18, 14, 11, 0.88) 0%,
-      rgba(18, 14, 11, 0.65) 45%,
-      rgba(18, 14, 11, 0.92) 85%,
-      rgba(18, 14, 11, 0.98) 100%
-    );
-  }
-
-  .heroContentGrid {
+  .spatialLayoutGrid {
     grid-template-columns: 1fr;
     gap: var(--space-8);
   }
-
-  .ribbonGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .mandirGrid {
+  .triptychGrid {
     grid-template-columns: 1fr;
+    gap: var(--space-6);
+    border-top: 1px solid rgba(197, 160, 89, 0.3);
+    border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+  }
+  .triptychPillar {
+    border-right: none;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.25);
+    padding: var(--space-4) 0;
+  }
+  .triptychPillar:last-child {
+    border-bottom: none;
+  }
+  .shastraPillarsGrid {
+    grid-template-columns: 1fr;
+  }
+  .pubsGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  .ctaBanner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ctaBtns {
+    flex-direction: row;
   }
 }
 
-@media (max-width: 640px) {
-  .heroBackdropImg {
-    object-position: 75% center;
+/* Mobile (768px & below) */
+@media (max-width: 768px) {
+  .founderCinematicSection {
+    height: auto;
+    min-height: unset;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 48px;
   }
 
-  .heroContentGrid {
-    padding-block: var(--space-10) var(--space-6);
+  .founderBgContainer {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    inset: auto;
   }
 
-  .heroMainTitle {
-    font-size: 2.3rem;
+  .founderBgImage {
+    object-position: 72% 20%;
   }
 
-  .heroSubTitle {
-    font-size: 1.2rem;
+  .founderScrimLeft {
+    background: linear-gradient(180deg, transparent 40%, rgba(23, 19, 16, 0.9) 85%, #171310 100%);
+  }
+
+  .founderEditorialCol {
+    padding: 24px 0 0;
+    max-width: 100%;
+  }
+
+  .founderActionsRow {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .btnKnowGuruji {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .linkExploreTeachings {
+    text-align: center;
+  }
+
+  .founderProvenanceTag {
+    position: static;
+    margin-top: 20px;
+    align-self: center;
+  }
+
+  .pubCard {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .pubActionLink {
+    align-self: center;
+  }
+
+  .ctaBtns {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btnCtaWhite,
+  .btnCtaOutline {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Dedicated Art-Directed Mobile Viewport (390px iPhone Standard) */
+@media (max-width: 480px) {
+  .heroContentWrap {
+    padding-block: var(--space-8) var(--space-6);
   }
 
   .heroCtaGroup {
@@ -652,21 +1339,21 @@
     align-items: stretch;
   }
 
-  .ribbonGrid {
-    grid-template-columns: 1fr;
-    gap: var(--space-3);
-  }
-
-  .mandirCards {
-    grid-template-columns: 1fr;
-  }
-
-  .ctaBanner {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .ctaBtns {
+  .heroCtaGroup > * {
     width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .ashramVignetteRow {
+    grid-template-columns: 1fr;
+  }
+
+  .founderBgContainer {
+    height: 340px;
+  }
+
+  .founderBgImage {
+    object-position: 72% 18%;
   }
 }

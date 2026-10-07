@@ -1,0 +1,167 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "name": "Home",
+      "h1Count": 1,
+      "h1Text": "Vedanta MissionVedanta Ashram · Indore",
+      "totalImages": 5,
+      "unverifiedFallbacks": 0,
+      "tbLeakage": false,
+      "interactiveElements": 69
+    },
+    {
+      "route": "/about/",
+      "name": "About",
+      "h1Count": 1,
+      "h1Text": "Revealing the EternalOneness of All Life",
+      "totalImages": 3,
+      "unverifiedFallbacks": 0,
+      "tbLeakage": false,
+      "interactiveElements": 48
+    },
+    {
+      "route": "/ashram/",
+      "name": "Ashram",
+      "h1Count": 1,
+      "h1Text": "The Living SanctuaryVedanta Ashram &amp; Sri Gangeshwar Mahadev Mandir",
+      "totalImages": 21,
+      "unverifiedFallbacks": 0,
+      "tbLeakage": false,
+      "interactiveElements": 61
+    },
+    {
+      "route": "/teachings/",
+      "name": "Teachings",
+      "h1Count": 0,
+      "h1Text": "NONE",
+      "totalImages": 0,
+      "unverifiedFallbacks": 0,
+      "tbLeakage": false,
+      "interactiveElements": 43
+    },
+    {
+      "route": "/publications/",
+      "name": "Publications",
+      "h1Count": 1,
+      "h1Text": "The Literary ArchiveTwo Decades of Continuous Vedantic Transmission",
+      "totalImages": 21,
+      "unverifiedFallbacks": 0,
+      "tbLeakage": false,
+      "interactiveElements": 654
+    },
+    {
+      "route": "/publications/vs-2021-may/",
+      "name": "Publication Detail (VS May 2021)",
+      "h1Count": 1,
+      "h1Text": "Vedanta Sandesh — May 2021",
+      "totalImages": 1,
+      "unverifiedFallbacks": 0,
+      "tbLeakage": false,
+      "interactiveElements": 52
+    },
+    {
+      "route": "/publications/book-000348/",
+      "name": "Publication Detail (E-Book Vol 6)",
+      "h1Count": 1,
+      "h1Text": "Vedanta Articles — Volume 6",
+      "totalImages": 1,
+      "unverifiedFallbacks": 0,
+      "tbLeakage": false,
+      "interactiveElements": 52
+    },
+    {
+      "route": "/publications/book-000353/",
+      "name": "Publication Detail (Tattva Bodha)",
+      "h1Count": 1,
+      "h1Text": "Tattva Bodha (Sanskrit Text &amp; Translation eBook)",
+      "totalImages": 1,
+      "unverifiedFallbacks": 0,
+      "tbLeakage": false,
+      "interactiveElements": 48
+    },
+    {
+      "route": "/events/",
+      "name": "Events",
+      "h1Count": 1,
+      "h1Text": "Spiritual Gatherings &amp; Living Tradition",
+      "totalImages": 5,
+      "unverifiedFallbacks": 0,
+      "tbLeakage": false,
+      "interactiveElements": 138
+    },
+    {
+      "route": "/events/guru-poornima-2026/",
+      "name": "Event Detail (Guru Poornima)",
+      "h1Count": 1,
+      "h1Text": "Guru Poornima Celebrations",
+      "totalImages": 1,
+      "unverifiedFallbacks": 0,
+      "tbLeakage": false,
+      "interactiveElements": 47
+    },
+    {
+      "route": "/learn/",
+      "name": "Learn",
+      "h1Count": 1,
+      "h1Text": "Systematic Scriptural Study",
+      "totalImages": 2,
+      "unverifiedFallbacks": 0,
+      "tbLeakage": false,
+      "interactiveElements": 56
+    },
+    {
+      "route": "/learn/gita-online/",
+      "name": "Learn Detail (Gita Online)",
+      "h1Count": 1,
+      "h1Text": "Bhagavad Gita Online Lesson Course",
+      "totalImages": 0,
+      "unverifiedFallbacks": 0,
+      "tbLeakage": false,
+      "interactiveElements": 46
+    },
+    {
+      "route": "/learn/tattva-bodha/",
+      "name": "Tattva Bodha Study Desk",
+      "h1Count": 1,
+      "h1Text": "Tattva Bodha",
+      "totalImages": 0,
+      "unverifiedFallbacks": 0,
+      "tbLeakage": false,
+      "interactiveElements": 46
+    }
+  ],
+  "viewports": [
+    {
+      "width": 375,
+      "height": 667,
+      "name": "Mobile Small (375px)"
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "name": "Mobile Large (430px)"
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "name": "Tablet Portrait (768px)"
+    },
+    {
+      "width": 1024,
+      "height": 768,
+      "name": "Tablet Landscape / Small Desktop (1024px)"
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "name": "Standard Desktop (1280px)"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "name": "Large Desktop (1440px)"
+    }
+  ],
+  "timestamp": "2026-09-20T17:28:26.239Z"
+}

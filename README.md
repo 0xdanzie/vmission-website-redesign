@@ -1,131 +1,156 @@
-# Vedanta Mission — Next-Generation Website Redesign
+﻿# Vedanta Mission — Digital Ashram & Advaita Vedanta Portal
 
 [![Next.js](https://img.shields.io/badge/Next.js-14.2.15-black?style=flat&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-18.3.1-blue?style=flat&logo=react)](https://react.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5.3-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![QA Status](https://img.shields.io/badge/QA%20Assertions-52%2F52%20Passed-brightgreen?style=flat)](scripts/test-final-qa.js)
+[![Pages Prerendered](https://img.shields.io/badge/Static%20Pages-680%20Prerendered-darkgreen?style=flat)](scripts/test-final-qa.js)
+[![Cinematic Entry](https://img.shields.io/badge/Entry%20Verification-37%2F37%20Passed-brightgreen?style=flat)](scripts/verify-cinematic-entry.js)
 
-A high-fidelity interactive redesign prototype for **Vedanta Mission & Vedanta Ashram, Indore**, honoring traditional Advaita Vedanta and the vision of Poojya Swami Atmananda Saraswati.
-
----
-
-## Live Demo
-
-- **Production Deployment:** [https://vmission-website-redesign.vercel.app](https://vmission-website-redesign.vercel.app) *(or connect your Vercel project)*
-- **Local Dev Server:** `http://localhost:3000`
+Official modern web portal and scriptural knowledge repository for **Vedanta Mission & Vedanta Ashram, Indore**, dedicated to the authentic study of Advaita Vedanta, the Upanishads, and the Bhagavad Gita under the traditional Shankaracharya lineage and guidance of Poojya Swami Atmananda Saraswati.
 
 ---
 
-## Creative Concept: "Ascending to the Dome"
+## Architecture & Technology Stack
 
-The website introduces a continuous 3D spatial arrival sequence that transitions seekers from the physical Ashram courtyard into the sacred consecrated sanctum of Sri Gangeshwar Mahadev before revealing the living digital gurukula:
+- **Framework:** Next.js 14.2.15 (App Router, static export via `output: 'export'`)
+- **Language & Runtime:** TypeScript 5.5.3 (strict mode), Node.js `>= 18.17.0`
+- **Static Scale:** **680 prerendered static HTML pages** across all dynamic teaching series, monthly publications, events, and courses.
+- **Styling:** Modular Vanilla CSS (`*.module.css`) with bespoke architectural tokens, responsive typography scales, and hardware-accelerated animations.
+- **Typography:**
+  - *Cormorant Garamond* (Sacred display & hero headings)
+  - *Plus Jakarta Sans* (Body copy, interactive navigation & UI)
+  - *Noto Serif Devanagari* (Sanskrit invocations, mantras & Devanagari script)
+- **State Architecture:** Light client-side React Contexts (`DataContext`, `AudioPlayerContext`, `ToastContext`) enabling seamless audio playback and interactive prototype flows across page transitions.
+
+---
+
+## Project Structure
 
 ```
-┌─────────────────┐       ┌─────────────────┐       ┌─────────────────┐       ┌─────────────────┐
-│  Real Ashram    │  ──►  │    Mandir Dome  │  ──►  │ Sacred Carved   │  ──►  │ Live Homepage   │
-│  Courtyard      │       │    Aperture     │       │ Wooden Doors    │       │ Living Gurukula │
-└─────────────────┘       └─────────────────┘       └─────────────────┘       └─────────────────┘
+V-Mission-CLEAN/
+├── src/
+│   ├── app/                    # Next.js App Router pages (public routes & admin)
+│   ├── components/             # Reusable UI components, modals, audio dock, branding
+│   ├── context/                # React Contexts (Audio, Data, Toasts)
+│   ├── data/                   # Canonical datasets (acharyas, teachings, publications, events)
+│   └── styles/                 # Global styles and design system variables
+├── public/
+│   ├── brand/vedanta-mission/  # Authoritative brand vector assets, favicons, social cards
+│   ├── images/
+│   │   ├── entry/              # Consecrated Sri Gangeshwar Mahadev entry scene assets
+│   │   └── vmission/           # Curated canonical photography of Ashram and Acharyas
+│   ├── _headers                # Edge CDN security headers (CSP, HSTS, frame options)
+│   └── robots.txt              # Search engine directives (admin route disallow)
+├── scripts/                    # Headless Chrome test runners, verification suites & ledgers
+├── docs/                       # Project specifications, brand guidelines & QA audit records
+│   ├── architecture/           # System design & console architecture
+│   ├── brand/                  # Brand guidelines & asset integration register
+│   ├── migration/              # Media and data migration reports
+│   └── qa/                     # Full responsive and functional verification test logs
+├── package.json                # Project dependencies and npm scripts
+├── package-lock.json           # Deterministic dependency lockfile
+├── tsconfig.json               # TypeScript configuration
+├── next.config.js              # Next.js build configuration (export target)
+├── .eslintrc.json              # ESLint rules
+├── .gitignore                  # Git exclusion rules
+└── README.md                   # Repository overview and developer documentation
 ```
 
-1. **Arrival:** Full-bleed authentic photography of the Vedanta Ashram campus with subtle atmospheric camera drift and the sacred Sanskrit Mahavakya (*सत्यं ज्ञानमनन्तं ब्रह्म*).
-2. **Ascending:** Continuous 3D upward camera push toward the upper terrace and dome.
-3. **Threshold:** Spatial perspective alignment with the consecrated teakwood sanctum doors.
-4. **Enter:** 3D parting of the carved doors with radiant warm sanctum glow and atmospheric light bloom.
-5. **Living Gurukula:** Smooth dissolve into the architectural hero section and interactive scriptural repository.
+---
 
-*Instant accessibility is built-in: seekers can click "Skip to Homepage ✕", press the <kbd>ESC</kbd> key, or enable reduced motion at any time.*
+## Key Modules & Features
+
+### 1. Consecrated Cinematic Entry Scene
+- Consecrated entrance featuring the authentic Shivling of Sri Gangeshwar Mahadev.
+- Full-viewport immersion hiding background chrome during introduction.
+- Realistic 3-layer contact shadow with subtle ambient lighting.
+- Strict performance limits (<= 1.70s desktop, <= 1.50s mobile).
+- Immediate session bypass via `sessionStorage` (`vm-entry-scene-seen`) ensuring the scene only plays once per visit.
+- Full accessibility bypass for `prefers-reduced-motion`.
+- Manual query triggers supported: `/?intro=1` (force play) and `/?intro=0` (force bypass).
+
+### 2. Jnana Ganga Discourses & Continuous Audio Dock
+- Searchable library of scriptural commentaries covering the Bhagavad Gita, Principal Upanishads, and Prakarana Granths.
+- Persistent bottom audio player supporting continuous listening across route navigation.
+
+### 3. Publications & Periodical Archive
+- Complete digital catalog of *Vedanta Sandesh* (English/Hindi) and *Vedanta Piyush* (Hindi/Gujarati) ezines.
+- E-Books, study texts, and original treatises by Swami Atmananda Saraswati.
+
+### 4. Gurukula Courses & Events
+- Structured curriculum explorer including the flagship *Tattva Bodha* correspondence course.
+- Detailed retreat schedules, Gyana Yagnas, and registration workflows.
+
+### 5. Seva & Direct Offering Portal
+- Direct bank transfer information (NEFT/RTGS, Cheque, UPI) for Annadanam, Mandir upkeep, and student sponsorship.
+- Devotee transaction acknowledgment generator for Section 80-G tax exemption reconciliation.
+- Zero collection of sensitive payment credentials (no debit/credit card numbers or CVVs stored).
+
+### 6. Prototype Staff & Operations Console (`/admin`)
+- Accessible via the discrete "Staff Login" utility link in the footer (isolated from the public navbar).
+- **Prototype Status:** Demonstrates institutional editorial workflows and local session persistence (`DataContext` / `localStorage`).
+- **Security Notice:** This console is a frontend prototype. Production deployment requires backend server-side session authentication (OAuth / JWT / SSO).
+- **Search Engine Isolation:** Protected with `<meta name="robots" content="noindex, nofollow, noarchive" />` and excluded in `public/robots.txt`.
 
 ---
 
-## Key Features
-
-- **Immersive Ashram Arrival:** High-performance GPU-accelerated CSS 3D entrance without heavy WebGL engine overhead.
-- **Cinematic Homepage Hero:** Dominant architectural backdrop featuring Sri Gangeshwar Mahadev Shivling dome, daily darshan schedule, and lineage highlights.
-- **100% Authentic V-Mission Imagery:** Curated repository of 23 authentic photographs spanning Guruji's discourses, Swaminis, sanctum worship, and sadhana camps.
-- **Ashram Campus & Gangeshwar Mahadev Darshan:** Interactive photography gallery, campus facilities, daily Vedic puja timings, and accommodation booking modal.
-- **Jnana Ganga Audio Discourses:** Built-in floating audio player dock with verse-by-verse scriptural commentaries by Swami Atmananda Saraswati.
-- **Vedantic Learning Programs & Correspondence:** Structured curricula including *Tattva Bodha* correspondence course lessons, syllabus breakdown, and interactive application modal.
-- **Events & Residential Sadhana Retreats:** Comprehensive event calendar, registration modal, and past international discourse archives.
-- **Digital Ezines & Publications:** Complete digital reader for monthly *Vedanta Sandesh* and *Vedanta Piyush* periodicals with category filtering and modal reader.
-- **Seva & Dana Offering Portal:** Dedicated direct donation portal supporting Annadanam, student sponsorship, and temple upkeep with UTR submission tracker.
-- **Staff / Admin Prototype:** Fully reactive administrative dashboard demonstrating real-time data persistence (`localStorage`) for inquiries, event management, course admissions, and donation verification.
-
----
-
-## Technology Stack
-
-- **Framework:** Next.js 14.2.15 (App Router, Static Site Generation / SSG export ready)
-- **UI & Logic:** React 18.3.1, TypeScript 5.5.3
-- **Styling:** Vanilla CSS Modules with bespoke Indian architectural design tokens, serif typography, and 60fps GPU transforms
-- **State Management:** Reactive React Contexts (`DataContext`, `AudioPlayerContext`, `ToastContext`) with client-side synchronization
-
----
-
-## Getting Started Locally
+## Local Setup & Development
 
 ### Prerequisites
-- Node.js `>= 18.17.0`
-- npm `>= 9.0.0`
+- **Node.js:** `>= 18.17.0` (tested with Node 20 and Node 24)
+- **npm:** `>= 9.0.0`
 
-### Installation & Run
-
+### 1. Clean Installation
+Always install dependencies cleanly from `package-lock.json`:
 ```bash
-# Clone the repository
-git clone https://github.com/<your-username>/vmission-website-redesign.git
-cd vmission-website-redesign
-
-# Install dependencies
-npm install
-
-# Start local development server
-npm run dev
+npm ci
 ```
 
-Visit `http://localhost:3000` in your browser.
+### 2. Start Development Server
+```bash
+npm run dev
+```
+Open `http://localhost:3000` in your browser.
 
-### Quality Assurance & Verification
+### 3. Static Production Build
+```bash
+npm run build
+```
+This compiles the application and generates the complete static website in the `out/` directory (680 HTML pages).
+
+---
+
+## Quality Assurance & Verification
+
+The repository includes automated test runners to verify builds, visual responsiveness, and entry behavior:
 
 ```bash
-# Validate TypeScript types
-npm run typecheck
+# 1. Typecheck TypeScript without emitting JS
+npx tsc --noEmit
 
-# Run ESLint validation
+# 2. Run ESLint static analysis
 npm run lint
 
-# Build production bundle (32 static pages)
-npm run build
+# 3. Verify Cinematic Entry in Headless Chrome (37 assertions)
+node scripts/verify-cinematic-entry.js
 
-# Run automated 52-point presentation QA test suite
+# 4. Run Route & Photographic Asset Integration Suite (52 assertions)
 node scripts/test-final-qa.js 3000
 ```
 
 ---
 
-## Prototype Scope & Production Roadmap
+## Deployment Guidelines
 
-This project is a **high-fidelity interactive proposal and presentation prototype**. 
+Because this application exports as a pure static bundle (`output: 'export'`), it can be hosted on any modern edge CDN or web server:
 
-For final production deployment, the following standard enhancements would be integrated:
-- **Backend & Database:** Persistent cloud database (PostgreSQL / MongoDB) replacing prototype `localStorage`.
-- **Authentication:** Role-based authentication (NextAuth / Supabase) for the Admin portal.
-- **Content Management System (CMS):** Headless CMS (Sanity / Strapi) for Ashram administrators to publish monthly ezines and discourses without code changes.
-- **Payment Gateway:** Integration with Razorpay / Stripe for automated 80-G tax exemption receipts and instant donation processing.
-- **Content Migration:** Ingestion of full multi-year archives of *Jnana Ganga* audio MP3s and PDF publications.
-- **Production CDN & SEO:** Subresource integrity, OpenGraph metadata validation, and multi-region CDN caching.
+- **Cloudflare Pages / Netlify:** Deploy the `out/` directory. Preconfigured security headers from `public/_headers` are automatically recognized.
+- **Vercel:** Connect the repository and configure build output to `out/`.
+- **Apache / Nginx:** Copy `out/` to the web root. Configure standard rewrite rules for HTML routing and set security headers matching `public/_headers`.
 
 ---
 
-## Team & Roles
-
-| Name | Role | Responsibilities |
-|---|---|---|
-| *Team Member 1* | Lead UI/UX & Creative Direction | Visual identity, 3D entrance concept, Indian architectural tokens |
-| *Team Member 2* | Full-Stack / Frontend Engineering | Next.js architecture, state management, component engineering |
-| *Team Member 3* | Quality Assurance & Content Integration | Asset curation, test suite automation, documentation |
-
----
-
-## License & Heritage
+## Heritage & Attribution
 
 Developed with reverence for **Vedanta Parmarthic Sewa Trust & Vedanta Ashram, Indore**.  
-All archival discourses, texts, and photographs are property of Vedanta Mission.
+All scriptural commentaries, audio discourses, texts, and archival photographs are the authentic heritage of Vedanta Mission.

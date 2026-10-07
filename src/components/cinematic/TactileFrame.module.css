@@ -1,0 +1,157 @@
+/* ==========================================================================
+   TACTILE IMAGE FRAME — ARCHIVAL PHOTOGRAPHIC FRAMING
+   Derived strictly from proven /about tactile visual language
+   ========================================================================== */
+
+.frameContainer {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.frameBorderOuter {
+  position: relative;
+  background: var(--vm-sandalwood);
+  padding: var(--space-2);
+  border: 1px solid rgba(197, 160, 89, 0.45);
+  box-shadow:
+    0 12px 32px -8px rgba(20, 15, 12, 0.16),
+    0 4px 12px -2px rgba(20, 15, 12, 0.08);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.frameContainer:hover .frameBorderOuter {
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 40px -10px rgba(20, 15, 12, 0.22),
+    0 6px 16px -2px rgba(20, 15, 12, 0.12);
+}
+
+.frameBorderInner {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(197, 160, 89, 0.25);
+  background: #140F0C;
+  width: 100%;
+  height: 100%;
+}
+
+.portrait {
+  aspect-ratio: 3 / 4;
+}
+
+.landscape {
+  aspect-ratio: 16 / 10;
+}
+
+.square {
+  aspect-ratio: 1 / 1;
+}
+
+.archival {
+  aspect-ratio: 4 / 3;
+}
+
+.natural {
+  aspect-ratio: auto;
+}
+
+.frameImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 12%;
+  display: block;
+  filter: contrast(1.05) brightness(0.98);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.frameContainer:hover .frameImage {
+  transform: scale(1.03);
+}
+
+.omBadge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 15, 12, 0.72);
+  border: 1px solid rgba(197, 160, 89, 0.5);
+  border-radius: var(--radius-full);
+  color: var(--vm-brass);
+  font-family: var(--font-devanagari);
+  font-size: 1rem;
+  line-height: 1;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* Corner Antique Accents */
+.frameCornerTopLeft,
+.frameCornerTopRight,
+.frameCornerBottomLeft,
+.frameCornerBottomRight {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.frameCornerTopLeft {
+  top: 4px;
+  left: 4px;
+  border-top: 1px solid var(--vm-brass);
+  border-left: 1px solid var(--vm-brass);
+}
+
+.frameCornerTopRight {
+  top: 4px;
+  right: 4px;
+  border-top: 1px solid var(--vm-brass);
+  border-right: 1px solid var(--vm-brass);
+}
+
+.frameCornerBottomLeft {
+  bottom: 4px;
+  left: 4px;
+  border-bottom: 1px solid var(--vm-brass);
+  border-left: 1px solid var(--vm-brass);
+}
+
+.frameCornerBottomRight {
+  bottom: 4px;
+  right: 4px;
+  border-bottom: 1px solid var(--vm-brass);
+  border-right: 1px solid var(--vm-brass);
+}
+
+.frameCaption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--vm-text-muted);
+}
+
+.dateTag {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vm-gerua);
+}
+
+.captionText {
+  line-height: 1.4;
+  font-style: italic;
+}

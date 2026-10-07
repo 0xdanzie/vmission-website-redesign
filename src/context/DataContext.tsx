@@ -32,9 +32,9 @@ export interface DonationRecord {
 const DEFAULT_INQUIRIES: Inquiry[] = [
   {
     id: 'inq-1',
-    name: 'Suresh Varma',
-    email: 'suresh.varma@example.com',
-    phone: '+91 98261 44552',
+    name: '[DEMO] Suresh Varma (Demo Seeker)',
+    email: 'demo-suresh@example.com',
+    phone: '+91 98000 00001',
     purpose: 'Ashram Visit / Stay',
     message: 'Seeking accommodation for 3 days for self-study and meeting Poojya Guruji in October.',
     date: '2026-08-28',
@@ -42,9 +42,9 @@ const DEFAULT_INQUIRIES: Inquiry[] = [
   },
   {
     id: 'inq-2',
-    name: 'Meenakshi Iyer',
-    email: 'm.iyer@example.com',
-    phone: '+91 94440 12890',
+    name: '[DEMO] Meenakshi Iyer (Demo Student)',
+    email: 'demo-meenakshi@example.com',
+    phone: '+91 98000 00002',
     purpose: 'Course Enrollment',
     message: 'Submitted answers to Tattva Bodha Lesson 1 questionnaire. Awaiting review.',
     date: '2026-08-27',
@@ -52,9 +52,9 @@ const DEFAULT_INQUIRIES: Inquiry[] = [
   },
   {
     id: 'inq-3',
-    name: 'Dr. R. K. Joshi',
-    email: 'rkjoshi@example.com',
-    phone: '+91 98930 55123',
+    name: '[DEMO] Dr. R. K. Joshi (Demo Donor)',
+    email: 'demo-rkjoshi@example.com',
+    phone: '+91 98000 00003',
     purpose: 'Donation / 80-G Query',
     message: 'Need the 80-G receipt for our annual Bhiksha contribution transferred via NEFT.',
     date: '2026-08-25',
@@ -65,42 +65,42 @@ const DEFAULT_INQUIRIES: Inquiry[] = [
 const DEFAULT_DONATIONS: DonationRecord[] = [
   {
     id: 'don-1',
-    donorName: 'Smt. Kamala Devi',
+    donorName: '[DEMO] Smt. Kamala Devi (Demo Devotee)',
     category: 'Daily Annadanam & Bhiksha',
     amount: 5100,
     date: '2026-08-28',
     method: 'UPI',
-    utrNumber: '324158920148',
+    utrNumber: 'DEMO-UTR-324158',
     receiptStatus: 'Issued',
   },
   {
     id: 'don-2',
-    donorName: 'Rajesh & Sunita Agarwal',
+    donorName: '[DEMO] Rajesh & Sunita Agarwal (Demo Devotees)',
     category: 'Brahmachari & Student Sponsorship',
     amount: 25000,
     date: '2026-08-27',
     method: 'NEFT/RTGS',
-    utrNumber: 'HDFCN262409812',
+    utrNumber: 'DEMO-UTR-HDFC26',
     receiptStatus: 'Issued',
   },
   {
     id: 'don-3',
-    donorName: 'Amitabh Sharma',
+    donorName: '[DEMO] Amitabh Sharma (Demo Devotee)',
     category: 'Temple Puja & Ashram Upkeep',
     amount: 2100,
     date: '2026-08-26',
     method: 'UPI',
-    utrNumber: '323984102941',
+    utrNumber: 'DEMO-UTR-323984',
     receiptStatus: 'Pending',
   },
   {
     id: 'don-4',
-    donorName: 'Ishaan Trivedi',
+    donorName: '[DEMO] Ishaan Trivedi (Demo Devotee)',
     category: 'Free Publications & Digital Outreach',
     amount: 3000,
     date: '2026-08-24',
     method: 'NEFT/RTGS',
-    utrNumber: 'SBIN002948194',
+    utrNumber: 'DEMO-UTR-SBIN00',
     receiptStatus: 'Issued',
   },
 ];
@@ -157,28 +157,85 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   const [inquiries, setInquiries] = useState<Inquiry[]>(DEFAULT_INQUIRIES);
   const [donations, setDonations] = useState<DonationRecord[]>(DEFAULT_DONATIONS);
 
-  // Load from localStorage on client side mount
+  // Load from localStorage on client side mount with version stamp (non-blocking)
   useEffect(() => {
-    try {
-      const savedEvents = localStorage.getItem('vm_events');
-      if (savedEvents) setEvents(JSON.parse(savedEvents));
+    const initData = () => {
+      try {
+        const CURRENT_DATA_VERSION = 'v4d_forensic_verified';
+        const savedVersion = localStorage.getItem('vm_data_version');
+        const isOutdated = savedVersion !== CURRENT_DATA_VERSION;
 
-      const savedCourses = localStorage.getItem('vm_courses');
-      if (savedCourses) setCourses(JSON.parse(savedCourses));
+        if (isOutdated) {
+          setTeachings(defaultTeachings);
+          setPublications(defaultPublications);
+          setEvents(defaultEvents);
+          setCourses(defaultCourses);
+          localStorage.setItem('vm_data_version', CURRENT_DATA_VERSION);
+          // Clean stale keys without blocking
+          localStorage.removeItem('vm_teachings');
+          localStorage.removeItem('vm_publications');
+          localStorage.removeItem('vm_events');
+          localStorage.removeItem('vm_courses');
+        } else {
+          const savedTeachings = localStorage.getItem('vm_teachings');
+          if (savedTeachings) {
+            try {
+              const parsed = JSON.parse(savedTeachings);
+              if (Array.isArray(parsed) && parsed.length >= defaultTeachings.length && parsed[0]?.category) {
+                setTeachings(parsed);
+              }
+            } catch {}
+          }
 
-      const savedTeachings = localStorage.getItem('vm_teachings');
-      if (savedTeachings) setTeachings(JSON.parse(savedTeachings));
+          const savedPubs = localStorage.getItem('vm_publications');
+          if (savedPubs) {
+            try {
+              const parsed = JSON.parse(savedPubs);
+              if (Array.isArray(parsed) && parsed.length >= defaultPublications.length) {
+                setPublications(parsed);
+              }
+            } catch {}
+          }
+        }
 
-      const savedPubs = localStorage.getItem('vm_publications');
-      if (savedPubs) setPublications(JSON.parse(savedPubs));
+        const savedEvents = localStorage.getItem('vm_events');
+        if (savedEvents) {
+          try {
+            setEvents(JSON.parse(savedEvents));
+          } catch {}
+        }
 
-      const savedInq = localStorage.getItem('vm_inquiries');
-      if (savedInq) setInquiries(JSON.parse(savedInq));
+        const savedCourses = localStorage.getItem('vm_courses');
+        if (savedCourses) {
+          try {
+            setCourses(JSON.parse(savedCourses));
+          } catch {}
+        }
 
-      const savedDon = localStorage.getItem('vm_donations');
-      if (savedDon) setDonations(JSON.parse(savedDon));
-    } catch (e) {
-      console.warn('LocalStorage error in DataProvider:', e);
+        const savedInq = localStorage.getItem('vm_inquiries');
+        if (savedInq) {
+          try {
+            setInquiries(JSON.parse(savedInq));
+          } catch {}
+        }
+
+        const savedDon = localStorage.getItem('vm_donations');
+        if (savedDon) {
+          try {
+            setDonations(JSON.parse(savedDon));
+          } catch {}
+        }
+      } catch (e) {
+        console.warn('LocalStorage error in DataProvider:', e);
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        (window as unknown as { requestIdleCallback: (cb: () => void) => number }).requestIdleCallback(initData);
+      } else {
+        setTimeout(initData, 50);
+      }
     }
   }, []);
 
