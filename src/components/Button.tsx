@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styles from './Button.module.css';
 
 interface ButtonProps {
+  id?: string;
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   href?: string;
@@ -16,6 +17,7 @@ interface ButtonProps {
 }
 
 export default function Button({
+  id,
   variant = 'primary',
   size = 'md',
   href,
@@ -33,7 +35,7 @@ export default function Button({
 
   if (href) {
     return (
-      <Link href={href} className={cls} aria-label={ariaLabel}>
+      <Link id={id} href={href} className={cls} aria-label={ariaLabel}>
         {children}
       </Link>
     );
@@ -41,6 +43,7 @@ export default function Button({
 
   return (
     <button
+      id={id}
       type={type}
       className={cls}
       onClick={onClick}

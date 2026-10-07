@@ -1,410 +1,402 @@
-'use client';
-
-import React, { useState } from 'react';
-import SectionHeader from '@/components/SectionHeader';
+import React from 'react';
+import Link from 'next/link';
+import { getAssetPath } from '@/utils/assetPath';
 import Button from '@/components/Button';
-import TimelineItem from '@/components/TimelineItem';
-import PlanVisitModal from '@/components/PlanVisitModal';
-import AshramImage from '@/components/AshramImage';
-import AshramGallery from '@/components/AshramGallery';
+import CinematicHero from '@/components/cinematic/CinematicHero';
+import TactileFrame from '@/components/cinematic/TactileFrame';
+import SacredDivider from '@/components/cinematic/SacredDivider';
+import CinematicPreFooter from '@/components/cinematic/CinematicPreFooter';
+import FootprintsArchive from '@/components/FootprintsArchive';
 import styles from './page.module.css';
 
-export default function AshramPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export const metadata = {
+  title: 'Vedanta Ashram & Sri Gangeshwar Mahadev Mandir | Indore',
+  description:
+    'Step inside Vedanta Ashram in Sudama Nagar, Indore: consecrated Gangeshwar Mahadev Mandir, daily contemplative rhythm, Gurukula study spaces, residential community, and travel directions.',
+};
 
-  const dailySchedule = [
+export default function AshramPage() {
+  const dailyRhythm = [
     {
-      timeOrYear: '05:30 AM',
-      title: 'Morning Meditation & Chanting',
-      description: 'Silent contemplation in the hall followed by Vedic chanting, Guru Stotram, and Shanti Mantras.',
+      time: '05:30 – 06:30 AM',
+      name: 'Brahma Muhurta',
+      title: 'Silent Meditation & Pratahkala Chanting',
+      desc: 'The ashram day awakens in stillness. Resident sadhaks gather in the discourse hall for silent meditation, Guru Stotram recitation, and Vedic peace invocations.',
     },
     {
-      timeOrYear: '07:00 AM',
-      title: 'Puja & Abhishek at Gangeshwar Mahadev Mandir',
-      description: 'Daily Shiva puja, Rudrabhishek, and morning aarti at the consecrated campus temple.',
+      time: '07:30 – 08:30 AM',
+      name: 'Mandir Upasana',
+      title: 'Sri Gangeshwar Mahadev Abhishek & Aarti',
+      desc: 'Consecrated Vedic worship, Rudrabhisheka, and morning camphor flame offerings at the monumental white Shivling sanctum, sanctifying the atmosphere.',
     },
     {
-      timeOrYear: '08:00 AM',
-      title: 'Sattwic Breakfast & Seva',
-      description: 'Wholesome vegetarian breakfast in the communal dining hall, followed by simple ashram seva duties.',
+      time: '09:30 – 10:45 AM',
+      name: 'Pravachan',
+      title: 'Traditional Vedanta Discourse',
+      desc: 'Systematic scriptural lectures by Poojya Guruji or resident Acharyas, unfolding the Upanishads, Bhagavad Gita, or Prakarana Granths verse by verse.',
     },
     {
-      timeOrYear: '09:00 AM',
-      title: 'Morning Vedanta Discourse',
-      description: 'Traditional verse-by-verse exposition of the Upanishads or Bhagavad Gita by Poojya Guruji.',
+      time: '12:00 – 01:00 PM',
+      name: 'Bhiksha',
+      title: 'Sattwic Annakshetra Prasad',
+      desc: 'Pure vegetarian consecrated meals served to monastics, resident students, and visiting pilgrims in the spirit of seva and mutual reverence.',
     },
     {
-      timeOrYear: '12:30 PM',
-      title: 'Bhiksha / Communal Lunch & Quiet Rest',
-      description: 'Mahatmas, resident brahmacharis, and guests take meals together in the spirit of family.',
+      time: '03:30 – 05:00 PM',
+      name: 'Swadhyaya',
+      title: 'Self-Study, Library Inquiry & Sanskrit',
+      desc: 'Quiet contemplation, manuscript study in the scriptural library, Sanskrit grammar lessons, or personal doubt-clearing satsangs with the teachers.',
     },
     {
-      timeOrYear: '04:30 PM',
-      title: 'Tea & Study Circle / Satsang',
-      description: 'Informal Satsang, clarification of philosophical doubts, and scriptural self-inquiry.',
+      time: '06:45 – 08:00 PM',
+      name: 'Sandhya Aarti',
+      title: 'Evening Mandir Worship & Mouna',
+      desc: 'The twilight worship at Gangeshwar Mahadev followed by Stotram recitation, devotional singing, and deep inward stillness (Mouna) before evening rest.',
+    },
+  ];
+
+  const ashramSpaces = [
+    {
+      title: 'Sri Gangeshwar Mahadev Mandir',
+      subtitle: 'Consecrated Sanctum with Monumental Shivling Dome',
+      desc: 'The spiritual heart of Vedanta Ashram, featuring the unique monumental white Shivling crown, carved sanctum doors, and consecrated Shiva Linga where daily Vedic rituals and abhishekams are performed.',
+      image: '/images/vmission/ashram/gangeshwar-dome-closeup.jpg',
+      caption: 'The consecrated white Shivling architectural dome of Sri Gangeshwar Mahadev Mandir',
     },
     {
-      timeOrYear: '06:30 PM',
-      title: 'Evening Mandir Aarti & Kirtan',
-      description: 'Devotional singing, stotram recitation, and evening lamp offerings at the temple.',
+      title: 'Pravachan Bhavan (Discourse Hall)',
+      subtitle: 'Sacred Auditorium for Traditional Vedantic Inquiry',
+      desc: 'An expansive, serene hall designed specifically for listening to scriptural expositions (Shravana). Monastics and seekers sit together on the floor before the vyasapeetha for daily lectures and residential camps.',
+      image: '/images/vmission/ashram/teaching-hall-interior.jpg',
+      caption: 'Pravachan Bhavan — dedicated hall for daily scriptural discourses and satsang',
     },
     {
-      timeOrYear: '08:00 PM',
-      title: 'Dinner & Night Reflection (Mouna)',
-      description: 'Light evening meal followed by silence (Mouna) and personal reflection before sleep.',
-      isLast: true,
+      title: 'Scriptural Research Library & Sanctum Threshold',
+      subtitle: 'Preserving Sanskrit Source Treatises and Commentaries',
+      desc: 'Housing classic Sanskrit commentaries, Shankaracharya Bhashyas, Prakarana granths, and the monthly journal archives, providing seekers with an authentic environment for reflective inquiry.',
+      image: '/images/vmission/ashram/sanctum-doors-threshold.jpg',
+      caption: 'Intricately carved sanctum threshold and contemplative research precincts',
+    },
+    {
+      title: 'Courtyard & Resident Monastic Kutirs',
+      subtitle: 'Simple, Serene Living for Serious Contemplatives',
+      desc: 'Surrounded by open verandas, gardens, and quiet walking paths, the residential kutirs provide a clutter-free, sattwic atmosphere conducive to ongoing self-reflection and meditation.',
+      image: '/images/vmission/ashram/courtyard-with-guruji.jpg',
+      caption: 'Ashram courtyard and peaceful monastic living quarters',
     },
   ];
 
   return (
-    <>
-      {/* 1. HERO */}
-      <section className={styles.hero} aria-label="Ashram Hero">
-        <div className={`container ${styles.heroContainer}`}>
-          <div className="animate-fadeUp">
-            <span className={styles.heroBadge}>Sudama Nagar · Indore · Central India</span>
-            <h1 className={styles.heroTitle}>Vedanta Ashram, Indore</h1>
-            <p className={styles.heroLead}>
-              A serene modern Gurukula dedicated to scriptural inquiry, meditation, and simple sattwic living under the guidance of traditional Advaita Acharyas.
+    <div className={styles.ashramWrapper}>
+      {/* ======================================================================
+          01. CINEMATIC ARRIVAL — THE LIVING SANCTUARY
+          ====================================================================== */}
+      <CinematicHero
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Vedanta Ashram' },
+        ]}
+        badge="Sudama Nagar · Indore · Established 1995"
+        sanskritInvocation="शान्तं शिवमद्वैतं चतुर्थं मन्यन्ते स आत्मा स विज्ञेयः"
+        title="Vedanta Ashram"
+        subtitle="Vedanta Ashram &amp; Sri Gangeshwar Mahadev Mandir"
+        lead="Established in 1995 by Poojya Swami Atmananda Saraswati, Vedanta Ashram is a physical Gurukula in Indore where traditional Advaita Vedanta is contemplated, lived, and systematically taught in an environment of monastic peace."
+        backdropImage="/images/vmission/entrance/ashram-entrance-cinematic.jpg"
+        backdropAlt="Entrance and facade of Vedanta Ashram, Indore"
+        focalPoint={{ desktop: { x: 50, y: 32 }, mobile: { x: 50, y: 25 } }}
+        ctas={[
+          { label: 'Sri Gangeshwar Mandir ↓', href: '#mandir', variant: 'primary' },
+          { label: 'Daily Contemplative Rhythm', href: '#rhythm', variant: 'outline' },
+        ]}
+      />
+
+      {/* ======================================================================
+          02. SRI GANGESHWAR MAHADEV MANDIR — ARCHITECTURAL SANCTUM
+          ====================================================================== */}
+      <section id="mandir" className={styles.mandirSection} aria-label="Sri Gangeshwar Mahadev Mandir">
+        <div className="container">
+          <div className={styles.mandirLayout}>
+            {/* Left: Architectural Focal Image */}
+            <div className={styles.mandirVisualCol}>
+              <TactileFrame
+                src="/images/vmission/ashram/gangeshwar-dome-closeup.jpg"
+                alt="Consecrated white Shivling dome of Sri Gangeshwar Mahadev Mandir"
+                caption="Sri Gangeshwar Mahadev Mandir — Consecrated in 1995 with unique white Shivling spire"
+                dateTag="Consecrated 1995"
+                aspectRatio="archival"
+                objectPosition="center top"
+                priority={true}
+              />
+              <div className={styles.mandirSecondaryFrame}>
+                <TactileFrame
+                  src="/images/vmission/worship/morning-aarti.jpg"
+                  alt="Morning camphor aarti worship at the sanctum altar"
+                  caption="Morning aarti and consecrated camphor lamp offerings"
+                  aspectRatio="landscape"
+                />
+              </div>
+            </div>
+
+            {/* Right: Sacred Architecture & Context */}
+            <div className={styles.mandirTextCol}>
+              <span className={styles.sectionOverline}>Mandir &amp; Sanctum</span>
+              <h2 className={styles.mandirHeading}>Sri Gangeshwar Mahadev Mandir</h2>
+              <p className={styles.mandirSub}>
+                The consecrated heart of the Indore campus, where Advaitic inquiry is grounded in classical devotional worship (Upasana).
+              </p>
+
+              <SacredDivider glyph="ॐ नमः शिवाय" />
+
+              <div className={styles.mandirNarrative}>
+                <p>
+                  Consecrated in 1995 alongside the founding of the Indore Ashram, Sri Gangeshwar Mahadev Mandir is crowned by a unique architectural feature: a monumental white sculpted Shivling forming the main spire (Shikhara) of the temple dome.
+                </p>
+                <p>
+                  In the traditional Advaita method, scriptural inquiry (Jnana-vichara) is supported by steady devotion and mental purification (Chitta-shuddhi). The temple serves as the focal point for morning and evening worship, Rudrabhisheka rituals, monthly Pradosha pujas, and annual Maha Shivaratri celebrations.
+                </p>
+              </div>
+
+              <div className={styles.mandirFeaturesList}>
+                <div className={styles.featureItem}>
+                  <span className={styles.featureIcon}>🛕</span>
+                  <div>
+                    <h4 className={styles.featureTitle}>Monumental Shivling Dome</h4>
+                    <p className={styles.featureDesc}>
+                      Architecturally distinct white Shivling spire visible across Sudama Nagar, signifying Lord Shiva as the embodiment of non-dual consciousness.
+                    </p>
+                  </div>
+                </div>
+
+                <div className={styles.featureItem}>
+                  <span className={styles.featureIcon}>🔥</span>
+                  <div>
+                    <h4 className={styles.featureTitle}>Vedic Upasana &amp; Rudrabhisheka</h4>
+                    <p className={styles.featureDesc}>
+                      Daily ritual abhishekams, Vedic chanting of Sri Rudram, and camphor aarti conducted according to scriptural tradition.
+                    </p>
+                  </div>
+                </div>
+
+                <div className={styles.featureItem}>
+                  <span className={styles.featureIcon}>🚪</span>
+                  <div>
+                    <h4 className={styles.featureTitle}>Carved Wooden Sanctum Doors</h4>
+                    <p className={styles.featureDesc}>
+                      Intricately carved teak sanctum doors greeting seekers entering the inner sanctum for meditation and darshan.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================================================
+          03. DAILY CONTEMPLATIVE RHYTHM (DINACHARYA)
+          ====================================================================== */}
+      <section id="rhythm" className={styles.rhythmSection} aria-label="Daily Routine and Schedule">
+        <div className="container">
+          <div className={styles.rhythmHeaderWrap}>
+            <span className={styles.sectionOverline}>Monastic Dinacharya</span>
+            <h2 className={styles.rhythmTitle}>The Daily Contemplative Rhythm</h2>
+            <p className={styles.rhythmLead}>
+              Life at Vedanta Ashram unfolds in a balanced rhythm of silent meditation, scriptural study, dedicated temple worship, and community service.
             </p>
-            <div className={styles.heroBtns}>
-              <Button variant="primary" size="lg" onClick={() => setIsModalOpen(true)}>
-                Plan Your Visit / Stay →
-              </Button>
-              <a href="#visitor-guide" className={styles.anchorBtn}>
-                Visitor Q&amp;A Guide ↓
-              </a>
-              <a href="#ashram-gallery" className={styles.anchorBtn}>
-                Photo Gallery ↓
-              </a>
-              <a href="#how-to-reach" className={styles.anchorBtn}>
-                Directions &amp; Map ↓
-              </a>
-            </div>
           </div>
-        </div>
-      </section>
 
-      {/* 2. VISITOR ESSENTIAL QUESTIONS */}
-      <section id="visitor-guide" className={`section ${styles.quickGuideSection}`} aria-label="Visitor Essentials">
-        <div className="container">
-          <SectionHeader
-            tag="Visitor Essentials"
-            title="Everything You Need to Know Before Visiting"
-            subtitle="Clear answers for seekers planning their first visit or study retreat at the Ashram."
-            align="center"
-          />
-
-          <div className="grid grid--4">
-            <div className={`card ${styles.qaCard}`}>
-              <span className={styles.qaIcon}>🚪</span>
-              <h4 className={styles.qaTitle}>Can I Visit?</h4>
-              <p className={styles.qaAnswer}>
-                <strong>Yes.</strong> Seekers are warmly welcome for daily temple darshan, satsangs, or residential study retreats with prior registration.
-              </p>
-            </div>
-
-            <div className={`card ${styles.qaCard}`}>
-              <span className={styles.qaIcon}>🏛️</span>
-              <h4 className={styles.qaTitle}>What is it Like?</h4>
-              <p className={styles.qaAnswer}>
-                A peaceful Gurukula with a Shiva temple, lush gardens, lecture halls, and quiet study areas designed for introspection.
-              </p>
-            </div>
-
-            <div className={`card ${styles.qaCard}`}>
-              <span className={styles.qaIcon}>🛏️</span>
-              <h4 className={styles.qaTitle}>Where Will I Stay?</h4>
-              <p className={styles.qaAnswer}>
-                Clean guest rooms equipped with beds, bedding, 24-hr water, and attached western toilets. Capacity: ~24 guests.
-              </p>
-            </div>
-
-            <div className={`card ${styles.qaCard}`}>
-              <span className={styles.qaIcon}>📜</span>
-              <h4 className={styles.qaTitle}>What to Know?</h4>
-              <p className={styles.qaAnswer}>
-                Strictly vegetarian, smoke/alcohol-free, modest white Indian attire, and active participation in daily classes and aartis.
-              </p>
-            </div>
+          <div className={styles.timelineContainer}>
+            {dailyRhythm.map((item, idx) => (
+              <div key={idx} className={styles.timelineRow}>
+                <div className={styles.timeTagCol}>
+                  <span className={styles.timeDisplay}>{item.time}</span>
+                  <span className={styles.timeCategoryName}>{item.name}</span>
+                </div>
+                <div className={styles.timelineNode}>
+                  <div className={styles.timelineDot} />
+                  {idx < dailyRhythm.length - 1 && <div className={styles.timelineConnector} />}
+                </div>
+                <div className={styles.timeContentCol}>
+                  <h3 className={styles.timeTitle}>{item.title}</h3>
+                  <p className={styles.timeDescription}>{item.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
+
+          <p className={styles.rhythmNote}>
+            * Visitors and residential camp participants are invited to join the daily sessions. Silence (Mouna) is encouraged during early morning hours and evening contemplation.
+          </p>
         </div>
       </section>
 
-      {/* 3. ABOUT THE ASHRAM & HISTORY */}
-      <section className="section section--muted" aria-label="About the Ashram">
+      {/* ======================================================================
+          04. THE ASHRAM SPACES — ARCHITECTURAL REPERTOIRE
+          ====================================================================== */}
+      <section className={styles.spacesSection} aria-label="Ashram Spaces and Facilities">
         <div className="container">
-          <div className={styles.twoCol}>
-            <div>
-              <SectionHeader
-                tag="History & Genesis"
-                title="A Sanctuary for the Contemplation of Truth"
-              />
-              <p className="text-lead">
-                Established in 1992 by Poojya Swami Atmananda Saraswati, Vedanta Ashram is located in Sudama Nagar, Indore. It was conceived not as a tourist hotel or ceremonial center, but as an authentic Gurukula.
-              </p>
-              <p className="text-body" style={{ marginTop: 'var(--space-3)' }}>
-                Here, students of Vedanta temporarily withdraw from the noise of worldly occupations to devote their attention to <em>Shravana</em> (listening to scriptural teaching), <em>Manana</em> (reflecting upon its meaning), and <em>Nididhyasana</em> (living in silent contemplation).
-              </p>
-            </div>
-
-            <div className={styles.visualCol}>
-              <AshramImage
-                type="ashram-exterior"
-                alt="Entrance and Exterior of Vedanta Ashram Indore"
-                aspectRatio="16/9"
-                badge="Indore Gurukula Campus"
-              />
-            </div>
+          <div className={styles.spacesHeader}>
+            <span className={styles.sectionOverline}>Gurukula Campus</span>
+            <h2 className={styles.spacesTitle}>Ashram Grounds &amp; Study Facilities</h2>
+            <p className={styles.spacesLead}>
+              Designed to support single-pointed contemplation, the Ashram facilities balance traditional aesthetic reverence with quiet monastic simplicity.
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* 4. CAMPUS FACILITIES WITH AUTHENTIC VISUAL FRAMES */}
-      <section className="section" aria-label="Facilities">
-        <div className="container">
-          <SectionHeader
-            tag="Campus & Living"
-            title="Sattwic Facilities for Inmates &amp; Guests"
-            subtitle="Thoughtfully designed amenities to support deep study, rest, and meditation."
-            align="center"
-          />
-
-          <div className="grid grid--3">
-            {/* Gangeshwar Temple */}
-            <div className={`card ${styles.facilityCardWithVisual}`}>
-              <AshramImage
-                type="gangeshwar-mandir"
-                alt="Sri Gangeshwar Mahadev Mandir at Vedanta Ashram"
-                aspectRatio="16/9"
-              />
-              <div className={styles.fText}>
-                <h3 className={styles.facilityTitle}>Gangeshwar Mahadev Temple</h3>
-                <p className={styles.facilityDesc}>
-                  A consecrated Shiva temple on campus where daily Vedic pujas, Rudra abhishekam, and evening aartis create a peaceful devotional atmosphere.
-                </p>
-              </div>
-            </div>
-
-            {/* Scriptural Library */}
-            <div className={`card ${styles.facilityCardWithVisual}`}>
-              <AshramImage
-                type="library"
-                alt="Vedanta Scriptural Library Indore"
-                aspectRatio="16/9"
-              />
-              <div className={styles.fText}>
-                <h3 className={styles.facilityTitle}>Scriptural Library</h3>
-                <p className={styles.facilityDesc}>
-                  A rich collection of classical Vedanta literature, Adi Shankara Bhashyas, Sanskrit reference books, and audio discourse archives.
-                </p>
-              </div>
-            </div>
-
-            {/* Guest Quarters */}
-            <div className={`card ${styles.facilityCardWithVisual}`}>
-              <AshramImage
-                type="rooms"
-                alt="Guest Rooms and Inmate Accommodations"
-                aspectRatio="16/9"
-              />
-              <div className={styles.fText}>
-                <h3 className={styles.facilityTitle}>Guest Accommodations</h3>
-                <p className={styles.facilityDesc}>
-                  Single and shared rooms equipped with beds, ceiling fans, 24-hour running water, and attached western toilets. Capacity: ~24 seekers.
-                </p>
-              </div>
-            </div>
-
-            {/* Dining Hall */}
-            <div className={`card ${styles.facilityCardWithVisual}`}>
-              <AshramImage
-                type="dining-hall"
-                alt="Annapurna Dining Hall at Vedanta Ashram"
-                aspectRatio="16/9"
-              />
-              <div className={styles.fText}>
-                <h3 className={styles.facilityTitle}>Communal Dining Hall</h3>
-                <p className={styles.facilityDesc}>
-                  Freshly prepared, pure vegetarian (sattwic) meals served twice daily. Resident Mahatmas and seekers eat together in the spirit of family.
-                </p>
-              </div>
-            </div>
-
-            {/* Meditation Hall */}
-            <div className={`card ${styles.facilityCardWithVisual}`}>
-              <AshramImage
-                type="meditation-hall"
-                alt="Meditation and Discourse Hall"
-                aspectRatio="16/9"
-              />
-              <div className={styles.fText}>
-                <h3 className={styles.facilityTitle}>Discourse &amp; Meditation Hall</h3>
-                <p className={styles.facilityDesc}>
-                  A spacious, airy hall equipped for daily discourses, chanting sessions, guided meditation, and interactive question-and-answer circles.
-                </p>
-              </div>
-            </div>
-
-            {/* Garden & Courtyard */}
-            <div className={`card ${styles.facilityCardWithVisual}`}>
-              <AshramImage
-                type="garden"
-                alt="Ashram Garden and Companion Animal Sanctuary"
-                aspectRatio="16/9"
-              />
-              <div className={styles.fText}>
-                <h3 className={styles.facilityTitle}>Courtyard &amp; Companion Pets</h3>
-                <p className={styles.facilityDesc}>
-                  The Ashram maintains a green garden courtyard and lives in affectionate harmony with friendly companion animals cared for by Guruji.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4.5 AUTHENTIC ASHRAM PHOTO GALLERY & LIGHTBOX */}
-      <section id="ashram-gallery" className="section section--muted" aria-label="Ashram Photo Gallery">
-        <div className="container">
-          <SectionHeader
-            tag="Visual Tour"
-            title="Photographs of Vedanta Ashram, Indore"
-            subtitle="Authentic views of our sanctuary, sacred temple sanctum, lecture hall, and campus grounds."
-            align="center"
-          />
-          <AshramGallery />
-        </div>
-      </section>
-
-      {/* 5. DAILY LIFE & SCHEDULE */}
-      <section className="section" aria-label="Daily Routine">
-        <div className="container container--md">
-          <SectionHeader
-            tag="Gurukula Rhythm"
-            title="Daily Routine &amp; Schedule"
-            subtitle="A structured daily cadence balancing prayer, scriptural study, nourishing meals, and silent reflection."
-            align="center"
-          />
-
-          <div className={styles.timelineWrapper}>
-            {dailySchedule.map((item, idx) => (
-              <TimelineItem
-                key={idx}
-                timeOrYear={item.timeOrYear}
-                title={item.title}
-                description={item.description}
-                isLast={item.isLast}
-              />
+          <div className={styles.spacesEditorialGrid}>
+            {ashramSpaces.map((space, idx) => (
+              <article key={idx} className={styles.spaceArticle}>
+                <div className={styles.spaceVisual}>
+                  <TactileFrame
+                    src={space.image}
+                    alt={space.caption}
+                    caption={space.caption}
+                    aspectRatio="landscape"
+                  />
+                </div>
+                <div className={styles.spaceText}>
+                  <span className={styles.spaceNumber}>0{idx + 1}</span>
+                  <h3 className={styles.spaceHeading}>{space.title}</h3>
+                  <p className={styles.spaceSub}>{space.subtitle}</p>
+                  <p className={styles.spaceDesc}>{space.desc}</p>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 6. GUIDELINES FOR RESIDENTS & VISITORS */}
-      <section className="section section--muted" aria-label="Guidelines">
+      {/* ======================================================================
+          05. ASHRAM PARIVAR & RESIDENTIAL LIFE
+          ====================================================================== */}
+      <section className={styles.communitySection} aria-label="Ashram Parivar and Community">
         <div className="container">
-          <SectionHeader
-            tag="Code of Conduct"
-            title="Ashram Discipline &amp; Expectations"
-            subtitle="Please review these essential guidelines before planning your visit."
-          />
-
-          <div className="grid grid--2">
-            <div className={styles.guidelineCard}>
-              <h4 className={styles.guideTitle}>✓ What is Expected</h4>
-              <ul className={styles.guideList}>
-                <li>Punctual attendance at daily classes, meditation sessions, and Mandir aartis.</li>
-                <li>Modest, simple traditional Indian attire (plain white attire preferred).</li>
-                <li>Maintaining silence (Mouna) during designated study and night hours.</li>
-                <li>Participation in light communal duties (cleaning dining dishes, keeping quarters tidy).</li>
-                <li>Respect and affection for companion pets residing peacefully on campus.</li>
-              </ul>
-            </div>
-
-            <div className={styles.guidelineCard}>
-              <h4 className={styles.guideTitle}>✕ What is Strictly Prohibited</h4>
-              <ul className={styles.guideList}>
-                <li>Smoking, alcohol, drugs, or non-vegetarian food anywhere on campus.</li>
-                <li>Eating in private quarters (all meals are served together in the dining hall).</li>
-                <li>Loud music, commercial work, or disruptive electronic use in common areas.</li>
-                <li>Unannounced overnight stays without prior registration and confirmation.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. HOW TO REACH & DIRECTIONS */}
-      <section id="how-to-reach" className="section" aria-label="Directions & Contact">
-        <div className="container">
-          <SectionHeader
-            tag="Travel Guide"
-            title="Visit / How to Reach the Ashram"
-            subtitle="Conveniently located in Indore, Madhya Pradesh, well connected by air, rail, and road."
-          />
-
-          <div className={styles.travelGrid}>
-            <div className={styles.travelCol}>
-              <div className={styles.travelItem}>
-                <span className={styles.travelIcon}>✈️</span>
-                <div>
-                  <h4 className={styles.travelMode}>By Air (Indore Airport - IDR)</h4>
-                  <p className={styles.travelDesc}>
-                    Devi Ahilyabai Holkar Airport connects directly to Mumbai, Delhi, Bengaluru, and major hubs. The Ashram is ~<strong>25–30 minutes</strong> by taxi or auto-rickshaw (~8 km).
-                  </p>
-                </div>
-              </div>
-
-              <div className={styles.travelItem}>
-                <span className={styles.travelIcon}>🚆</span>
-                <div>
-                  <h4 className={styles.travelMode}>By Train (Indore Junction - INDB)</h4>
-                  <p className={styles.travelDesc}>
-                    Indore Junction is connected nationwide. Take a prepaid auto-rickshaw to Sudama Nagar (inside Sankaracharya Gate). Travel time: ~<strong>20–25 minutes</strong> (~6 km).
-                  </p>
-                </div>
-              </div>
-
-              <div className={styles.travelItem}>
-                <span className={styles.travelIcon}>🚗</span>
-                <div>
-                  <h4 className={styles.travelMode}>By Road &amp; Landmark</h4>
-                  <p className={styles.travelDesc}>
-                    Located inside <strong>Sankaracharya Gate</strong>, between Futi-Kothi and Hawa Bangla in Sector-E, Sudama Nagar, Indore.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.addressCard}>
-              <h4 className={styles.addressTitle}>Postal Address &amp; Helplines</h4>
-              <p className={styles.addressText}>
-                <strong>Vedanta Ashram</strong><br />
-                2948, Sector-E, Sudama Nagar<br />
-                Inside Sankaracharya Gate<br />
-                Indore – 452009, Madhya Pradesh, India
+          <div className={styles.communityGrid}>
+            <div className={styles.communityContentCol}>
+              <span className={styles.sectionOverline}>Living Gurukula Family</span>
+              <h2 className={styles.communityTitle}>The Ashram Parivar</h2>
+              <p className={styles.communityLead}>
+                Vedanta Ashram is sustained by an intimate community of resident monks, renunciants (Brahmacharins), dedicated volunteers, and visiting spiritual seekers united in the common pursuit of Self-knowledge.
               </p>
-              <div className={styles.addressActions}>
-                <p><strong>Ashram Helpline:</strong> +91 7000361938</p>
-                <p><strong>Guruji Contact:</strong> +91 98269 59480</p>
-                <p><strong>Email:</strong> vmission@gmail.com</p>
+              <div className={styles.communityNarrative}>
+                <p>
+                  During annual Gita Jayanti shivirs, Guru Poornima festivals, and residential retreats, seekers from across India and abroad reside at the Ashram, participating in intensive scriptural inquiry and cooperative seva.
+                </p>
+                <p>
+                  The kitchen operates on the principle of Sattwic Annakshetra—simple, freshly prepared vegetarian meals served with warmth and sanctity, nourishing both body and mind.
+                </p>
               </div>
-              <div style={{ marginTop: 'var(--space-4)' }}>
-                <Button variant="primary" fullWidth onClick={() => setIsModalOpen(true)}>
-                  Plan Your Visit Now →
-                </Button>
+
+              <div className={styles.communityHighlights}>
+                <div className={styles.comHighlightItem}>
+                  <span className={styles.comHighlightNum}>30+</span>
+                  <span className={styles.comHighlightLabel}>Years of Unbroken Gurukula Transmission (Est. 1995)</span>
+                </div>
+                <div className={styles.comHighlightItem}>
+                  <span className={styles.comHighlightNum}>100+</span>
+                  <span className={styles.comHighlightLabel}>Residential Scripture Shivirs &amp; Sadhana Camps Hosted</span>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.communityVisualCol}>
+              <TactileFrame
+                src="/images/vmission/community/residential-camp-gathering.jpg"
+                alt="Residential scripture shivir gathering at Vedanta Ashram, Indore"
+                caption="Seekers gathered in Pravachan Bhavan during an intensive scriptural retreat"
+                aspectRatio="landscape"
+              />
+              <div className={styles.communitySecondaryFrame}>
+                <TactileFrame
+                  src="/images/vmission/community/satsang-with-acharya.jpg"
+                  alt="Satsang and dialogue with Acharyas in the courtyard"
+                  caption="Informal dialogue and doubt-clearing satsang under the veranda"
+                  aspectRatio="landscape"
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Plan Visit Modal */}
-      <PlanVisitModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+      {/* ======================================================================
+          05B. VM FOOTPRINTS — HISTORICAL DISCOURSE & MAHATMAS ARCHIVE
+          ====================================================================== */}
+      <FootprintsArchive />
+
+      {/* ======================================================================
+          06. HOW TO REACH / SANCTUARY VISITOR GUIDE
+          ====================================================================== */}
+      <section id="reach" className={styles.reachSection} aria-label="Directions and Reaching the Ashram">
+        <div className="container">
+          <div className={styles.reachHeader}>
+            <span className={styles.sectionOverline}>Pilgrim &amp; Visitor Guide</span>
+            <h2 className={styles.reachTitle}>Reaching Vedanta Ashram</h2>
+            <p className={styles.reachLead}>
+              Located in the quiet residential neighbourhood of Sudama Nagar in Indore, Madhya Pradesh, the Ashram is well-connected by air, rail, and road.
+            </p>
+          </div>
+
+          <div className={styles.reachGrid}>
+            <div className={styles.reachCard}>
+              <div className={styles.reachIconWrap}>✈️</div>
+              <h3 className={styles.reachCardTitle}>By Air</h3>
+              <p className={styles.reachLocationName}>Devi Ahilyabai Holkar Airport (IDR)</p>
+              <p className={styles.reachDistance}>Distance: ~8 km (Approx. 25–30 minutes)</p>
+              <p className={styles.reachCardDesc}>
+                Indore Airport has frequent direct flights connecting major Indian cities including Mumbai, Delhi, Bengaluru, Hyderabad, and Ahmedabad. Prepaid taxis and auto-rickshaws are readily available.
+              </p>
+            </div>
+
+            <div className={styles.reachCard}>
+              <div className={styles.reachIconWrap}>🚆</div>
+              <h3 className={styles.reachCardTitle}>By Rail</h3>
+              <p className={styles.reachLocationName}>Indore Junction Railway Station (INDB)</p>
+              <p className={styles.reachDistance}>Distance: ~6 km (Approx. 20 minutes)</p>
+              <p className={styles.reachCardDesc}>
+                Direct superfast and express trains connect Indore with Mumbai, New Delhi, Kolkata, Pune, and Bhopal. Taxis, app cabs, and city buses provide convenient transit to Sudama Nagar.
+              </p>
+            </div>
+
+            <div className={styles.reachCard}>
+              <div className={styles.reachIconWrap}>📍</div>
+              <h3 className={styles.reachCardTitle}>Campus Address</h3>
+              <p className={styles.reachLocationName}>Vedanta Ashram &amp; Gangeshwar Mandir</p>
+              <p className={styles.reachDistance}>Sector E, Sudama Nagar, Indore, M.P. 452009</p>
+              <p className={styles.reachCardDesc}>
+                Situated in Western Indore. Landmark: Sri Gangeshwar Mahadev Mandir (prominent white Shivling dome), easily recognized by local transport operators.
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.visitNoticeBox}>
+            <h4 className={styles.visitNoticeTitle}>Visitor Information &amp; Ashram Protocol</h4>
+            <p className={styles.visitNoticeText}>
+              Visitors are welcome to attend the daily morning and evening temple aartis, as well as open morning pravachans. For residential camp participation or overnight lodging requests, please correspond with the Ashram office in advance to confirm accommodation availability.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================================================
+          07. PRE-FOOTER INVITATION
+          ====================================================================== */}
+      <CinematicPreFooter
+        tag="Visitor Information"
+        sanskrit="अथातो ब्रह्मजिज्ञासा"
+        heading="Visiting Vedanta Ashram"
+        subheading="Step inside for study, meditation, and devotional quietude"
+        description="Whether seeking a serene space to reflect on the Upanishads or attending a residential camp, the doors of Vedanta Ashram remain open to every earnest seeker."
+        ctas={[
+          { label: 'Browse Recorded Pravachans', href: '/teachings', variant: 'primary' },
+          { label: 'Explore Our Acharyas', href: '/acharyas', variant: 'outline' },
+        ]}
+        quote={{
+          sanskrit: 'शान्तिः शान्तिः शान्तिः',
+          translation: 'May there be peace in the cosmic realm, peace in the atmosphere, and peace within the heart.',
+          source: 'Taittiriya Upanishad Shanti Patha',
+        }}
       />
-    </>
+    </div>
   );
 }

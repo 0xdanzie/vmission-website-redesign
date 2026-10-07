@@ -1,0 +1,161 @@
+/* ==========================================================================
+   CINEMATIC PRE-FOOTER — MIDNIGHT WALNUT GROUNDING SECTION
+   Derived strictly from proven /about pre-footer architecture
+   ========================================================================== */
+
+.preFooterSection {
+  position: relative;
+  background-color: var(--vm-walnut);
+  color: var(--vm-ivory);
+  padding: var(--space-20) 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(197, 160, 89, 0.28);
+}
+
+.preFooterBackdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(224, 99, 40, 0.12) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(197, 160, 89, 0.08) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.preFooterContent {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tagBadge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--vm-brass);
+  margin-bottom: var(--space-3);
+  padding: 4px 16px;
+  background: rgba(197, 160, 89, 0.12);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: var(--radius-full);
+}
+
+.sanskritInvocation {
+  font-family: var(--font-devanagari);
+  font-size: var(--text-lg);
+  color: var(--vm-brass);
+  letter-spacing: normal;
+  line-height: 1.5;
+  margin: 0 0 var(--space-4) 0;
+  font-weight: 500;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.18;
+  color: var(--vm-ivory);
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-5) 0;
+}
+
+.subheading {
+  display: block;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--vm-sandalwood-dark);
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(253, 251, 247, 0.85);
+  margin: 0 auto var(--space-8) auto;
+  max-width: 660px;
+}
+
+.quoteCard {
+  background: rgba(20, 15, 12, 0.65);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  border-radius: var(--radius-sm);
+  padding: var(--space-6) var(--space-8);
+  margin: 0 auto var(--space-8) auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+.quoteSanskrit {
+  font-family: var(--font-devanagari);
+  font-size: 1.25rem;
+  color: var(--vm-brass);
+  margin: 0 0 var(--space-2) 0;
+  line-height: 1.5;
+}
+
+.quoteTranslation {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--vm-ivory);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.quoteSource {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vm-brass-dark);
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.secondaryBtn {
+  border-color: rgba(197, 160, 89, 0.6) !important;
+  color: var(--vm-ivory) !important;
+  background: rgba(20, 15, 12, 0.4) !important;
+  backdrop-filter: blur(4px);
+}
+
+.secondaryBtn:hover {
+  background: rgba(197, 160, 89, 0.18) !important;
+  border-color: var(--vm-brass) !important;
+}
+
+@media (max-width: 768px) {
+  .preFooterSection {
+    padding: var(--space-14) 0;
+  }
+
+  .heading {
+    font-size: 2rem;
+  }
+
+  .ctaRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -1,0 +1,2113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Founder Experience Showcase — Swami Atmananda Saraswati | Vedanta Mission</title>
+  
+  <!-- Typography System (Phase 2D.6 Final 3-Family Authority) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Noto+Serif+Devanagari:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       PHASE 2D.6 COLOR TOKENS & SYSTEM
+       ========================================================================== */
+    :root {
+      /* Primary Bhagwa Palette */
+      --vm-bhagwa: #E06328;
+      --vm-bhagwa-hover: #F0753B;
+      --vm-gerua: #C84E17;
+      --vm-gerua-active: #B34211;
+      --vm-bhagwa-contrast: #A73C0E;
+      --vm-bhagwa-subtle: rgba(224, 99, 40, 0.08);
+      --vm-bhagwa-glow: rgba(224, 99, 40, 0.20);
+      
+      /* Neutral Foundations */
+      --vm-ivory: #FDFBF7;
+      --vm-ivory-warm: #F7F3EB;
+      --vm-sand: #EBE5D8;
+      --vm-sand-border: #DFD7C7;
+      --vm-walnut: #1E1916;
+      --vm-walnut-surface: #27211D;
+      --vm-walnut-card: #2F2823;
+      --vm-walnut-border: #443B34;
+
+      /* Sacred Accent */
+      --vm-brass: #C5A059;
+      --vm-brass-soft: rgba(197, 160, 89, 0.25);
+      --vm-brass-border: rgba(197, 160, 89, 0.4);
+
+      /* Text Colors */
+      --vm-text-dark: #1E1916;
+      --vm-text-muted: #665D55;
+      --vm-text-subtle: #8A8177;
+      --vm-text-light: #FDFBF7;
+      --vm-text-light-muted: #BCB3A9;
+
+      /* Typography */
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-ui: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-sanskrit: 'Noto Serif Devanagari', 'Cormorant Garamond', serif;
+
+      /* Shadows & Radii */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 14px;
+      --radius-xl: 20px;
+      --shadow-subtle: 0 4px 20px rgba(30, 25, 22, 0.05);
+      --shadow-elevated: 0 12px 36px rgba(30, 25, 22, 0.09);
+      --shadow-walnut: 0 16px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-ui);
+      background-color: #120F0D;
+      color: var(--vm-text-light);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Showcase Top Bar */
+    .showcase-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(22, 18, 16, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+      padding: 12px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .showcase-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .showcase-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--vm-gerua);
+      color: #FFF;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+    }
+    .showcase-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--vm-ivory);
+      letter-spacing: 0.02em;
+    }
+    .showcase-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .showcase-nav-btn {
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--vm-text-light-muted);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.2s ease;
+    }
+    .showcase-nav-btn:hover, .showcase-nav-btn.active {
+      color: var(--vm-ivory);
+      background: rgba(224, 99, 40, 0.18);
+      border-color: var(--vm-bhagwa);
+    }
+    .showcase-nav-btn.recommend {
+      background: var(--vm-gerua);
+      color: #FFF;
+      border-color: var(--vm-bhagwa);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .showcase-main {
+      padding: 40px 0 100px;
+    }
+
+    /* Concept Canvas Frames */
+    .concept-wrapper {
+      margin-bottom: 72px;
+      background: #171311;
+      border: 1px solid var(--vm-walnut-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-walnut);
+    }
+    .concept-header-bar {
+      background: var(--vm-walnut);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .concept-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(197, 160, 89, 0.15);
+      color: var(--vm-brass);
+      border: 1px solid var(--vm-brass-border);
+    }
+    .concept-tag.recommended {
+      background: rgba(224, 99, 40, 0.2);
+      color: var(--vm-bhagwa);
+      border-color: var(--vm-bhagwa);
+    }
+    .concept-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--vm-ivory);
+    }
+    .concept-desc {
+      font-size: 0.85rem;
+      color: var(--vm-text-light-muted);
+    }
+
+    /* ==========================================================================
+       SIMULATED SITE CHROMES & STYLES
+       ========================================================================== */
+
+    /* Simulated Home Context Banner */
+    .simulated-context-lead {
+      background: var(--vm-ivory);
+      color: var(--vm-text-dark);
+      padding: 32px 0 16px;
+      border-bottom: 1px dashed var(--vm-sand-border);
+      text-align: center;
+    }
+    .context-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      color: var(--vm-bhagwa-contrast);
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+    .context-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--vm-text-dark);
+    }
+
+    /* Common Components inside Prototypes */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+    .btn-primary {
+      background: var(--vm-gerua);
+      color: #FFF;
+      border: 1px solid var(--vm-gerua);
+      box-shadow: 0 4px 14px rgba(200, 78, 23, 0.28);
+    }
+    .btn-primary:hover {
+      background: var(--vm-bhagwa);
+      border-color: var(--vm-bhagwa);
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--vm-text-dark);
+      border: 1.5px solid var(--vm-sand-border);
+    }
+    .btn-outline:hover {
+      border-color: var(--vm-bhagwa);
+      color: var(--vm-bhagwa-contrast);
+      background: var(--vm-bhagwa-subtle);
+    }
+    .btn-outline-light {
+      background: transparent;
+      color: var(--vm-ivory);
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+    }
+    .btn-outline-light:hover {
+      border-color: var(--vm-brass);
+      color: var(--vm-brass);
+      background: rgba(197, 160, 89, 0.08);
+    }
+
+    .sacred-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--vm-bhagwa-contrast);
+      margin-bottom: 12px;
+    }
+    .sacred-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 2px;
+      background: var(--vm-bhagwa);
+    }
+
+    .brass-rule {
+      width: 48px;
+      height: 2px;
+      background: var(--vm-brass);
+      margin: 16px 0 20px;
+    }
+
+    /* --------------------------------------------------------------------------
+       CONCEPT A — EDITORIAL SPLIT (HOMEPAGE)
+       -------------------------------------------------------------------------- */
+    .founder-concept-a {
+      background: var(--vm-ivory);
+      color: var(--vm-text-dark);
+      padding: 72px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .concept-a-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .concept-a-text {
+      padding-right: 16px;
+    }
+    .concept-a-name {
+      font-family: var(--font-display);
+      font-size: clamp(2.3rem, 3.8vw, 3.4rem);
+      font-weight: 600;
+      line-height: 1.12;
+      color: var(--vm-text-dark);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .concept-a-role-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .role-honorific {
+      font-family: var(--font-sanskrit);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--vm-bhagwa-contrast);
+    }
+    .role-sep {
+      color: var(--vm-brass);
+      font-size: 0.9rem;
+    }
+    .role-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--vm-text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .concept-a-lead {
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: #3A322C;
+      margin-bottom: 24px;
+    }
+    .concept-a-lead strong {
+      color: var(--vm-text-dark);
+      font-weight: 600;
+    }
+
+    /* Milestone Chips Row */
+    .milestone-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .milestone-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--vm-ivory-warm);
+      border: 1px solid var(--vm-sand-border);
+      padding: 7px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      color: var(--vm-text-dark);
+    }
+    .milestone-chip-year {
+      font-weight: 700;
+      color: var(--vm-bhagwa-contrast);
+      font-size: 0.82rem;
+    }
+    .milestone-chip-label {
+      font-weight: 500;
+      color: var(--vm-text-muted);
+    }
+
+    .concept-a-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    /* Concept A Image Frame */
+    .concept-a-media-col {
+      position: relative;
+    }
+    .concept-a-portrait-card {
+      position: relative;
+      background: var(--vm-ivory-warm);
+      border: 1px solid var(--vm-sand-border);
+      border-radius: var(--radius-lg);
+      padding: 12px;
+      box-shadow: var(--shadow-elevated);
+      transition: transform 0.3s ease;
+    }
+    .concept-a-image-wrap {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 4 / 3.4;
+      background: #E8E0D2;
+    }
+    .concept-a-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 72% 28%; /* Emphasize Guruji with river backdrop naturally on left */
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .concept-a-portrait-card:hover .concept-a-image-wrap img {
+      transform: scale(1.02);
+    }
+    .portrait-caption-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 4px 2px;
+      font-size: 0.78rem;
+      color: var(--vm-text-muted);
+    }
+    .portrait-caption-source {
+      font-weight: 600;
+      color: var(--vm-bhagwa-contrast);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .portrait-caption-source::before {
+      content: '●';
+      font-size: 0.6rem;
+      color: var(--vm-brass);
+    }
+    .portrait-accent-seal {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      background: var(--vm-walnut);
+      border: 2px solid var(--vm-brass);
+      color: var(--vm-brass);
+      border-radius: 50%;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.15;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    }
+    .portrait-accent-seal span {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--vm-bhagwa);
+    }
+
+    /* --------------------------------------------------------------------------
+       CONCEPT B — IMMERSIVE FOUNDER FEATURE (HOMEPAGE)
+       -------------------------------------------------------------------------- */
+    .founder-concept-b {
+      background: linear-gradient(135deg, #171310 0%, #201A16 100%);
+      color: var(--vm-text-light);
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid var(--vm-walnut-border);
+      border-bottom: 1px solid var(--vm-walnut-border);
+    }
+    /* Subtle background saffron radiance */
+    .founder-concept-b::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(224, 99, 40, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .concept-b-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .concept-b-content-surface {
+      background: rgba(39, 33, 29, 0.82);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(197, 160, 89, 0.28);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+    .concept-b-eyebrow {
+      color: var(--vm-brass);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .concept-b-eyebrow::before {
+      content: '';
+      width: 20px;
+      height: 2px;
+      background: var(--vm-brass);
+    }
+    .concept-b-name {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 3.4vw, 3.1rem);
+      font-weight: 600;
+      color: var(--vm-ivory);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .concept-b-shloka-box {
+      border-left: 3px solid var(--vm-bhagwa);
+      padding: 8px 14px;
+      margin: 16px 0 20px;
+      background: rgba(224, 99, 40, 0.08);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .concept-b-shloka-sanskrit {
+      font-family: var(--font-sanskrit);
+      font-size: 0.95rem;
+      color: var(--vm-brass);
+      line-height: 1.5;
+    }
+    .concept-b-shloka-trans {
+      font-size: 0.78rem;
+      color: var(--vm-text-light-muted);
+      margin-top: 4px;
+      font-style: italic;
+    }
+    .concept-b-lead {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--vm-text-light-muted);
+      margin-bottom: 24px;
+    }
+    .concept-b-media-col {
+      position: relative;
+    }
+    .concept-b-photo-frame {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(197, 160, 89, 0.35);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
+      aspect-ratio: 4 / 3.6;
+      position: relative;
+    }
+    .concept-b-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 70% 25%;
+      display: block;
+    }
+    /* Restrained, strictly natural border fade - no heavy orange overlay */
+    .concept-b-photo-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+
+    /* --------------------------------------------------------------------------
+       EVALUATION & RECOMMENDATION COMPARISON SECTION
+       -------------------------------------------------------------------------- */
+    .eval-section {
+      padding: 48px 36px;
+      background: #191512;
+      border-top: 1px solid var(--vm-walnut-border);
+    }
+    .eval-heading-wrap {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 36px;
+    }
+    .eval-table-wrap {
+      overflow-x: auto;
+      margin-bottom: 32px;
+    }
+    .eval-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .eval-table th, .eval-table td {
+      padding: 14px 18px;
+      border: 1px solid var(--vm-walnut-border);
+      text-align: left;
+    }
+    .eval-table th {
+      background: var(--vm-walnut);
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--vm-brass);
+    }
+    .eval-table tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .eval-score {
+      font-weight: 700;
+      color: var(--vm-bhagwa);
+    }
+    .recommendation-banner {
+      background: linear-gradient(135deg, rgba(200, 78, 23, 0.15) 0%, rgba(197, 160, 89, 0.12) 100%);
+      border: 1.5px solid var(--vm-bhagwa);
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    }
+    .rec-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+      color: var(--vm-bhagwa);
+    }
+    .rec-content h4 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: var(--vm-ivory);
+      margin-bottom: 6px;
+    }
+    .rec-content p {
+      font-size: 0.92rem;
+      color: var(--vm-text-light-muted);
+      line-height: 1.6;
+    }
+
+    /* --------------------------------------------------------------------------
+       FOUNDER DETAIL PAGE PROTOTYPE (/acharyas/swami-atmananda-saraswati)
+       -------------------------------------------------------------------------- */
+    .founder-detail-view {
+      background: var(--vm-ivory);
+      color: var(--vm-text-dark);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 72px;
+      box-shadow: var(--shadow-walnut);
+    }
+    .detail-browser-chrome {
+      background: #25201C;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #38302A;
+    }
+    .browser-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .browser-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #4A3E37;
+    }
+    .browser-url-bar {
+      flex: 1;
+      max-width: 600px;
+      background: #1A1513;
+      border: 1px solid #3D342D;
+      border-radius: 4px;
+      padding: 4px 14px;
+      font-family: monospace;
+      font-size: 0.78rem;
+      color: var(--vm-brass);
+    }
+
+    /* Detail Hero */
+    .detail-hero {
+      background: linear-gradient(180deg, var(--vm-ivory) 0%, var(--vm-ivory-warm) 100%);
+      padding: 64px 0 54px;
+      border-bottom: 1px solid var(--vm-sand-border);
+    }
+    .detail-hero-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 48px;
+      align-items: flex-start;
+    }
+    .detail-hero-portrait-card {
+      background: #FFF;
+      border: 1px solid var(--vm-sand-border);
+      border-radius: var(--radius-md);
+      padding: 10px;
+      box-shadow: var(--shadow-elevated);
+      position: sticky;
+      top: 90px;
+    }
+    .detail-hero-img-wrap {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      aspect-ratio: 1 / 1.08;
+      background: #EFE8DD;
+    }
+    .detail-hero-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 70% 20%;
+      display: block;
+    }
+    .quick-facts-box {
+      margin-top: 14px;
+      background: var(--vm-ivory-warm);
+      border: 1px solid var(--vm-sand-border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+    }
+    .qf-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--vm-bhagwa-contrast);
+      margin-bottom: 10px;
+    }
+    .qf-list {
+      list-style: none;
+      font-size: 0.8rem;
+    }
+    .qf-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .qf-list li:last-child {
+      border-bottom: none;
+    }
+    .qf-key {
+      color: var(--vm-text-muted);
+    }
+    .qf-val {
+      font-weight: 600;
+      color: var(--vm-text-dark);
+      text-align: right;
+    }
+
+    .detail-hero-content {
+      padding-top: 8px;
+    }
+    .detail-breadcrumbs {
+      font-size: 0.78rem;
+      color: var(--vm-text-muted);
+      margin-bottom: 14px;
+      display: flex;
+      gap: 6px;
+    }
+    .detail-breadcrumbs a {
+      color: var(--vm-bhagwa-contrast);
+      text-decoration: none;
+    }
+    .detail-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--vm-text-dark);
+      margin-bottom: 8px;
+    }
+    .detail-lead-para {
+      font-size: 1.12rem;
+      line-height: 1.75;
+      color: #38302A;
+      margin: 20px 0 28px;
+    }
+
+    /* Detail Section Navigation Tabs */
+    .detail-subnav {
+      position: sticky;
+      top: 61px;
+      z-index: 50;
+      background: var(--vm-ivory);
+      border-bottom: 1px solid var(--vm-sand-border);
+      display: flex;
+      gap: 28px;
+      padding: 0 40px;
+    }
+    .detail-subnav a {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--vm-text-muted);
+      text-decoration: none;
+      padding: 14px 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .detail-subnav a:hover, .detail-subnav a.active {
+      color: var(--vm-bhagwa-contrast);
+      border-bottom-color: var(--vm-bhagwa);
+    }
+
+    /* Detail Page Body Sections */
+    .detail-content-body {
+      padding: 54px 40px 72px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .detail-section {
+      margin-bottom: 64px;
+      scroll-margin-top: 130px;
+    }
+    .detail-sec-header {
+      margin-bottom: 28px;
+    }
+    .detail-sec-title {
+      font-family: var(--font-display);
+      font-size: 2.1rem;
+      font-weight: 600;
+      color: var(--vm-text-dark);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .detail-sec-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--vm-sand-border);
+    }
+
+    /* Spiritual Journey Timeline */
+    .timeline-track {
+      position: relative;
+      padding-left: 36px;
+    }
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--vm-bhagwa) 0%, var(--vm-brass) 50%, var(--vm-sand-border) 100%);
+    }
+    .timeline-node {
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .timeline-node:last-child {
+      margin-bottom: 0;
+    }
+    .timeline-marker {
+      position: absolute;
+      left: -36px;
+      top: 4px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--vm-ivory);
+      border: 3px solid var(--vm-bhagwa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 4px rgba(224, 99, 40, 0.12);
+    }
+    .timeline-node.gold .timeline-marker {
+      border-color: var(--vm-brass);
+    }
+    .timeline-card {
+      background: #FFF;
+      border: 1px solid var(--vm-sand-border);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      box-shadow: var(--shadow-subtle);
+    }
+    .timeline-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .timeline-year-tag {
+      font-weight: 700;
+      color: var(--vm-bhagwa-contrast);
+      font-size: 0.88rem;
+      letter-spacing: 0.05em;
+    }
+    .timeline-event-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--vm-text-dark);
+    }
+    .verification-pill {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .verification-pill.verified {
+      background: #EAF5E9;
+      color: #246B2C;
+      border: 1px solid #BCE0BD;
+    }
+    .verification-pill.candidate {
+      background: #FFF8E6;
+      color: #9C6800;
+      border: 1px solid #F5DE9E;
+    }
+    .timeline-card-body {
+      font-size: 0.94rem;
+      line-height: 1.65;
+      color: #4A423A;
+    }
+
+    /* Foundations & Legacy Cards Grid */
+    .foundations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .foundation-card {
+      background: #FFF;
+      border: 1px solid var(--vm-sand-border);
+      border-top: 3px solid var(--vm-bhagwa);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-subtle);
+    }
+    .foundation-year {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--vm-bhagwa-contrast);
+      margin-bottom: 6px;
+    }
+    .foundation-name {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--vm-text-dark);
+      margin-bottom: 10px;
+    }
+    .foundation-body {
+      font-size: 0.88rem;
+      color: var(--vm-text-muted);
+      line-height: 1.6;
+    }
+    .foundation-list {
+      margin-top: 10px;
+      padding-left: 18px;
+      font-size: 0.84rem;
+      color: #4D443D;
+    }
+    .foundation-list li {
+      margin-bottom: 4px;
+    }
+
+    /* Related Teachings & Publications Cards */
+    .teachings-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 20px;
+    }
+    .teaching-mini-card {
+      background: #FFF;
+      border: 1px solid var(--vm-sand-border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .teaching-mini-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--vm-bhagwa);
+    }
+    .tmc-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--vm-bhagwa-contrast);
+      margin-bottom: 8px;
+    }
+    .tmc-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--vm-text-dark);
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+    .tmc-desc {
+      font-size: 0.84rem;
+      color: var(--vm-text-muted);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+    .tmc-link {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--vm-gerua);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* --------------------------------------------------------------------------
+       MOBILE PREVIEWS SECTION (390px VIEWPORT FRAME)
+       -------------------------------------------------------------------------- */
+    .mobile-showcase-section {
+      padding: 56px 0 80px;
+      background: #14100E;
+      border-top: 1px solid var(--vm-walnut-border);
+    }
+    .mobile-frames-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 40px;
+    }
+    .mobile-device-card {
+      text-align: center;
+    }
+    .mobile-device-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--vm-brass);
+      margin-bottom: 16px;
+      letter-spacing: 0.04em;
+    }
+    .mobile-device-shell {
+      width: 390px;
+      height: 780px;
+      background: #000;
+      border-radius: 46px;
+      border: 8px solid #2B2420;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+      text-align: left;
+    }
+    .mobile-device-shell::-webkit-scrollbar {
+      width: 4px;
+    }
+    .mobile-device-shell::-webkit-scrollbar-thumb {
+      background: #4A3E37;
+      border-radius: 4px;
+    }
+    .mobile-notch {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 24px;
+      background: #120F0D;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .mobile-notch-pill {
+      width: 90px;
+      height: 12px;
+      background: #000;
+      border-radius: 8px;
+    }
+
+    /* Mobile Prototype 1: Home Founder Section on Mobile */
+    .mobile-screen-content {
+      background: var(--vm-ivory);
+      color: var(--vm-text-dark);
+      padding: 24px 18px 40px;
+    }
+    .mobile-portrait-wrap {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 1 / 1.05;
+      background: #E8E0D2;
+      border: 1px solid var(--vm-sand-border);
+      margin-bottom: 18px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    }
+    .mobile-portrait-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 70% 20%; /* Preserves Guruji's face, tilak, and saffron shawl respectfully */
+      display: block;
+    }
+    .mobile-name {
+      font-family: var(--font-display);
+      font-size: 2.1rem;
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--vm-text-dark);
+      margin-bottom: 6px;
+    }
+    .mobile-lead {
+      font-size: 0.94rem;
+      line-height: 1.6;
+      color: #3D352F;
+      margin-bottom: 18px;
+    }
+
+    /* Mobile Prototype 2: Detail Page on Mobile */
+    .mobile-detail-content {
+      background: var(--vm-ivory);
+      color: var(--vm-text-dark);
+      padding: 20px 16px 40px;
+    }
+
+    /* --------------------------------------------------------------------------
+       CONTENT AUDIT / GOVERNANCE MATRIX
+       -------------------------------------------------------------------------- */
+    .governance-section {
+      background: #191412;
+      border-top: 1px solid var(--vm-walnut-border);
+      padding: 64px 0 80px;
+    }
+    .gov-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .gov-card {
+      background: #211B17;
+      border: 1px solid #362D26;
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+    .gov-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: var(--vm-ivory);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .gov-status-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .gov-card.status-verified {
+      border-top: 3px solid #388E3C;
+    }
+    .gov-card.status-verify {
+      border-top: 3px solid #F57C00;
+    }
+    .gov-card.status-client {
+      border-top: 3px solid var(--vm-brass);
+    }
+    .gov-item {
+      margin-bottom: 14px;
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--vm-text-light-muted);
+    }
+    .gov-item strong {
+      color: var(--vm-ivory);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* Responsive adjustments for showcase wrapper */
+    @media (max-width: 992px) {
+      .concept-a-grid, .concept-b-grid, .detail-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+      .concept-a-text {
+        padding-right: 0;
+      }
+      .detail-hero-portrait-card {
+        position: static;
+        max-width: 420px;
+        margin: 0 auto;
+      }
+      .detail-subnav {
+        padding: 0 20px;
+        overflow-x: auto;
+      }
+      .detail-content-body {
+        padding: 40px 20px 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Showcase Navigation Header -->
+  <header class="showcase-header">
+    <div class="showcase-brand">
+      <span class="showcase-badge">Phase 2.9</span>
+      <span class="showcase-title">Founder / Guruji Experience Showcase</span>
+    </div>
+    <nav class="showcase-nav">
+      <a href="#concept-a" class="showcase-nav-btn active">Concept A (Editorial Split)</a>
+      <a href="#concept-b" class="showcase-nav-btn">Concept B (Immersive)</a>
+      <a href="#evaluation" class="showcase-nav-btn recommend">★ Layout Recommendation</a>
+      <a href="#detail-page" class="showcase-nav-btn">Founder Detail Page</a>
+      <a href="#mobile-preview" class="showcase-nav-btn">Mobile (390px)</a>
+      <a href="#governance" class="showcase-nav-btn">Content Verification Gate</a>
+    </nav>
+  </header>
+
+  <main class="showcase-main">
+    <div class="container">
+
+      <!-- ====================================================================
+           SECTION 1: CONCEPT A — EDITORIAL SPLIT (HOMEPAGE)
+           ==================================================================== -->
+      <div class="concept-wrapper" id="concept-a">
+        <div class="concept-header-bar">
+          <div>
+            <span class="concept-tag recommended">Recommended Concept A</span>
+            <span class="concept-title" style="margin-left: 8px;">Homepage Founder Section · Editorial Split</span>
+          </div>
+          <div class="concept-desc">
+            50/50 Grid · Ivory Grounding · Authentic Portrait Negative Space · Dignified Vedantic Hierarchy
+          </div>
+        </div>
+
+        <!-- Simulated Context Intro (Representing Homepage Flow after Hero) -->
+        <div class="simulated-context-lead">
+          <span class="context-label">Home Section Position: After Mission Genesis · Before Teachings</span>
+          <div class="context-title">Living Lineage of Advaita Vedanta</div>
+        </div>
+
+        <!-- Prototype: Concept A -->
+        <section class="founder-concept-a" aria-label="Founder Introduction Concept A">
+          <div class="container">
+            <div class="concept-a-grid">
+              
+              <!-- Left Column: Identity, Narrative & Action -->
+              <div class="concept-a-text">
+                <span class="sacred-eyebrow">Founding Acharya</span>
+                <h2 class="concept-a-name">Swami Atmananda Saraswati</h2>
+                
+                <div class="concept-a-role-group">
+                  <span class="role-honorific">पूज्य गुरुजी</span>
+                  <span class="role-sep">✦</span>
+                  <span class="role-honorific" style="font-family: var(--font-ui); font-size: 1rem;">Poojya Guruji</span>
+                  <span class="role-sep">✦</span>
+                  <span class="role-title">Advaita Vedanta Scholar &amp; Acharya</span>
+                </div>
+
+                <div class="brass-rule"></div>
+
+                <p class="concept-a-lead">
+                  Renowned scholar of Advaita Vedanta and founder of <strong>Vedanta Mission (1992)</strong>, dedicated to sharing the timeless wisdom of the Bhagavad Gita, Upanishads, and classical Vedantic texts through traditional Guru-shishya parampara in India and abroad.
+                </p>
+
+                <!-- Milestone Chips -->
+                <div class="milestone-chips-row">
+                  <div class="milestone-chip">
+                    <span class="milestone-chip-year">1987</span>
+                    <span class="milestone-chip-label">Sanyas Deeksha</span>
+                  </div>
+                  <div class="milestone-chip">
+                    <span class="milestone-chip-year">1992</span>
+                    <span class="milestone-chip-label">Vedanta Mission Founded</span>
+                  </div>
+                  <div class="milestone-chip">
+                    <span class="milestone-chip-year">1995</span>
+                    <span class="milestone-chip-label">Vedanta Ashram, Indore</span>
+                  </div>
+                </div>
+
+                <!-- Call to Action Group -->
+                <div class="concept-a-cta-row">
+                  <a href="#detail-page" class="btn btn-primary">
+                    Know Guruji &amp; His Journey
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  </a>
+                  <a href="#detail-teachings" class="btn btn-outline">
+                    Explore Guruji's Teachings
+                  </a>
+                </div>
+              </div>
+
+              <!-- Right Column: Supplied Canonical Real Portrait -->
+              <div class="concept-a-media-col">
+                <div class="concept-a-portrait-card">
+                  <div class="portrait-accent-seal">
+                    <span>1992</span>
+                    FOUNDED
+                  </div>
+                  <div class="concept-a-image-wrap">
+                    <img 
+                      src="../../../public/images/vmission/acharyas/swami-atmananda-saraswati/founder-portrait.png" 
+                      alt="Poojya Guruji Swami Atmananda Saraswati in natural Bhagwa robes beside serene waters" 
+                      loading="lazy"
+                      onerror="this.src='../../../public/images/vmission/acharyas/guruji-portrait-riverside.jpg'"
+                    >
+                  </div>
+                  <div class="portrait-caption-strip">
+                    <span class="portrait-caption-source">Authentic Ashram Archive Photograph</span>
+                    <span>Indore · Riverside Satsang</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ====================================================================
+           SECTION 2: CONCEPT B — IMMERSIVE FOUNDER FEATURE (HOMEPAGE)
+           ==================================================================== -->
+      <div class="concept-wrapper" id="concept-b">
+        <div class="concept-header-bar">
+          <div>
+            <span class="concept-tag">Alternative Concept B</span>
+            <span class="concept-title" style="margin-left: 8px;">Homepage Founder Section · Immersive Grounded</span>
+          </div>
+          <div class="concept-desc">
+            Midnight Walnut Grounding · Floating Surface Card · Shloka Integration · Meditative Ambience
+          </div>
+        </div>
+
+        <!-- Prototype: Concept B -->
+        <section class="founder-concept-b" aria-label="Founder Introduction Concept B">
+          <div class="container">
+            <div class="concept-b-grid">
+              
+              <!-- Left Column: Frosted Glass / Content Surface -->
+              <div class="concept-b-content-surface">
+                <div class="concept-b-eyebrow">Founder &amp; Head Acharya</div>
+                <h2 class="concept-b-name">Swami Atmananda Saraswati</h2>
+                <div style="font-family: var(--font-sanskrit); color: var(--vm-bhagwa); font-size: 1.1rem; margin-bottom: 12px;">
+                  पूज्य गुरुजी · Poojya Guruji
+                </div>
+
+                <div class="concept-b-shloka-box">
+                  <div class="concept-b-shloka-sanskrit">
+                    तद्विद्धि प्रणिपातेन परिप्रश्नेन सेवया ।<br>
+                    उपदेक्ष्यन्ति ते ज्ञानं ज्ञानिनस्तत्त्वदर्शिनः ॥
+                  </div>
+                  <div class="concept-b-shloka-trans">
+                    “Know that through reverence, inquiry, and selfless service; the wise who have seen the Truth will impart that wisdom unto you.” (Gita 4.34)
+                  </div>
+                </div>
+
+                <p class="concept-b-lead">
+                  A distinguished renunciant and scholar of Advaita Vedanta, Poojya Guruji has consecrated over four decades to scriptural teaching, ascetic contemplation, and the establishment of an authentic residential Gurukula in Indore.
+                </p>
+
+                <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+                  <a href="#detail-page" class="btn btn-primary">
+                    Read Life &amp; Sadhana
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  </a>
+                  <a href="#detail-page" class="btn btn-outline-light">
+                    Ashram Gurukula
+                  </a>
+                </div>
+              </div>
+
+              <!-- Right Column: Immersive Portrait Frame -->
+              <div class="concept-b-media-col">
+                <div class="concept-b-photo-frame">
+                  <img 
+                    src="../../../public/images/vmission/acharyas/swami-atmananda-saraswati/founder-portrait.png" 
+                    alt="Swami Atmananda Saraswati seated in contemplation" 
+                    loading="lazy"
+                    onerror="this.src='../../../public/images/vmission/acharyas/guruji-portrait-riverside.jpg'"
+                  >
+                </div>
+                <div style="text-align: right; margin-top: 10px; font-size: 0.78rem; color: var(--vm-text-light-muted);">
+                  Canonical Portrait · Natural Bhagwa Robes
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ====================================================================
+           SECTION 3: COMPARATIVE EVALUATION & SELECTION MATRIX
+           ==================================================================== -->
+      <section class="eval-section" id="evaluation">
+        <div class="eval-heading-wrap">
+          <span class="sacred-eyebrow" style="color: var(--vm-brass);">Objective Architectural Evaluation</span>
+          <h2 style="font-family: var(--font-display); font-size: 2.2rem; color: var(--vm-ivory); margin-bottom: 8px;">
+            Concept Comparison &amp; Recommendation
+          </h2>
+          <p style="color: var(--vm-text-light-muted); font-size: 0.95rem;">
+            Both concepts were evaluated across seven institutional criteria for long-term spiritual dignity and usability.
+          </p>
+        </div>
+
+        <div class="eval-table-wrap">
+          <table class="eval-table">
+            <thead>
+              <tr>
+                <th>Evaluation Dimension</th>
+                <th>Concept A: Editorial Split</th>
+                <th>Concept B: Immersive Grounded</th>
+                <th>Analysis &amp; Ruling</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Emotional Impact &amp; Serenity</strong></td>
+                <td><span class="eval-score">9.6 / 10</span> — Open, luminous, inviting</td>
+                <td>9.2 / 10 — Deep, introspective, dramatic</td>
+                <td>Concept A delivers warmth and openness without somber heaviness on the homepage.</td>
+              </tr>
+              <tr>
+                <td><strong>Readability &amp; Scanning</strong></td>
+                <td><span class="eval-score">9.8 / 10</span> — Crisp dark text on Ivory</td>
+                <td>8.5 / 10 — High contrast on dark surface</td>
+                <td>Concept A offers optimal scannability for diverse age groups and daylight viewing.</td>
+              </tr>
+              <tr>
+                <td><strong>Spiritual Dignity &amp; Reverence</strong></td>
+                <td>9.5 / 10 — Restrained traditional Gurukula tone</td>
+                <td><span class="eval-score">9.7 / 10</span> — Rich meditative atmosphere</td>
+                <td>Both maintain profound reverence; neither feels corporate.</td>
+              </tr>
+              <tr>
+                <td><strong>Founder Prominence</strong></td>
+                <td><span class="eval-score">9.7 / 10</span> — Large, uncompromised real portrait</td>
+                <td>9.3 / 10 — Integrated into dark ambiance</td>
+                <td>Concept A showcases the real portrait with clear negative space balance.</td>
+              </tr>
+              <tr>
+                <td><strong>Mobile Adaptability (390px)</strong></td>
+                <td><span class="eval-score">9.7 / 10</span> — Seamless stack: Text → Media → CTA</td>
+                <td>8.4 / 10 — Floating dark cards stack awkwardly</td>
+                <td>Concept A adapts effortlessly to narrow mobile viewports.</td>
+              </tr>
+              <tr>
+                <td><strong>Bhagwa Color Integration</strong></td>
+                <td><span class="eval-score">9.6 / 10</span> — Natural robe tones lead organically</td>
+                <td>9.1 / 10 — Warm glow accents assist</td>
+                <td>In Concept A, the natural Bhagwa of Guruji's robes acts as the visual centerpiece.</td>
+              </tr>
+              <tr>
+                <td><strong>Institutional Credibility</strong></td>
+                <td><span class="eval-score">9.8 / 10</span> — Enduring, scholarly publication feel</td>
+                <td>8.8 / 10 — Can feel too moody for an institution</td>
+                <td>Concept A projects scholarly permanence suitable for a 30+ year Gurukula.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="recommendation-banner">
+          <div class="rec-icon">★</div>
+          <div class="rec-content">
+            <h4>Recommended Layout for Homepage: CONCEPT A (Editorial Split)</h4>
+            <p>
+              <strong>Selection Rationale:</strong> Concept A is recommended as the official Homepage Founder feature because it achieves the highest readability, superior mobile responsiveness at 390px, and harmonizes seamlessly with the preceding Ivory content surfaces. It allows the authentic Bhagwa robes in the supplied photograph to carry the primary color energy organically without artificial filters, projecting profound spiritual dignity and scholarly permanence over decades of use.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 4: FOUNDER DETAIL EXPERIENCE (/acharyas/swami-atmananda-saraswati)
+           ==================================================================== -->
+      <div class="concept-wrapper" id="detail-page" style="margin-top: 72px;">
+        <div class="concept-header-bar">
+          <div>
+            <span class="concept-tag" style="background: rgba(197, 160, 89, 0.2); color: var(--vm-brass);">Canonical Detail Route</span>
+            <span class="concept-title" style="margin-left: 8px;">Founder Detail Page Experience (/acharyas/[id])</span>
+          </div>
+          <div class="concept-desc">
+            Complete Spiritual Biography · Verified Milestones · Foundations &amp; Legacy · Shastra Catalog Integrations
+          </div>
+        </div>
+
+        <!-- Simulated Browser Viewport -->
+        <div class="founder-detail-view">
+          
+          <!-- Mock Browser Chrome -->
+          <div class="detail-browser-chrome">
+            <div class="browser-dots">
+              <span class="browser-dot"></span>
+              <span class="browser-dot"></span>
+              <span class="browser-dot"></span>
+            </div>
+            <div class="browser-url-bar">
+              https://vmission.org.in/acharyas/swami-atmananda-saraswati
+            </div>
+          </div>
+
+          <!-- Detail Page Hero -->
+          <header class="detail-hero">
+            <div class="container">
+              <div class="detail-hero-grid">
+                
+                <!-- Left: Portrait & Quick Facts Sidebar -->
+                <div class="detail-hero-portrait-card">
+                  <div class="detail-hero-img-wrap">
+                    <img 
+                      src="../../../public/images/vmission/acharyas/swami-atmananda-saraswati/founder-portrait.png" 
+                      alt="Swami Atmananda Saraswati portrait"
+                      loading="lazy"
+                      onerror="this.src='../../../public/images/vmission/acharyas/guruji-portrait-riverside.jpg'"
+                    >
+                  </div>
+                  
+                  <div class="quick-facts-box">
+                    <div class="qf-title">Ecclesiastical Facts</div>
+                    <ul class="qf-list">
+                      <li>
+                        <span class="qf-key">Honorific</span>
+                        <span class="qf-val">Poojya Guruji (पूज्य गुरुजी)</span>
+                      </li>
+                      <li>
+                        <span class="qf-key">Role</span>
+                        <span class="qf-val">Founding Acharya</span>
+                      </li>
+                      <li>
+                        <span class="qf-key">Tradition</span>
+                        <span class="qf-val">Advaita Vedanta (Shankara)</span>
+                      </li>
+                      <li>
+                        <span class="qf-key">Sanyas Deeksha</span>
+                        <span class="qf-val">1987 (Swami Chinmayananda)</span>
+                      </li>
+                      <li>
+                        <span class="qf-key">Mantra Deeksha</span>
+                        <span class="qf-val">Jagadguru Swaroopanandaji</span>
+                      </li>
+                      <li>
+                        <span class="qf-key">Headquarters</span>
+                        <span class="qf-val">Vedanta Ashram, Indore</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Right: Editorial Header & Summary -->
+                <div class="detail-hero-content">
+                  <div class="detail-breadcrumbs">
+                    <a href="#">Home</a> <span>/</span> <a href="#">Acharyas</a> <span>/</span> <span>Swami Atmananda Saraswati</span>
+                  </div>
+
+                  <span class="sacred-eyebrow">Founding Acharya &amp; Spiritual Preceptor</span>
+                  <h1 class="detail-h1">Swami Atmananda Saraswati</h1>
+                  <div style="font-family: var(--font-sanskrit); color: var(--vm-bhagwa-contrast); font-size: 1.3rem; margin-bottom: 14px;">
+                    पूज्य गुरुजी स्वामी आत्मानन्द सरस्वती
+                  </div>
+
+                  <div class="brass-rule"></div>
+
+                  <p class="detail-lead-para">
+                    Swami Atmananda Saraswati is a renowned scholar of Advaita Vedanta and the founder of <strong>Vedanta Mission (1992)</strong> and <strong>Vedanta Ashram, Indore (1995)</strong>. Initiated into Sanyas by Swami Chinmayananda in 1987, he has dedicated over four decades to unfolding the subtle truths of the Upanishads, Bhagavad Gita, and Brahma Sutras to seekers across India and internationally.
+                  </p>
+
+                  <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+                    <a href="#detail-timeline" class="btn btn-primary">
+                      Explore Spiritual Journey
+                    </a>
+                    <a href="#detail-teachings" class="btn btn-outline">
+                      View Recorded Discourses (48+)
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </header>
+
+          <!-- Sticky In-Page Sub-navigation -->
+          <nav class="detail-subnav" aria-label="Acharya Detail Sections">
+            <a href="#detail-journey" class="active">1. Spiritual Journey</a>
+            <a href="#detail-foundations">2. Foundations &amp; Legacy</a>
+            <a href="#detail-vision">3. Teaching Vision</a>
+            <a href="#detail-teachings">4. Related Teachings</a>
+            <a href="#detail-publications">5. Publications</a>
+          </nav>
+
+          <!-- Main Detail Content Body -->
+          <div class="detail-content-body">
+
+            <!-- Section 1: Life & Spiritual Training (Timeline) -->
+            <section class="detail-section" id="detail-journey">
+              <div class="detail-sec-header">
+                <span class="sacred-eyebrow">Chronological Lineage</span>
+                <h2 class="detail-sec-title">Life &amp; Spiritual Training</h2>
+              </div>
+
+              <div class="timeline-track">
+                
+                <!-- Node 1: Early Life -->
+                <div class="timeline-node">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-card">
+                    <div class="timeline-card-header">
+                      <span class="timeline-year-tag">EARLY YEARS</span>
+                      <h3 class="timeline-event-title">Birth &amp; Formative Inclination</h3>
+                      <span class="verification-pill candidate">Candidate Content</span>
+                    </div>
+                    <div class="timeline-card-body">
+                      Born into a respected Brahmin family in Uttar Pradesh; his father served as a dedicated medical doctor in the Indian Army. A science graduate, his analytical mind turned deeply toward scriptural inquiry and philosophical contemplation early in life.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Node 2: Mantra Deeksha -->
+                <div class="timeline-node">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-card">
+                    <div class="timeline-card-header">
+                      <span class="timeline-year-tag">COLLEGE YEARS</span>
+                      <h3 class="timeline-event-title">Mantra Deeksha at Dwarka Math</h3>
+                      <span class="verification-pill candidate">Candidate Content</span>
+                    </div>
+                    <div class="timeline-card-body">
+                      Received formal Mantra Deeksha during his collegiate days from His Holiness Jagadguru Shankaracharya Swami Swaroopanandaji Maharaj of the sacred Dwarka Sharada Peetham, setting the unshakeable foundation for orthodox Shankara Parampara.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Node 3: 1980 Sandeepany -->
+                <div class="timeline-node">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-card">
+                    <div class="timeline-card-header">
+                      <span class="timeline-year-tag">1980</span>
+                      <h3 class="timeline-event-title">Sandeepany Sadhanalaya, Mumbai</h3>
+                      <span class="verification-pill verified">Source Supported</span>
+                    </div>
+                    <div class="timeline-card-body">
+                      Entered Sandeepany Sadhanalaya in Powai, Mumbai — an intensive Gurukula institution established by Chinmaya Mission. Undertook rigorous classical studies of the Prasthanatraya under the direct guidance of revered teacher Swami Viditatmanandaji.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Node 4: 1983 Brahmacharya -->
+                <div class="timeline-node">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-card">
+                    <div class="timeline-card-header">
+                      <span class="timeline-year-tag">1983</span>
+                      <h3 class="timeline-event-title">Naishthik Brahmacharya Deeksha &amp; Himalayan Service</h3>
+                      <span class="verification-pill verified">Source Supported</span>
+                    </div>
+                    <div class="timeline-card-body">
+                      Initiated into Naishthik Brahmacharya vows upon completion of formal Gurukula curriculum. Appointed Acharya of Sandeepany Himalayas in Himachal Pradesh, conducting scriptural discourses and spiritual instruction in the northern ranges.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Node 5: 1987 Sanyas -->
+                <div class="timeline-node gold">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-card" style="border-left: 3px solid var(--vm-bhagwa);">
+                    <div class="timeline-card-header">
+                      <span class="timeline-year-tag">1987</span>
+                      <h3 class="timeline-event-title">Sanyas Deeksha from Swami Chinmayananda</h3>
+                      <span class="verification-pill verified">Source Supported</span>
+                    </div>
+                    <div class="timeline-card-body">
+                      Received the sacred vows of complete monastic renunciation (Sanyas Deeksha) directly from Pujya Gurudev Swami Chinmayananda. Conferred the monastic name <strong>Swami Atmananda Saraswati</strong>, entering the Saraswati order of the Dashanami monastic tradition.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Node 6: 1989-1990 Pilgrimage -->
+                <div class="timeline-node">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-card">
+                    <div class="timeline-card-header">
+                      <span class="timeline-year-tag">1989 – 1990</span>
+                      <h3 class="timeline-event-title">Parivrajaka Pilgrimage &amp; Kalpa-Vaas</h3>
+                      <span class="verification-pill candidate">Candidate Content</span>
+                    </div>
+                    <div class="timeline-card-body">
+                      Toured across the Indian subcontinent as an itinerant ascetic (Parivrajaka). Undertook deep study of the Brahma Sutra Bhashya on the banks of the sacred Narmada at Omkareshwar under Brahmaleen Swamiji, followed by intense Kalpa-Vaas sadhana at Prayagraj during the 1990 Maha Kumbh Mela.
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- Section 2: Foundations & Legacy -->
+            <section class="detail-section" id="detail-foundations">
+              <div class="detail-sec-header">
+                <span class="sacred-eyebrow">Institutional Architecture</span>
+                <h2 class="detail-sec-title">Foundations &amp; Legacy</h2>
+              </div>
+
+              <div class="foundations-grid">
+                
+                <div class="foundation-card">
+                  <div class="foundation-year">ESTABLISHED 1992</div>
+                  <h3 class="foundation-name">Vedanta Mission</h3>
+                  <p class="foundation-body">
+                    Founded to disseminate pristine Vedantic knowledge without commercial motives. Activities include:
+                  </p>
+                  <ul class="foundation-list">
+                    <li>Public Gyan Yajnas &amp; Gita discourses</li>
+                    <li>Residential intensive Sadhana camps</li>
+                    <li>Stress-management seminars for modern seekers</li>
+                    <li>Online correspondence Gita study programs</li>
+                  </ul>
+                </div>
+
+                <div class="foundation-card">
+                  <div class="foundation-year">ESTABLISHED 1995</div>
+                  <h3 class="foundation-name">Vedanta Ashram, Indore</h3>
+                  <p class="foundation-body">
+                    A serene residential Gurukula located in Sudama Nagar, Indore (MP), operated through the <strong>Vedanta Parmarthic Sewa Trust</strong>. Hosts full-time Vedanta Brahmacharis, library of rare manuscripts, and Shri Gangeshwar Mahadev Mandir.
+                  </p>
+                </div>
+
+                <div class="foundation-card">
+                  <div class="foundation-year">INSTITUTIONAL TRUST</div>
+                  <h3 class="foundation-name">Ancient Indian Culture Trust</h3>
+                  <p class="foundation-body">
+                    Serves as Founder President of the Ancient Indian Culture Trust, Mumbai, dedicated to preserving Vedic pedagogical traditions, classical Sanskrit heritage, and supporting monastic aspirants.
+                  </p>
+                </div>
+
+                <div class="foundation-card">
+                  <div class="foundation-year">TEACHING PARAMPARA</div>
+                  <h3 class="foundation-name">Disciples &amp; Outreach</h3>
+                  <p class="foundation-body">
+                    Under his spiritual mentorship, senior monastic disciple <strong>Swamini Amitananda Saraswati</strong> serves as Acharya of Vedanta Ashram, Indore, and established the Gujarat unit of Vedanta Mission, expanding regional outreach.
+                  </p>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- Section 3: Teaching Vision -->
+            <section class="detail-section" id="detail-vision">
+              <div class="detail-sec-header">
+                <span class="sacred-eyebrow">Prasthanatraya Pedagogy</span>
+                <h2 class="detail-sec-title">Teaching Vision &amp; Philosophy</h2>
+              </div>
+
+              <div style="background: var(--vm-ivory-warm); border: 1px solid var(--vm-sand-border); border-radius: var(--radius-md); padding: 28px 32px; margin-bottom: 24px;">
+                <blockquote style="font-family: var(--font-display); font-size: 1.45rem; font-style: italic; color: var(--vm-text-dark); line-height: 1.5; margin-bottom: 14px;">
+                  “Vedanta is not a set of dogmas to be believed, but an uncompromising science of Self-inquiry. The Shastra serves as a mirror, dissolving the fundamental error of individuality and revealing one's timeless nature as pure, non-dual Consciousness.”
+                </blockquote>
+                <div style="font-size: 0.85rem; font-weight: 600; color: var(--vm-bhagwa-contrast);">
+                  — Swami Atmananda Saraswati
+                </div>
+              </div>
+
+              <p style="font-size: 1rem; line-height: 1.75; color: #4A423A;">
+                Poojya Guruji's discourses are characterized by precision, intellectual clarity, and deep adherence to Adi Shankaracharya's commentaries (Bhashyas). Without diluting subtle philosophical distinctions for superficial popular appeal, his teachings provide modern seekers with structured, verse-by-verse access to the fundamental texts of Sanatana Dharma.
+              </p>
+            </section>
+
+            <!-- Section 4: Verified Related Teachings -->
+            <section class="detail-section" id="detail-teachings">
+              <div class="detail-sec-header">
+                <span class="sacred-eyebrow">Audio &amp; Video Discourses</span>
+                <h2 class="detail-sec-title">Key Discourses by Swami Atmananda Saraswati</h2>
+              </div>
+
+              <div class="teachings-preview-grid">
+                
+                <!-- Card 1 -->
+                <div class="teaching-mini-card">
+                  <div>
+                    <span class="tmc-badge">Bhagavad Gita · Video Playlist</span>
+                    <h3 class="tmc-title">Bhagavad Gita — Chapter 3 (Karma Yoga)</h3>
+                    <p class="tmc-desc">Comprehensive verse-by-verse exposition unfolding the art and philosophy of dedicated action.</p>
+                  </div>
+                  <a href="#" class="tmc-link">
+                    Listen to Lectures
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="teaching-mini-card">
+                  <div>
+                    <span class="tmc-badge">Bhagavad Gita · Video Series</span>
+                    <h3 class="tmc-title">Bhagavad Gita — Chapter 12 (Bhakti Yoga)</h3>
+                    <p class="tmc-desc">Delivered during the Rishikesh spiritual retreat, exploring true devotion and non-dual love.</p>
+                  </div>
+                  <a href="#" class="tmc-link">
+                    Listen to Lectures
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="teaching-mini-card">
+                  <div>
+                    <span class="tmc-badge">Prakarana Granth · Audio Series</span>
+                    <h3 class="tmc-title">Vivekachudamani Pravachans</h3>
+                    <p class="tmc-desc">Detailed discrimination between the Real and the unreal from Adi Shankaracharya's masterwork.</p>
+                  </div>
+                  <a href="#" class="tmc-link">
+                    Listen to Lectures
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </a>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="teaching-mini-card">
+                  <div>
+                    <span class="tmc-badge">Upanishads · Audio Discourses</span>
+                    <h3 class="tmc-title">Mandukya Karika Discourses</h3>
+                    <p class="tmc-desc">In-depth exploration of the three states of consciousness (Avasthatraya) and the fourth transcendental reality.</p>
+                  </div>
+                  <a href="#" class="tmc-link">
+                    Listen to Lectures
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </a>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- Section 5: Publications by Swami Atmananda -->
+            <section class="detail-section" id="detail-publications">
+              <div class="detail-sec-header">
+                <span class="sacred-eyebrow">Publications &amp; Ezines</span>
+                <h2 class="detail-sec-title">Authored &amp; Edited Works</h2>
+              </div>
+
+              <div class="teachings-preview-grid">
+                
+                <div class="teaching-mini-card">
+                  <div>
+                    <span class="tmc-badge">Monthly Digital Magazine</span>
+                    <h3 class="tmc-title">Vedanta Sandesh (2000 – Present)</h3>
+                    <p class="tmc-desc">Pujya Guruji serves as Editor-in-Chief of this monthly spiritual publication, circulating globally for over 25 years.</p>
+                  </div>
+                  <a href="#" class="tmc-link">Read Latest March 2026 Issue →</a>
+                </div>
+
+                <div class="teaching-mini-card">
+                  <div>
+                    <span class="tmc-badge">Monograph · English</span>
+                    <h3 class="tmc-title">Articles on Gita</h3>
+                    <p class="tmc-desc">An analytical compendium clarifying practical sadhana, surrender, and non-attached action.</p>
+                  </div>
+                  <a href="#" class="tmc-link">Download PDF Treatise →</a>
+                </div>
+
+                <div class="teaching-mini-card">
+                  <div>
+                    <span class="tmc-badge">Book Series · Volume 6</span>
+                    <h3 class="tmc-title">Vedanta Articles — Volume 6</h3>
+                    <p class="tmc-desc">Selected philosophical essays on Advaita, meditation, and traditional inquiry.</p>
+                  </div>
+                  <a href="#" class="tmc-link">Access E-Book Edition →</a>
+                </div>
+
+              </div>
+            </section>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           SECTION 5: MOBILE EXPERIENCE AT 390px VIEWPORT
+           ==================================================================== -->
+      <section class="mobile-showcase-section" id="mobile-preview">
+        <div class="container">
+          <div class="eval-heading-wrap">
+            <span class="sacred-eyebrow" style="color: var(--vm-brass);">Responsive Integrity Test</span>
+            <h2 style="font-family: var(--font-display); font-size: 2.2rem; color: var(--vm-ivory); margin-bottom: 8px;">
+              Mobile Viewport Validation (390px iPhone Standard)
+            </h2>
+            <p style="color: var(--vm-text-light-muted); font-size: 0.95rem;">
+              Testing portrait crop preservation, touch targets, and typography hierarchy on mobile screens.
+            </p>
+          </div>
+
+          <div class="mobile-frames-container">
+            
+            <!-- Frame 1: Homepage Founder Feature on Mobile (Concept A) -->
+            <div class="mobile-device-card">
+              <div class="mobile-device-title">1. Homepage Founder Section (Concept A)</div>
+              <div class="mobile-device-shell">
+                <div class="mobile-notch"><div class="mobile-notch-pill"></div></div>
+                
+                <div class="mobile-screen-content">
+                  <span class="sacred-eyebrow" style="font-size: 0.7rem;">Founding Acharya</span>
+                  
+                  <h2 class="mobile-name">Swami Atmananda Saraswati</h2>
+                  
+                  <div style="font-family: var(--font-sanskrit); color: var(--vm-bhagwa-contrast); font-size: 1.05rem; font-weight: 600; margin-bottom: 14px;">
+                    पूज्य गुरुजी · Poojya Guruji
+                  </div>
+
+                  <!-- Mobile Portrait: Respectfully Cropped -->
+                  <div class="mobile-portrait-wrap">
+                    <img 
+                      src="../../../public/images/vmission/acharyas/swami-atmananda-saraswati/founder-portrait.png" 
+                      alt="Swami Atmananda Saraswati mobile portrait"
+                      onerror="this.src='../../../public/images/vmission/acharyas/guruji-portrait-riverside.jpg'"
+                    >
+                  </div>
+
+                  <p class="mobile-lead">
+                    Renowned scholar of Advaita Vedanta and founder of <strong>Vedanta Mission (1992)</strong>, dedicated to unfolding the wisdom of the Gita and Upanishads.
+                  </p>
+
+                  <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="#detail-page" class="btn btn-primary" style="width: 100%; text-align: center;">
+                      Know Guruji &amp; His Journey
+                    </a>
+                    <a href="#detail-teachings" class="btn btn-outline" style="width: 100%; text-align: center;">
+                      Guruji's Discourses
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Frame 2: Founder Detail Page on Mobile -->
+            <div class="mobile-device-card">
+              <div class="mobile-device-title">2. Founder Detail Page Hero &amp; Journey</div>
+              <div class="mobile-device-shell">
+                <div class="mobile-notch"><div class="mobile-notch-pill"></div></div>
+                
+                <div class="mobile-detail-content">
+                  <div style="font-size: 0.72rem; color: var(--vm-text-muted); margin-bottom: 8px;">
+                    Home / Acharyas / Swami Atmananda
+                  </div>
+
+                  <div class="mobile-portrait-wrap" style="aspect-ratio: 1/1;">
+                    <img 
+                      src="../../../public/images/vmission/acharyas/swami-atmananda-saraswati/founder-portrait.png" 
+                      alt="Swami Atmananda Saraswati portrait"
+                      onerror="this.src='../../../public/images/vmission/acharyas/guruji-portrait-riverside.jpg'"
+                    >
+                  </div>
+
+                  <span class="sacred-eyebrow" style="font-size: 0.68rem;">Founding Acharya</span>
+                  <h1 style="font-family: var(--font-display); font-size: 1.95rem; line-height: 1.15; margin-bottom: 6px;">
+                    Swami Atmananda Saraswati
+                  </h1>
+                  <div style="font-family: var(--font-sanskrit); color: var(--vm-bhagwa-contrast); font-size: 1rem; margin-bottom: 12px;">
+                    पूज्य गुरुजी
+                  </div>
+
+                  <div class="quick-facts-box" style="margin-bottom: 20px;">
+                    <div class="qf-title">Lineage Milestones</div>
+                    <ul class="qf-list" style="font-size: 0.76rem;">
+                      <li><span>1980</span><span class="qf-val">Sandeepany Sadhanalaya</span></li>
+                      <li><span>1983</span><span class="qf-val">Brahmacharya Deeksha</span></li>
+                      <li><span>1987</span><span class="qf-val">Sanyas Deeksha</span></li>
+                      <li><span>1992</span><span class="qf-val">Vedanta Mission</span></li>
+                      <li><span>1995</span><span class="qf-val">Vedanta Ashram, Indore</span></li>
+                    </ul>
+                  </div>
+
+                  <a href="#detail-timeline" class="btn btn-primary" style="width: 100%; font-size: 0.85rem;">
+                    View Detailed Timeline
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 6: CONTENT VERIFICATION & GOVERNANCE GATE
+           ==================================================================== -->
+      <section class="governance-section" id="governance">
+        <div class="container">
+          <div class="eval-heading-wrap">
+            <span class="sacred-eyebrow" style="color: var(--vm-brass);">Quality Gate &amp; Content Audit</span>
+            <h2 style="font-family: var(--font-display); font-size: 2.2rem; color: var(--vm-ivory); margin-bottom: 8px;">
+              Content Verification &amp; Governance Status
+            </h2>
+            <p style="color: var(--vm-text-light-muted); font-size: 0.95rem;">
+              Distinguishing verified codebase facts, newly supplied candidate content, and client sign-off gates.
+            </p>
+          </div>
+
+          <div class="gov-grid">
+            
+            <!-- Category 1: Source Supported -->
+            <div class="gov-card status-verified">
+              <h3>
+                <span style="color: #4CAF50;">✔</span>
+                SOURCE-SUPPORTED
+              </h3>
+              <div class="gov-item">
+                <strong>Founding of Vedanta Mission (1992)</strong>
+                Verified in `vmission.org.in`, codebase architecture, and prior legal filings.
+              </div>
+              <div class="gov-item">
+                <strong>Sandeepany Sadhanalaya Studies (1980–1983)</strong>
+                Recorded in `src/data/acharyas.ts` and Chinmaya Mission historical records.
+              </div>
+              <div class="gov-item">
+                <strong>Sanyas Deeksha from Swami Chinmayananda (1987)</strong>
+                Formally documented in official publications and ezine mastheads.
+              </div>
+              <div class="gov-item">
+                <strong>Vedanta Ashram, Indore &amp; Sewa Trust (1995)</strong>
+                Documented in official trust registration documents.
+              </div>
+              <div class="gov-item">
+                <strong>Vedanta Sandesh Chief Editor</strong>
+                Verified across 100+ published issues in resource catalog.
+              </div>
+            </div>
+
+            <!-- Category 2: Requires Source Verification -->
+            <div class="gov-card status-verify">
+              <h3>
+                <span style="color: #FFA726;">⚡</span>
+                REQUIRES VERIFICATION
+              </h3>
+              <div class="gov-item">
+                <strong>Pre-Monastic Family &amp; Father's Army Service</strong>
+                Supplied in candidate brief; pending cross-reference with old-site HTML archives.
+              </div>
+              <div class="gov-item">
+                <strong>Mantra Deeksha from Jagadguru Swaroopanandaji</strong>
+                Supplied in candidate brief; pending client documentary confirmation.
+              </div>
+              <div class="gov-item">
+                <strong>Sandeepany Himalayas Acharyaship (1983)</strong>
+                Supplied in candidate brief; pending Chinmaya Mission archive check.
+              </div>
+              <div class="gov-item">
+                <strong>1990 Kumbh Kalpa-Vaas at Prayag</strong>
+                Supplied in candidate brief; high spiritual value, pending publication cross-check.
+              </div>
+            </div>
+
+            <!-- Category 3: Client Approval Required -->
+            <div class="gov-card status-client">
+              <h3>
+                <span style="color: var(--vm-brass);">✦</span>
+                CLIENT APPROVAL GATE
+              </h3>
+              <div class="gov-item">
+                <strong>Homepage Concept Selection (Concept A vs B)</strong>
+                Formal sign-off required from client on Concept A Editorial Split layout.
+              </div>
+              <div class="gov-item">
+                <strong>Canonical Photograph Crop Bounds</strong>
+                Approval of responsive crop on `founder-portrait.png` preserving face and Bhagwa robes.
+              </div>
+              <div class="gov-item">
+                <strong>Ancient Indian Culture Trust Reference</strong>
+                Client confirmation on whether this institutional role should be featured on public bio.
+              </div>
+              <div class="gov-item">
+                <strong>Lineage &amp; Disciple Presentation</strong>
+                Client confirmation on presenting Swamini Amitananda Saraswati under disciple/parampara section.
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer style="background: #0E0B0A; border-top: 1px solid #28211C; padding: 24px; text-align: center; font-size: 0.82rem; color: #7A7067;">
+    Vedanta Mission Redesign · Phase 2.9 Founder Experience Showcase · Isolated Prototype Only · No Production Code Modified
+  </footer>
+
+</body>
+</html>

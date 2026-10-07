@@ -3,9 +3,15 @@ import { events } from '@/data/events';
 import EventDetailClient from './EventDetailClient';
 
 export function generateStaticParams() {
-  return events.map((e) => ({
+  const primaryIds = events.map((e) => ({
     eventId: e.id,
   }));
+  const canonicalIds = events
+    .filter((e) => e.canonicalId && e.canonicalId !== e.id)
+    .map((e) => ({
+      eventId: e.canonicalId as string,
+    }));
+  return [...primaryIds, ...canonicalIds];
 }
 
 export default function EventDetailPage({

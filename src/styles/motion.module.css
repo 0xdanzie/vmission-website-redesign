@@ -1,0 +1,169 @@
+/* Shared Digital Ashram Motion Language — Opt-in & Isolated */
+/* PHASE 5.5F: Global Cinematic Motion & Shared-Element Morph System */
+
+.editorialReveal {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: editorialFadeUp var(--vm-dur-editorial, 320ms) var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+}
+
+.maskReveal {
+  clip-path: inset(0 0 100% 0);
+  animation: maskUnveil var(--vm-dur-image, 550ms) var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+}
+
+.imageReveal {
+  opacity: 0;
+  transform: scale(1.03);
+  animation: imageZoomIn var(--vm-dur-image, 550ms) var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+}
+
+.slowImageDrift {
+  animation: subtleDrift var(--vm-dur-ambient, 14s) ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.lineDraw {
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: lineExpand var(--vm-dur-image, 550ms) var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+}
+
+.softHover {
+  transition: transform var(--vm-transition-micro, 180ms cubic-bezier(0.16, 1, 0.3, 1)),
+              box-shadow var(--vm-transition-micro, 180ms cubic-bezier(0.16, 1, 0.3, 1)),
+              border-color var(--vm-transition-micro, 180ms cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.softHover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(33, 23, 15, 0.08);
+}
+
+.chapterTransition {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: chapterFade var(--vm-dur-image, 550ms) var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+}
+
+.scrollScene {
+  position: relative;
+  transition: opacity var(--vm-dur-image, 550ms) var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1)),
+              transform var(--vm-dur-image, 550ms) var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+/* Stagger Utilities */
+.stagger1 {
+  animation-delay: 60ms;
+}
+
+.stagger2 {
+  animation-delay: 120ms;
+}
+
+.stagger3 {
+  animation-delay: 180ms;
+}
+
+.stagger4 {
+  animation-delay: 240ms;
+}
+
+/* Keyframes */
+@keyframes editorialFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes maskUnveil {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes imageZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes subtleDrift {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.025) translate(-0.8%, -0.8%);
+  }
+}
+
+@keyframes lineExpand {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes chapterFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* View Transition API Morph Classes */
+.morphSource {
+  view-transition-name: vm-morph-entity;
+}
+
+.morphTarget {
+  view-transition-name: vm-morph-entity;
+}
+
+/* Reduced Motion Override: Absolute Invariant Compliance */
+@media (prefers-reduced-motion: reduce) {
+  .editorialReveal,
+  .maskReveal,
+  .imageReveal,
+  .slowImageDrift,
+  .lineDraw,
+  .chapterTransition,
+  .scrollScene {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+
+  .softHover {
+    transition: none !important;
+  }
+
+  .softHover:hover {
+    transform: none !important;
+  }
+
+  .morphSource,
+  .morphTarget {
+    view-transition-name: none !important;
+  }
+}

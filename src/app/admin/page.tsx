@@ -28,7 +28,7 @@ export default function AdminDashboardPage() {
           </p>
         </div>
         <div className={styles.headerActions}>
-          <Link href="/admin/contact" className={styles.btnActionSecondary}>
+          <Link href="/admin/enquiries" className={styles.btnActionSecondary}>
             Inquiry Queue ({pendingInquiries.length})
           </Link>
           <Link href="/admin/events" className={styles.btnActionPrimary}>
@@ -41,7 +41,7 @@ export default function AdminDashboardPage() {
       <div className={styles.kpiGrid}>
         <div className={styles.kpiCard}>
           <div className={styles.kpiTop}>
-            <span className={styles.kpiTag}>SEEKER INQUIRIES</span>
+            <span className={styles.kpiTag}>SEEKER ENQUIRIES</span>
             <span className={styles.kpiIcon}>✉️</span>
           </div>
           <div className={styles.kpiMain}>
@@ -49,7 +49,7 @@ export default function AdminDashboardPage() {
             <span className={styles.kpiSub}>New / Awaiting Review</span>
           </div>
           <div className={styles.kpiFooter}>
-            <Link href="/admin/contact" className={styles.kpiLink}>Open Inquiries Queue →</Link>
+            <Link href="/admin/enquiries" className={styles.kpiLink}>Open Enquiries Queue →</Link>
           </div>
         </div>
 
@@ -63,7 +63,7 @@ export default function AdminDashboardPage() {
             <span className={styles.kpiSub}>{pendingDonations.length} Pending 80-G Receipts</span>
           </div>
           <div className={styles.kpiFooter}>
-            <Link href="/admin/donations" className={styles.kpiLink}>Manage Seva Records →</Link>
+            <Link href="/admin/seva" className={styles.kpiLink}>Manage Seva Records →</Link>
           </div>
         </div>
 
@@ -91,7 +91,7 @@ export default function AdminDashboardPage() {
             <span className={styles.kpiSub}>{teachings.length} Discourses · {publications.length} Issues</span>
           </div>
           <div className={styles.kpiFooter}>
-            <Link href="/admin/teachings" className={styles.kpiLink}>Audio &amp; Publications →</Link>
+            <Link href="/admin/content" className={styles.kpiLink}>Content &amp; Media Index →</Link>
           </div>
         </div>
       </div>

@@ -1,82 +1,723 @@
-/* LEARN PAGE STYLES */
+/* ==========================================================================
+   LEARN PAGE STYLES — The Digital Gurukula (Cinematic Editorial Blueprint)
+   ========================================================================== */
 
+/* Scene 1 — Gurukula Threshold Hero: Enter the Gurukula */
 .hero {
-  padding-block: var(--space-20) var(--space-16);
-  background: linear-gradient(175deg, var(--vm-bg-sand) 0%, var(--vm-bg-muted) 100%);
-  border-bottom: 1px solid var(--vm-border-light);
+  position: relative;
+  overflow: hidden;
+  background: var(--vm-walnut, #16120E);
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  padding-top: var(--nav-height);
+}
+
+.heroAtmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.heroAtmosphereImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 65% 26%;
+  opacity: 0.38;
+  filter: saturate(0.85) contrast(1.08);
+  transform: scale(1.02);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: heroImageReveal 550ms var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1)) forwards;
+}
+
+@media (max-width: 768px) {
+  .heroAtmosphereImg {
+    object-position: 60% 20%;
+  }
+}
+
+.hero:hover .heroAtmosphereImg {
+  transform: scale(1.04);
+}
+
+.heroScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    rgba(22, 18, 14, 0.98) 0%,
+    rgba(22, 18, 14, 0.92) 42%,
+    rgba(22, 18, 14, 0.70) 75%,
+    rgba(22, 18, 14, 0.40) 100%
+  );
+  pointer-events: none;
+}
+
+.heroVignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(22, 18, 14, 0.75) 0%,
+    transparent 20%,
+    transparent 75%,
+    rgba(22, 18, 14, 0.96) 100%
+  );
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 3;
+  max-width: 940px;
+  padding-block: var(--space-4) var(--space-10);
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.heroBadgeRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  animation: heroEditorialReveal 320ms var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1)) 60ms both;
 }
 
 .badge {
-  display: inline-block;
-  font-size: var(--text-meta);
+  font-family: var(--hero-eyebrow-font, var(--font-ui));
+  font-size: var(--hero-eyebrow-size, 13px);
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--vm-saffron);
-  margin-bottom: var(--space-2);
+  letter-spacing: var(--hero-eyebrow-tracking, 0.12em);
+  text-transform: var(--hero-eyebrow-transform, uppercase);
+  color: var(--vm-bhagwa, #E59500);
+}
+
+.badgeDivider {
+  font-size: 0.75rem;
+  color: rgba(212, 175, 55, 0.45);
+}
+
+.badgeSub {
+  font-family: var(--hero-eyebrow-font, var(--font-ui));
+  font-size: var(--hero-eyebrow-size, 13px);
+  font-weight: 600;
+  letter-spacing: var(--hero-eyebrow-tracking, 0.12em);
+  text-transform: var(--hero-eyebrow-transform, uppercase);
+  color: rgba(251, 248, 243, 0.75);
+}
+
+.sanctumStamp {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: rgba(212, 175, 55, 0.7);
+  letter-spacing: 0.05em;
 }
 
 .title {
-  font-family: var(--font-serif);
-  font-size: var(--text-hero);
+  font-family: var(--hero-h1-font, var(--font-display));
+  font-size: var(--hero-h1-size, 64px);
   font-weight: 600;
-  color: var(--vm-text);
-  line-height: var(--lh-tight);
-  margin-bottom: var(--space-4);
+  color: var(--vm-ivory, #FBF8F3);
+  line-height: var(--hero-h1-lh, 1.02);
+  letter-spacing: var(--hero-h1-tracking, -0.015em);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+  animation: heroEditorialReveal 360ms var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1)) 100ms both;
 }
 
 .lead {
-  font-size: var(--text-lead);
-  color: var(--vm-text-muted);
-  line-height: var(--lh-body);
+  font-family: var(--hero-lead-font, var(--font-ui));
+  font-size: var(--hero-lead-size, 19px);
+  line-height: var(--hero-lead-lh, 1.65);
+  color: rgba(251, 248, 243, 0.88);
+  max-width: 760px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  animation: heroEditorialReveal 320ms var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1)) 160ms both;
+}
+
+.heroKeypoints {
+  animation: heroEditorialReveal 320ms var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1)) 220ms both;
+}
+
+@keyframes heroImageReveal {
+  from { opacity: 0.15; transform: scale(1.05); }
+  to { opacity: 0.38; transform: scale(1.02); }
+}
+
+@keyframes heroEditorialReveal {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroAtmosphereImg,
+  .heroBadgeRow,
+  .title,
+  .lead,
+  .heroKeypoints {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+.heroKeypoints {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
+  margin-top: var(--space-2);
+}
+
+.keypoint {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.kpNum {
+  font-family: var(--font-cinzel, serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--vm-brass, #D4AF37);
+}
+
+.kpTitle {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--vm-ivory, #FBF8F3);
+  margin-bottom: 2px;
+}
+
+.kpDesc {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: rgba(251, 248, 243, 0.75);
+}
+
+.kpDivider {
+  display: none;
+}
+
+.heroCaptionPlate {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  padding: 4px 10px;
+  background: rgba(22, 18, 14, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: var(--vm-radius-xs, 4px);
+  backdrop-filter: blur(6px);
+  align-self: flex-start;
+}
+
+.heroMediaBadge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vm-brass, #D4AF37);
+}
+
+.heroMediaText {
+  font-size: 0.75rem;
+  color: rgba(251, 248, 243, 0.85);
+  font-weight: 500;
+}
+
+
+/* Chapter Transition Marker (Hero -> Scene 2) */
+.chapterTransition {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
+  background: linear-gradient(180deg, #F6F1E6 0%, var(--vm-bg-ivory, #FCFBF8) 100%);
+  border-bottom: 1px solid rgba(197, 155, 75, 0.15);
+  position: relative;
+}
+
+.chapterLine {
+  flex: 1;
+  max-width: 140px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197, 155, 75, 0.35) 60%, var(--vm-gold-brass, #C59B4B));
+}
+
+.chapterTransition .chapterLine:last-child,
+.chapterTransitionSecond .chapterLine:last-child {
+  background: linear-gradient(90deg, var(--vm-gold-brass, #C59B4B), rgba(197, 155, 75, 0.35) 40%, transparent);
+}
+
+.chapterBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px 20px;
+  background: var(--vm-bg-surface, #FFFFFF);
+  border: 1px solid rgba(197, 155, 75, 0.45);
+  border-radius: var(--vm-radius-pill, 9999px);
+  box-shadow: 0 2px 12px rgba(33, 23, 15, 0.04), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  z-index: 1;
+}
+
+.chapterNum {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--vm-terracotta, #964228);
+}
+
+.chapterDot {
+  font-size: 0.5rem;
+  color: var(--vm-gold-brass, #C59B4B);
+}
+
+.chapterText {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--vm-text-charcoal, #21170F);
+  text-transform: uppercase;
+}
+
+/* Chapter Transition Marker Second (Scene 2 -> Scene 3) */
+.chapterTransitionSecond {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-4);
+  background: linear-gradient(180deg, var(--vm-bg-ivory, #FCFBF8) 0%, var(--vm-bg-cream, #FAFAF7) 100%);
+  border-top: 1px solid rgba(197, 155, 75, 0.15);
+  position: relative;
+}
+
+/* Scene 2 — Featured Study Portal: Tattva Bodha */
+.featuredSection {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-12);
+  background: var(--vm-bg-ivory, #FCFBF8);
+}
+
+.featuredBox {
+  background: var(--vm-bg-surface, #FFFFFF);
+  border: 1.5px solid var(--vm-brass-border, rgba(197, 155, 75, 0.45));
+  border-radius: var(--vm-radius-xl, 16px);
+  padding: var(--space-8) var(--space-8);
+  box-shadow: 0 10px 36px rgba(33, 23, 15, 0.06);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featuredBox:hover {
+  border-color: var(--vm-gold-brass, #C59B4B);
+  box-shadow: 0 16px 44px rgba(33, 23, 15, 0.09);
+}
+
+.featuredGrid {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.manuscriptCol {
+  display: flex;
+  justify-content: center;
+}
+
+.bookDeskStand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.bookFrame {
+  position: relative;
+  border-radius: var(--vm-radius-md, 8px);
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(33, 23, 15, 0.18), 0 3px 10px rgba(33, 23, 15, 0.08), -6px 0 16px rgba(0, 0, 0, 0.06);
+  border: 1.5px solid rgba(197, 155, 75, 0.4);
+  background: var(--vm-bg-sand, #F4EFE6);
+  max-width: 270px;
+  width: 100%;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.featuredBox:hover .bookFrame {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 48px rgba(33, 23, 15, 0.22), 0 4px 12px rgba(33, 23, 15, 0.1);
+}
+
+.bookImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.manuscriptBadge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(22, 18, 14, 0.9);
+  color: var(--vm-brass, #D4AF37);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  text-align: center;
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.manuscriptPlate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 14px;
+  background: var(--vm-bg-sand, #F4EFE6);
+  border: 1px solid var(--vm-border-light, #E8E0D2);
+  border-radius: var(--vm-radius-xs, 4px);
+  text-align: center;
+  width: 100%;
+  max-width: 270px;
+}
+
+.plateLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vm-terracotta, #964228);
+}
+
+.plateSub {
+  font-size: 0.6875rem;
+  color: var(--vm-text-muted, #73695E);
+  font-style: italic;
+}
+
+.featuredContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.featuredHeaderRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.featuredStatusBadge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2E7D32;
+  background: rgba(46, 125, 50, 0.1);
+  padding: 4px 12px;
+  border-radius: var(--vm-radius-pill, 9999px);
+  border: 1px solid rgba(46, 125, 50, 0.25);
+}
+
+.doorwayTag {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vm-gold-brass, #C59B4B);
+  background: rgba(197, 155, 75, 0.1);
+  padding: 4px 10px;
+  border-radius: var(--vm-radius-pill, 9999px);
+  border: 1px solid rgba(197, 155, 75, 0.25);
+}
+
+.authorBadge {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--vm-text-muted, #73695E);
+  font-style: italic;
+}
+
+.featuredTitle {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  color: var(--vm-text-charcoal, #21170F);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.featuredSubtitle {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--vm-terracotta, #964228);
+  margin: 0;
+}
+
+.featuredLead {
+  font-size: 0.9375rem;
+  color: var(--vm-text-muted, #73695E);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.featureHighlights {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-block: var(--space-2);
+}
+
+.highlightItem {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 0.875rem;
+  color: var(--vm-text-charcoal, #21170F);
+  line-height: 1.5;
+}
+
+.highlightCheck {
+  color: var(--vm-gold-brass, #C59B4B);
+  font-weight: 700;
+}
+
+.featuredActionRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-top: var(--space-3);
+}
+
+.primaryStudyBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 26px;
+  background: var(--vm-terracotta, #964228);
+  color: #FFFFFF;
+  border-radius: var(--vm-radius-md, 8px);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  min-height: 48px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+  outline-offset: 3px;
+  box-shadow: 0 2px 8px rgba(150, 66, 40, 0.2);
+}
+
+.primaryStudyBtn:hover {
+  background: var(--vm-bhagwa-orange, #C05A28);
+  transform: translateY(-1px);
+}
+
+.primaryStudyBtn:focus-visible {
+  outline: 2px solid var(--vm-gold-brass, #C59B4B);
+}
+
+.secondaryStudyLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 20px;
+  color: var(--vm-terracotta, #964228);
+  border: 1px solid var(--vm-brass-border, rgba(197, 155, 75, 0.45));
+  border-radius: var(--vm-radius-md, 8px);
+  background: transparent;
+  font-size: 0.875rem;
+  font-weight: 600;
+  min-height: 48px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  outline-offset: 3px;
+}
+
+.secondaryStudyLink:hover {
+  background: var(--vm-bg-sand, #F4EFE6);
+  border-color: var(--vm-terracotta, #964228);
+  color: var(--vm-terracotta, #964228);
+}
+
+.studyNote {
+  font-size: 0.8125rem;
+  color: var(--vm-text-faint, #A89F91);
+  font-style: italic;
+}
+
+/* Scene 3 — Four Learning Doors */
+.catalogHeaderWrap {
+  margin-bottom: var(--space-6);
 }
 
 .filterRow {
   margin-bottom: var(--space-8);
 }
 
-/* Method List */
+/* Scene 4 — The Vedantic Method of Study */
+.methodologySection {
+  background: var(--vm-bg-sand, #F4EFE6);
+  border-top: 1px solid var(--vm-border-light, #E8E0D2);
+}
+
 .methodList {
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
-  margin-top: var(--space-6);
+  margin-top: var(--space-8);
 }
 
 .methodItem {
   display: flex;
-  gap: var(--space-4);
-  background: var(--vm-bg-surface);
-  border: 1px solid var(--vm-border-light);
-  border-radius: var(--vm-radius-lg);
+  gap: var(--space-5);
+  align-items: flex-start;
   padding: var(--space-6);
+  background: var(--vm-bg-surface, #FFFFFF);
+  border: 1px solid var(--vm-border-light, #E8E0D2);
+  border-radius: var(--vm-radius-lg, 12px);
+  box-shadow: 0 2px 8px rgba(33, 23, 15, 0.03);
 }
 
 .methodNum {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--vm-saffron);
-  background: var(--vm-saffron-light);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 1.85rem;
+  font-weight: 600;
+  color: var(--vm-gold-brass, #C59B4B);
+  line-height: 1;
 }
 
 .methodTitle {
-  font-family: var(--font-serif);
-  font-size: 1.0625rem;
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 1.25rem;
   font-weight: 600;
-  color: var(--vm-text);
-  margin-bottom: var(--space-2);
+  color: var(--vm-text-charcoal, #21170F);
+  margin: 0 0 var(--space-2) 0;
 }
 
 .methodText {
   font-size: 0.9375rem;
-  color: var(--vm-text-muted);
-  line-height: var(--lh-relaxed);
+  color: var(--vm-text-muted, #73695E);
+  line-height: 1.7;
+  margin: 0;
 }
+
+@media (max-width: 960px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}
+
+@media (max-width: 768px) {
+  .heroKeypoints {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .heroCaptionPlate {
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 860px) {
+  .featuredGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .bookFrame {
+    max-width: 220px;
+  }
+
+  .manuscriptPlate {
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding-top: var(--nav-height);
+    padding-bottom: var(--space-8);
+  }
+
+  .heroInner {
+    padding-block: var(--space-3) var(--space-4);
+  }
+
+  .featuredBox {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .featuredTitle {
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    word-break: break-word;
+  }
+
+  .featuredActionRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primaryStudyBtn,
+  .secondaryStudyLink {
+    width: 100%;
+    text-align: center;
+  }
+
+  .methodItem {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .chapterTransition,
+  .chapterTransitionSecond {
+    padding-top: var(--space-3);
+    padding-bottom: var(--space-3);
+    padding-inline: var(--space-3);
+  }
+
+  .chapterBadge {
+    padding: 5px 12px;
+    max-width: 100%;
+  }
+
+  .chapterNum,
+  .chapterText {
+    font-size: 0.625rem;
+  }
+
+  .chapterLine {
+    max-width: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featuredBox,
+  .primaryStudyBtn,
+  .bookFrame {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+

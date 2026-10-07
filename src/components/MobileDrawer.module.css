@@ -1,17 +1,21 @@
+/* ============================================================
+   MOBILE DRAWER — MIDNIGHT WALNUT FOUNDATION (PHASE 3A)
+   ============================================================ */
+
 .backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(44, 42, 41, 0.55);
-  z-index: 1099;
+  z-index: 1100;
+  background: rgba(14, 10, 8, 0.78);
+  backdrop-filter: blur(6px);
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--vm-ease-base);
-  backdrop-filter: blur(2px);
 }
 
 .backdrop.open {
   opacity: 1;
-  pointer-events: all;
+  pointer-events: auto;
 }
 
 .drawer {
@@ -19,20 +23,24 @@
   top: 0;
   right: 0;
   bottom: 0;
-  width: min(340px, 92vw);
-  background: var(--vm-bg);
-  z-index: 1100;
+  width: min(88vw, 380px);
+  z-index: 1200;
+  background: #1A1512;
+  border-left: 1px solid rgba(197, 160, 89, 0.35);
+  box-shadow: -16px 0 48px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
-  transition: transform var(--vm-ease-slow);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  box-shadow: var(--vm-shadow-xl);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform var(--vm-ease-base), visibility var(--vm-ease-base);
+  color: var(--vm-ivory);
 }
 
 .drawer.open {
   transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
 }
 
 /* Header */
@@ -40,149 +48,194 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-5) var(--space-6);
-  border-bottom: 1px solid var(--vm-border-light);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.om {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  color: var(--vm-saffron);
-  line-height: 1;
-}
-
-.brandName {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--vm-text);
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .closeBtn {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--vm-ivory);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--vm-radius-sm);
-  color: var(--vm-text-muted);
-  transition: background var(--vm-ease-fast), color var(--vm-ease-fast);
-}
-
-.closeBtn:hover {
-  background: var(--vm-bg-muted);
-  color: var(--vm-text);
-}
-
-/* Quote */
-.quote {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 0.8125rem;
-  color: var(--vm-text-faint);
-  padding: var(--space-4) var(--space-6);
-  border-bottom: 1px solid var(--vm-border-light);
-  line-height: 1.55;
-}
-
-/* Nav List */
-.navList {
-  padding: var(--space-4) var(--space-4);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.navLink {
-  display: block;
-  padding: 13px 16px;
-  border-radius: var(--vm-radius-md);
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--vm-text);
-  transition: background var(--vm-ease-fast), color var(--vm-ease-fast), padding-left var(--vm-ease-fast);
-  min-height: 48px;
-  display: flex;
-  align-items: center;
-}
-
-.navLink:hover {
-  background: var(--vm-bg-muted);
-  padding-left: 20px;
-}
-
-.navLink.active {
-  background: var(--vm-saffron-light);
-  color: var(--vm-saffron);
-  font-weight: 600;
-  padding-left: 20px;
-}
-
-/* Actions */
-.actions {
-  margin-top: auto;
-  padding: var(--space-4) var(--space-4);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  border-top: 1px solid var(--vm-border-light);
-}
-
-.btnDonate {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  padding: 13px var(--space-4);
-  background: var(--vm-saffron);
-  color: var(--vm-text-inverse);
-  border-radius: var(--vm-radius-md);
-  font-size: 0.9375rem;
-  font-weight: 600;
-  min-height: 48px;
   transition: background var(--vm-ease-fast);
 }
 
-.btnDonate:hover {
-  background: var(--vm-saffron-hover);
+.closeBtn:hover {
+  background: rgba(224, 99, 40, 0.2);
+  color: var(--vm-bhagwa-hover);
 }
 
-.btnCall,
-.btnWhatsApp {
+/* Motto Bar */
+.mottoBar {
+  padding: 12px 24px;
+  background: #14100E;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: left;
+}
+
+.mottoBar span {
+  font-family: var(--font-sanskrit);
+  font-size: 0.88rem;
+  color: var(--vm-brass);
+  display: block;
+}
+
+.mottoBar p {
+  font-size: 0.76rem;
+  color: #9E948A;
+  margin-top: 2px;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* Scrollable Nav */
+.navContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px 24px;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navLink,
+.accordionToggle {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: 11px var(--space-4);
-  border: 1.5px solid var(--vm-border);
-  border-radius: var(--vm-radius-md);
-  font-size: 0.875rem;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 14px;
+  border-radius: var(--vm-radius-sm);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
   font-weight: 500;
-  color: var(--vm-text);
+  color: #D6CCC0;
+  text-decoration: none;
+  transition: all var(--vm-ease-fast);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.navLink:hover,
+.accordionToggle:hover,
+.openToggle {
+  background: rgba(224, 99, 40, 0.12);
+  color: var(--vm-ivory);
+}
+
+.navLink.active {
+  color: var(--vm-bhagwa);
+  font-weight: 600;
+  background: rgba(224, 99, 40, 0.16);
+  border-left: 3px solid var(--vm-bhagwa);
+}
+
+.toggleCaret {
+  transition: transform var(--vm-ease-fast);
+  opacity: 0.7;
+}
+
+.caretRotated {
+  transform: rotate(180deg);
+  opacity: 1;
+  color: var(--vm-bhagwa);
+}
+
+/* Accordion Sub-list */
+.subList {
+  list-style: none;
+  margin: 4px 0 8px 16px;
+  padding-left: 12px;
+  border-left: 1.5px solid rgba(197, 160, 89, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.subLink {
+  display: block;
+  min-height: 40px;
+  padding: 8px 10px;
+  font-size: 0.86rem;
+  color: #B5ACA1;
+  text-decoration: none;
+  border-radius: var(--vm-radius-sm);
+  transition: color var(--vm-ease-fast), background var(--vm-ease-fast);
+}
+
+.subLink:hover {
+  color: var(--vm-bhagwa-hover);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Footer Actions */
+.footerActions {
+  padding: 20px 24px;
+  background: #14100E;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.btnDrawerDonate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   min-height: 48px;
-  transition: border-color var(--vm-ease-fast), background var(--vm-ease-fast);
+  background: var(--vm-gerua);
+  color: #FFF;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--vm-radius-sm);
+  text-decoration: none;
+  border: 1px solid var(--vm-gerua);
+  box-shadow: 0 4px 14px rgba(200, 78, 23, 0.35);
+  transition: all var(--vm-ease-fast);
 }
 
-.btnCall:hover,
-.btnWhatsApp:hover {
-  border-color: var(--vm-saffron);
-  background: var(--vm-saffron-light);
-  color: var(--vm-saffron);
+.btnDrawerDonate:hover {
+  background: var(--vm-bhagwa);
+  border-color: var(--vm-bhagwa);
 }
 
-/* Footer */
-.drawerFooter {
-  padding: var(--space-4) var(--space-6);
-  border-top: 1px solid var(--vm-border-light);
+.quickContactLinks {
+  display: flex;
+  gap: 8px;
 }
 
-.address {
-  font-size: 0.75rem;
-  color: var(--vm-text-faint);
-  line-height: 1.6;
+.contactChip {
+  flex: 1;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #CFC5B8;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--vm-radius-sm);
+  text-decoration: none;
+  transition: all var(--vm-ease-fast);
+}
+
+.contactChip:hover {
+  background: rgba(197, 160, 89, 0.15);
+  border-color: var(--vm-brass);
+  color: var(--vm-brass);
 }

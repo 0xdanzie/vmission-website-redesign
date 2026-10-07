@@ -1,68 +1,597 @@
-/* ACHARYAS PAGE STYLES */
+/* ==========================================================================
+   ACHARYAS PAGE — THE MONASTIC LINEAGE HALL
+   Digital Ashram Master Cinematic Standard
+   ========================================================================== */
 
-.hero {
-  padding-block: var(--space-20) var(--space-16);
-  background: linear-gradient(175deg, var(--vm-bg-sand) 0%, var(--vm-bg-muted) 100%);
-  border-bottom: 1px solid var(--vm-border-light);
+.lineageHallWrapper {
+  background-color: var(--vm-ivory);
+  color: var(--vm-text);
+  overflow-x: hidden;
 }
 
-.badge {
+/* ==========================================================================
+   02. PARAMPARA & LINEAGE EXPOSITION
+   ========================================================================== */
+.paramparaSection {
+  background-color: var(--vm-ivory);
+  padding: var(--space-16) 0 var(--space-20) 0;
+  position: relative;
+}
+
+.paramparaIntroWrap {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sectionOverline {
   display: inline-block;
-  font-size: var(--text-meta);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--vm-saffron);
+  color: var(--vm-ochre);
   margin-bottom: var(--space-2);
 }
 
-.title {
-  font-family: var(--font-serif);
-  font-size: var(--text-hero);
-  font-weight: 600;
-  color: var(--vm-text);
-  line-height: var(--lh-tight);
-  margin-bottom: var(--space-4);
+.paramparaTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-weight: 700;
+  color: var(--vm-walnut);
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-4) 0;
 }
 
-.lead {
-  font-size: var(--text-lead);
+.paramparaLead {
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+  line-height: 1.7;
   color: var(--vm-text-muted);
-  line-height: var(--lh-body);
+  max-width: 820px;
+  margin: 0 auto var(--space-6) auto;
 }
 
-/* Lineage Card */
-.lineageCard {
-  background: var(--vm-bg-surface);
-  border: 1px solid var(--vm-border-light);
-  border-radius: var(--vm-radius-xl);
-  padding: var(--space-8);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-  box-shadow: var(--vm-shadow-sm);
+.lineageColumns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+  margin-top: var(--space-12);
+  text-align: left;
 }
 
-.omSymbol {
-  font-family: var(--font-serif);
-  font-size: 2.75rem;
-  color: var(--vm-saffron);
-  line-height: 1;
-  opacity: 0.35;
+.lineageBlock {
+  position: relative;
+  padding: var(--space-6);
+  background: var(--vm-sand);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: var(--radius-sm);
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.lineageTitle {
-  font-family: var(--font-serif);
-  font-size: var(--text-h3);
+.lineageBlock:hover {
+  transform: translateY(-2px);
+  border-color: var(--vm-brass);
+}
+
+.lineageOrderNum {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
   font-weight: 600;
-  color: var(--vm-text);
+  color: var(--vm-brass);
+  display: block;
+  margin-bottom: var(--space-2);
+  line-height: 1;
+}
+
+.lineageHeading {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--vm-walnut);
+  margin: 0 0 var(--space-3) 0;
+  line-height: 1.25;
 }
 
 .lineageText {
-  font-size: 0.9375rem;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: 1.65;
   color: var(--vm-text-muted);
-  line-height: var(--lh-relaxed);
-  max-width: 600px;
+  margin: 0;
+}
+
+/* ==========================================================================
+   03. FOUNDING ACHARYA — ASYMMETRIC EDITORIAL LAYOUT
+   ========================================================================== */
+.founderSection {
+  background-color: var(--vm-sand);
+  padding: var(--space-20) 0;
+  position: relative;
+  border-top: 1px solid rgba(197, 160, 89, 0.25);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.25);
+}
+
+.founderLayout {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+.founderPortraitCol {
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-6));
+}
+
+.founderQuoteCard {
+  margin-top: var(--space-6);
+  padding: var(--space-5) var(--space-6);
+  background: var(--vm-sandalwood);
+  border-left: 3px solid var(--vm-gerua);
+  border-radius: var(--radius-sm);
+}
+
+.founderQuoteSanskrit {
+  font-family: var(--font-devanagari);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--vm-walnut);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.founderQuoteTranslation {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--vm-text-muted);
+  margin: 0;
+}
+
+.founderBioCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.founderHeader {
+  margin-bottom: var(--space-4);
+}
+
+.founderTag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--vm-gerua);
+  margin-bottom: var(--space-1);
+}
+
+.founderHonorific {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--vm-text-muted);
+  margin: 0 0 2px 0;
+}
+
+.founderName {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: var(--vm-walnut);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  margin: 0 0 var(--space-2) 0;
+}
+
+.founderRole {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--vm-ochre);
+  margin: 0;
+}
+
+.lineageProvenance {
+  background: var(--vm-ivory);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-sm);
+  margin: var(--space-4) 0 var(--space-6) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.provLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--vm-text-muted);
+}
+
+.provText {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--vm-walnut);
+}
+
+.founderNarrative {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--vm-text);
+  margin-bottom: var(--space-8);
+}
+
+.founderNarrativeSecondary {
+  color: var(--vm-text-muted);
+  margin-top: var(--space-4);
+}
+
+.milestoneGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.milestoneItem {
+  background: var(--vm-ivory);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid rgba(197, 160, 89, 0.28);
+  border-radius: var(--radius-sm);
+}
+
+.milestoneYear {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--vm-gerua);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.milestoneTitle {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--vm-walnut);
+  margin: 0 0 4px 0;
+}
+
+.milestoneDesc {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  line-height: 1.55;
+  color: var(--vm-text-muted);
+  margin: 0;
+}
+
+.founderActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.btnSecondaryOutline {
+  border-color: var(--vm-walnut) !important;
+  color: var(--vm-walnut) !important;
+}
+
+.btnSecondaryOutline:hover {
+  background: var(--vm-walnut) !important;
+  color: var(--vm-ivory) !important;
+}
+
+/* ==========================================================================
+   04. RESIDENT ACHARYAS — EDITORIAL PORTRAIT GALLERY (Anti-Card)
+   ========================================================================== */
+.residentSection {
+  background-color: var(--vm-ivory);
+  padding: var(--space-20) 0;
+}
+
+.residentHeader {
+  max-width: 780px;
+  margin: 0 auto var(--space-16) auto;
+  text-align: center;
+}
+
+.residentTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.6vw, 3rem);
+  font-weight: 700;
+  color: var(--vm-walnut);
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-3) 0;
+}
+
+.residentLead {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--vm-text-muted);
+}
+
+.residentEditorialList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.residentArticle {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: var(--space-10);
+  align-items: center;
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.35);
+}
+
+.residentArticle:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.residentMeta {
+  margin-bottom: var(--space-3);
+}
+
+.residentRoleTag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vm-gerua);
+  margin-bottom: var(--space-1);
+}
+
+.residentHonorificText {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--vm-text-muted);
+}
+
+.residentArticleName {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--vm-walnut);
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.residentBioText {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--vm-text);
+  margin: 0 0 var(--space-3) 0;
+}
+
+.residentFullBioText {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  color: var(--vm-text-muted);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.residentSubjectArea {
+  margin-bottom: var(--space-5);
+}
+
+.subjectLabel {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vm-ochre);
+  margin-bottom: var(--space-2);
+}
+
+.subjectPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.subjectPill {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  padding: 4px 12px;
+  background: var(--vm-sand);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: var(--radius-full);
+  color: var(--vm-walnut);
+}
+
+.biographyLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--vm-gerua);
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.biographyLink:hover {
+  color: var(--vm-ochre);
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   05. TEACHING & LIVING TRADITION PREVIEW
+   ========================================================================== */
+.traditionSection {
+  background-color: var(--vm-sand);
+  padding: var(--space-20) 0;
+  border-top: 1px solid rgba(197, 160, 89, 0.25);
+}
+
+.traditionHeader {
+  max-width: 780px;
+  margin: 0 auto var(--space-12) auto;
+  text-align: center;
+}
+
+.traditionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--vm-walnut);
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-3) 0;
+}
+
+.traditionLead {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--vm-text-muted);
+}
+
+.teachingsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+.teachingPreviewItem {
+  background: var(--vm-ivory);
+  padding: var(--space-6);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.teachingPreviewItem:hover {
+  transform: translateY(-2px);
+  border-color: var(--vm-brass);
+}
+
+.teachingCatBadge {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vm-gerua);
+  margin-bottom: var(--space-2);
+}
+
+.teachingPreviewTitle {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--vm-walnut);
+  line-height: 1.25;
+  margin: 0 0 var(--space-1) 0;
+}
+
+.teachingPreviewTeacher {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--vm-text-muted);
+  font-weight: 500;
+  margin: 0 0 var(--space-3) 0;
+}
+
+.teachingPreviewDesc {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--vm-text);
+  flex-grow: 1;
+  margin: 0 0 var(--space-4) 0;
+}
+
+.teachingPreviewFooter {
+  border-top: 1px solid rgba(197, 160, 89, 0.25);
+  padding-top: var(--space-3);
+}
+
+.teachingLink {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--vm-gerua);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.teachingLink:hover {
+  color: var(--vm-ochre);
+}
+
+.traditionCta {
+  text-align: center;
+}
+
+/* ==========================================================================
+   RESPONSIVE STYLES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .founderLayout {
+    grid-template-columns: 340px 1fr;
+    gap: var(--space-8);
+  }
+
+  .lineageColumns {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .teachingsRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .founderLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .founderPortraitCol {
+    position: static;
+  }
+
+  .milestoneGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .residentArticle {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .founderActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }

@@ -1,3 +1,7 @@
+/* ============================================================
+   NAVBAR — MIDNIGHT WALNUT FOUNDATION (PHASE 2D.6 & PHASE 3A)
+   ============================================================ */
+
 .navbar {
   position: fixed;
   top: 0;
@@ -5,16 +9,17 @@
   right: 0;
   z-index: 1000;
   height: var(--nav-height);
-  background: rgba(253, 251, 247, 0.92);
-  border-bottom: 1px solid transparent;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: border-color var(--vm-ease-base), box-shadow var(--vm-ease-base);
+  background: rgba(26, 21, 18, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.22);
+  transition: background var(--vm-ease-base), border-color var(--vm-ease-base), box-shadow var(--vm-ease-base);
 }
 
 .scrolled {
-  border-bottom-color: var(--vm-border-light);
-  box-shadow: var(--vm-shadow-sm);
+  background: rgba(22, 17, 14, 0.98);
+  border-bottom-color: rgba(197, 160, 89, 0.35);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
 }
 
 .inner {
@@ -25,169 +30,300 @@
   gap: var(--space-6);
 }
 
-/* Logo */
-.logo {
+.logoLink {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
   text-decoration: none;
   flex-shrink: 0;
 }
 
-.logoOm {
-  font-family: var(--font-serif);
-  font-size: 1.75rem;
-  color: var(--vm-saffron);
-  line-height: 1;
-  font-weight: 400;
-}
-
-.logoText {
+.desktopLogo {
   display: flex;
-  flex-direction: column;
-  line-height: 1.2;
+  align-items: center;
 }
 
-.logoMain {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--vm-text);
-  letter-spacing: -0.01em;
+.mobileLogo {
+  display: none !important;
+  align-items: center;
 }
 
-.logoSub {
-  font-size: 0.6875rem;
-  font-weight: 500;
-  color: var(--vm-text-faint);
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+/* Primary full horizontal brand lockup: default across desktop, tablet, and standard mobile */
+.brandPrimary {
+  display: flex;
+  align-items: center;
 }
 
-/* Desktop Nav */
+.brandPrimary img {
+  display: block;
+  width: 175px !important;
+  height: auto !important;
+  max-height: 62px;
+  object-fit: contain;
+  transition: width var(--vm-ease-fast);
+}
+
+.brandUltraNarrow {
+  display: none !important;
+}
+
+/* Desktop Navigation */
 .desktopNav {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: var(--space-2);
   flex: 1;
   justify-content: center;
 }
 
-.navLink {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--vm-text-muted);
-  padding: 6px 12px;
-  border-radius: var(--vm-radius-sm);
-  transition: color var(--vm-ease-fast), background var(--vm-ease-fast);
+.navItemWrapper {
   position: relative;
-  white-space: nowrap;
 }
 
-.navLink:hover {
-  color: var(--vm-text);
-  background: var(--vm-bg-muted);
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #D6CCC0;
+  padding: 8px 14px;
+  border-radius: var(--vm-radius-sm);
+  transition: color var(--vm-ease-fast), background var(--vm-ease-fast);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.navLink:hover,
+.dropdownOpen {
+  color: var(--vm-ivory);
+  background: rgba(224, 99, 40, 0.12);
 }
 
 .navLink.active {
-  color: var(--vm-saffron);
+  color: var(--vm-bhagwa);
   font-weight: 600;
 }
 
-.navLink.active::after {
-  content: '';
+.caret {
+  transition: transform var(--vm-ease-fast);
+  opacity: 0.7;
+}
+
+.caretRotated {
+  transform: rotate(180deg);
+  opacity: 1;
+  color: var(--vm-bhagwa);
+}
+
+/* Dropdown Menu Panel */
+.dropdownPanel {
   position: absolute;
-  bottom: -2px;
-  left: 12px;
-  right: 12px;
-  height: 2px;
-  background: var(--vm-saffron);
-  border-radius: var(--vm-radius-pill);
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 280px;
+  background: var(--vm-walnut-surface);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  border-top: 3px solid var(--vm-bhagwa);
+  border-radius: var(--vm-radius-md);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+  padding: 12px 0;
+  animation: fadeIn var(--vm-ease-fast) forwards;
+  z-index: 1010;
 }
 
-/* Actions */
-.actions {
+.dropdownHeader {
+  padding: 6px 18px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 6px;
+}
+
+.dropdownKicker {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--vm-brass);
+}
+
+.dropdownList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdownItem {
   display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  flex-shrink: 0;
-}
-
-.btnDonate {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--vm-saffron);
-  padding: 8px 16px;
-  border: 1.5px solid var(--vm-saffron-border);
-  border-radius: var(--vm-radius-pill);
-  transition: background var(--vm-ease-fast), color var(--vm-ease-fast), border-color var(--vm-ease-fast);
-  white-space: nowrap;
-}
-
-.btnDonate:hover {
-  background: var(--vm-saffron-light);
-  border-color: var(--vm-saffron);
-}
-
-.btnContact {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--vm-text-inverse);
-  background: var(--vm-saffron);
-  padding: 8px 16px;
-  border-radius: var(--vm-radius-pill);
-  transition: background var(--vm-ease-fast), transform var(--vm-ease-fast);
-  white-space: nowrap;
-}
-
-.btnContact:hover {
-  background: var(--vm-saffron-hover);
-  transform: translateY(-1px);
-}
-
-/* Hamburger */
-.hamburger {
-  display: none;
   flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 44px;
-  height: 44px;
-  padding: 10px;
-  border-radius: var(--vm-radius-sm);
+  padding: 8px 18px;
+  text-decoration: none;
   transition: background var(--vm-ease-fast);
 }
 
-.hamburger:hover {
-  background: var(--vm-bg-muted);
+.dropdownItem:hover {
+  background: rgba(224, 99, 40, 0.15);
 }
 
-.hamburger span {
+.dropdownItemLabel {
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--vm-ivory);
+}
+
+.dropdownItem:hover .dropdownItemLabel {
+  color: var(--vm-bhagwa-hover);
+}
+
+.dropdownItemDesc {
+  font-size: 0.75rem;
+  color: #9E948A;
+  margin-top: 2px;
+  line-height: 1.35;
+}
+
+/* Actions Group */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.btnContact {
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #C2B8AD;
+  padding: 8px 14px;
+  text-decoration: none;
+  transition: color var(--vm-ease-fast);
+}
+
+.btnContact:hover {
+  color: var(--vm-ivory);
+}
+
+.btnDonate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--vm-gerua);
+  color: #FFF;
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--vm-radius-sm);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--vm-gerua);
+  box-shadow: 0 2px 10px rgba(200, 78, 23, 0.35);
+  transition: all var(--vm-ease-fast);
+}
+
+.btnDonate:hover {
+  background: var(--vm-bhagwa);
+  border-color: var(--vm-bhagwa);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(224, 99, 40, 0.45);
+}
+
+/* Mobile Hamburger Toggle */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 44px;
+  height: 44px;
+  padding: 12px 10px;
+  border-radius: var(--vm-radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--vm-ivory);
+}
+
+.hamburgerBar {
   display: block;
   width: 100%;
   height: 2px;
-  background: var(--vm-text);
-  border-radius: var(--vm-radius-pill);
-  transition: opacity var(--vm-ease-fast);
+  background-color: var(--vm-ivory);
+  border-radius: 1px;
+  transition: all var(--vm-ease-fast);
 }
 
-/* Responsive */
-@media (max-width: 900px) {
+.hamburger:hover {
+  background: rgba(224, 99, 40, 0.15);
+  border-color: var(--vm-bhagwa);
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1279px) {
+  .brandPrimary img {
+    width: 160px !important;
+    max-height: 58px;
+  }
+}
+
+@media (max-width: 1080px) {
   .desktopNav {
     display: none;
   }
-
   .btnContact {
     display: none;
   }
-
   .hamburger {
     display: flex;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1023px) {
+  .brandPrimary img {
+    width: 155px !important;
+    max-height: 56px;
+  }
+}
+
+@media (max-width: 768px) {
   .btnDonate {
     display: none;
   }
+  .inner {
+    gap: var(--space-3);
+  }
+  .brandPrimary img {
+    width: 150px !important;
+    max-height: 54px;
+  }
 }
+
+@media (max-width: 414px) {
+  .brandPrimary img {
+    width: 140px !important;
+    max-height: 50px;
+  }
+}
+
+@media (max-width: 375px) {
+  .brandPrimary img {
+    width: 136px !important;
+    max-height: 48px;
+  }
+}
+
+/* Ultra-narrow fallback (<= 360px): switch to emblem mark */
+@media (max-width: 360px) {
+  .brandPrimary {
+    display: none !important;
+  }
+  .brandUltraNarrow {
+    display: flex !important;
+    align-items: center;
+  }
+  .brandUltraNarrow img {
+    width: 36px !important;
+    height: 38px !important;
+    object-fit: contain;
+  }
+}
+

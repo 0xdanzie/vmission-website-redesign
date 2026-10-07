@@ -1,0 +1,92 @@
+[
+  {
+    "label": "/events → /about",
+    "from": "/events/",
+    "to": "/about/",
+    "success": true,
+    "timeToDestinationMs": 283,
+    "clientNav": true,
+    "fullReload": false
+  },
+  {
+    "label": "/events → /learn",
+    "from": "/events/",
+    "to": "/learn/",
+    "success": true,
+    "timeToDestinationMs": 159,
+    "clientNav": true,
+    "fullReload": false
+  },
+  {
+    "label": "/events → /teachings",
+    "from": "/events/",
+    "to": "/teachings/",
+    "success": true,
+    "timeToDestinationMs": 560,
+    "clientNav": true,
+    "fullReload": false
+  },
+  {
+    "label": "/events → /publications",
+    "from": "/events/",
+    "to": "/publications/",
+    "success": true,
+    "timeToDestinationMs": 698,
+    "clientNav": true,
+    "fullReload": false
+  },
+  {
+    "label": "/learn → /about",
+    "from": "/learn/",
+    "to": "/about/",
+    "success": true,
+    "timeToDestinationMs": 100,
+    "clientNav": true,
+    "fullReload": false
+  },
+  {
+    "label": "/learn → /teachings",
+    "from": "/learn/",
+    "to": "/teachings/",
+    "success": true,
+    "timeToDestinationMs": 317,
+    "clientNav": true,
+    "fullReload": false
+  },
+  {
+    "label": "/publications → /events",
+    "from": "/publications/",
+    "to": "/events/",
+    "success": true,
+    "timeToDestinationMs": 300,
+    "clientNav": true,
+    "fullReload": false
+  },
+  {
+    "label": "/events/[eventId] → /events",
+    "from": "/events/guru-poornima-2026/",
+    "to": "/events/",
+    "success": true,
+    "timeToDestinationMs": 132,
+    "clientNav": true,
+    "fullReload": false
+  },
+  {
+    "label": "/learn/[id] → /learn",
+    "from": "/learn/tattva-bodha/",
+    "to": "/learn/",
+    "success": true,
+    "timeToDestinationMs": 68,
+    "clientNav": true,
+    "fullReload": false
+  },
+  {
+    "label": "/publications/[id] → /publications",
+    "from": "/publications/vs-2021-may/",
+    "to": "/publications/",
+    "success": true,
+    "timeToDestinationMs": 824,
+    "clientNav": true,
+    "fullReload": false
+  }
+]

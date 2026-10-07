@@ -1,0 +1,459 @@
+{
+  "summary": {
+    "workingCanonical": 931,
+    "workingMirror": 1178,
+    "legacyDependent": 56,
+    "invalidDefective": 1,
+    "totalSourcesAudited": 2213
+  },
+  "dependencies": [
+    {
+      "type": "Audio",
+      "id": "canonical-000434",
+      "canonicalId": "canonical-000434",
+      "title": "Dakshinamurty St_Talk-2",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/11/dm_02.mp3",
+      "dependency": "Legacy WordPress MP3 file directly served"
+    },
+    {
+      "type": "Audio",
+      "id": "canonical-000435",
+      "canonicalId": "canonical-000435",
+      "title": "Dakshinamurty St_Talk-1",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/11/dm_01.mp3",
+      "dependency": "Legacy WordPress MP3 file directly served"
+    },
+    {
+      "type": "Audio",
+      "id": "canonical-000436",
+      "canonicalId": "canonical-000436",
+      "title": "Ethics Talk-Ambarnath",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/11/rotary_naitikta-talk.mp3",
+      "dependency": "Legacy WordPress MP3 file directly served"
+    },
+    {
+      "type": "Audio",
+      "id": "canonical-000437",
+      "canonicalId": "canonical-000437",
+      "title": "gita dhyana shlokas",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/11/gita_dhyana-shlokas.mp3",
+      "dependency": "Legacy WordPress MP3 file directly served"
+    },
+    {
+      "type": "Audio",
+      "id": "canonical-000438",
+      "canonicalId": "canonical-000438",
+      "title": "Impact Moderato",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/11/audio-2.mp3",
+      "dependency": "Legacy WordPress MP3 file directly served"
+    },
+    {
+      "type": "Audio",
+      "id": "canonical-000439",
+      "canonicalId": "canonical-000439",
+      "title": "Impact Moderato",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/11/audio-1.mp3",
+      "dependency": "Legacy WordPress MP3 file directly served"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000101-gita-janmashtami-camp-2026",
+      "canonicalId": "canonical-000101",
+      "title": "Gita (Janmashtami) Camp 2026",
+      "url": "https://www.vmission.org.in/gita-janmashtami-camp-2026/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000102-vedanta-sravan-satra",
+      "canonicalId": "canonical-000102",
+      "title": "VEDANTA SRAVAN SATRA",
+      "url": "https://www.vmission.org.in/10410-2/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000103-bal-samskar-shivir",
+      "canonicalId": "canonical-000103",
+      "title": "Bal Samskar Shivir",
+      "url": "https://www.vmission.org.in/bal-samskar-shivir/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000104-gita-camp-va",
+      "canonicalId": "canonical-000104",
+      "title": "GITA CAMP @ VA",
+      "url": "https://www.vmission.org.in/gita-camp-va/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000105-gita-classes-va",
+      "canonicalId": "canonical-000105",
+      "title": "Gita Classes @ VA",
+      "url": "https://www.vmission.org.in/gita-classes-va/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000106-vedanta-sandesh-may-2023",
+      "canonicalId": "canonical-000106",
+      "title": "Vedanta Sandesh May 2023",
+      "url": "https://www.vmission.org.in/vedanta-sandesh-may-2023/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000107-vedanta-sandesh-apr-2023",
+      "canonicalId": "canonical-000107",
+      "title": "Vedanta Sandesh Apr 2023",
+      "url": "https://www.vmission.org.in/vs-apr-2023/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000108-antifragility-sanyas",
+      "canonicalId": "canonical-000108",
+      "title": "Antifragility & Sanyas",
+      "url": "https://www.vmission.org.in/antifragility-sanyas/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000109-vedanta-camp-2022",
+      "canonicalId": "canonical-000109",
+      "title": "Vedanta Camp 2022",
+      "url": "https://www.vmission.org.in/8508-2/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000110-ashram-parivar-yojna",
+      "canonicalId": "canonical-000110",
+      "title": "ASHRAM_PARIVAR YOJNA",
+      "url": "https://www.vmission.org.in/ashram-parivar-yojna/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000111-sampoorna-gita-gyana-mahayagna",
+      "canonicalId": "canonical-000111",
+      "title": "SAMPOORNA GITA GYANA MAHAYAGNA",
+      "url": "https://www.vmission.org.in/sampoorna-gita-gyana-mahayagna/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000112-sampoorna-kathopanishad-gyana-yagna",
+      "canonicalId": "canonical-000112",
+      "title": "SAMPOORNA KATHOPANISHAD GYANA YAGNA",
+      "url": "https://www.vmission.org.in/kathopanishad-gyana-yagna/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000113-shiva-mahimna-stotram",
+      "canonicalId": "canonical-000113",
+      "title": "Shiva-Mahimna Stotram",
+      "url": "https://www.vmission.org.in/shiva-mahimna-stotram/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000114-hanuman-chalisa",
+      "canonicalId": "canonical-000114",
+      "title": "Hanuman Chalisa",
+      "url": "https://www.vmission.org.in/hanumaan-chalisa/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000115-bhaja-govindam",
+      "canonicalId": "canonical-000115",
+      "title": "Bhaja Govindam",
+      "url": "https://www.vmission.org.in/bg/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000116-janmastami-vedanta-camp-2020",
+      "canonicalId": "canonical-000116",
+      "title": "Janmastami Vedanta Camp 2020",
+      "url": "https://www.vmission.org.in/janmastami-vedanta-camp-2020/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000117-gita-gyana-yagna-lucknow",
+      "canonicalId": "canonical-000117",
+      "title": "Gita Gyana Yagna, Lucknow",
+      "url": "https://www.vmission.org.in/gita-gyana-yagna-lucknow-2/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000118-sundarkand-monthly-satsang",
+      "canonicalId": "canonical-000118",
+      "title": "Sundarkand Monthly Satsang",
+      "url": "https://www.vmission.org.in/sundarkand-monthly-satsang/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000119-vedanta-camp-indore",
+      "canonicalId": "canonical-000119",
+      "title": "Vedanta Camp, Indore",
+      "url": "https://www.vmission.org.in/vedanta-camp-indore/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000120-love-nature",
+      "canonicalId": "canonical-000120",
+      "title": "Love Nature",
+      "url": "https://www.vmission.org.in/love-nature/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000121-maha-shivratri-vedanta-camp-feb-2020",
+      "canonicalId": "canonical-000121",
+      "title": "Maha Shivratri Vedanta Camp – Feb 2020",
+      "url": "https://www.vmission.org.in/maha-shivratri-vedanta-camp-feb-2020/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000122-sundarkand-path-indore",
+      "canonicalId": "canonical-000122",
+      "title": "Sundarkand Path, Indore",
+      "url": "https://www.vmission.org.in/sundarkand-path-indore/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000123-gita-gyan-yagna-lucknow",
+      "canonicalId": "canonical-000123",
+      "title": "Gita Gyan Yagna, Lucknow",
+      "url": "https://www.vmission.org.in/gita-gyan-yagna-lucknow/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000124-gita-gyana-yagna-vadodara",
+      "canonicalId": "canonical-000124",
+      "title": "Gita Gyana Yagna, Vadodara",
+      "url": "https://www.vmission.org.in/gita-gyana-yagna-vadodara/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000125-8th-anand-lahari-2019",
+      "canonicalId": "canonical-000125",
+      "title": "8th Anand-Lahari : 2019",
+      "url": "https://www.vmission.org.in/anand-lahari/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000126-gita-gyana-yagna-mumbai",
+      "canonicalId": "canonical-000126",
+      "title": "Gita Gyana Yagna, Mumbai",
+      "url": "https://www.vmission.org.in/gita-gyana-yagna-mumbai-2/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000127-hanuman-chalisa-samapan-p-guruji-s-birthday",
+      "canonicalId": "canonical-000127",
+      "title": "Hanuman Chalisa Samapan & P. Guruji's Birthday",
+      "url": "https://www.vmission.org.in/hanuman-chalisa-gyan-yagna-samapan/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000128-gita-gyan-yagna-mumbai-anand-lahari",
+      "canonicalId": "canonical-000128",
+      "title": "Gita Gyan Yagna, Mumbai & Anand-Lahari",
+      "url": "https://www.vmission.org.in/anandlahari/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000129-gita-jayanti-gita-bhawan",
+      "canonicalId": "canonical-000129",
+      "title": "Gita Jayanti @ Gita Bhawan",
+      "url": "https://www.vmission.org.in/gita-jayanti-gita-bhawan/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000130-gita-jayanti-futi-kothi",
+      "canonicalId": "canonical-000130",
+      "title": "Gita Jayanti - Futi Kothi",
+      "url": "https://www.vmission.org.in/gita-jayanti-futi-kothi/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000131-visit-to-victoria-nature-park-bhavnagar",
+      "canonicalId": "canonical-000131",
+      "title": "Visit to Victoria Nature Park @ Bhavnagar",
+      "url": "https://www.vmission.org.in/visit-to-victoria-nature-park-bhavnagar/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000132-vibhooti-darshan-yatra",
+      "canonicalId": "canonical-000132",
+      "title": "Vibhooti Darshan Yatra",
+      "url": "https://www.vmission.org.in/birding-gujrat/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000133-satsang-bhavanagar",
+      "canonicalId": "canonical-000133",
+      "title": "Satsang @ Bhavanagar",
+      "url": "https://www.vmission.org.in/satsang-bhavanagar/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000134-visit-to-statue-of-unity",
+      "canonicalId": "canonical-000134",
+      "title": "Visit to Statue of Unity",
+      "url": "https://www.vmission.org.in/visit-to-statue-of-unity/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000135-gita-gyana-yagna-ahmedabad",
+      "canonicalId": "canonical-000135",
+      "title": "Gita Gyana Yagna, Ahmedabad",
+      "url": "https://www.vmission.org.in/gita-gyana-yagna-ahmedabad-2/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000136-gita-gyana-yagna-ahmedabad",
+      "canonicalId": "canonical-000136",
+      "title": "Gita Gyana Yagna, Ahmedabad",
+      "url": "https://www.vmission.org.in/gita-gyana-yagna-ahmedabad/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000137-camp-conclusion",
+      "canonicalId": "canonical-000137",
+      "title": "Camp Conclusion :",
+      "url": "https://www.vmission.org.in/camp-conclusion/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000138-",
+      "canonicalId": "canonical-000138",
+      "title": "हनुमान चालीसा सत्संग :",
+      "url": "https://www.vmission.org.in/hanumaan-chalisa-satsang/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Event Report",
+      "id": "hist-000139-gita-gyana-yagna-lucknow",
+      "canonicalId": "canonical-000139",
+      "title": "Gita Gyana Yagna, Lucknow :",
+      "url": "https://www.vmission.org.in/gita-gyana-yagna-lucknow/",
+      "dependency": "Legacy WordPress event post URL preserved as archival source attribution"
+    },
+    {
+      "type": "Footprint Slide",
+      "id": "footprint-slide-01",
+      "canonicalId": "canonical-000090",
+      "title": "VM Footprint 1: Global Discourses & Mahatmas",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/10/img-vmission-footprints.jpg",
+      "dependency": "Legacy WordPress carousel slide image (local fallback provided)"
+    },
+    {
+      "type": "Footprint Slide",
+      "id": "footprint-slide-02",
+      "canonicalId": "canonical-000091",
+      "title": "VM Footprint 2: Global Discourses & Mahatmas",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/10/img-vmission-footprints-2.jpg",
+      "dependency": "Legacy WordPress carousel slide image (local fallback provided)"
+    },
+    {
+      "type": "Footprint Slide",
+      "id": "footprint-slide-03",
+      "canonicalId": "canonical-000092",
+      "title": "VM Footprint 3: Global Discourses & Mahatmas",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/10/img-vmission-footprints-3.jpg",
+      "dependency": "Legacy WordPress carousel slide image (local fallback provided)"
+    },
+    {
+      "type": "Footprint Slide",
+      "id": "footprint-slide-04",
+      "canonicalId": "canonical-000093",
+      "title": "VM Footprint 4: Global Discourses & Mahatmas",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/10/img-vmission-footprints-4.jpg",
+      "dependency": "Legacy WordPress carousel slide image (local fallback provided)"
+    },
+    {
+      "type": "Footprint Slide",
+      "id": "footprint-slide-05",
+      "canonicalId": "canonical-000094",
+      "title": "VM Footprint 5: Global Discourses & Mahatmas",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/10/img-vmission-footprints-5.jpg",
+      "dependency": "Legacy WordPress carousel slide image (local fallback provided)"
+    },
+    {
+      "type": "Footprint Slide",
+      "id": "footprint-slide-06",
+      "canonicalId": "canonical-000095",
+      "title": "VM Footprint 6: Global Discourses & Mahatmas",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/10/img-vmission-footprints-6.jpg",
+      "dependency": "Legacy WordPress carousel slide image (local fallback provided)"
+    },
+    {
+      "type": "Footprint Slide",
+      "id": "footprint-slide-07",
+      "canonicalId": "canonical-000096",
+      "title": "VM Footprint 7: Global Discourses & Mahatmas",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/10/img-vmission-footprints-7.jpg",
+      "dependency": "Legacy WordPress carousel slide image (local fallback provided)"
+    },
+    {
+      "type": "Footprint Slide",
+      "id": "footprint-slide-08",
+      "canonicalId": "canonical-000097",
+      "title": "VM Footprint 8: Global Discourses & Mahatmas",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/10/img-vmission-footprints-8.jpg",
+      "dependency": "Legacy WordPress carousel slide image (local fallback provided)"
+    },
+    {
+      "type": "Footprint Slide",
+      "id": "footprint-slide-09",
+      "canonicalId": "canonical-000098",
+      "title": "VM Footprint 9: Global Discourses & Mahatmas",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/10/img-vmission-footprints-9.jpg",
+      "dependency": "Legacy WordPress carousel slide image (local fallback provided)"
+    },
+    {
+      "type": "Footprint Slide",
+      "id": "footprint-slide-10",
+      "canonicalId": "canonical-000099",
+      "title": "VM Footprint 10: Global Discourses & Mahatmas",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/10/img-vmission-footprints-10.jpg",
+      "dependency": "Legacy WordPress carousel slide image (local fallback provided)"
+    },
+    {
+      "type": "Footprint Slide",
+      "id": "footprint-slide-11",
+      "canonicalId": "canonical-000100",
+      "title": "VM Footprint 11: Global Discourses & Mahatmas",
+      "url": "https://www.vmission.org.in/wp-content/uploads/2019/10/img-vmission-footprints-11.jpg",
+      "dependency": "Legacy WordPress carousel slide image (local fallback provided)"
+    }
+  ]
+}

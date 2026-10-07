@@ -1,7 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import type { Publication } from '@/data/publications';
+import { resolvePublicationCover } from '@/lib/media-identity';
+import PublicationPlaceholder from '@/components/PublicationPlaceholder';
 import styles from './PublicationCard.module.css';
 
 interface Props {
@@ -10,15 +12,33 @@ interface Props {
 }
 
 export default function PublicationCard({ publication, onReadOnline }: Props) {
+  const [imgError, setImgError] = useState(false);
+
+  // Validate cover via strict media ownership pipeline
+  const resolvedCover = resolvePublicationCover(
+    publication.id,
+    publication.type,
+    publication.coverImage
+  );
+
+  const showPlaceholder = !resolvedCover || imgError;
+
   return (
-    <article className={`card ${styles.card}`}>
-      {/* Cover */}
+    <article className={`card ${styles.card}`} data-morph-source="publication">
+      {/* Cover / Restrained Editorial Placeholder */}
       <div className={styles.cover} aria-label={`Cover of ${publication.title}`}>
-        <div className={styles.coverInner}>
-          <span className={styles.pubType}>{publication.type}</span>
-          <span className={styles.pubMonth}>{publication.month} {publication.year}</span>
-          <span className={styles.pubOm} aria-hidden="true">ॐ</span>
-        </div>
+        {showPlaceholder ? (
+          <PublicationPlaceholder publication={publication} />
+        ) : (
+          <img
+            src={resolvedCover}
+            alt={publication.title}
+            className={styles.coverImg}
+            loading="lazy"
+            data-morph-element="cover"
+            onError={() => setImgError(true)}
+          />
+        )}
         {publication.isLatest && (
           <span className={styles.latestBadge} aria-label="Latest issue">Latest</span>
         )}

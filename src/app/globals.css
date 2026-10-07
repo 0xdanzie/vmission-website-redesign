@@ -1,54 +1,84 @@
 /* ============================================================
    VEDANTA MISSION DESIGN SYSTEM — MODERN INDIAN GURUKULA
-   70% Timeless Indian Ashram & Gurukula + 30% Modern Editorial
-
-   Typography:
-   - Display serif: Fraunces (warm, organic, literary — not Roman-monument)
-   - Body serif: Cormorant Garamond (scholarly, manuscript-adjacent)
-   - UI sans: Inter (clean chrome)
+   Phase 2D.6 Hardened Brand Identity & Phase 3A Production Baseline
+   
+   Authorities:
+   - PHASE-2D6-BHAGWA-BRAND-REFINEMENT.md
+   - docs/branding/design-tokens.md
+   - docs/branding/color-system.md
+   - docs/branding/typography-system.md
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 :root {
-  /* --- PALETTE: MODERN INDIAN GURUKULA --- */
-  /* Primary Background: Warm Ivory / Temple White */
-  --vm-bg: #FDFBF7;
-  --vm-bg-sand: #FAF6EE;
-  --vm-bg-surface: #FFFFFF;
+  /* ============================================================
+     1. COLOR SYSTEM — BHAGWA LED (PHASE 2D.6)
+     ============================================================ */
 
-  /* Secondary Background: Sandalwood & Natural Parchment */
-  --vm-bg-sandalwood: #F5EDE0;
-  --vm-bg-sandalwood-dark: #EADBC8;
+  /* Primary Bhagwa Family */
+  --vm-bhagwa: #E06328;
+  --vm-bhagwa-hover: #F0753B;
+  --vm-gerua: #C84E17;                  /* Primary Action CTA */
+  --vm-gerua-active: #B34211;
+  --vm-ochre: #A73C0E;                  /* High-contrast text on light surfaces */
+  --vm-bhagwa-subtle: rgba(224, 99, 40, 0.08);
+  --vm-bhagwa-glow: rgba(224, 99, 40, 0.22);
+  --vm-bhagwa-border: rgba(224, 99, 40, 0.28);
+
+  /* Backwards-compatibility aliases for existing components */
+  --vm-saffron: var(--vm-bhagwa);
+  --vm-saffron-hover: var(--vm-bhagwa-hover);
+  --vm-saffron-deep: var(--vm-gerua);
+  --vm-saffron-light: var(--vm-bhagwa-subtle);
+  --vm-saffron-border: var(--vm-bhagwa-border);
+
+  /* Neutral Light Reading Surfaces */
+  --vm-ivory: #FDFBF7;                  /* Primary Reading Canvas */
+  --vm-ivory-warm: #F7F3EB;
+  --vm-bg-surface: #FFFFFF;
+  --vm-sand: #FAF6EE;
+  --vm-sand-border: #DFD7C7;
+  --vm-sandalwood: #F5EDE0;
+  --vm-sandalwood-dark: #EADBC8;
   --vm-bg-muted: #F5EFE6;
   --vm-bg-stone: #ECE3D4;
-  --vm-bg-dark: #1E1916;
-  --vm-bg-dark-stone: #2A231E;
+  --vm-bg-ashram: #F0E9DD;          /* Warm sandstone — used by EventCard, Badge, PublicationCard */
 
-  /* Primary Accent: Muted Saffron & Terracotta */
-  --vm-saffron: #D95D39;
-  --vm-saffron-hover: #BF4D2B;
-  --vm-saffron-deep: #9E381C;
-  --vm-saffron-light: #FAF0EB;
-  --vm-saffron-border: rgba(217, 93, 57, 0.28);
+  /* Aliases for existing components */
+  --vm-bg: var(--vm-ivory);
+  --vm-bg-sand: var(--vm-sand);
 
-  /* Secondary Accent: Antique Brass / Muted Temple Gold */
+  /* Dark Grounding Foundation: Midnight Walnut */
+  --vm-walnut: #1E1916;
+  --vm-walnut-surface: #28221E;
+  --vm-walnut-card: #2F2823;
+  --vm-walnut-border: #3D342E;
+  --vm-walnut-scrim: rgba(26, 21, 18, 0.90);
+  --vm-bg-dark: var(--vm-walnut);
+  --vm-bg-dark-stone: var(--vm-walnut-surface);
+
+  /* Sacred Nature Accent: Deep Bilva Green */
+  --vm-green: #2D4F38;
+  --vm-forest: #2D4F38;
+  --vm-forest-dark: #1E3626;
+  --vm-forest-light: #EAF2EC;
+
+  /* Sacred Detail Accent: Antique Brass */
   --vm-brass: #C5A059;
-  --vm-brass-dark: #9B783E;
+  --vm-brass-dark: #A38241;
   --vm-brass-light: #FAF5E8;
-  --vm-brass-border: #DBC082;
-  --vm-brass-glow: rgba(197, 160, 89, 0.25);
+  --vm-brass-border: rgba(197, 160, 89, 0.45);
+  --vm-brass-soft: rgba(197, 160, 89, 0.22);
+  --vm-brass-glow: rgba(197, 160, 89, 0.30);
 
-  /* Natural Sacred Accent: Muted Forest Green */
-  --vm-forest: #3F5E4D;
-  --vm-forest-dark: #2E4839;
-  --vm-forest-light: #EBF2ED;
-
-  /* Typography Colors: Dark Walnut & Charcoal */
+  /* Editorial Typography Colors */
   --vm-text: #221D1A;
-  --vm-text-muted: #5E564F;
-  --vm-text-faint: #8F857B;
-  --vm-text-inverse: #FAF6EE;
+  --vm-text-dark: #1E1916;
+  --vm-text-muted: #665D55;
+  --vm-text-faint: #8E847A;
+  --vm-text-inverse: #FDFBF7;
+  --vm-text-light-muted: #B8AEA3;
 
   /* Status Colors */
   --vm-success: #2E6B47;
@@ -58,30 +88,62 @@
   --vm-warning: #C07D1E;
   --vm-warning-bg: #FEF8ED;
 
-  /* Borders */
-  --vm-border-light: rgba(197, 160, 89, 0.18);
+  /* Borders & Dividers */
+  --vm-border-light: rgba(197, 160, 89, 0.22);
   --vm-border: rgba(34, 29, 26, 0.12);
-  --vm-border-strong: rgba(34, 29, 26, 0.25);
+  --vm-border-strong: rgba(34, 29, 26, 0.24);
 
-  /* --- TYPOGRAPHY SCALE --- */
-  --font-serif: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  /* ============================================================
+     2. TYPOGRAPHY SYSTEM (PHASE 2D.6 FINAL 3 FAMILIES)
+     ============================================================ */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-serif-body: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-ui: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sanskrit: 'Noto Serif Devanagari', 'Cormorant Garamond', serif;
+  --font-devanagari: 'Noto Serif Devanagari', serif;
+  --font-serif-devanagari: 'Noto Serif Devanagari', serif;
 
-  --text-hero: clamp(2.4rem, 4.5vw, 3.75rem);
-  --text-h1: clamp(1.85rem, 3.5vw, 2.75rem);
-  --text-h2: clamp(1.4rem, 2.5vw, 2.0rem);
-  --text-h3: clamp(1.15rem, 1.8vw, 1.45rem);
-  --text-lead: clamp(1.0625rem, 1.25vw, 1.25rem);
+  /* Fluid Typographic Scale */
+  --text-hero: clamp(2.6rem, 5vw, 4.2rem);
+  --text-h1: clamp(2.1rem, 3.8vw, 3.2rem);
+  --text-h2: clamp(1.6rem, 2.8vw, 2.3rem);
+  --text-h3: clamp(1.25rem, 2vw, 1.65rem);
+  --text-lead: clamp(1.0625rem, 1.3vw, 1.25rem);
   --text-body: 1rem;
   --text-meta: 0.8125rem;
+  --text-caption: 0.75rem;
 
-  --lh-tight: 1.15;
-  --lh-snug: 1.35;
+  --lh-tight: 1.12;
+  --lh-snug: 1.28;
   --lh-body: 1.7;
   --lh-relaxed: 1.85;
 
-  /* --- SPACING TOKENS --- */
+  /* ============================================================
+     INTERIOR PAGE HERO TYPOGRAPHY SYSTEM (STANDARDIZED TOKENS)
+     ============================================================ */
+  --hero-eyebrow-font: var(--font-ui);
+  --hero-eyebrow-size: 13px;
+  --hero-eyebrow-tracking: 0.12em;
+  --hero-eyebrow-transform: uppercase;
+
+  --hero-h1-font: var(--font-display);
+  --hero-h1-size: 64px;
+  --hero-h1-lh: 1.02;
+  --hero-h1-tracking: -0.015em;
+
+  --hero-lead-font: var(--font-ui);
+  --hero-lead-size: 19px;
+  --hero-lead-lh: 1.65;
+
+  --hero-sanskrit-font: var(--font-sanskrit);
+  --hero-sanskrit-size: 24px;
+  --hero-sanskrit-lh: 1.35;
+
+  /* ============================================================
+     3. SPACING, RADII & SHADOWS
+     ============================================================ */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -93,34 +155,58 @@
   --space-12: 3rem;
   --space-16: 4rem;
   --space-20: 5rem;
+  --space-24: 6rem;
 
-  /* --- SHADOWS --- */
-  --vm-shadow-xs: 0 1px 3px rgba(34, 29, 26, 0.05);
-  --vm-shadow-sm: 0 3px 8px rgba(34, 29, 26, 0.06), 0 1px 2px rgba(197, 160, 89, 0.08);
-  --vm-shadow-md: 0 8px 24px rgba(34, 29, 26, 0.08), 0 2px 6px rgba(197, 160, 89, 0.06);
-  --vm-shadow-lg: 0 16px 40px rgba(34, 29, 26, 0.10);
-  --vm-shadow-xl: 0 24px 60px rgba(34, 29, 26, 0.14);
-
-  /* --- RADII --- */
-  --vm-radius-sm: 6px;
-  --vm-radius-md: 10px;
-  --vm-radius-lg: 16px;
-  --vm-radius-xl: 24px;
+  --vm-radius-sm: 4px;
+  --vm-radius-md: 8px;
+  --vm-radius-lg: 14px;
+  --vm-radius-xl: 20px;
   --vm-radius-arch: 140px 140px 16px 16px;
   --vm-radius-pill: 9999px;
 
-  /* --- CONTAINERS --- */
+  --vm-shadow-xs: 0 2px 6px rgba(30, 25, 22, 0.04);
+  --vm-shadow-sm: 0 4px 14px rgba(30, 25, 22, 0.06);
+  --vm-shadow-md: 0 10px 28px rgba(30, 25, 22, 0.08);
+  --vm-shadow-lg: 0 18px 48px rgba(30, 25, 22, 0.12);
+  --vm-shadow-xl: 0 28px 72px rgba(0, 0, 0, 0.35);
+
+  /* Containers */
   --container-max: 1240px;
+  --container-wide: 1400px;
   --container-md: 860px;
   --container-sm: 680px;
 
-  /* --- TRANSITIONS --- */
-  --vm-ease-fast: 160ms cubic-bezier(0.16, 1, 0.3, 1);
-  --vm-ease-base: 280ms cubic-bezier(0.16, 1, 0.3, 1);
-  --vm-ease-slow: 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* Navigation Height */
+  --nav-height: 72px;
+
+  /* Transitions & Motion Language (Phase 5.5F) */
+  --vm-motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --vm-motion-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Duration Tiers */
+  --vm-dur-micro: 180ms;       /* Interactive micro-feedback, toggles, chips */
+  --vm-dur-editorial: 320ms;   /* Text lines, headings, metadata, badges */
+  --vm-dur-page: 300ms;        /* Global page editorial cut & hairline */
+  --vm-dur-image: 550ms;       /* Hero image unveils, photo frames */
+  --vm-dur-morph: 520ms;       /* Cross-view shared-element bookplate/card morphs */
+  --vm-dur-ambient: 12s;       /* Slow sacred ambient drifts */
+
+  /* Composite Timing Tokens */
+  --vm-transition-micro: var(--vm-dur-micro) var(--vm-motion-ease);
+  --vm-transition-editorial: var(--vm-dur-editorial) var(--vm-motion-ease);
+  --vm-transition-page: var(--vm-dur-page) var(--vm-motion-ease);
+  --vm-transition-image: var(--vm-dur-image) var(--vm-motion-ease);
+  --vm-transition-morph: var(--vm-dur-morph) var(--vm-motion-ease);
+
+  /* Backwards-compatibility aliases */
+  --vm-ease-fast: var(--vm-transition-micro);
+  --vm-ease-base: var(--vm-transition-editorial);
+  --vm-ease-slow: var(--vm-transition-image);
 }
 
-/* RESET */
+/* ============================================================
+   4. BASE RESET & FOUNDATIONS
+   ============================================================ */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -131,12 +217,13 @@ html {
   font-size: 16px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
-  background-color: var(--vm-bg);
+  background-color: var(--vm-ivory);
   color: var(--vm-text);
-  font-family: var(--font-sans);
+  font-family: var(--font-ui);
   font-size: var(--text-body);
   line-height: var(--lh-body);
   -webkit-font-smoothing: antialiased;
@@ -144,30 +231,48 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+}
+
+.brand-logo-container {
+  display: inline-flex;
+}
+
+/* Accessible Focus States */
+:focus-visible {
+  outline: 2px solid var(--vm-bhagwa);
+  outline-offset: 3px;
 }
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
-  color: var(--vm-text);
+  font-family: var(--font-display);
+  color: var(--vm-text-dark);
   line-height: var(--lh-tight);
   letter-spacing: -0.01em;
 }
 
-/* Heading utility classes (used in JSX as className="text-h1" etc.) */
+/* Heading utility classes */
 .text-h1 {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: var(--text-h1);
   font-weight: 600;
-  color: var(--vm-text);
+  color: var(--vm-text-dark);
   line-height: var(--lh-snug);
   letter-spacing: -0.015em;
 }
 .text-h2 {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: var(--text-h2);
   font-weight: 600;
-  color: var(--vm-text);
+  color: var(--vm-text-dark);
+  line-height: var(--lh-snug);
+}
+.text-h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 600;
+  color: var(--vm-text-dark);
   line-height: var(--lh-snug);
 }
 .text-lead {
@@ -199,12 +304,18 @@ img {
   display: block;
 }
 
-/* --- LAYOUT UTILITIES --- */
+/* ============================================================
+   5. GLOBAL LAYOUT UTILITIES
+   ============================================================ */
 .container {
   width: 100%;
   max-width: var(--container-max);
   margin-inline: auto;
   padding-inline: var(--space-6);
+}
+
+.container--wide {
+  max-width: var(--container-wide);
 }
 
 .container--md {
@@ -219,20 +330,26 @@ img {
   padding-block: var(--space-20);
 }
 
+/* Scroll-margin: prevents sticky navbar from covering section headings on anchor scroll */
+section[aria-label],
+[id] {
+  scroll-margin-top: calc(var(--nav-height) + 16px);
+}
+
 .section--sm {
   padding-block: var(--space-12);
 }
 
 .section--muted {
-  background-color: var(--vm-bg-sand);
+  background-color: var(--vm-sand);
 }
 
 .section--sandalwood {
-  background-color: var(--vm-bg-sandalwood);
+  background-color: var(--vm-sandalwood);
 }
 
 .section--dark {
-  background-color: var(--vm-bg-dark);
+  background-color: var(--vm-walnut);
   color: var(--vm-text-inverse);
 }
 
@@ -244,10 +361,10 @@ img {
 }
 
 .section--dark p {
-  color: rgba(250, 246, 238, 0.78);
+  color: var(--vm-text-light-muted);
 }
 
-/* Grids */
+/* Responsive Grids */
 .grid {
   display: grid;
   gap: var(--space-6);
@@ -276,11 +393,50 @@ img {
   .grid--2 { grid-template-columns: 1fr; }
 }
 
-/* --- GURUKULA THEMED CARDS & FRAMES --- */
+/* Sacred Eyebrow */
+.sacred-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--vm-ochre);
+  margin-bottom: var(--space-3);
+}
+
+.sacred-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: var(--vm-bhagwa);
+}
+
+.sacred-eyebrow--brass {
+  color: var(--vm-brass);
+}
+
+.sacred-eyebrow--brass::before {
+  background: var(--vm-brass);
+}
+
+/* Subtle Brass Divider Rule */
+.brass-divider {
+  width: 48px;
+  height: 2px;
+  background: var(--vm-brass);
+  margin: var(--space-4) 0 var(--space-5);
+}
+
+/* ============================================================
+   6. CARDS & EDITORIAL SURFACES
+   ============================================================ */
 .card {
   background: var(--vm-bg-surface);
   border: 1px solid var(--vm-border-light);
-  border-radius: var(--vm-radius-lg);
+  border-radius: var(--vm-radius-md);
   padding: var(--space-6);
   box-shadow: var(--vm-shadow-xs);
   transition: transform var(--vm-ease-base), box-shadow var(--vm-ease-base), border-color var(--vm-ease-base);
@@ -292,7 +448,6 @@ img {
   border-color: var(--vm-brass-border);
 }
 
-/* Indian Architectural Arch Frame */
 .arch-frame {
   border-radius: var(--vm-radius-arch);
   overflow: hidden;
@@ -300,22 +455,16 @@ img {
   box-shadow: var(--vm-shadow-sm);
 }
 
-/* Parchment Card */
 .parchment-card {
-  background: var(--vm-bg-sandalwood);
+  background: var(--vm-sandalwood);
   border: 1px solid var(--vm-brass-border);
-  border-radius: var(--vm-radius-lg);
+  border-radius: var(--vm-radius-md);
   padding: var(--space-6);
 }
 
-/* Temple Border Trim */
-.temple-border {
-  border-top: 2px solid var(--vm-brass);
-  border-bottom: 2px solid var(--vm-brass);
-  padding-block: var(--space-4);
-}
-
-/* --- FORM CONTROLS --- */
+/* ============================================================
+   7. FORM CONTROLS
+   ============================================================ */
 .form-field {
   display: flex;
   flex-direction: column;
@@ -333,10 +482,10 @@ img {
 .form-textarea,
 .form-select {
   width: 100%;
-  padding: 11px 16px;
+  padding: 12px 16px;
   background: var(--vm-bg-surface);
   border: 1.5px solid var(--vm-border);
-  border-radius: var(--vm-radius-md);
+  border-radius: var(--vm-radius-sm);
   color: var(--vm-text);
   font-family: inherit;
   font-size: 0.9375rem;
@@ -347,8 +496,8 @@ img {
 .form-input:focus,
 .form-textarea:focus,
 .form-select:focus {
-  border-color: var(--vm-saffron);
-  box-shadow: 0 0 0 3px rgba(217, 93, 57, 0.12);
+  border-color: var(--vm-bhagwa);
+  box-shadow: 0 0 0 3px var(--vm-bhagwa-subtle);
 }
 
 .form-hint {
@@ -356,7 +505,9 @@ img {
   color: var(--vm-text-faint);
 }
 
-/* Micro-animations */
+/* ============================================================
+   8. ANIMATIONS & MICRO-INTERACTIONS
+   ============================================================ */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -368,10 +519,81 @@ img {
 }
 
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.96); }
+  from { opacity: 0; transform: scale(0.97); }
   to { opacity: 1; transform: scale(1); }
 }
 
 .animate-fadeUp {
   animation: fadeUp var(--vm-ease-slow) both;
 }
+
+/* Responsive Hero Typography Overrides */
+@media (max-width: 1024px) {
+  :root {
+    --hero-h1-size: 52px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --hero-eyebrow-size: 11.5px;
+    --hero-h1-size: 40px;
+    --hero-lead-size: 16.5px;
+    --hero-sanskrit-size: 19px;
+  }
+}
+
+/* ============================================================
+   9. VIEW TRANSITION API — SHARED ELEMENT MORPH (PHASE 5.5F)
+   ============================================================ */
+/* Shared Element Morph Destination Bindings */
+[data-morph-target] [data-morph-element],
+[data-morph-target][data-morph-element] {
+  view-transition-name: vm-morph-entity;
+}
+
+::view-transition-old(vm-morph-entity),
+::view-transition-new(vm-morph-entity) {
+  animation-duration: var(--vm-dur-morph, 520ms);
+  animation-timing-function: var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+::view-transition-group(vm-morph-entity) {
+  animation-duration: var(--vm-dur-morph, 520ms);
+  animation-timing-function: var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+/* Reduced Motion Compliance */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0s !important;
+  }
+}
+
+/* ============================================================
+   CINEMATIC ENTRY OVERLAY — FULL VIEWPORT IMMERSION
+   Ensure website header/navbar stays underneath overlay during intro
+   ============================================================ */
+html:not(.vm-entry-seen) body > #main-content,
+html:not(.vm-entry-seen) [class*="pageWrapper"] {
+  transform: none !important;
+  will-change: auto !important;
+}
+
+html:not(.vm-entry-seen) header[class*="navbar"] {
+  pointer-events: none;
+}
+
+html:not(.vm-entry-seen) body {
+  overflow: hidden;
+}
+

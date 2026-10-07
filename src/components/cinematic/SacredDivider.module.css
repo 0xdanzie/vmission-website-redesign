@@ -1,0 +1,66 @@
+/* ==========================================================================
+   SACRED DIVIDER — ANTIQUE BRASS HAIRLINE WITH SANSKRIT GLYPH
+   ========================================================================== */
+
+.dividerWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 680px;
+  margin: var(--space-8) auto;
+  gap: var(--space-4);
+  opacity: 0.85;
+}
+
+.lineLeft,
+.lineRight {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(197, 160, 89, 0.45) 50%,
+    rgba(197, 160, 89, 0.7) 100%
+  );
+}
+
+.lineLeft {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(197, 160, 89, 0.45) 50%,
+    rgba(197, 160, 89, 0.7) 100%
+  );
+}
+
+.lineRight {
+  background: linear-gradient(
+    90deg,
+    rgba(197, 160, 89, 0.7) 0%,
+    rgba(197, 160, 89, 0.45) 50%,
+    transparent 100%
+  );
+}
+
+.centerCluster {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--vm-brass);
+}
+
+.glyph {
+  font-family: var(--font-devanagari);
+  font-size: 1.15rem;
+  line-height: 1;
+  color: var(--vm-brass);
+  text-shadow: 0 0 10px rgba(197, 160, 89, 0.35);
+}
+
+.sutra {
+  font-family: var(--font-devanagari);
+  font-size: var(--text-xs);
+  letter-spacing: normal;
+  color: var(--vm-brass-dark);
+}

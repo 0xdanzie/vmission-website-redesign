@@ -1,0 +1,706 @@
+/* ==========================================================================
+   COURSE DETAIL STYLES — Digital Gurukula (Editorial & Cinematic Polish)
+   ========================================================================== */
+
+.coursePage {
+  min-height: 80vh;
+  background: var(--vm-bg-cream, #FAFAF7);
+}
+
+.hero {
+  padding-block: var(--space-16) var(--space-12);
+  background: linear-gradient(180deg, var(--vm-bg-sand, #F4EFE6) 0%, var(--vm-bg-cream, #FAFAF7) 100%);
+  border-bottom: 1px solid var(--vm-border-light, #E8E0D2);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.heroContent {
+  max-width: 860px;
+}
+
+.heroMediaCol {
+  display: flex;
+  justify-content: center;
+}
+
+.heroMediaCard {
+  border-radius: var(--vm-radius-md, 8px);
+  overflow: hidden;
+  box-shadow: 0 14px 34px rgba(33, 23, 15, 0.14);
+  border: 1.5px solid var(--vm-brass-border, rgba(197, 155, 75, 0.4));
+  background: var(--vm-bg-sand, #F4EFE6);
+  max-width: 240px;
+  width: 100%;
+}
+
+.heroMediaImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 3/4;
+}
+
+.heroMediaPlate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 12px;
+  background: var(--vm-bg-sand, #F4EFE6);
+  border-top: 1px solid var(--vm-border-light, #E8E0D2);
+  text-align: center;
+}
+
+.heroMediaCaption {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vm-terracotta, #964228);
+}
+
+.heroMediaSub {
+  font-size: 0.6875rem;
+  color: var(--vm-text-muted, #73695E);
+  font-style: italic;
+}
+
+.breadcrumb {
+  margin-bottom: var(--space-4);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--vm-terracotta, #964228);
+  transition: color 0.2s ease, transform 0.2s ease;
+  outline-offset: 3px;
+}
+
+.backLink:hover {
+  color: var(--vm-bhagwa-orange, #C05A28);
+  transform: translateX(-2px);
+}
+
+.backLink:focus-visible {
+  outline: 2px solid var(--vm-gold-brass, #C59B4B);
+}
+
+.badgeRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.formatBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--vm-text-muted, #73695E);
+  background: var(--vm-bg-ashram, #F0E9DD);
+  border: 1px solid var(--vm-border-light, #E8E0D2);
+  padding: 3px 8px;
+  border-radius: var(--vm-radius-sm, 4px);
+}
+
+.feeBadge {
+  font-size: 0.75rem;
+  color: var(--vm-text-faint, #A89F91);
+  font-style: italic;
+}
+
+.title {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: clamp(2.1rem, 4.5vw, 3.25rem);
+  font-weight: 600;
+  color: var(--vm-text-charcoal, #21170F);
+  line-height: 1.15;
+  margin-bottom: var(--space-2);
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--vm-terracotta, #964228);
+  margin-bottom: var(--space-4);
+}
+
+.lead {
+  font-size: 1rem;
+  color: var(--vm-text-muted, #73695E);
+  line-height: 1.75;
+  margin-bottom: var(--space-6);
+  max-width: 780px;
+}
+
+.quickSpecs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--vm-border-light, #E8E0D2);
+  border-bottom: 1px solid var(--vm-border-light, #E8E0D2);
+}
+
+.specItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.specLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vm-text-faint, #A89F91);
+}
+
+.specVal {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--vm-text-charcoal, #21170F);
+}
+
+.specDivider {
+  display: none;
+}
+
+/* Feature Banners */
+.directAccessBanner,
+.gatheringBanner {
+  margin-top: var(--space-6);
+  padding: var(--space-6);
+  border-radius: var(--vm-radius-lg, 12px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.directAccessBanner {
+  background: var(--vm-bg-surface, #FFFFFF);
+  border: 1.5px solid var(--vm-brass-border, rgba(197, 155, 75, 0.45));
+  box-shadow: 0 6px 20px rgba(33, 23, 15, 0.05);
+}
+
+.gatheringBanner {
+  background: linear-gradient(135deg, var(--vm-bg-surface, #FFFFFF) 0%, var(--vm-bg-sand, #F4EFE6) 100%);
+  border: 1.5px solid var(--vm-brass-border, rgba(197, 155, 75, 0.5));
+  box-shadow: 0 6px 20px rgba(33, 23, 15, 0.05);
+}
+
+.bannerTag {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vm-terracotta, #964228);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.accessTitle {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--vm-text-charcoal, #21170F);
+  margin-bottom: 4px;
+}
+
+.accessDesc {
+  font-size: 0.875rem;
+  color: var(--vm-text-muted, #73695E);
+  line-height: 1.55;
+  max-width: 580px;
+}
+
+.accessBtn,
+.gatheringBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: var(--vm-radius-md, 8px);
+  font-size: 0.875rem;
+  font-weight: 600;
+  min-height: 48px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  outline-offset: 3px;
+}
+
+.accessBtn {
+  background: var(--vm-terracotta, #964228);
+  color: #FFFFFF;
+}
+
+.accessBtn:hover {
+  background: var(--vm-bhagwa-orange, #C05A28);
+  transform: translateY(-1px);
+}
+
+.accessBtn:focus-visible {
+  outline: 2px solid var(--vm-gold-brass, #C59B4B);
+}
+
+.gatheringBtn {
+  background: var(--vm-gold-brass, #C59B4B);
+  color: var(--vm-text-charcoal, #21170F);
+}
+
+.gatheringBtn:hover {
+  background: var(--vm-terracotta, #964228);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.gatheringBtn:focus-visible {
+  outline: 2px solid var(--vm-terracotta, #964228);
+}
+
+/* Two Column Layout */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: var(--space-10);
+  align-items: flex-start;
+}
+
+.cardBox {
+  background: var(--vm-bg-surface, #FFFFFF);
+  border: 1px solid var(--vm-border-light, #E8E0D2);
+  border-radius: var(--vm-radius-xl, 16px);
+  padding: var(--space-8);
+  box-shadow: 0 4px 20px rgba(33, 23, 15, 0.04);
+}
+
+.learnList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  list-style: none;
+  padding: 0;
+}
+
+.learnItem {
+  display: flex;
+  gap: 12px;
+  font-size: 0.9375rem;
+  color: var(--vm-text-charcoal, #21170F);
+  line-height: 1.6;
+}
+
+.checkIcon {
+  color: var(--vm-gold-brass, #C59B4B);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Sample Lessons Block */
+.sampleLessonsBlock {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--vm-border-light, #E8E0D2);
+}
+
+.sampleHeader {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--vm-text-charcoal, #21170F);
+  margin-bottom: var(--space-4);
+}
+
+.sampleList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sampleItem {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--vm-bg-sand, #F4EFE6);
+  border-radius: var(--vm-radius-md, 8px);
+  border: 1px solid var(--vm-border-light, #E8E0D2);
+  align-items: flex-start;
+}
+
+.lessonNum {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--vm-gold-brass, #C59B4B);
+  line-height: 1;
+}
+
+.lessonTitle {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--vm-text-charcoal, #21170F);
+  margin: 0 0 2px 0;
+}
+
+.lessonDesc {
+  font-size: 0.8125rem;
+  color: var(--vm-text-muted, #73695E);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Gita Online & Sangyan Notices */
+.digitizationNotice,
+.sangyanNotice {
+  margin-top: var(--space-8);
+  padding: var(--space-5);
+  background: var(--vm-bg-sand, #F4EFE6);
+  border-left: 3px solid var(--vm-gold-brass, #C59B4B);
+  border-radius: 0 var(--vm-radius-md, 8px) var(--vm-radius-md, 8px) 0;
+}
+
+.noticeTitle {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--vm-text-charcoal, #21170F);
+  margin-bottom: 4px;
+}
+
+.noticeText {
+  font-size: 0.875rem;
+  color: var(--vm-text-muted, #73695E);
+  line-height: 1.6;
+}
+
+.sangyanTeachingsLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--vm-terracotta, #964228);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+  outline-offset: 3px;
+}
+
+.sangyanTeachingsLink:hover {
+  color: var(--vm-bhagwa-orange, #C05A28);
+}
+
+.sangyanTeachingsLink:focus-visible {
+  outline: 2px solid var(--vm-gold-brass, #C59B4B);
+}
+
+/* Details Card */
+.detailsCard {
+  background: var(--vm-bg-surface, #FFFFFF);
+  border: 1px solid var(--vm-border-light, #E8E0D2);
+  border-radius: var(--vm-radius-xl, 16px);
+  padding: var(--space-8);
+  box-shadow: 0 4px 20px rgba(33, 23, 15, 0.04);
+}
+
+.detailsTitle {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--vm-text-charcoal, #21170F);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--vm-border-light, #E8E0D2);
+}
+
+.detailBlock {
+  margin-bottom: var(--space-5);
+}
+
+.detailHeading {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vm-text-faint, #A89F91);
+  margin-bottom: 4px;
+}
+
+.detailText {
+  font-size: 0.9375rem;
+  color: var(--vm-text-charcoal, #21170F);
+  line-height: 1.65;
+}
+
+.contactBlock {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--vm-border-light, #E8E0D2);
+}
+
+.actionBtns {
+  margin-top: var(--space-4);
+}
+
+.inquiryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 20px;
+  background: var(--vm-terracotta, #964228);
+  color: #FFFFFF;
+  border-radius: var(--vm-radius-md, 8px);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  min-height: 48px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+  outline-offset: 3px;
+}
+
+.inquiryBtn:hover {
+  background: var(--vm-bhagwa-orange, #C05A28);
+  transform: translateY(-1px);
+}
+
+.inquiryBtn:focus-visible {
+  outline: 2px solid var(--vm-gold-brass, #C59B4B);
+}
+
+.residentialDisciplineBox {
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  background: var(--vm-bg-sand, #F4EFE6);
+  border: 1px solid var(--vm-border-light, #E8E0D2);
+  border-left: 3px solid var(--vm-terracotta, #964228);
+  border-radius: 0 var(--vm-radius-md, 8px) var(--vm-radius-md, 8px) 0;
+}
+
+.pillarTag {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vm-terracotta, #964228);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.disciplineTitle {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 1.1875rem;
+  font-weight: 600;
+  color: var(--vm-text-charcoal, #21170F);
+  margin: 0 0 6px 0;
+}
+
+.disciplineText {
+  font-size: 0.875rem;
+  color: var(--vm-text-muted, #73695E);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Chapter Transition Marker */
+.chapterTransition {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--space-6);
+  background: var(--vm-bg-cream, #FAFAF7);
+}
+
+.chapterLine {
+  flex: 1;
+  max-width: 160px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--vm-border-light, #E8E0D2) 50%, var(--vm-gold-brass, #C59B4B));
+}
+
+.chapterTransition .chapterLine:last-child {
+  background: linear-gradient(90deg, var(--vm-gold-brass, #C59B4B), var(--vm-border-light, #E8E0D2) 50%, transparent);
+}
+
+.chapterBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px 18px;
+  background: var(--vm-bg-surface, #FFFFFF);
+  border: 1px solid var(--vm-brass-border, rgba(197, 155, 75, 0.4));
+  border-radius: var(--vm-radius-pill, 9999px);
+  box-shadow: 0 2px 8px rgba(33, 23, 15, 0.04);
+}
+
+.chapterNum {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--vm-terracotta, #964228);
+}
+
+.chapterDot {
+  font-size: 0.5rem;
+  color: var(--vm-gold-brass, #C59B4B);
+}
+
+.chapterText {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--vm-text-charcoal, #21170F);
+  text-transform: uppercase;
+}
+
+/* Sangyan Editorial Pillars */
+.sangyanBlock {
+  margin-top: var(--space-8);
+}
+
+.sangyanPillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.sangyanPillarCard {
+  background: var(--vm-bg-sand, #F4EFE6);
+  border: 1px solid var(--vm-border-light, #E8E0D2);
+  border-radius: var(--vm-radius-md, 8px);
+  padding: var(--space-4);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.pillarNum {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--vm-gold-brass, #C59B4B);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.pillarTitle {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--vm-text-charcoal, #21170F);
+  margin: 0 0 4px 0;
+}
+
+.pillarDesc {
+  font-size: 0.8125rem;
+  color: var(--vm-text-muted, #73695E);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Event Link Button */
+.eventLinkBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  background: var(--vm-bg-surface, #FFFFFF);
+  border: 1.5px solid var(--vm-brass-border, rgba(197, 155, 75, 0.5));
+  border-radius: var(--vm-radius-md, 8px);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--vm-terracotta, #964228);
+  min-height: 48px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  outline-offset: 3px;
+}
+
+.eventLinkBtn:hover {
+  background: var(--vm-bg-ashram, #F0E9DD);
+  color: var(--vm-bhagwa-orange, #C05A28);
+  border-color: var(--vm-terracotta, #964228);
+  transform: translateY(-1px);
+}
+
+.eventLinkBtn:focus-visible {
+  outline: 2px solid var(--vm-gold-brass, #C59B4B);
+}
+
+@media (max-width: 860px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .heroMediaCol {
+    display: none;
+  }
+
+  .twoCol {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .accessBtn,
+  .gatheringBtn,
+  .inquiryBtn,
+  .eventLinkBtn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding-block: var(--space-10) var(--space-8);
+  }
+
+  .cardBox,
+  .detailsCard {
+    padding: var(--space-5);
+  }
+
+  .quickSpecs {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+
+  .sangyanPillarsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accessBtn,
+  .gatheringBtn,
+  .inquiryBtn,
+  .sangyanTeachingsLink,
+  .backLink {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+

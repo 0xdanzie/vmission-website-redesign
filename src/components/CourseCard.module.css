@@ -1,78 +1,236 @@
-.card {
-  padding: var(--space-6);
+/* ==========================================================================
+   COURSE CARD STYLES — Architectural Learning Doorway Component
+   ========================================================================== */
+
+.doorCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--vm-bg-surface, #FFFFFF);
+  border: 1.5px solid var(--vm-border-light, #E8E0D2);
+  border-radius: var(--vm-radius-xl, 16px);
+  padding: var(--space-8);
+  box-shadow: 0 4px 16px rgba(33, 23, 15, 0.03);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.doorCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(33, 23, 15, 0.08);
+  border-color: var(--vm-brass-border, rgba(197, 155, 75, 0.5));
+}
+
+.doorActive {
+  border-color: var(--vm-brass-border, rgba(197, 155, 75, 0.45));
+  background: linear-gradient(180deg, var(--vm-bg-surface, #FFFFFF) 0%, var(--vm-bg-ivory, #FCFBF8) 100%);
+}
+
+.doorHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--vm-border-light, #E8E0D2);
+  flex-wrap: wrap;
+}
+
+.doorNumeralWrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.doorNumeral {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--vm-gold-brass, #C59B4B);
+  line-height: 1;
+}
+
+.doorPlaque {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.doorType {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vm-terracotta, #964228);
+}
+
+.doorFormatBadge {
+  font-size: 0.75rem;
+  color: var(--vm-text-muted, #73695E);
+}
+
+.doorStatusWrap {
+  display: flex;
+  align-items: center;
+}
+
+.titleBlock {
+  margin-bottom: var(--space-4);
+}
+
+.title {
+  font-family: var(--font-serif, 'Cormorant Garamond', serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--vm-text-charcoal, #21170F);
+  line-height: 1.25;
+  margin: 0 0 4px 0;
+}
+
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.titleLink:hover {
+  color: var(--vm-terracotta, #964228);
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--vm-text-muted, #73695E);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.metaRail {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--space-4);
+  background: var(--vm-bg-sand, #F4EFE6);
+  border-radius: var(--vm-radius-md, 8px);
+  border: 1px solid var(--vm-border-light, #E8E0D2);
+  margin-bottom: var(--space-4);
+}
+
+.metaItem {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--space-2);
+  font-size: 0.8125rem;
+  align-items: baseline;
+}
+
+.metaLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--vm-text-faint, #A89F91);
+}
+
+.metaVal {
+  color: var(--vm-text-charcoal, #21170F);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.metaDivider {
+  height: 1px;
+  background: var(--vm-border-light, #E8E0D2);
+}
+
+.desc {
+  font-size: 0.875rem;
+  color: var(--vm-text-muted, #73695E);
+  line-height: 1.65;
+  margin-bottom: var(--space-6);
+  flex: 1;
+}
+
+.footerRow {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--vm-border-light, #E8E0D2);
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
 }
 
-.iconRow {
-  display: flex;
+.feeNotice {
+  font-size: 0.75rem;
+  color: var(--vm-text-muted, #73695E);
+  font-style: italic;
+}
+
+.doorActionBtn {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-1);
-}
-
-.icon {
-  font-size: 1.75rem;
-  line-height: 1;
-}
-
-.title {
-  font-family: var(--font-serif);
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--vm-text);
-  line-height: 1.35;
-}
-
-.subtitle {
-  font-size: 0.875rem;
-  color: var(--vm-text-muted);
-  line-height: 1.5;
-}
-
-.meta {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  padding: var(--space-3);
-  background: var(--vm-bg-muted);
-  border-radius: var(--vm-radius-sm);
-}
-
-.metaRow {
-  display: flex;
-  gap: var(--space-2);
-  font-size: 0.8125rem;
-  align-items: flex-start;
-}
-
-.metaLabel {
-  color: var(--vm-text-faint);
-  min-width: 60px;
-  flex-shrink: 0;
-}
-
-.metaVal {
-  color: var(--vm-text);
-  font-weight: 500;
-}
-
-.desc {
-  font-size: 0.875rem;
-  color: var(--vm-text-muted);
-  line-height: 1.60;
-  flex: 1;
-}
-
-.link {
+  justify-content: center;
+  min-height: 48px;
+  padding: 10px 20px;
+  background: var(--vm-bg-sand, #F4EFE6);
+  color: var(--vm-terracotta, #964228);
+  border: 1px solid var(--vm-brass-border, rgba(197, 155, 75, 0.4));
+  border-radius: var(--vm-radius-md, 8px);
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--vm-saffron);
-  margin-top: auto;
-  transition: letter-spacing var(--vm-ease-fast);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  outline-offset: 3px;
+  text-align: center;
 }
 
-.link:hover {
-  letter-spacing: 0.01em;
+.doorActionBtn:hover {
+  background: var(--vm-terracotta, #964228);
+  color: #FFFFFF;
+  border-color: var(--vm-terracotta, #964228);
 }
+
+.doorActionBtn:focus-visible {
+  outline: 2px solid var(--vm-gold-brass, #C59B4B);
+}
+
+.doorPrimaryBtn {
+  background: var(--vm-terracotta, #964228);
+  color: #FFFFFF;
+  border-color: var(--vm-terracotta, #964228);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(150, 66, 40, 0.2);
+}
+
+.doorPrimaryBtn:hover {
+  background: var(--vm-bhagwa-orange, #C05A28);
+  border-color: var(--vm-bhagwa-orange, #C05A28);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .doorCard {
+    padding: var(--space-5);
+  }
+
+  .metaItem {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .doorActionBtn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doorCard,
+  .doorActionBtn {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
