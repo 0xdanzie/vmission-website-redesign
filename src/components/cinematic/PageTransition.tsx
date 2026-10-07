@@ -79,9 +79,11 @@ export default function PageTransition({ children }: PageTransitionProps) {
 
       if (!prefersReduced && typeof document !== 'undefined' && 'startViewTransition' in document) {
         (document as unknown as { startViewTransition: (cb: () => void) => void }).startViewTransition(() => {
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
           setKey(pathname);
         });
       } else {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
         setKey(pathname);
       }
 

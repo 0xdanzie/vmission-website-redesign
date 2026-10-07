@@ -511,6 +511,7 @@ function TeachingsLibrary() {
               sizes="100vw"
               quality={90}
               className={styles.hallImage}
+                data-scroll-depth="true"
             />
             <div className={styles.hallScrim} />
             <div className={styles.hallVignette} />

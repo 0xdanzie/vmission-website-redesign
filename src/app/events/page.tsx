@@ -237,6 +237,7 @@ export default function EventsPage() {
             fill
             sizes="100vw"
             className={styles.heroAtmosphereImg}
+              data-scroll-depth="true"
             priority
           />
           <div className={styles.heroScrim} />
