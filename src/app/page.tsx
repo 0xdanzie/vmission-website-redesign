@@ -30,6 +30,7 @@ export default function HomePage() {
             src={getAssetPath('/images/vmission/hero/vmission-hero-cinematic.jpg')}
             alt="Vedanta Mission Ashram, Sri Gangeshwar Mahadev Shivling Dome in Indore"
             className={styles.heroBackdropImg}
+              data-scroll-depth="true"
             loading="eager"
           />
           <div className={styles.heroBackdropGradient} />
@@ -102,6 +103,7 @@ export default function HomePage() {
                   src={getAssetPath('/images/vmission/ashram/gangeshwar-dome-closeup.jpg')}
                   alt="Sri Gangeshwar Mahadev Monumental Shivling Dome at Vedanta Ashram"
                   className={styles.landmarkImg}
+                    data-scroll-depth="true"
                   loading="lazy"
                 />
                 <div className={styles.landmarkCaption}>
@@ -293,6 +295,7 @@ export default function HomePage() {
             src={getAssetPath('/images/vmission/acharyas/swami-atmananda-saraswati/founder-portrait.png')}
             alt="Poojya Guruji Swami Atmananda Saraswati in natural Bhagwa robes beside the river"
             className={styles.founderBgImage}
+              data-scroll-depth="true"
             loading="lazy"
           />
           {/* Targeted Localized Contrast Scrim across Left River Area */}

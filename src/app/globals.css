@@ -190,6 +190,7 @@
   --vm-dur-image: 550ms;       /* Hero image unveils, photo frames */
   --vm-dur-morph: 520ms;       /* Cross-view shared-element bookplate/card morphs */
   --vm-dur-ambient: 12s;       /* Slow sacred ambient drifts */
+  --vm-dur-reveal: 650ms;       /* Progressive section scroll reveal */
 
   /* Composite Timing Tokens */
   --vm-transition-micro: var(--vm-dur-micro) var(--vm-motion-ease);
@@ -563,6 +564,31 @@ section[aria-label],
   animation-timing-function: var(--vm-motion-ease, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
+
+/* ============================================================
+   GLOBAL EDITORIAL SCROLL MOTION EXPERIENCE
+   Smooth, calm, compositor-friendly section reveals
+   ============================================================ */
+.vm-scroll-section {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--vm-dur-reveal, 650ms) cubic-bezier(0.16, 1, 0.3, 1),
+              transform var(--vm-dur-reveal, 650ms) cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.vm-scroll-section.vm-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: auto;
+}
+
+/* Subtle editorial scroll depth target */
+[data-scroll-depth] {
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 /* Reduced Motion Compliance */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -570,6 +596,23 @@ section[aria-label],
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  .vm-scroll-section {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+
+  [data-scroll-depth] {
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
   }
 
   ::view-transition-group(*),

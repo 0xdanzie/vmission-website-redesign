@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import AudioPlayerDock from '@/components/AudioPlayerDock';
 import ToastStack from '@/components/ToastStack';
 import PageTransition from '@/components/cinematic/PageTransition';
+import ScrollMotion from '@/components/cinematic/ScrollMotion';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://vmission.org.in'),
@@ -91,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Footer />
               <AudioPlayerDock />
               <ToastStack />
+              <ScrollMotion />
             </AudioPlayerProvider>
           </DataProvider>
         </ToastProvider>
