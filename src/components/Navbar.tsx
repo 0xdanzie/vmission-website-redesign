@@ -94,11 +94,11 @@ export default function Navbar() {
           <Link href="/" className={styles.logoLink} aria-label="Vedanta Mission — Home">
             {/* Approved full horizontal brand lockup: default for desktop, tablet, and standard mobile (>= 361px) */}
             <span className={styles.brandPrimary}>
-              <BrandLogo variant="navbar" size="md" priority />
+              <BrandLogo variant="primary-white" size="md" priority />
             </span>
             {/* Ultra-narrow fallback (<= 360px): emblem mark */}
             <span className={styles.brandUltraNarrow}>
-              <BrandLogo variant="mobile" size="md" priority />
+              <BrandLogo variant="emblem-white" size="md" priority />
             </span>
           </Link>
 

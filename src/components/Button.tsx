@@ -14,6 +14,7 @@ interface ButtonProps {
   disabled?: boolean;
   ariaLabel?: string;
   fullWidth?: boolean;
+  tone?: 'light' | 'dark';
 }
 
 export default function Button({
@@ -28,8 +29,9 @@ export default function Button({
   disabled = false,
   ariaLabel,
   fullWidth = false,
+  tone = 'light',
 }: ButtonProps) {
-  const cls = [styles.btn, styles[variant], styles[size], fullWidth ? styles.full : '', className]
+  const cls = [styles.btn, styles[variant], styles[size], tone === 'dark' ? styles.onDark : '', fullWidth ? styles.full : '', className]
     .filter(Boolean)
     .join(' ');
 

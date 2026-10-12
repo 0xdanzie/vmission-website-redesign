@@ -1,329 +1,319 @@
-/* ============================================================
-   NAVBAR — MIDNIGHT WALNUT FOUNDATION (PHASE 2D.6 & PHASE 3A)
-   ============================================================ */
+/* ==========================================================================
+   Navbar — monochrome ink bar, saffron accent on the Donate action
+   ========================================================================== */
 
 .navbar {
+  --nb-ink: #0b0b0b;
+  --nb-paper: #f4f1ea;
+  --nb-mute: rgba(244, 241, 234, 0.6);
+  --nb-line: rgba(244, 241, 234, 0.14);
+  --nb-accent: #e06328;
+
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  height: var(--nav-height);
-  background: rgba(26, 21, 18, 0.94);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(197, 160, 89, 0.22);
-  transition: background var(--vm-ease-base), border-color var(--vm-ease-base), box-shadow var(--vm-ease-base);
+  background: var(--nb-ink);
+  color: var(--nb-paper);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, background 0.3s ease;
 }
 
-.scrolled {
-  background: rgba(22, 17, 14, 0.98);
-  border-bottom-color: rgba(197, 160, 89, 0.35);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+.navbar.scrolled {
+  border-bottom-color: var(--nb-line);
+  background: rgba(11, 11, 11, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .inner {
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-6);
+  gap: clamp(1rem, 2vw, 2rem);
+  min-height: 76px;
 }
+
+/* ---------- Logo ---------- */
 
 .logoLink {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  text-decoration: none;
   flex-shrink: 0;
+  text-decoration: none;
+  color: inherit;
 }
 
-.desktopLogo {
-  display: flex;
-  align-items: center;
-}
-
-.mobileLogo {
-  display: none !important;
-  align-items: center;
-}
-
-/* Primary full horizontal brand lockup: default across desktop, tablet, and standard mobile */
 .brandPrimary {
-  display: flex;
-  align-items: center;
-}
-
-.brandPrimary img {
-  display: block;
-  width: 175px !important;
-  height: auto !important;
-  max-height: 62px;
-  object-fit: contain;
-  transition: width var(--vm-ease-fast);
+  display: inline-flex;
 }
 
 .brandUltraNarrow {
-  display: none !important;
+  display: none;
 }
 
-/* Desktop Navigation */
+/* ---------- Desktop navigation ---------- */
+
 .desktopNav {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  flex: 1;
-  justify-content: center;
+  gap: clamp(0.25rem, 1vw, 1.25rem);
+  height: 100%;
 }
 
 .navItemWrapper {
   position: relative;
+  display: flex;
+  align-items: center;
+  height: 76px;
 }
 
 .navLink {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-family: var(--font-ui);
-  font-size: 0.9rem;
+  gap: 0.4rem;
+  padding: 0.5rem 0.6rem;
+  font-family: var(--font-ui, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.82rem;
   font-weight: 500;
-  color: #D6CCC0;
-  padding: 8px 14px;
-  border-radius: var(--vm-radius-sm);
-  transition: color var(--vm-ease-fast), background var(--vm-ease-fast);
-  white-space: nowrap;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nb-mute);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  left: 0.6rem;
+  right: 0.6rem;
+  bottom: 0.2rem;
+  height: 1px;
+  background: var(--nb-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .navLink:hover,
-.dropdownOpen {
-  color: var(--vm-ivory);
-  background: rgba(224, 99, 40, 0.12);
+.navLink:focus-visible,
+.navLink.dropdownOpen {
+  color: var(--nb-paper);
+}
+
+.navLink:hover::after,
+.navLink:focus-visible::after,
+.navLink.dropdownOpen::after,
+.navLink.active::after {
+  transform: scaleX(1);
 }
 
 .navLink.active {
-  color: var(--vm-bhagwa);
-  font-weight: 600;
+  color: var(--nb-paper);
 }
 
 .caret {
-  transition: transform var(--vm-ease-fast);
+  transition: transform 0.3s ease;
   opacity: 0.7;
 }
 
 .caretRotated {
   transform: rotate(180deg);
-  opacity: 1;
-  color: var(--vm-bhagwa);
 }
 
-/* Dropdown Menu Panel */
+/* ---------- Dropdown panel ---------- */
+
 .dropdownPanel {
   position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  min-width: 280px;
-  background: var(--vm-walnut-surface);
-  border: 1px solid rgba(197, 160, 89, 0.3);
-  border-top: 3px solid var(--vm-bhagwa);
-  border-radius: var(--vm-radius-md);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
-  padding: 12px 0;
-  animation: fadeIn var(--vm-ease-fast) forwards;
-  z-index: 1010;
+  top: 100%;
+  left: -1rem;
+  min-width: 320px;
+  background: var(--nb-ink);
+  border: 1px solid var(--nb-line);
+  border-top: 2px solid var(--nb-accent);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+  animation: nbDropIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  z-index: 1001;
+}
+
+@keyframes nbDropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .dropdownHeader {
-  padding: 6px 18px 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: 6px;
+  padding: 1rem 1.25rem 0.5rem;
+  border-bottom: 1px solid var(--nb-line);
 }
 
 .dropdownKicker {
   font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-weight: 600;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--vm-brass);
+  color: var(--nb-accent);
 }
 
 .dropdownList {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0.5rem 0;
 }
 
 .dropdownItem {
   display: flex;
   flex-direction: column;
-  padding: 8px 18px;
+  gap: 0.2rem;
+  padding: 0.75rem 1.25rem;
   text-decoration: none;
-  transition: background var(--vm-ease-fast);
+  color: var(--nb-paper);
+  transition: background 0.25s ease, padding-left 0.3s ease;
 }
 
-.dropdownItem:hover {
-  background: rgba(224, 99, 40, 0.15);
+.dropdownItem:hover,
+.dropdownItem:focus-visible {
+  background: rgba(244, 241, 234, 0.05);
+  padding-left: 1.6rem;
 }
 
 .dropdownItemLabel {
-  font-family: var(--font-ui);
-  font-size: 0.88rem;
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
+  font-size: 1rem;
   font-weight: 600;
-  color: var(--vm-ivory);
-}
-
-.dropdownItem:hover .dropdownItemLabel {
-  color: var(--vm-bhagwa-hover);
+  letter-spacing: -0.01em;
 }
 
 .dropdownItemDesc {
-  font-size: 0.75rem;
-  color: #9E948A;
-  margin-top: 2px;
-  line-height: 1.35;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--nb-mute);
 }
 
-/* Actions Group */
+/* ---------- Actions ---------- */
+
 .actions {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 0.6rem;
   flex-shrink: 0;
 }
 
 .btnContact {
-  font-family: var(--font-ui);
-  font-size: 0.88rem;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  color: #C2B8AD;
-  padding: 8px 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--nb-paper);
   text-decoration: none;
-  transition: color var(--vm-ease-fast);
+  border: 1px solid var(--nb-line);
+  border-radius: 999px;
+  transition: border-color 0.25s ease, color 0.25s ease;
 }
 
-.btnContact:hover {
-  color: var(--vm-ivory);
+.btnContact:hover,
+.btnContact:focus-visible {
+  border-color: var(--nb-paper);
 }
 
 .btnDonate {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  background: var(--vm-gerua);
-  color: #FFF;
-  font-family: var(--font-ui);
-  font-size: 0.88rem;
+  padding: 0.6rem 1.15rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  padding: 10px 20px;
-  border-radius: var(--vm-radius-sm);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--nb-ink);
+  background: var(--nb-accent);
+  border-radius: 999px;
   text-decoration: none;
-  letter-spacing: 0.02em;
-  border: 1px solid var(--vm-gerua);
-  box-shadow: 0 2px 10px rgba(200, 78, 23, 0.35);
-  transition: all var(--vm-ease-fast);
+  white-space: nowrap;
+  transition: background 0.25s ease, transform 0.3s ease;
 }
 
-.btnDonate:hover {
-  background: var(--vm-bhagwa);
-  border-color: var(--vm-bhagwa);
+.btnDonate:hover,
+.btnDonate:focus-visible {
+  background: var(--nb-paper);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(224, 99, 40, 0.45);
 }
 
-/* Mobile Hamburger Toggle */
+/* ---------- Hamburger ---------- */
+
 .hamburger {
   display: none;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 6px;
   width: 44px;
   height: 44px;
-  padding: 12px 10px;
-  border-radius: var(--vm-radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--vm-ivory);
+  padding: 0;
+  background: none;
+  border: 1px solid var(--nb-line);
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--nb-paper);
 }
 
 .hamburgerBar {
   display: block;
-  width: 100%;
-  height: 2px;
-  background-color: var(--vm-ivory);
-  border-radius: 1px;
-  transition: all var(--vm-ease-fast);
+  width: 18px;
+  height: 1.5px;
+  margin: 0 auto;
+  background: currentColor;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.hamburger:hover {
-  background: rgba(224, 99, 40, 0.15);
-  border-color: var(--vm-bhagwa);
-}
+/* ---------- Responsive ---------- */
 
-/* Responsive Media Queries */
-@media (max-width: 1279px) {
-  .brandPrimary img {
-    width: 160px !important;
-    max-height: 58px;
-  }
-}
-
-@media (max-width: 1080px) {
+@media (max-width: 1180px) {
   .desktopNav {
     display: none;
   }
+
   .btnContact {
     display: none;
   }
+
   .hamburger {
-    display: flex;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
-@media (max-width: 1023px) {
-  .brandPrimary img {
-    width: 155px !important;
-    max-height: 56px;
-  }
-}
-
-@media (max-width: 768px) {
-  .btnDonate {
-    display: none;
-  }
+@media (max-width: 560px) {
   .inner {
-    gap: var(--space-3);
+    min-height: 64px;
   }
-  .brandPrimary img {
-    width: 150px !important;
-    max-height: 54px;
+
+  .btnDonate {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.72rem;
   }
 }
 
-@media (max-width: 414px) {
-  .brandPrimary img {
-    width: 140px !important;
-    max-height: 50px;
-  }
-}
-
-@media (max-width: 375px) {
-  .brandPrimary img {
-    width: 136px !important;
-    max-height: 48px;
-  }
-}
-
-/* Ultra-narrow fallback (<= 360px): switch to emblem mark */
 @media (max-width: 360px) {
   .brandPrimary {
-    display: none !important;
+    display: none;
   }
+
   .brandUltraNarrow {
-    display: flex !important;
-    align-items: center;
-  }
-  .brandUltraNarrow img {
-    width: 36px !important;
-    height: 38px !important;
-    object-fit: contain;
+    display: inline-flex;
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .dropdownPanel {
+    animation: none;
+  }
+}

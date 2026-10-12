@@ -1,1359 +1,1198 @@
 /* ============================================================
-   HOMEPAGE STYLES — VEDANTA MISSION / INDORE ASHRAM
-   Phase 3A.4 — Architectural & Spiritual Visual Journey
+   HOME — monochrome editorial with a single saffron accent
    ============================================================ */
+
+.home {
+  --ink: #0b0b0b;
+  --ink-2: #151515;
+  --paper: #f3f1ec;
+  --paper-2: #e7e4dc;
+  --mute: #6c6861;
+  --mute-dark: #9d988e;
+  --line: rgba(11, 11, 11, 0.14);
+  --line-dark: rgba(243, 241, 236, 0.16);
+  --accent: #e06328;
+  --accent-soft: #f0753b;
+  --tight: 'Inter Tight', system-ui, sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  overflow-x: clip;
+}
+
+.home em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+/* Global h1–h6 rule forces a dark colour. Headings here inherit the colour of
+   their section instead, so they stay readable on the dark bands. */
+.home h1,
+.home h2,
+.home h3,
+.home h4,
+.home h5,
+.home h6 {
+  color: inherit;
+}
+
+/* ---------- Shared primitives ---------- */
+
+.eyebrow,
+.eyebrowLight {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 1.4rem;
+}
+
+.eyebrow::before,
+.eyebrowLight::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+}
+
+.eyebrowLight {
+  color: var(--mute-dark);
+}
+
+.h2,
+.h2Light {
+  font-family: var(--tight);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 6vw, 5.6rem);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  margin: 0;
+  max-width: 14ch;
+}
+
+.h2Light {
+  color: var(--paper);
+}
+
+.lead {
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--mute);
+  max-width: 56ch;
+  margin: 1.8rem 0 0;
+}
+
+.bodyLarge {
+  font-family: var(--font-serif-body);
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin: 0 0 3rem;
+  color: var(--ink);
+}
+
+.btnPrimary,
+.btnLight,
+.btnGhost,
+.btnGhostLight {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1.05rem 1.6rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: background-color 0.4s var(--ease-out), color 0.4s var(--ease-out),
+    border-color 0.4s var(--ease-out);
+  white-space: nowrap;
+}
+
+.btnPrimary {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btnPrimary:hover {
+  background: var(--accent);
+}
+
+.btnLight {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.btnLight:hover {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.btnGhost {
+  border: 1px solid rgba(243, 241, 236, 0.5);
+  color: var(--paper);
+}
+
+.btnGhost:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.btnGhostLight {
+  border: 1px solid var(--line-dark);
+  color: var(--paper);
+}
+
+.btnGhostLight:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.textLink,
+.textLinkLight {
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--ink);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  padding-bottom: 3px;
+  transition: background-size 0.5s var(--ease-out), color 0.3s;
+}
+
+.textLink:hover {
+  background-size: 100% 1px;
+  color: var(--accent);
+}
+
+.textLinkLight {
+  color: var(--paper);
+}
+
+.textLinkLight:hover {
+  background-size: 100% 1px;
+  color: var(--accent-soft);
+}
+
+.lineMask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+}
+
+.lineMask > span {
+  display: inline-block;
+}
+
+.word {
+  display: inline;
+}
+
+.rule {
+  height: 1px;
+  background: var(--ink);
+  transform-origin: left center;
+  margin: 1rem 0 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.6rem;
+  margin-top: 2.4rem;
+}
+
+.cardNum {
+  display: block;
+  font-family: var(--tight);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 2.5rem;
+}
 
 /* ============================================================
-   CHAPTER 1: THE SACRED ARRIVAL (MONUMENTAL & CONTEMPLATIVE)
+   01 — HERO
    ============================================================ */
-.heroCinematic {
+
+.hero {
   position: relative;
-  min-height: 92vh;
+  min-height: 100svh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: var(--paper);
+  background: var(--ink);
   overflow: hidden;
-  background-color: #140F0C;
-  color: var(--vm-ivory);
-  padding-top: var(--nav-height);
-  padding-bottom: var(--space-16);
+  isolation: isolate;
 }
 
-.heroBackdrop {
+.heroMedia {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: -2;
   overflow: hidden;
 }
 
-.heroBackdropImg {
+.heroImg {
   width: 100%;
-  height: 100%;
+  height: 120%;
   object-fit: cover;
-  object-position: center 32%;
-  filter: contrast(1.08) brightness(0.74);
-  transform: scale(1.01);
-  transition: transform 12s ease-out;
+  object-position: center 40%;
+  will-change: transform;
 }
 
-@media (max-width: 768px) {
-  .heroBackdropImg {
-    object-position: center 25%;
-  }
-}
-
-.heroCinematic:hover .heroBackdropImg {
-  transform: scale(1.03);
-}
-
-.heroBackdropGradient {
+.heroShade {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(
-      90deg,
-      rgba(20, 15, 12, 0.95) 0%,
-      rgba(20, 15, 12, 0.86) 44%,
-      rgba(20, 15, 12, 0.44) 72%,
-      rgba(20, 15, 12, 0.78) 100%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(20, 15, 12, 0.40) 0%,
-      transparent 30%,
-      rgba(20, 15, 12, 0.65) 68%,
-      rgba(20, 15, 12, 0.96) 100%
-    );
+    linear-gradient(180deg, rgba(11, 11, 11, 0.55) 0%, rgba(11, 11, 11, 0.1) 35%, rgba(11, 11, 11, 0.85) 100%),
+    linear-gradient(90deg, rgba(11, 11, 11, 0.6) 0%, transparent 60%);
 }
 
-.heroBackdropTexture {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 75% 35%,
-    rgba(224, 99, 40, 0.16) 0%,
-    transparent 55%
-  );
-  pointer-events: none;
-}
-
-/* Organic Dawn Horizon Descent into Chapter 2 (No blunt lines) */
-.heroBottomDawnTransition {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(20, 15, 12, 0.4) 35%,
-    rgba(253, 251, 247, 0.2) 75%,
-    var(--vm-ivory) 100%
-  );
-  z-index: 3;
-  pointer-events: none;
-}
-
-.heroContentWrap {
+.heroInner {
   position: relative;
-  z-index: 2;
-  max-width: 780px;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  padding-block: var(--space-12) var(--space-8);
+  z-index: 1;
+  padding: 0 clamp(1.25rem, 4vw, 3.5rem) clamp(2.5rem, 6vh, 4.5rem);
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
 }
 
-/* Quiet, Unified Identity Line (No pill shapes) */
-.heroIdentityCue {
+.heroMeta {
+  position: absolute;
+  top: calc(-100svh + 8.5rem);
+  left: clamp(1.25rem, 4vw, 3.5rem);
   display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--vm-brass);
   flex-wrap: wrap;
+  gap: 0.6rem 2rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(243, 241, 236, 0.75);
 }
 
-.heroIdentityDot {
-  color: var(--vm-bhagwa);
+.heroTitle {
+  font-family: var(--tight);
   font-weight: 700;
+  font-size: clamp(3.2rem, 11.5vw, 14rem);
+  line-height: 0.86;
+  letter-spacing: -0.065em;
+  margin: 0 0 clamp(2rem, 5vh, 3.5rem);
+}
+
+.heroTitle .lineMask {
+  display: block;
+}
+
+.heroFoot {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 520px);
+  gap: 2.5rem;
+  align-items: end;
+  border-top: 1px solid var(--line-dark);
+  padding-top: 1.8rem;
 }
 
 .heroSanskrit {
   font-family: var(--font-sanskrit);
-  font-size: 1.35rem;
-  color: #E2B770;
-  letter-spacing: normal;
-  line-height: 1.5;
-  margin-top: 2px;
-}
-
-.heroMainTitle {
-  font-family: var(--font-display);
-  font-size: clamp(3.2rem, 5.8vw, 5rem);
-  font-weight: 500;
-  line-height: 1.03;
-  color: var(--vm-ivory);
-  letter-spacing: -0.015em;
+  font-size: clamp(1.25rem, 2.2vw, 1.8rem);
   margin: 0;
-}
-
-.heroSubTitle {
-  display: block;
-  font-family: var(--font-ui);
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--vm-bhagwa);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-top: 8px;
+  color: var(--paper);
 }
 
 .heroDescription {
-  font-size: 1.05rem;
-  color: #C8BFB5;
+  font-size: 1.02rem;
   line-height: 1.7;
-  max-width: 660px;
-  margin: var(--space-2) 0 0;
+  color: rgba(243, 241, 236, 0.82);
+  margin: 0 0 1.8rem;
 }
 
-.heroCtaGroup {
+.heroCtas {
   display: flex;
-  align-items: center;
-  gap: var(--space-4);
   flex-wrap: wrap;
-  margin-top: var(--space-5);
+  gap: 0.8rem;
 }
 
-.btnHeroAshram {
-  border-color: rgba(255, 255, 255, 0.4) !important;
-  color: var(--vm-ivory) !important;
+.marquee {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--line-dark);
+  padding: 1.1rem 0;
+  overflow: hidden;
 }
 
-.btnHeroAshram:hover {
-  border-color: var(--vm-brass) !important;
-  color: var(--vm-brass) !important;
-  background: rgba(197, 160, 89, 0.12) !important;
+.marqueeTrack {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+  font-family: var(--tight);
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+}
+
+.marqueeTrack span {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.6rem;
+  padding-right: 1.6rem;
+  white-space: nowrap;
+}
+
+.marqueeTrack i {
+  font-style: normal;
+  color: var(--accent);
+  font-size: 0.8em;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 /* ============================================================
-   CHAPTER 2: THE SACRED GURUKULA & SANCTUM (THE PLACE)
+   02 — THE PLACE (light)
    ============================================================ */
-.sanctumChapter {
-  background-color: var(--vm-ivory);
-  padding-top: var(--space-16);
-  padding-bottom: var(--space-20);
+
+.ashram,
+.teachings,
+.publications,
+.events {
+  position: relative;
+  padding: clamp(6rem, 13vw, 11rem) 0;
 }
 
-.ashramIntroHeader {
+.sectionHead {
+  max-width: 980px;
+  margin-bottom: clamp(3.5rem, 7vw, 6rem);
+}
+
+.sectionHeadCenter {
   text-align: center;
-  max-width: 860px;
-  margin: 0 auto var(--space-12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: clamp(3.5rem, 7vw, 6rem);
 }
 
-.ashramEyebrow {
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--vm-brass);
-  margin-bottom: var(--space-3);
-  display: inline-block;
+.sectionHeadCenter .h2 {
+  max-width: 18ch;
 }
 
-.ashramTitle {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 4.4vw, 3.6rem);
-  font-weight: 500;
-  color: var(--vm-text-dark);
-  margin-bottom: var(--space-3);
+.sectionHeadCenter .lead {
+  margin-inline: auto;
 }
 
-.ashramSubtitle {
-  font-size: 1.05rem;
-  color: var(--vm-text-muted);
-  line-height: 1.7;
+.sectionHeadCenter .eyebrow {
+  justify-content: center;
 }
 
-/* Spatial Layout: Dominant Landmark Anchor + Integrated Narrative */
-.spatialLayoutGrid {
+.ashramGrid {
   display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
-  gap: var(--space-12);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(3rem, 6vw, 7rem);
   align-items: start;
 }
 
-.landmarkAnchorFrame {
-  border-radius: var(--vm-radius-md);
-  overflow: hidden;
-  box-shadow: 0 16px 36px rgba(30, 25, 22, 0.08);
-  border: 1px solid rgba(197, 160, 89, 0.35);
-  background: #ECE5DA;
+.landmark {
+  margin: 0;
+  position: sticky;
+  top: 120px;
 }
 
-.landmarkImgWrap {
+.landmarkFrame {
   position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3.6;
   overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--paper-2);
 }
 
-.landmarkImg {
+.landmarkFrame img,
+.vignetteImg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 1.2s ease-out;
 }
 
-.landmarkAnchorFrame:hover .landmarkImg {
-  transform: scale(1.02);
-}
-
-.landmarkCaption {
-  padding: 16px 22px;
-  background: #FFFFFF;
-  border-top: 1px solid var(--vm-sand-border);
+.caption {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 0.3rem;
+  margin-top: 1rem;
+  font-size: 0.86rem;
+  color: var(--mute);
 }
 
-.landmarkCaption strong {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  color: var(--vm-text-dark);
+.caption strong {
+  color: var(--ink);
+  font-weight: 600;
 }
 
-.landmarkCaption span {
-  font-size: 0.82rem;
-  color: var(--vm-text-muted);
+.schedule {
+  margin-bottom: 3.5rem;
 }
 
-.ashramDetailCol {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
-
-.ashramNarrativeText p {
-  font-size: 1.02rem;
-  color: var(--vm-text-muted);
-  line-height: 1.75;
-  margin: 0;
-}
-
-/* Integrated Ashram Daily Rhythm (Typographic, Not a Box Card) */
-.mandirScheduleBlock {
-  background: rgba(243, 238, 230, 0.65);
-  border-left: 3px solid var(--vm-gerua);
-  border-top: 1px solid rgba(197, 160, 89, 0.25);
-  border-bottom: 1px solid rgba(197, 160, 89, 0.25);
-  border-radius: var(--vm-radius-sm);
-  padding: var(--space-6);
-}
-
-.schedBlockHeader {
+.scheduleHead {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: var(--space-4);
+  gap: 1rem;
   flex-wrap: wrap;
-  gap: var(--space-2);
 }
 
-.schedBlockHeading {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--vm-text-dark);
+.scheduleHead h3 {
+  font-family: var(--tight);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 
-.schedSeekersNotice {
-  font-size: 0.74rem;
+.scheduleHead span {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
   font-weight: 600;
-  color: var(--vm-forest);
-  letter-spacing: 0.04em;
 }
 
-.schedEntries {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+.scheduleList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.schedEntry {
-  display: flex;
-  gap: var(--space-4);
-  align-items: baseline;
-}
-
-.schedTimeBadge {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--vm-gerua);
-  min-width: 84px;
-}
-
-.schedEntryText strong {
-  display: block;
-  font-size: 0.94rem;
-  color: var(--vm-text-dark);
-  margin-bottom: 2px;
-}
-
-.schedEntryText span {
-  display: block;
-  font-size: 0.82rem;
-  color: var(--vm-text-muted);
-  line-height: 1.45;
-}
-
-.schedDivider {
-  height: 1px;
-  background: rgba(197, 160, 89, 0.25);
-}
-
-/* Supporting Architectural Vignettes */
-.ashramVignetteRow {
+.scheduleRow {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-4);
+  grid-template-columns: 110px 1fr;
+  gap: 1.5rem;
+  padding: 1.6rem 0.4rem;
+  border-bottom: 1px solid var(--line);
+  transition: padding 0.5s var(--ease-out), background-color 0.4s;
 }
 
-.ashramVignetteCard {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  overflow: visible;
-  box-shadow: none;
+.scheduleRow:hover {
+  padding-left: 1.2rem;
+  background: var(--paper-2);
 }
 
-.vignetteImgWrap {
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-  border-radius: var(--vm-radius-sm);
-  background: #ECE5DA;
-  border: 1px solid rgba(197, 160, 89, 0.25);
+.time {
+  font-family: var(--tight);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--accent);
+  padding-top: 0.2rem;
+}
+
+.scheduleRow strong {
+  display: block;
+  font-weight: 600;
+  font-size: 1.02rem;
+  margin-bottom: 0.35rem;
+}
+
+.scheduleRow span {
+  font-size: 0.92rem;
+  color: var(--mute);
+  line-height: 1.55;
+}
+
+.vignettes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+  margin-top: 3.5rem;
+}
+
+.vignette h4 {
+  font-family: var(--tight);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 1.1rem 0 0.25rem;
+}
+
+.vignette span {
+  font-size: 0.88rem;
+  color: var(--mute);
 }
 
 .vignetteImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.8s ease-out;
-}
-
-.ashramVignetteCard:hover .vignetteImg {
-  transform: scale(1.03);
-}
-
-.vignetteBody {
-  padding: 8px 0 0;
-}
-
-.vignetteBody h5 {
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  color: var(--vm-text-dark);
-  margin: 0 0 2px;
-}
-
-.vignetteBody span {
-  font-size: 0.75rem;
-  color: var(--vm-text-faint);
-  display: block;
-}
-
-.ashramActionsRow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-5);
-  flex-wrap: wrap;
-  margin-top: var(--space-2);
-}
-
-.linkDirections {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--vm-text-muted);
-  text-decoration: none;
-  transition: color var(--vm-ease-fast);
-}
-
-.linkDirections:hover {
-  color: var(--vm-bhagwa);
-  text-decoration: underline;
-}
-
-/* ============================================================
-   CHAPTER 3: THE LIVING TRADITION & LINEAGE (THE VISION)
-   ============================================================ */
-.lineageChapter {
-  background: linear-gradient(180deg, #F7F3EB 0%, #F7F3EB 80%, #E8DFD0 92%, #221A15 100%);
-  padding-top: var(--space-20);
-  padding-bottom: var(--space-24);
-}
-
-.lineageIntroWrap {
-  text-align: center;
-  max-width: 840px;
-  margin: 0 auto var(--space-12);
-}
-
-.lineageEyebrow {
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--vm-brass);
-  display: inline-block;
-  margin-bottom: var(--space-2);
-}
-
-.lineageTitle {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
-  font-weight: 500;
-  color: var(--vm-text-dark);
-  margin-bottom: var(--space-4);
-}
-
-.lineageEmblemLine {
-  width: 44px;
-  height: 2px;
-  background: var(--vm-bhagwa);
-  margin: 0 auto var(--space-6);
-}
-
-.lineageQuote {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-style: italic;
-  color: #4A3E36;
-  line-height: 1.65;
-  margin: 0;
-}
-
-/* Editorial Triptych: Classical Pedagogy (Zero Box Cards, Delicate Separators) */
-.triptychGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  margin-top: var(--space-10);
-  border-top: 1px solid rgba(197, 160, 89, 0.35);
-  border-bottom: 1px solid rgba(197, 160, 89, 0.35);
-  padding-block: var(--space-10);
-}
-
-.triptychPillar {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 0 var(--space-8);
-  border-right: 1px solid rgba(197, 160, 89, 0.35);
-  display: flex;
-  flex-direction: column;
-}
-
-.triptychPillar:last-child {
-  border-right: none;
-}
-
-.triptychHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-4);
-}
-
-.triptychNumeral {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--vm-bhagwa);
-  letter-spacing: 0.05em;
-  line-height: 1;
-}
-
-.triptychIconBox {
-  color: var(--vm-brass);
-  opacity: 0.85;
-}
-
-.triptychHeading {
-  font-family: var(--font-display);
-  font-size: 1.45rem;
-  font-weight: 600;
-  color: var(--vm-text-dark);
-  margin-bottom: var(--space-3);
-  letter-spacing: -0.01em;
-}
-
-.triptychDesc {
-  font-size: 0.92rem;
-  color: #5C5046;
-  line-height: 1.7;
-  margin: 0;
-}
-
-/* Contemplative Bridge into Chapter 4 (Founder) */
-.lineageToFounderBridge {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-top: var(--space-14);
-}
-
-.bridgeVerticalLine {
-  width: 1px;
-  height: 48px;
-  background: linear-gradient(180deg, var(--vm-bhagwa) 0%, rgba(224, 99, 40, 0.2) 100%);
-  margin-bottom: var(--space-4);
-}
-
-.bridgeInvitationText {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-style: italic;
-  color: #5A4E45;
-  max-width: 620px;
-  margin: 0;
-}
-
-/* ============================================================
-   CHAPTER 4: FOUNDER CINEMATIC SECTION (CONCEPT A APPROVED)
-   ============================================================ */
-.founderCinematicSection {
   position: relative;
-  width: 100%;
-  min-height: 680px;
-  height: 76vh;
-  max-height: 840px;
-  background-color: #171310;
   overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: var(--paper-2);
+}
+
+.vignetteImg img {
+  transform-origin: center;
+}
+
+.vignette:hover .vignetteImg img {
+  transform: scale(1.06);
+  transition: transform 1.2s var(--ease-out);
+}
+
+/* ============================================================
+   03 — THE VISION (dark)
+   ============================================================ */
+
+.lineage {
+  background: var(--ink);
+  color: var(--paper);
+  padding: clamp(6rem, 13vw, 11rem) 0;
+}
+
+.lineageHead {
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.quote {
+  margin: 0 0 clamp(5rem, 10vw, 8rem);
+  font-family: var(--font-serif-body);
+  font-size: clamp(1.9rem, 3.8vw, 3.4rem);
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  max-width: 34ch;
+  color: var(--paper);
+}
+
+.pillars {
+  list-style: none;
+  margin: 0 0 clamp(5rem, 9vw, 7rem);
+  padding: 0;
+  border-top: 1px solid var(--line-dark);
+}
+
+.pillar {
+  position: relative;
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 2rem;
+  align-items: start;
+  padding: 2.4rem 1rem;
+  border-bottom: 1px solid var(--line-dark);
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.5s var(--ease-out);
+}
+
+.pillar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.6s var(--ease-out);
+  z-index: -1;
+}
+
+.pillar:hover::before {
+  transform: scaleY(1);
+}
+
+.pillar:hover {
+  color: var(--ink);
+}
+
+.pillarNumeral {
+  font-family: var(--tight);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+  padding-top: 0.4rem;
+}
+
+.pillar h3 {
+  font-family: var(--tight);
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.pillar p {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--mute-dark);
+  transition: color 0.5s;
+}
+
+.pillar:hover p {
+  color: var(--mute);
+}
+
+.bridge {
+  font-family: var(--font-serif-body);
+  font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+  font-style: italic;
+  color: var(--mute-dark);
+  max-width: 36ch;
+  margin: 0;
+}
+
+/* ============================================================
+   04 — FOUNDER (full-bleed)
+   ============================================================ */
+
+.founder {
+  position: relative;
+  min-height: 100svh;
   display: flex;
   align-items: center;
+  color: var(--paper);
+  background: var(--ink);
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(6rem, 12vw, 9rem) 0 clamp(5rem, 9vw, 7rem);
 }
 
-.founderBgContainer {
+.founderMedia {
   position: absolute;
-  inset: 0;
-  z-index: 1;
+  inset: -10% 0;
+  z-index: -2;
+  overflow: hidden;
 }
 
-.founderBgImage {
+.founderImg {
   width: 100%;
-  height: 100%;
+  height: 120%;
   object-fit: cover;
-  object-position: 78% 24%;
-  display: block;
+  object-position: 70% 30%;
+  will-change: transform;
 }
 
-.founderScrimLeft {
+.founderShade {
   position: absolute;
   inset: 0;
-  z-index: 2;
-  background: linear-gradient(
-    90deg,
-    rgba(18, 14, 12, 0.94) 0%,
-    rgba(18, 14, 12, 0.86) 38%,
-    rgba(18, 14, 12, 0.38) 62%,
-    transparent 84%
-  );
-  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(11, 11, 11, 0.94) 0%, rgba(11, 11, 11, 0.6) 45%, rgba(11, 11, 11, 0.1) 100%),
+    linear-gradient(180deg, transparent 60%, rgba(11, 11, 11, 0.9) 100%);
 }
 
-.founderBottomFade {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 140px;
-  z-index: 2;
-  background: linear-gradient(180deg, transparent 0%, rgba(22, 18, 16, 0.98) 100%);
-  pointer-events: none;
-}
-
-.founderEditorialCol {
+.founderContainer {
   position: relative;
-  z-index: 3;
-  max-width: 580px;
 }
 
-.founderEyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--vm-brass);
-  margin-bottom: var(--space-3);
-}
-
-.founderEyebrow::before {
-  content: '';
-  width: 28px;
-  height: 2px;
-  background: var(--vm-bhagwa);
+.founderCol {
+  max-width: 620px;
 }
 
 .founderName {
-  font-family: var(--font-display);
-  font-size: clamp(2.8rem, 4.6vw, 4.2rem);
-  font-weight: 500;
-  line-height: 1.06;
-  color: var(--vm-ivory);
-  letter-spacing: -0.015em;
-  margin-bottom: 8px;
+  font-family: var(--tight);
+  font-weight: 700;
+  font-size: clamp(3.2rem, 8.5vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+  margin: 0 0 2rem;
 }
 
-.founderHonorificRow {
+.honorific {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: var(--space-4);
-}
-
-.founderDevanagari {
-  font-family: var(--font-sanskrit);
-  font-size: 1.2rem;
-  color: var(--vm-bhagwa);
-}
-
-.founderHonorificSep {
-  color: rgba(255, 255, 255, 0.3);
-  font-size: 0.9rem;
-}
-
-.founderLatinHonorific {
+  gap: 0.8rem;
   font-size: 0.95rem;
-  color: #D4C9BD;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  color: var(--mute-dark);
+  margin-bottom: 1.8rem;
 }
 
-.founderBioLead {
-  font-size: 1.02rem;
-  line-height: 1.7;
-  color: #D6CCC0;
-  margin-bottom: var(--space-6);
+.devanagari {
+  font-family: var(--font-sanskrit);
+  font-size: 1.15rem;
+  color: var(--paper);
 }
 
-.founderBioLead strong {
-  color: var(--vm-ivory);
-  font-weight: 600;
+.honorificSep {
+  color: var(--accent);
 }
 
-/* Story Anchors */
-.storyAnchorsRow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-6);
-  padding: 16px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-  margin-bottom: var(--space-6);
-}
-
-.storyAnchorItem {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.storyAnchorYear {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--vm-bhagwa);
-  line-height: 1;
-}
-
-.storyAnchorLabel {
-  font-size: 0.72rem;
-  color: #A69E95;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-.storyAnchorSep {
-  width: 1px;
-  height: 24px;
-  background: rgba(255, 255, 255, 0.14);
-}
-
-/* Founder Actions */
-.founderActionsRow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-5);
-  flex-wrap: wrap;
-}
-
-.btnKnowGuruji {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--vm-gerua);
-  color: #FFF;
-  font-family: var(--font-ui);
-  font-size: 0.94rem;
-  font-weight: 600;
-  padding: 14px 28px;
-  border-radius: var(--vm-radius-sm);
-  text-decoration: none;
-  letter-spacing: 0.02em;
-  box-shadow: 0 4px 18px rgba(200, 78, 23, 0.35);
-  border: 1px solid var(--vm-gerua);
-  transition: all var(--vm-ease-fast);
-}
-
-.btnKnowGuruji:hover {
-  background: var(--vm-bhagwa);
-  border-color: var(--vm-bhagwa);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 22px rgba(224, 99, 40, 0.45);
-}
-
-.linkExploreTeachings {
-  color: var(--vm-ivory);
-  font-family: var(--font-ui);
-  font-size: 0.92rem;
-  font-weight: 500;
-  text-decoration: none;
-  opacity: 0.85;
-  transition: opacity var(--vm-ease-fast), color var(--vm-ease-fast);
-}
-
-.linkExploreTeachings:hover {
-  opacity: 1;
-  color: var(--vm-brass);
-}
-
-.founderProvenanceTag {
-  position: absolute;
-  bottom: 20px;
-  right: 28px;
-  z-index: 3;
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
-  background: rgba(18, 14, 12, 0.65);
-  backdrop-filter: blur(8px);
-  padding: 4px 10px;
-  border-radius: var(--vm-radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* ============================================================
-   CHAPTER 5: JNANA GANGA — TEACHINGS BRIDGE & SHASTRA PILLARS
-   ============================================================ */
-.teachingsBridgeSection {
-  background: linear-gradient(180deg, #171310 0%, #15110E 35%, #181310 100%);
-  padding: 90px 0 96px;
-}
-
-.bridgeHeaderWrap {
-  text-align: center;
-  max-width: 740px;
-  margin: 0 auto 52px;
-}
-
-.bridgeEyebrow {
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--vm-brass);
-  margin-bottom: var(--space-3);
-  display: inline-block;
-}
-
-.bridgeTitle {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
-  font-weight: 500;
-  color: var(--vm-ivory);
-  margin-bottom: var(--space-3);
-}
-
-.bridgeSubtitle {
+.founderBio {
   font-size: 1.05rem;
-  color: #BDB3A7;
-  line-height: 1.65;
+  line-height: 1.75;
+  color: rgba(243, 241, 236, 0.82);
+  margin: 0;
 }
 
-.shastraPillarsGrid {
+.founderBio strong {
+  color: var(--paper);
+  font-weight: 600;
+}
+
+.timeline {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
-  margin-bottom: var(--space-12);
+  margin-top: 3rem;
+  border-top: 1px solid var(--line-dark);
+  position: relative;
 }
 
-.pillarCard {
-  background: #221C18;
-  border: 1px solid rgba(197, 160, 89, 0.25);
-  border-radius: var(--vm-radius-sm);
-  padding: var(--space-6);
+.timelineItem {
+  padding-top: 1.2rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  transition: transform var(--vm-ease-base), border-color var(--vm-ease-base);
+  gap: 0.35rem;
 }
 
-.pillarCard:hover {
-  transform: translateY(-2px);
-  border-color: var(--vm-bhagwa);
-}
-
-.pillarNum {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
+.timelineItem span {
+  font-family: var(--tight);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
   font-weight: 700;
-  color: var(--vm-bhagwa);
-  margin-bottom: 6px;
-  display: block;
+  letter-spacing: -0.04em;
+  color: var(--accent-soft);
 }
 
-.pillarName {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: var(--vm-ivory);
-  margin-bottom: 8px;
-}
-
-.pillarDesc {
+.timelineItem strong {
   font-size: 0.88rem;
-  color: #B5ABA0;
-  line-height: 1.6;
-  margin-bottom: var(--space-5);
+  font-weight: 500;
+  color: var(--paper);
 }
 
-.pillarLink {
-  font-size: 0.84rem;
-  font-weight: 600;
-  color: var(--vm-brass);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.pillarLink:hover {
-  color: var(--vm-bhagwa-hover);
-}
-
-/* Audio Row */
-.teachingsAudioRow {
-  padding-top: var(--space-8);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.audioRowHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--space-6);
-  flex-wrap: wrap;
-  gap: var(--space-3);
-}
-
-.audioRowTitle {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  color: var(--vm-ivory);
-}
-
-.allAudioLink {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--vm-bhagwa);
-  text-decoration: none;
-}
-
-.allAudioLink:hover {
-  text-decoration: underline;
+.provenance {
+  position: absolute;
+  bottom: 1.8rem;
+  right: clamp(1.25rem, 4vw, 3.5rem);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mute-dark);
 }
 
 /* ============================================================
-   CHAPTER 6: LITERARY HERITAGE — PUBLICATIONS & MONTHLY EZINES
+   05 — JNANA GANGA (teachings, light)
    ============================================================ */
-.publicationsChapter {
-  background-color: var(--vm-ivory);
-  padding-block: var(--space-20);
+
+.shastraGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin-bottom: clamp(5rem, 9vw, 7rem);
 }
 
-.pubsGrid {
+.shastraCard {
+  display: flex;
+  flex-direction: column;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 2.4rem 2.2rem 2.2rem;
+  min-height: 420px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.shastraCard h3 {
+  font-family: var(--tight);
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  margin: 0 0 1rem;
+}
+
+.shastraCard p {
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: var(--mute-dark);
+  margin: 0 0 auto;
+  padding-bottom: 2rem;
+}
+
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line-dark);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--paper);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.cardLink:hover {
+  color: var(--accent-soft);
+}
+
+.audioHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.audioHead h3 {
+  font-family: var(--tight);
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.cardGrid3,
+.cardGrid2 {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-8);
+  gap: 1.4rem;
+}
+
+.cardGrid3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cardGrid2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.centerLink {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* ============================================================
+   06 — PUBLICATIONS (light, two covers)
+   ============================================================ */
+
+.covers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 3.5rem);
 }
 
 .pubCard {
-  background: #FFFFFF;
-  border: 1px solid rgba(197, 160, 89, 0.28);
-  border-radius: var(--vm-radius-md);
-  padding: var(--space-8);
-  display: flex;
-  gap: var(--space-8);
-  box-shadow: 0 8px 24px rgba(30, 25, 22, 0.04);
-  transition: transform var(--vm-ease-base), border-color var(--vm-ease-base);
-}
-
-.pubCard:hover {
-  transform: translateY(-2px);
-  border-color: var(--vm-bhagwa);
-}
-
-.pubCoverFrame {
-  flex-shrink: 0;
-  width: 165px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 2rem;
+  width: clamp(20em, 25em, 30em);
 }
 
-.pubBookBadge {
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--vm-ochre);
-  text-align: center;
-}
-
-.pubCoverMock {
-  background: linear-gradient(145deg, #2A211B 0%, #16120F 100%);
-  border: 1px solid var(--vm-brass-border);
-  border-left: 4px solid var(--vm-bhagwa);
-  border-radius: 4px;
-  padding: 20px 14px;
-  text-align: center;
-  color: #FFFFFF;
-  box-shadow: -4px 8px 24px rgba(0, 0, 0, 0.32), inset 2px 0 5px rgba(255, 255, 255, 0.05);
+.cover {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 205px;
+  overflow: hidden;
+  border-radius: 3px;
+  box-shadow: 0 30px 60px -30px rgba(11, 11, 11, 0.45);
 }
 
-.pubCoverEmblem {
-  font-family: var(--font-sanskrit);
-  font-size: 1.5rem;
-  color: var(--vm-bhagwa);
-  margin-bottom: 4px;
+.coverInk {
+  background: var(--ink);
+  color: var(--paper);
 }
 
-.pubCoverTitle {
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  letter-spacing: 0.06em;
-  color: var(--vm-ivory);
-  margin: 0;
-  line-height: 1.2;
+.coverPaper {
+  background: var(--paper-2);
+  color: var(--ink);
+  border: 1px solid var(--line);
 }
 
-.pubCoverSub {
-  font-size: 0.65rem;
-  color: #BDB3A7;
-  line-height: 1.3;
-  margin: 4px 0;
+.coverBadge,
+.coverBadgeDark {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
-.pubIssueTag {
-  display: inline-block;
-  font-size: 0.65rem;
-  color: var(--vm-brass);
-  background: rgba(197, 160, 89, 0.15);
-  padding: 2px 6px;
-  border-radius: 2px;
-  margin-top: auto;
+.coverBadge {
+  color: var(--mute-dark);
 }
 
-.pubCardDetails {
+.coverBadgeDark {
+  color: var(--mute);
+}
+
+.coverBody {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 0.6rem;
 }
 
-.pubTitle {
-  font-family: var(--font-display);
-  font-size: 1.55rem;
-  color: var(--vm-text-dark);
-  margin-bottom: var(--space-2);
+.coverEmblem,
+.coverEmblemDark {
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  line-height: 1;
+  font-family: var(--font-sanskrit);
+  color: var(--accent);
+  margin-bottom: 0.8rem;
 }
 
-.pubDesc {
-  font-size: 0.92rem;
-  color: var(--vm-text-muted);
-  line-height: 1.65;
-  margin-bottom: var(--space-4);
+.coverBody h4 {
+  font-family: var(--tight);
+  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin: 0;
 }
 
-.pubMetaRow {
+.coverBody p {
+  font-size: 0.9rem;
+  margin: 0;
+  opacity: 0.7;
+}
+
+.coverIssue,
+.coverIssueDark {
+  margin-top: 0.8rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.pubDetails h3 {
+  font-family: var(--tight);
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.8rem;
+}
+
+.pubDetails p {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--mute);
+  margin: 0 0 1.2rem;
+}
+
+.pubMeta {
   display: flex;
-  gap: var(--space-4);
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--vm-forest);
-  margin-bottom: var(--space-4);
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.pubMetaRow span + span::before {
-  content: '·';
-  margin-right: var(--space-4);
-  color: var(--vm-brass);
-  font-weight: 400;
-}
-
-.pubActionLink {
-  align-self: flex-start;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--vm-gerua);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.pubActionLink:hover {
-  color: var(--vm-bhagwa);
-  text-decoration: underline;
-}
-
-/* ============================================================
-   CHAPTER 7: COMMUNAL SATSANG & RETREATS
-   ============================================================ */
-.eventsChapter {
-  background-color: #F8F4ED;
-  padding-block: var(--space-20);
-}
-
-.sectionLinkRow {
-  text-align: center;
-  margin-top: var(--space-10);
-}
-
-.moreLink {
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: var(--vm-gerua);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border-radius: var(--vm-radius-sm);
-  border: 1px solid rgba(200, 78, 23, 0.3);
-  transition: all var(--vm-ease-fast);
-}
-
-.moreLink:hover {
-  background: var(--vm-bhagwa-subtle);
-  border-color: var(--vm-bhagwa);
-}
-
-/* ============================================================
-   CHAPTER 8: SACRED SEVA & STEWARDSHIP
-   ============================================================ */
-.sevaChapter {
-  background-color: var(--vm-walnut);
-  padding-block: var(--space-20);
-}
-
-.ctaBanner {
-  background: linear-gradient(135deg, #241D19 0%, #1A1512 100%);
-  border: 1px solid rgba(197, 160, 89, 0.4);
-  border-radius: var(--vm-radius-lg);
-  padding: var(--space-12) var(--space-10);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--space-8);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-}
-
-.ctaContent {
-  max-width: 620px;
-}
-
-.ctaKicker {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--vm-brass);
-  margin-bottom: 6px;
-}
-
-.ctaTitle {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.4vw, 2.8rem);
-  font-weight: 500;
-  color: var(--vm-ivory);
-  margin-bottom: var(--space-3);
-}
-
-.ctaText {
-  font-size: 1rem;
-  color: #D4C9BD;
-  line-height: 1.65;
-  margin-bottom: var(--space-3);
-}
-
-.ctaTrustNotice {
-  font-size: 0.84rem;
-  color: var(--vm-brass);
-  font-weight: 500;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.ctaBtns {
-  display: flex;
-  gap: var(--space-4);
-  flex-shrink: 0;
-}
-
-.btnCtaWhite {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--vm-gerua);
-  color: #FFF;
-  font-family: var(--font-ui);
-  font-size: 0.94rem;
-  font-weight: 600;
-  padding: 13px 26px;
-  border-radius: var(--vm-radius-sm);
-  text-decoration: none;
-  transition: all var(--vm-ease-fast);
-  border: 1px solid var(--vm-gerua);
-  box-shadow: 0 4px 14px rgba(200, 78, 23, 0.35);
-}
-
-.btnCtaWhite:hover {
-  background: var(--vm-bhagwa);
-  border-color: var(--vm-bhagwa);
-  transform: translateY(-1px);
-}
-
-.btnCtaOutline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  color: var(--vm-ivory);
-  font-family: var(--font-ui);
-  font-size: 0.94rem;
-  font-weight: 600;
-  padding: 12px 24px;
-  border-radius: var(--vm-radius-sm);
-  border: 1.5px solid rgba(197, 160, 89, 0.5);
-  text-decoration: none;
-  transition: all var(--vm-ease-fast);
-}
-
-.btnCtaOutline:hover {
-  background: rgba(197, 160, 89, 0.15);
-  border-color: var(--vm-brass);
+  color: var(--ink);
+  margin-bottom: 1.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
 }
 
 /* ============================================================
-   RESPONSIVE ART DIRECTION
+   07 — EVENTS
    ============================================================ */
 
-/* Tablet (1024px) */
+.events {
+  border-top: 1px solid var(--line);
+}
+
+/* ============================================================
+   08 — SEVA (black band)
+   ============================================================ */
+
+.seva {
+  background: var(--ink);
+  color: var(--paper);
+  padding: clamp(6rem, 12vw, 10rem) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.seva::after {
+  content: '';
+  position: absolute;
+  inset: auto -20% -40% auto;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(224, 99, 40, 0.22), transparent 62%);
+  pointer-events: none;
+}
+
+.sevaInner {
+  position: relative;
+  z-index: 1;
+}
+
+.sevaKicker {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  color: var(--accent-soft);
+  margin: 0 0 1.6rem;
+}
+
+.sevaTitle {
+  font-family: var(--tight);
+  font-weight: 700;
+  font-size: clamp(3rem, 8vw, 7.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  margin: 0 0 clamp(3rem, 6vw, 5rem);
+  max-width: 14ch;
+}
+
+.sevaTitle em {
+  color: var(--accent);
+}
+
+.sevaGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+}
+
+.sevaText {
+  font-size: clamp(1.02rem, 1.3vw, 1.2rem);
+  line-height: 1.7;
+  color: rgba(243, 241, 236, 0.78);
+  margin: 0;
+  max-width: 56ch;
+}
+
+.sevaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: flex-start;
+}
+
+.sevaTrust {
+  margin: 3.5rem 0 0;
+  font-size: 0.86rem;
+  color: var(--mute-dark);
+  border-top: 1px solid var(--line-dark);
+  padding-top: 1.4rem;
+}
+
+.sevaTrust strong {
+  color: var(--paper);
+  font-weight: 600;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
 @media (max-width: 1024px) {
-  .spatialLayoutGrid {
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
+  .shastraGrid,
+  .cardGrid3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .triptychGrid {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-    border-top: 1px solid rgba(197, 160, 89, 0.3);
-    border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+
+  .pillar {
+    grid-template-columns: 60px 1fr;
   }
-  .triptychPillar {
-    border-right: none;
-    border-bottom: 1px solid rgba(197, 160, 89, 0.25);
-    padding: var(--space-4) 0;
-  }
-  .triptychPillar:last-child {
-    border-bottom: none;
-  }
-  .shastraPillarsGrid {
-    grid-template-columns: 1fr;
-  }
-  .pubsGrid {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-  .ctaBanner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .ctaBtns {
-    flex-direction: row;
+
+  .pillar p {
+    grid-column: 2;
   }
 }
 
-/* Mobile (768px & below) */
-@media (max-width: 768px) {
-  .founderCinematicSection {
-    height: auto;
-    min-height: unset;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-bottom: 48px;
+@media (max-width: 860px) {
+  .heroFoot,
+  .ashramGrid,
+  .sevaGrid,
+  .covers,
+  .cardGrid2 {
+    grid-template-columns: 1fr;
   }
 
-  .founderBgContainer {
+  .landmark {
     position: relative;
-    width: 100%;
-    height: 380px;
-    inset: auto;
+    top: auto;
   }
 
-  .founderBgImage {
-    object-position: 72% 20%;
-  }
-
-  .founderScrimLeft {
-    background: linear-gradient(180deg, transparent 40%, rgba(23, 19, 16, 0.9) 85%, #171310 100%);
-  }
-
-  .founderEditorialCol {
-    padding: 24px 0 0;
-    max-width: 100%;
-  }
-
-  .founderActionsRow {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-  }
-
-  .btnKnowGuruji {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .linkExploreTeachings {
-    text-align: center;
-  }
-
-  .founderProvenanceTag {
+  .heroMeta {
     position: static;
-    margin-top: 20px;
-    align-self: center;
+    margin-bottom: 2rem;
   }
 
-  .pubCard {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  .timeline {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
   }
 
-  .pubActionLink {
-    align-self: center;
-  }
-
-  .ctaBtns {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .btnCtaWhite,
-  .btnCtaOutline {
-    width: 100%;
-    text-align: center;
+  .provenance {
+    position: static;
+    margin-top: 2.5rem;
   }
 }
 
-/* Dedicated Art-Directed Mobile Viewport (390px iPhone Standard) */
-@media (max-width: 480px) {
-  .heroContentWrap {
-    padding-block: var(--space-8) var(--space-6);
-  }
-
-  .heroCtaGroup {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .heroCtaGroup > * {
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-  }
-
-  .ashramVignetteRow {
+@media (max-width: 600px) {
+  .shastraGrid,
+  .cardGrid3 {
     grid-template-columns: 1fr;
   }
 
-  .founderBgContainer {
-    height: 340px;
+  .vignettes {
+    grid-template-columns: 1fr;
   }
 
-  .founderBgImage {
-    object-position: 72% 18%;
+  .scheduleRow {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .pillar {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .pillar p {
+    grid-column: auto;
+  }
+
+  .shastraCard {
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack {
+    animation: none;
+  }
+
+  .word,
+  .lineMask > span {
+    transform: none !important;
+  }
+}
+
+/* ---------- Supporting layout blocks ---------- */
+
+.ashramCol {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+@media (max-width: 860px) {
+  .heroCopy {
+    width: 100%;
   }
 }

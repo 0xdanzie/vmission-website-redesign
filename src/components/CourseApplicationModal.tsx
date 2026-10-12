@@ -72,8 +72,9 @@ export default function CourseApplicationModal({ course, isOpen, onClose }: Prop
       aria-modal="true"
       aria-label={`Enrollment Application for ${course.title}`}
       onClick={onClose}
+      data-lenis-prevent
     >
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()} data-lenis-prevent>
         {/* Header */}
         <div className={styles.header}>
           <div>

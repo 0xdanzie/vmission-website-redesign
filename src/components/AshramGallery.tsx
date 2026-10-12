@@ -153,8 +153,9 @@ export default function AshramGallery() {
           role="dialog"
           aria-modal="true"
           aria-label={activeItem.title}
+          data-lenis-prevent
         >
-          <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
+          <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()} data-lenis-prevent>
             <button
               type="button"
               className={styles.btnClose}

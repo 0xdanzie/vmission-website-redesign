@@ -1,597 +1,934 @@
 /* ==========================================================================
-   ACHARYAS PAGE — THE MONASTIC LINEAGE HALL
-   Digital Ashram Master Cinematic Standard
+   Acharyas — The Monastic Lineage Hall
+   Paper and ink. Pinned horizontal lineage gallery on desktop.
    ========================================================================== */
 
-.lineageHallWrapper {
-  background-color: var(--vm-ivory);
-  color: var(--vm-text);
-  overflow-x: hidden;
+.hall {
+  --ink: #0b0b0b;
+  --ink-2: #151515;
+  --paper: #f4f1ea;
+  --paper-2: #ebe6da;
+  --text: #0b0b0b;
+  --mute: #5c5750;
+  --line: rgba(11, 11, 11, 0.14);
+  --accent: #e06328;
+
+  background: var(--paper);
+  color: var(--text);
+  overflow-x: clip;
 }
 
-/* ==========================================================================
-   02. PARAMPARA & LINEAGE EXPOSITION
-   ========================================================================== */
-.paramparaSection {
-  background-color: var(--vm-ivory);
-  padding: var(--space-16) 0 var(--space-20) 0;
-  position: relative;
+.hall h1,
+.hall h2,
+.hall h3,
+.hall h4 {
+  color: inherit;
 }
 
-.paramparaIntroWrap {
-  max-width: 960px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.sectionOverline {
+.overline {
   display: inline-block;
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--vm-ochre);
-  margin-bottom: var(--space-2);
+  color: var(--accent);
 }
 
-.paramparaTitle {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
-  font-weight: 700;
-  color: var(--vm-walnut);
-  letter-spacing: -0.015em;
-  margin: 0 0 var(--space-4) 0;
+.founderBio {
+  min-width: 0;
 }
 
-.paramparaLead {
-  font-family: var(--font-body);
-  font-size: clamp(1.05rem, 1.25vw, 1.2rem);
-  line-height: 1.7;
-  color: var(--vm-text-muted);
-  max-width: 820px;
-  margin: 0 auto var(--space-6) auto;
-}
-
-.lineageColumns {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-8);
-  margin-top: var(--space-12);
-  text-align: left;
-}
-
-.lineageBlock {
-  position: relative;
-  padding: var(--space-6);
-  background: var(--vm-sand);
-  border: 1px solid rgba(197, 160, 89, 0.35);
-  border-radius: var(--radius-sm);
-  transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.lineageBlock:hover {
-  transform: translateY(-2px);
-  border-color: var(--vm-brass);
-}
-
-.lineageOrderNum {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
+.overlineLight {
+  display: inline-block;
+  font-size: 0.72rem;
   font-weight: 600;
-  color: var(--vm-brass);
-  display: block;
-  margin-bottom: var(--space-2);
-  line-height: 1;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
-.lineageHeading {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
+.h2 {
+  margin: 1rem 0 0;
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
+  font-size: clamp(2.2rem, 4.8vw, 4.2rem);
   font-weight: 700;
-  color: var(--vm-walnut);
-  margin: 0 0 var(--space-3) 0;
-  line-height: 1.25;
+  line-height: 1;
+  letter-spacing: -0.035em;
 }
 
-.lineageText {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  line-height: 1.65;
-  color: var(--vm-text-muted);
-  margin: 0;
+.h2Light {
+  margin: 1rem 0 0;
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
+  font-size: clamp(2.2rem, 4.8vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  color: var(--paper);
 }
 
-/* ==========================================================================
-   03. FOUNDING ACHARYA — ASYMMETRIC EDITORIAL LAYOUT
-   ========================================================================== */
-.founderSection {
-  background-color: var(--vm-sand);
-  padding: var(--space-20) 0;
+.lead {
+  max-width: 62ch;
+  margin: 1.5rem 0 0;
+  font-size: clamp(1.02rem, 1.2vw, 1.15rem);
+  line-height: 1.7;
+  color: var(--mute);
+}
+
+.leadLight {
+  max-width: 62ch;
+  margin: 1.5rem 0 0;
+  font-size: clamp(1.02rem, 1.2vw, 1.15rem);
+  line-height: 1.7;
+  color: rgba(244, 241, 234, 0.65);
+}
+
+/* ---------- 01. Hero ---------- */
+
+.hero {
   position: relative;
-  border-top: 1px solid rgba(197, 160, 89, 0.25);
-  border-bottom: 1px solid rgba(197, 160, 89, 0.25);
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 10rem 0 6rem;
+  background: var(--ink);
+  color: var(--paper);
+  overflow: hidden;
 }
 
-.founderLayout {
+.heroMedia {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.heroImg {
+  position: absolute;
+  top: -8%;
+  left: -2%;
+  width: 104%;
+  height: 116%;
+  object-fit: cover;
+  object-position: 52% 30%;
+  will-change: transform;
+}
+
+.heroShade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(11, 11, 11, 0.5) 0%, rgba(11, 11, 11, 0.1) 30%, rgba(11, 11, 11, 0.95) 100%),
+    linear-gradient(90deg, rgba(11, 11, 11, 0.7) 0%, transparent 65%);
+}
+
+.heroContent {
+  position: relative;
+  max-width: 980px;
+}
+
+.crumbs {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: rgba(244, 241, 234, 0.6);
+}
+
+.crumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.crumbs a:hover {
+  color: var(--accent);
+}
+
+.heroBadge {
+  margin: 1.5rem 0 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.7);
+}
+
+.heroSanskrit {
+  margin: 1.25rem 0 0;
+  font-family: var(--font-sanskrit, 'Noto Serif Devanagari', serif);
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  line-height: 1.8;
+  color: var(--accent);
+}
+
+.heroTitle {
+  margin: 1.5rem 0 0;
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
+  font-size: clamp(3.2rem, 9.6vw, 9.5rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: var(--paper);
+}
+
+.lineMask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.lineInner {
+  display: inline-block;
+}
+
+.heroItalic {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+
+.heroSub {
+  margin: 1.75rem 0 0;
+  font-size: 1.25rem;
+  color: var(--paper);
+}
+
+.heroLead {
+  max-width: 58ch;
+  margin: 1rem 0 0;
+  font-size: clamp(1rem, 1.2vw, 1.12rem);
+  line-height: 1.7;
+  color: rgba(244, 241, 234, 0.75);
+}
+
+.heroCtas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+/* ---------- 02. Parampara ---------- */
+
+.parampara {
+  padding: clamp(6rem, 11vw, 10rem) 0;
+}
+
+.paramparaTop {
+  max-width: 800px;
+}
+
+.quoteBig {
+  margin: clamp(3rem, 6vw, 5rem) 0 0;
+  max-width: 1100px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.9rem, 3.8vw, 3.4rem);
+  font-style: italic;
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+}
+
+.word {
+  color: rgba(11, 11, 11, 0.58);
+  transition: color 0.2s linear;
+}
+
+.points {
   display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: var(--space-12);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 3.5rem);
+  margin-top: clamp(4rem, 8vw, 6.5rem);
+}
+
+.point {
+  position: relative;
+  padding-top: 1.5rem;
+}
+
+.pointNum {
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.pointBarWrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.pointBar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--text);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.pointTitle {
+  margin: 1.25rem 0 0.75rem;
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
+  font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.pointText {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--mute);
+}
+
+/* ---------- 03. Founder ---------- */
+
+.founder {
+  padding: clamp(6rem, 11vw, 10rem) 0;
+  background: var(--paper-2);
+}
+
+.founderGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(3rem, 7vw, 8rem);
   align-items: start;
 }
 
-.founderPortraitCol {
+.founderSticky {
   position: sticky;
-  top: calc(var(--nav-height) + var(--space-6));
+  top: 110px;
 }
 
-.founderQuoteCard {
-  margin-top: var(--space-6);
-  padding: var(--space-5) var(--space-6);
-  background: var(--vm-sandalwood);
-  border-left: 3px solid var(--vm-gerua);
-  border-radius: var(--radius-sm);
+.portraitFrame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--ink);
+}
+
+.portraitImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 8%;
+  transform: scale(1.1);
+  transition: transform 1.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.portraitFrame:hover .portraitImg {
+  transform: scale(1.03);
+}
+
+.portraitTag {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--accent);
+}
+
+.portraitCaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 1.1rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent);
+}
+
+.portraitCaption strong {
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
+  font-size: 1rem;
+}
+
+.portraitCaption span {
+  font-size: 0.88rem;
+  color: var(--mute);
+}
+
+.founderQuote {
+  margin: 2rem 0 0;
+  padding: 1.75rem 2rem;
+  background: var(--ink);
+  color: var(--paper);
+  border-left: 3px solid var(--accent);
 }
 
 .founderQuoteSanskrit {
-  font-family: var(--font-devanagari);
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--vm-walnut);
-  margin: 0 0 var(--space-2) 0;
-}
-
-.founderQuoteTranslation {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--vm-text-muted);
   margin: 0;
+  font-family: var(--font-sanskrit, 'Noto Serif Devanagari', serif);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--paper);
 }
 
-.founderBioCol {
-  display: flex;
-  flex-direction: column;
+.founderQuoteText {
+  margin: 1rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(244, 241, 234, 0.7);
 }
 
-.founderHeader {
-  margin-bottom: var(--space-4);
-}
-
-.founderTag {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--vm-gerua);
-  margin-bottom: var(--space-1);
-}
-
-.founderHonorific {
-  font-family: var(--font-display);
+.honorific {
+  margin: 1.5rem 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.4rem;
   font-style: italic;
-  font-size: 1.15rem;
-  color: var(--vm-text-muted);
-  margin: 0 0 2px 0;
+  color: var(--accent);
 }
 
 .founderName {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  margin: 0.4rem 0 0;
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
+  font-size: clamp(2.4rem, 4.8vw, 4.4rem);
   font-weight: 700;
-  color: var(--vm-walnut);
-  letter-spacing: -0.015em;
-  line-height: 1.15;
-  margin: 0 0 var(--space-2) 0;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
 }
 
 .founderRole {
-  font-family: var(--font-body);
-  font-size: 1.05rem;
+  margin: 1rem 0 0;
+  font-size: 1rem;
   font-weight: 600;
-  color: var(--vm-ochre);
-  margin: 0;
+  color: var(--mute);
 }
 
-.lineageProvenance {
-  background: var(--vm-ivory);
-  border: 1px solid rgba(197, 160, 89, 0.4);
-  padding: var(--space-3) var(--space-5);
-  border-radius: var(--radius-sm);
-  margin: var(--space-4) 0 var(--space-6) 0;
+.provenance {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0.35rem;
+  margin-top: 2rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .provLabel {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
+  font-size: 0.7rem;
   font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--vm-text-muted);
+  color: var(--accent);
 }
 
 .provText {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--vm-walnut);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--mute);
 }
 
-.founderNarrative {
-  font-family: var(--font-body);
-  font-size: 1.05rem;
-  line-height: 1.75;
-  color: var(--vm-text);
-  margin-bottom: var(--space-8);
+.prose {
+  margin-top: 2rem;
 }
 
-.founderNarrativeSecondary {
-  color: var(--vm-text-muted);
-  margin-top: var(--space-4);
+.prose p {
+  margin: 0 0 1.25rem;
+  font-size: 1.02rem;
+  line-height: 1.8;
+  color: var(--mute);
 }
 
-.milestoneGrid {
+.milestones {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-4);
-  margin-bottom: var(--space-8);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--line);
 }
 
-.milestoneItem {
-  background: var(--vm-ivory);
-  padding: var(--space-4) var(--space-5);
-  border: 1px solid rgba(197, 160, 89, 0.28);
-  border-radius: var(--radius-sm);
+.milestone {
+  padding: 1.5rem 1.5rem 1.75rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.milestone:nth-child(even) {
+  padding-left: 1.5rem;
+  padding-right: 0;
+  border-left: 1px solid var(--line);
 }
 
 .milestoneYear {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
+  font-size: 1.6rem;
   font-weight: 700;
-  color: var(--vm-gerua);
-  display: block;
-  margin-bottom: 2px;
+  color: var(--accent);
 }
 
 .milestoneTitle {
-  font-family: var(--font-display);
+  margin: 0.4rem 0 0.5rem;
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
   font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--vm-walnut);
-  margin: 0 0 4px 0;
+  font-weight: 700;
 }
 
 .milestoneDesc {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  line-height: 1.55;
-  color: var(--vm-text-muted);
   margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--mute);
 }
 
-.founderActions {
+.founderCtas {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-4);
-  margin-top: var(--space-4);
+  gap: 1rem;
+  margin-top: 2.5rem;
 }
 
-.btnSecondaryOutline {
-  border-color: var(--vm-walnut) !important;
-  color: var(--vm-walnut) !important;
+/* ---------- 04. Residents — pinned horizontal gallery ---------- */
+
+.residents {
+  position: relative;
+  padding-top: clamp(6rem, 11vw, 10rem);
+  background: var(--ink);
+  color: var(--paper);
+  overflow-x: clip;
 }
 
-.btnSecondaryOutline:hover {
-  background: var(--vm-walnut) !important;
-  color: var(--vm-ivory) !important;
+.residents .overline {
+  color: var(--accent);
 }
 
-/* ==========================================================================
-   04. RESIDENT ACHARYAS — EDITORIAL PORTRAIT GALLERY (Anti-Card)
-   ========================================================================== */
-.residentSection {
-  background-color: var(--vm-ivory);
-  padding: var(--space-20) 0;
+.residents .lead {
+  color: rgba(244, 241, 234, 0.65);
 }
 
-.residentHeader {
-  max-width: 780px;
-  margin: 0 auto var(--space-16) auto;
-  text-align: center;
+.residents .h2 {
+  color: var(--paper);
 }
 
-.residentTitle {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 3.6vw, 3rem);
-  font-weight: 700;
-  color: var(--vm-walnut);
-  letter-spacing: -0.015em;
-  margin: 0 0 var(--space-3) 0;
+.residentsHeader {
+  padding-bottom: clamp(3rem, 6vw, 5rem);
 }
 
-.residentLead {
-  font-family: var(--font-body);
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: var(--vm-text-muted);
+.pinWrap {
+  position: relative;
 }
 
-.residentEditorialList {
+.pin {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.progressTrack {
+  position: absolute;
+  left: clamp(1.5rem, 6vw, 6rem);
+  right: clamp(1.5rem, 6vw, 6rem);
+  bottom: 2.25rem;
+  height: 1px;
+  background: rgba(244, 241, 234, 0.15);
+  z-index: 2;
+}
+
+.progressFill {
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.track {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding: 0 clamp(1.5rem, 6vw, 6rem);
+  will-change: transform;
+}
+
+.card {
+  flex: 0 0 auto;
+  width: clamp(300px, 36vw, 540px);
   display: flex;
   flex-direction: column;
-  gap: var(--space-16);
-  max-width: 1040px;
-  margin: 0 auto;
+  max-height: 72vh;
+  background: var(--ink-2);
+  border: 1px solid rgba(244, 241, 234, 0.1);
+  overflow: hidden;
 }
 
-.residentArticle {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: var(--space-10);
-  align-items: center;
-  padding-bottom: var(--space-12);
-  border-bottom: 1px solid rgba(197, 160, 89, 0.35);
-}
-
-.residentArticle:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.residentMeta {
-  margin-bottom: var(--space-3);
-}
-
-.residentRoleTag {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
+.cardIndex {
+  position: absolute;
+  margin: 0.9rem 0 0 0.9rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--vm-gerua);
-  margin-bottom: var(--space-1);
+  letter-spacing: 0.18em;
+  color: var(--paper);
+  z-index: 2;
+  background: rgba(11, 11, 11, 0.7);
+  padding: 0.3rem 0.6rem;
 }
 
-.residentHonorificText {
-  display: block;
-  font-family: var(--font-display);
+.card {
+  position: relative;
+}
+
+.cardImgWrap {
+  position: relative;
+  flex: 0 0 auto;
+  height: clamp(200px, 34vh, 320px);
+  overflow: hidden;
+}
+
+.cardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
+  filter: grayscale(0.6);
+}
+
+.card:hover .cardImg {
+  transform: scale(1.05);
+  filter: grayscale(0);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem 1.75rem 1.75rem;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.cardRole {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cardHonorific {
+  margin: 0.25rem 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-style: italic;
   font-size: 1.05rem;
-  color: var(--vm-text-muted);
+  color: rgba(244, 241, 234, 0.6);
 }
 
-.residentArticleName {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--vm-walnut);
-  letter-spacing: -0.01em;
+.cardName {
   margin: 0;
-  line-height: 1.2;
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--paper);
 }
 
-.residentBioText {
-  font-family: var(--font-body);
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--vm-text);
-  margin: 0 0 var(--space-3) 0;
-}
-
-.residentFullBioText {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
+.cardBio {
+  margin: 0.5rem 0 0;
+  font-size: 0.92rem;
   line-height: 1.65;
-  color: var(--vm-text-muted);
-  margin: 0 0 var(--space-4) 0;
+  color: rgba(244, 241, 234, 0.72);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.residentSubjectArea {
-  margin-bottom: var(--space-5);
+.subjects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
 }
 
 .subjectLabel {
-  display: block;
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
+  font-size: 0.66rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--vm-ochre);
-  margin-bottom: var(--space-2);
+  color: rgba(244, 241, 234, 0.45);
 }
 
-.subjectPills {
+.pills {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: 0.4rem;
 }
 
-.subjectPill {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  font-weight: 500;
-  padding: 4px 12px;
-  background: var(--vm-sand);
-  border: 1px solid rgba(197, 160, 89, 0.4);
-  border-radius: var(--radius-full);
-  color: var(--vm-walnut);
+.pill {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.75rem;
+  color: var(--paper);
+  border: 1px solid rgba(244, 241, 234, 0.2);
+  border-radius: 999px;
 }
 
-.biographyLink {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
+.cardLink {
+  align-self: flex-start;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: var(--vm-gerua);
+  color: var(--paper);
   text-decoration: none;
-  transition: transform 0.2s ease, color 0.2s ease;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 0.2rem;
+  transition: color 0.25s ease;
 }
 
-.biographyLink:hover {
-  color: var(--vm-ochre);
-  transform: translateX(4px);
+.cardLink:hover {
+  color: var(--accent);
 }
 
-/* ==========================================================================
-   05. TEACHING & LIVING TRADITION PREVIEW
-   ========================================================================== */
-.traditionSection {
-  background-color: var(--vm-sand);
-  padding: var(--space-20) 0;
-  border-top: 1px solid rgba(197, 160, 89, 0.25);
+.trackEnd {
+  flex: 0 0 auto;
+  width: clamp(200px, 22vw, 320px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--paper);
+  line-height: 1;
+}
+
+.trackEndSub {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+/* ---------- 05. Living tradition ---------- */
+
+.tradition {
+  padding: clamp(6rem, 11vw, 10rem) 0;
+  background: var(--paper);
 }
 
 .traditionHeader {
-  max-width: 780px;
-  margin: 0 auto var(--space-12) auto;
-  text-align: center;
+  max-width: 820px;
 }
 
-.traditionTitle {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.4vw, 2.8rem);
-  font-weight: 700;
-  color: var(--vm-walnut);
-  letter-spacing: -0.015em;
-  margin: 0 0 var(--space-3) 0;
+.tradition .overlineLight,
+.tradition .h2Light,
+.tradition .leadLight {
+  color: inherit;
 }
 
-.traditionLead {
-  font-family: var(--font-body);
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--vm-text-muted);
+.tradition .h2Light {
+  color: var(--text);
 }
 
-.teachingsRow {
+.tradition .leadLight {
+  color: var(--mute);
+}
+
+.teachingGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
-  margin-bottom: var(--space-12);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: clamp(3.5rem, 7vw, 5rem);
 }
 
-.teachingPreviewItem {
-  background: var(--vm-ivory);
-  padding: var(--space-6);
-  border: 1px solid rgba(197, 160, 89, 0.35);
-  border-radius: var(--radius-sm);
+.teachingCard {
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  gap: 0.75rem;
+  padding: 2rem;
+  background: var(--ink);
+  color: var(--paper);
 }
 
-.teachingPreviewItem:hover {
-  transform: translateY(-2px);
-  border-color: var(--vm-brass);
-}
-
-.teachingCatBadge {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
+.teachingCat {
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--vm-gerua);
-  margin-bottom: var(--space-2);
+  color: var(--accent);
 }
 
-.teachingPreviewTitle {
-  font-family: var(--font-display);
+.teachingTitle {
+  margin: 0.25rem 0 0;
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
   font-size: 1.35rem;
   font-weight: 700;
-  color: var(--vm-walnut);
-  line-height: 1.25;
-  margin: 0 0 var(--space-1) 0;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--paper);
 }
 
-.teachingPreviewTeacher {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  color: var(--vm-text-muted);
-  font-weight: 500;
-  margin: 0 0 var(--space-3) 0;
+.teachingTeacher {
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(244, 241, 234, 0.55);
 }
 
-.teachingPreviewDesc {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  line-height: 1.6;
-  color: var(--vm-text);
-  flex-grow: 1;
-  margin: 0 0 var(--space-4) 0;
-}
-
-.teachingPreviewFooter {
-  border-top: 1px solid rgba(197, 160, 89, 0.25);
-  padding-top: var(--space-3);
+.teachingDesc {
+  margin: 0.25rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: rgba(244, 241, 234, 0.72);
+  flex: 1;
 }
 
 .teachingLink {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
+  margin-top: 0.5rem;
+  align-self: flex-start;
+  font-size: 0.82rem;
   font-weight: 600;
-  color: var(--vm-gerua);
+  color: var(--paper);
   text-decoration: none;
-  transition: color 0.2s ease;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 0.2rem;
 }
 
 .teachingLink:hover {
-  color: var(--vm-ochre);
+  color: var(--accent);
 }
 
 .traditionCta {
-  text-align: center;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: clamp(3rem, 6vw, 4.5rem);
 }
 
-/* ==========================================================================
-   RESPONSIVE STYLES
-   ========================================================================== */
-@media (max-width: 1024px) {
-  .founderLayout {
-    grid-template-columns: 340px 1fr;
-    gap: var(--space-8);
-  }
+/* ---------- Responsive ---------- */
 
-  .lineageColumns {
-    grid-template-columns: 1fr;
-    gap: var(--space-4);
-  }
-
-  .teachingsRow {
-    grid-template-columns: 1fr;
+@media (max-width: 1100px) {
+  .teachingGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 768px) {
-  .founderLayout {
+@media (max-width: 900px) {
+  .founderGrid {
     grid-template-columns: 1fr;
   }
 
-  .founderPortraitCol {
-    position: static;
+  .founderSticky {
+    position: relative;
+    top: 0;
+    max-width: 560px;
   }
 
-  .milestoneGrid {
+  .points {
     grid-template-columns: 1fr;
   }
 
-  .residentArticle {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
+  /* Residents stack vertically when the pin is disabled */
+  .pinWrap {
+    height: auto !important;
   }
 
-  .founderActions {
+  .pin {
+    position: relative;
+    height: auto;
+    display: block;
+    padding-bottom: 2rem;
+    overflow: visible;
+  }
+
+  .progressTrack {
+    display: none;
+  }
+
+  .track {
     flex-direction: column;
-    align-items: stretch;
+    gap: 1.25rem;
+    padding: 0 1.5rem;
+  }
+
+  .card {
+    width: 100%;
+    max-height: none;
+  }
+
+  .cardImgWrap {
+    height: 280px;
+  }
+
+  .trackEnd {
+    width: auto;
+    padding: 2rem 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 8rem 0 4.5rem;
+    min-height: 92vh;
+  }
+
+  .heroCtas>*,
+  .founderCtas>*,
+  .traditionCta>* {
+    width: 100%;
+  }
+
+  .milestones {
+    grid-template-columns: 1fr;
+  }
+
+  .milestone:nth-child(even) {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .teachingGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .teachingCard {
+    padding: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .portraitImg,
+  .cardImg {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* Living tradition banner */
+.traditionFigure {
+  position: relative;
+  margin: clamp(3.5rem, 7vw, 5rem) 0 0;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.traditionImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transition: transform 1.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.traditionFigure:hover .traditionImg {
+  transform: scale(1.03);
+}
+
+@media (max-width: 600px) {
+  .traditionFigure {
+    aspect-ratio: 4 / 3;
   }
 }

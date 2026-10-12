@@ -155,15 +155,15 @@ export default function EventDetailClient({ eventId }: { eventId: string }) {
                     event.registration === 'open'
                       ? 'open'
                       : event.registration === 'limited'
-                      ? 'limited'
-                      : 'closed'
+                        ? 'limited'
+                        : 'closed'
                   }
                   label={
                     event.registration === 'open'
                       ? 'Registration Open'
                       : event.registration === 'limited'
-                      ? 'Limited Space'
-                      : 'Registration Closed'
+                        ? 'Limited Space'
+                        : 'Registration Closed'
                   }
                 />
               )}
@@ -286,8 +286,8 @@ export default function EventDetailClient({ eventId }: { eventId: string }) {
                         {event.registration === 'closed'
                           ? 'Registration for this event is currently closed. You may contact the Ashram office for inquiries regarding waiting lists.'
                           : isActive
-                          ? 'This lesson batch commenced on September 15, 2026 and is currently in progress. Lesson 1 is freely available to all seekers.'
-                          : 'Reserve your attendance for this gathering. Space is managed to ensure a quiet, contemplative atmosphere.'}
+                            ? 'This lesson batch commenced on September 15, 2026 and is currently in progress. Lesson 1 is freely available to all seekers.'
+                            : 'Reserve your attendance for this gathering. Space is managed to ensure a quiet, contemplative atmosphere.'}
                       </p>
 
                       {event.registration !== 'closed' && (
@@ -410,15 +410,15 @@ export default function EventDetailClient({ eventId }: { eventId: string }) {
                         e.registration === 'open'
                           ? 'open'
                           : e.registration === 'limited'
-                          ? 'limited'
-                          : 'closed'
+                            ? 'limited'
+                            : 'closed'
                       }
                       label={
                         e.registration === 'open'
                           ? 'Open'
                           : e.registration === 'limited'
-                          ? 'Limited'
-                          : 'Closed'
+                            ? 'Limited'
+                            : 'Closed'
                       }
                     />
                   </div>

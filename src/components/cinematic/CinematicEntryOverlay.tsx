@@ -89,6 +89,9 @@ export default function CinematicEntryOverlay() {
     // Temporarily lock body scroll during overlay
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    if (typeof window !== 'undefined' && window.lenisInstance) {
+      window.lenisInstance.stop();
+    }
 
     // Warm up image assets
     const atmosphereSrc = getAssetPath('/images/entry/entry-atmosphere.webp');
@@ -109,6 +112,9 @@ export default function CinematicEntryOverlay() {
     function finishEntry() {
       setIsActive(false);
       document.body.style.overflow = originalOverflow || '';
+      if (typeof window !== 'undefined' && window.lenisInstance) {
+        window.lenisInstance.start();
+      }
       try {
         sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
         document.documentElement.classList.add('vm-entry-seen');
@@ -120,6 +126,9 @@ export default function CinematicEntryOverlay() {
     return () => {
       clearTimeout(timer);
       document.body.style.overflow = originalOverflow || '';
+      if (typeof window !== 'undefined' && window.lenisInstance) {
+        window.lenisInstance.start();
+      }
     };
   }, [isHomepage]);
 
@@ -136,10 +145,14 @@ export default function CinematicEntryOverlay() {
       className={styles.overlay}
       aria-hidden="true"
       role="presentation"
+      data-lenis-prevent
       onAnimationEnd={(e) => {
         if (e.target === overlayRef.current) {
           setIsActive(false);
           document.body.style.overflow = '';
+          if (typeof window !== 'undefined' && window.lenisInstance) {
+            window.lenisInstance.start();
+          }
           try {
             sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
             document.documentElement.classList.add('vm-entry-seen');

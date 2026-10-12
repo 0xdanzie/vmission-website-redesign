@@ -2,11 +2,14 @@
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import gsap from 'gsap';
 import { useData } from '@/context/DataContext';
 import { Publication } from '@/data/publications';
 import PublicationModal from '@/components/PublicationModal';
-import CinematicHero from '@/components/cinematic/CinematicHero';
-import SacredDivider from '@/components/cinematic/SacredDivider';
+import Magnetic from '@/components/motion/Magnetic';
+import TiltCard from '@/components/motion/TiltCard';
+import { useScrollReveals } from '@/components/motion/useScrollReveals';
+import { getAssetPath } from '@/utils/assetPath';
 import CinematicPreFooter from '@/components/cinematic/CinematicPreFooter';
 import Button from '@/components/Button';
 import PublicationPlaceholder from '@/components/PublicationPlaceholder';
@@ -26,6 +29,9 @@ const BATCH_INCREMENT = 24;
 
 export default function PublicationsPage() {
   const { publications } = useData();
+  const rootRef = useRef<HTMLDivElement>(null);
+  const heroImgRef = useRef<HTMLImageElement>(null);
+  useScrollReveals(rootRef);
   const [selectedType, setSelectedType] = useState<string>('All Archive');
   const [selectedEra, setSelectedEra] = useState<string>('All Eras');
   const [selectedYear, setSelectedYear] = useState<string>('All Years');
@@ -177,35 +183,103 @@ export default function PublicationsPage() {
     }
   };
 
-  return (
-    <div className={styles.archiveWrapper}>
-      {/* ======================================================================
-          01. SCENE 01 — ARRIVE: THE LITERARY ARCHIVE (GATE 2)
-          ====================================================================== */}
-      <CinematicHero
-        breadcrumbs={[
-          { label: 'Home', href: '/' },
-          { label: 'Literary Archive' },
-        ]}
-        badge={`${totalCount} Canonical Works · ${minYear}–${maxYear} Documented Corpus`}
-        title="The Literary Archive"
-        subtitle="Preserving the Living Heritage of Advaita Vedanta"
-        lead="Preserving and disseminating the traditional teachings of Advaita Vedanta through authentic monthly journals, foundational treatises, and classical Sanskrit scriptures. Every record in this archive is catalogued with verified source downloads, digital reading editions, or institutional preservation plates."
-        backdropImage="/images/vmission/teaching/07-vedanta-archive-restored.jpg"
-        backdropAlt="Vedanta Ashram manuscript library and classical publication archives"
-        focalPoint={{ desktop: { x: 50, y: 40 }, mobile: { x: 50, y: 32 } }}
-        ctas={[
-          { label: 'E-Book Vault ↓', href: '#ebook-vault', variant: 'primary' },
-          { label: 'Explore Full Archive ↓', href: '#archive-browser', variant: 'outline' },
-        ]}
-      />
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap
+        .timeline({ defaults: { ease: 'power4.out' } })
+        .fromTo('[data-pub-mask]', { clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0% 0 0 0)', duration: 1.5 }, 0)
+        .fromTo(heroImgRef.current, { scale: 1.18 }, { scale: 1, duration: 2.4, ease: 'power2.out' }, 0)
+        .fromTo('[data-pub-line]', { yPercent: 115 }, { yPercent: 0, duration: 1.1, stagger: 0.12 }, 0.45)
+        .fromTo('[data-pub-fade]', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.9, stagger: 0.08 }, 0.9);
 
-      {/* ======================================================================
-          INSTITUTIONAL ARCHIVE REGISTRY STRIP (GATE 2)
-          ====================================================================== */}
-      <nav className={styles.registryStrip} aria-label="Archive Registry Statistics">
+      gsap.to(heroImgRef.current, {
+        yPercent: 14,
+        ease: 'none',
+        scrollTrigger: { trigger: '[data-pub-hero]', start: 'top top', end: 'bottom top', scrub: true },
+      });
+
+      // Shelf plinth: the e-book shelf draws in as it arrives
+      gsap.utils.toArray<HTMLElement>('[data-shelf-line]').forEach((el) => {
+        gsap.fromTo(
+          el,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 90%', once: true },
+          }
+        );
+      });
+
+      // Cover reveal: each cover lifts out of its frame as it enters view
+      gsap.utils.toArray<HTMLElement>('[data-cover-lift]').forEach((el) => {
+        gsap.fromTo(
+          el,
+          { yPercent: 6, opacity: 0.4 },
+          {
+            yPercent: 0,
+            opacity: 1,
+            ease: 'none',
+            scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 55%', scrub: true },
+          }
+        );
+      });
+    }, rootRef);
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div className={styles.archive} ref={rootRef}>
+      {/* 01. Hero */}
+      <section className={styles.hero} data-pub-hero aria-labelledby="pub-hero-title">
+        <div className={styles.heroMedia} data-pub-mask>
+          <img
+            ref={heroImgRef}
+            src={getAssetPath('/images/vmission/teaching/07-vedanta-archive-restored.jpg')}
+            alt="Vedanta Ashram manuscript library and classical publication archives"
+            className={styles.heroImg}
+          />
+          <div className={styles.heroShade} />
+        </div>
+
         <div className="container">
-          <div className={styles.registryGrid}>
+          <div className={styles.heroContent}>
+            <nav className={styles.crumbs} aria-label="Breadcrumb" data-pub-fade>
+              <Link href="/">Home</Link>
+              <span>/</span>
+              <span>Literary Archive</span>
+            </nav>
+
+            <p className={styles.heroBadge} data-pub-fade>
+              {totalCount} Canonical Works · {minYear}–{maxYear} Documented Corpus
+            </p>
+
+            <h1 id="pub-hero-title" className={styles.heroTitle}>
+              <span className={styles.lineMask}><span className={styles.lineInner} data-pub-line>The Literary</span></span>
+              <span className={styles.lineMask}><span className={`${styles.lineInner} ${styles.heroItalic}`} data-pub-line>Archive</span></span>
+            </h1>
+
+            <p className={styles.heroSub} data-pub-fade>Preserving the Living Heritage of Advaita Vedanta</p>
+            <p className={styles.heroLead} data-pub-fade>
+              Preserving and disseminating the traditional teachings of Advaita Vedanta through authentic monthly journals, foundational treatises, and classical Sanskrit scriptures. Every record in this archive is catalogued with verified source downloads, digital reading editions, or institutional preservation plates.
+            </p>
+
+            <div className={styles.heroCtas} data-pub-fade>
+              <Magnetic strength={0.25}>
+                <a href="#ebook-vault" className={styles.ctaPrimary}>E-Book Vault ↓</a>
+              </Magnetic>
+              <Magnetic strength={0.25}>
+                <a href="#archive-browser" className={styles.ctaGhost}>Explore Full Archive ↓</a>
+              </Magnetic>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Registry strip */}
+      <nav className={styles.registry} aria-label="Archive Registry Statistics">
+        <div className="container">
+          <div className={styles.registryGrid} data-stagger>
             <button
               type="button"
               className={styles.registryItem}
@@ -215,7 +289,7 @@ export default function PublicationsPage() {
                 setSelectedYear('All Years');
                 scrollToArchive();
               }}
-              title="View all 250 canonical publications"
+              title="View all canonical publications"
             >
               <span className={styles.registryNumber}>{totalCount}</span>
               <span className={styles.registryLabel}>Catalogued Works</span>
@@ -278,8 +352,8 @@ export default function PublicationsPage() {
               <span className={styles.registrySub}>Sanskrit Mūla &amp; Chants</span>
             </button>
 
-            <div className={styles.registryItemEpoch}>
-              <span className={styles.registryNumberEpoch}>{minYear}–{maxYear}</span>
+            <div className={styles.registryItemStatic}>
+              <span className={styles.registryNumber}>{minYear}–{maxYear}</span>
               <span className={styles.registryLabel}>Corpus Epoch</span>
               <span className={styles.registrySub}>Documented Digital Era</span>
             </div>
@@ -287,287 +361,171 @@ export default function PublicationsPage() {
         </div>
       </nav>
 
-      {/* ======================================================================
-          02. SCENE 02 — E-BOOK VAULT: CURATED LIBRARY VAULT (GATE 3)
-          ====================================================================== */}
-      <section id="ebook-vault" className={styles.vaultSection} aria-label="Curated E-Book Vault">
+      {/* 02. E-book vault */}
+      <section id="ebook-vault" className={styles.vault} aria-labelledby="vault-title">
         <div className="container">
-          <div className={styles.vaultHeader}>
-            <span className={styles.sectionOverline}>Curated Library Vault</span>
-            <h2 className={styles.vaultTitle}>Recovered Philosophical Treatises</h2>
-            <p className={styles.vaultLead}>
+          <div className={styles.intro} data-reveal>
+            <span className={styles.overline}>Curated Library Vault</span>
+            <h2 id="vault-title" className={styles.h2}>Recovered Philosophical Treatises</h2>
+            <div className={styles.rule} data-rule />
+            <p className={styles.lead}>
               Six foundational treatises and scriptural monographs authored by Pujya Swami Atmananda Saraswati, preserved with their authentic recovered original artwork and complete PDF scriptural texts.
             </p>
           </div>
 
-          <div className={styles.vaultShelfWrapper}>
-            <div className={styles.vaultGrid}>
-              {ebooksList.map((book) => {
-                const resolvedCover = resolvePublicationCover(book.id, book.type, book.coverImage);
-                return (
-                  <article key={book.id} className={styles.vaultCard} data-morph-source="publication">
-                    <div className={styles.vaultCoverCol}>
-                      {resolvedCover ? (
-                        <div className={styles.vaultFrameWrapper}>
-                          <img
-                            src={resolvedCover}
-                            alt={`Cover of ${book.title}`}
-                            className={styles.vaultCoverImg}
-                            loading="lazy"
-                          />
-                          <div className={styles.vaultSpineShading} aria-hidden="true" />
-                          <span className={styles.vaultVerifiedTag}>Authentic Cover</span>
-                        </div>
+          <div className={styles.vaultGrid} data-stagger>
+            {ebooksList.map((book) => {
+              const resolvedCover = resolvePublicationCover(book.id, book.type, book.coverImage);
+              return (
+                <TiltCard key={book.id} max={5} className={styles.vaultCard}>
+                  <div className={styles.vaultCover} data-cover-lift>
+                    {resolvedCover ? (
+                      <>
+                        <img src={resolvedCover} alt={`Cover of ${book.title}`} className={styles.coverImg} loading="lazy" />
+                        <span className={styles.verifiedTag}>Authentic Cover</span>
+                      </>
+                    ) : (
+                      <PublicationPlaceholder publication={book} />
+                    )}
+                  </div>
+
+                  <div className={styles.vaultBody}>
+                    <div className={styles.tagRow}>
+                      <span className={styles.tagAccent}>Canonical E-Book</span>
+                      <span className={styles.tag}>{book.language}</span>
+                      {book.pageCount && <span className={styles.tag}>{book.pageCount} Pages</span>}
+                    </div>
+
+                    <h3 className={styles.vaultTitle}>
+                      <Link href={`/publications/${book.id}`} className={styles.titleLink}>
+                        {book.title}
+                      </Link>
+                    </h3>
+
+                    {book.author && <p className={styles.byline}>By {book.author}</p>}
+                    <p className={styles.synopsis}>{book.description}</p>
+
+                    <div className={styles.actions}>
+                      <a
+                        href={book.downloadUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.actionPrimary}
+                        title="Download verified high-resolution PDF"
+                      >
+                        Download PDF Mirror ↗
+                      </a>
+                      {book.readOnlineUrl ? (
+                        <button
+                          type="button"
+                          onClick={() => setActiveModalPub(book)}
+                          className={styles.actionGhost}
+                          title="Open Digital Reader"
+                        >
+                          Digital Reader
+                        </button>
                       ) : (
-                        <PublicationPlaceholder publication={book} />
+                        <Link href={`/publications/${book.id}`} className={styles.actionGhost}>
+                          Archival Bookplate →
+                        </Link>
                       )}
                     </div>
+                  </div>
+                </TiltCard>
+              );
+            })}
+          </div>
 
-                    <div className={styles.vaultContentCol}>
-                      <div className={styles.vaultTagRow}>
-                        <span className={styles.vaultSeriesBadge}>Canonical E-Book</span>
-                        <span className={styles.vaultLangBadge}>{book.language}</span>
-                        {book.pageCount && (
-                          <span className={styles.vaultPagesBadge}>{book.pageCount} Pages</span>
-                        )}
-                      </div>
-
-                      <h3 className={styles.vaultItemTitle}>
-                        <Link href={`/publications/${book.id}`} className={styles.vaultTitleLink}>
-                          {book.title}
-                        </Link>
-                      </h3>
-
-                      {book.author && <p className={styles.vaultAuthor}>By {book.author}</p>}
-                      <p className={styles.vaultSynopsis}>{book.description}</p>
-
-                      <div className={styles.vaultActions}>
-                        <a
-                          href={book.downloadUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.btnVaultDownload}
-                          title="Download verified high-resolution PDF"
-                        >
-                          Download PDF Mirror ↗
-                        </a>
-                        {book.readOnlineUrl ? (
-                          <button
-                            type="button"
-                            onClick={() => setActiveModalPub(book)}
-                            className={styles.btnVaultReader}
-                            title="Open Digital Reader"
-                          >
-                            Digital Reader 📖
-                          </button>
-                        ) : (
-                          <Link
-                            href={`/publications/${book.id}`}
-                            className={styles.btnVaultReader}
-                          >
-                            Archival Bookplate →
-                          </Link>
-                        )}
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-
-            <div className={styles.vaultShelfPlinth} aria-hidden="true">
-              <div className={styles.vaultShelfPlinthWood} />
-              <div className={styles.vaultShelfPlinthBrass} />
-            </div>
+          <div className={styles.shelf} aria-hidden="true">
+            <span className={styles.shelfLine} data-shelf-line />
           </div>
         </div>
       </section>
 
-      <SacredDivider glyph="ॐ" />
-
-      {/* ======================================================================
-          03. SCENE 03 — PERIODICAL TIMELINE: LIVING JOURNALS (GATE 4)
-          ====================================================================== */}
-      <section className={styles.periodicalsSection} aria-label="Monthly Periodical Journals">
+      {/* 03. Periodicals */}
+      <section className={styles.periodicals} aria-labelledby="periodicals-title">
         <div className="container">
-          <div className={styles.periodicalsHeader}>
-            <span className={styles.sectionOverline}>Living Periodical Tradition</span>
-            <h2 className={styles.periodicalsTitle}>Monthly Wisdom Journals</h2>
-            <p className={styles.periodicalsLead}>
+          <div className={styles.intro} data-reveal>
+            <span className={styles.overline}>Living Periodical Tradition</span>
+            <h2 id="periodicals-title" className={styles.h2}>Monthly Wisdom Journals</h2>
+            <div className={styles.rule} data-rule />
+            <p className={styles.lead}>
               Published continuously without interruption since 1995. Explore the latest flagship editions alongside historical epochs.
             </p>
           </div>
 
-          {/* Anchor Issues Spread */}
-          <div className={styles.showcaseGrid}>
-            {/* Latest Vedanta Sandesh */}
-            {latestSandesh && (
-              <article className={styles.showcaseCard} data-morph-source="publication">
-                <div className={styles.showcaseCoverCol}>
-                  {(() => {
-                    const resolvedCover = resolvePublicationCover(
-                      latestSandesh.id,
-                      latestSandesh.type,
-                      latestSandesh.coverImage
-                    );
-                    return resolvedCover ? (
-                      <div className={styles.vaultFrameWrapper}>
-                        <img
-                          src={resolvedCover}
-                          alt={`Cover of ${latestSandesh.title}`}
-                          className={styles.vaultCoverImg}
-                          loading="lazy"
-                        />
-                        <div className={styles.vaultSpineShading} aria-hidden="true" />
-                        <span className={styles.vaultVerifiedTag}>Authentic Cover</span>
-                      </div>
+          <div className={styles.showcase} data-stagger>
+            {[latestSandesh, latestPiyush].map((issue) => {
+              if (!issue) return null;
+              const resolvedCover = resolvePublicationCover(issue.id, issue.type, issue.coverImage);
+              return (
+                <article key={issue.id} className={styles.issue}>
+                  <div className={styles.issueCover} data-cover-lift>
+                    {resolvedCover ? (
+                      <>
+                        <img src={resolvedCover} alt={`Cover of ${issue.title}`} className={styles.coverImg} loading="lazy" />
+                        <span className={styles.verifiedTag}>Authentic Cover</span>
+                      </>
                     ) : (
-                      <PublicationPlaceholder publication={latestSandesh} />
-                    );
-                  })()}
-                </div>
-                <div className={styles.showcaseContentCol}>
-                  <div className={styles.showcaseTagRow}>
-                    <span className={styles.showcaseTypeBadge}>Vedanta Sandesh</span>
-                    <span className={styles.showcaseLangBadge}>{latestSandesh.language}</span>
-                    <span className={styles.showcaseLatestTag}>Current Edition</span>
-                  </div>
-
-                  <h3 className={styles.showcaseItemTitle}>
-                    <Link href={`/publications/${latestSandesh.id}`} className={styles.showcaseTitleLink}>
-                      {latestSandesh.title}
-                    </Link>
-                  </h3>
-                  <p className={styles.showcaseIssueMeta}>
-                    Issue: {latestSandesh.month} {latestSandesh.year} · {latestSandesh.pageCount || 36} Pages
-                  </p>
-                  <p className={styles.showcaseDesc}>{latestSandesh.description}</p>
-
-                  <div className={styles.showcaseActions}>
-                    <a
-                      href={latestSandesh.downloadUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.btnDownload}
-                      title="Download verified PDF mirror"
-                    >
-                      Download PDF Mirror ↗
-                    </a>
-                    {latestSandesh.readOnlineUrl ? (
-                      <button
-                        type="button"
-                        onClick={() => setActiveModalPub(latestSandesh)}
-                        className={styles.btnReadOnline}
-                      >
-                        Read Online Reader 📖
-                      </button>
-                    ) : (
-                      <Link
-                        href={`/publications/${latestSandesh.id}`}
-                        className={styles.btnReadOnline}
-                      >
-                        Archival Bookplate →
-                      </Link>
+                      <PublicationPlaceholder publication={issue} />
                     )}
                   </div>
-                </div>
-              </article>
-            )}
-
-            {/* Latest Vedanta Piyush */}
-            {latestPiyush && (
-              <article className={styles.showcaseCard} data-morph-source="publication">
-                <div className={styles.showcaseCoverCol}>
-                  {(() => {
-                    const resolvedCover = resolvePublicationCover(
-                      latestPiyush.id,
-                      latestPiyush.type,
-                      latestPiyush.coverImage
-                    );
-                    return resolvedCover ? (
-                      <div className={styles.vaultFrameWrapper}>
-                        <img
-                          src={resolvedCover}
-                          alt={`Cover of ${latestPiyush.title}`}
-                          className={styles.vaultCoverImg}
-                          loading="lazy"
-                        />
-                        <div className={styles.vaultSpineShading} aria-hidden="true" />
-                        <span className={styles.vaultVerifiedTag}>Authentic Cover</span>
-                      </div>
-                    ) : (
-                      <PublicationPlaceholder publication={latestPiyush} />
-                    );
-                  })()}
-                </div>
-                <div className={styles.showcaseContentCol}>
-                  <div className={styles.showcaseTagRow}>
-                    <span className={styles.showcaseTypeBadge}>Vedanta Piyush</span>
-                    <span className={styles.showcaseLangBadge}>{latestPiyush.language}</span>
-                    <span className={styles.showcaseLatestTag}>Current Edition</span>
-                  </div>
-
-                  <h3 className={styles.showcaseItemTitle}>
-                    <Link href={`/publications/${latestPiyush.id}`} className={styles.showcaseTitleLink}>
-                      {latestPiyush.title}
-                    </Link>
-                  </h3>
-                  <p className={styles.showcaseIssueMeta}>
-                    Issue: {latestPiyush.month} {latestPiyush.year} · {latestPiyush.pageCount || 36} Pages
-                  </p>
-                  <p className={styles.showcaseDesc}>{latestPiyush.description}</p>
-
-                  <div className={styles.showcaseActions}>
-                    <a
-                      href={latestPiyush.downloadUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.btnDownload}
-                      title="Download verified PDF mirror"
-                    >
-                      Download PDF Mirror ↗
-                    </a>
-                    {latestPiyush.readOnlineUrl ? (
-                      <button
-                        type="button"
-                        onClick={() => setActiveModalPub(latestPiyush)}
-                        className={styles.btnReadOnline}
-                      >
-                        Read Online Reader 📖
-                      </button>
-                    ) : (
-                      <Link
-                        href={`/publications/${latestPiyush.id}`}
-                        className={styles.btnReadOnline}
-                      >
-                        Archival Bookplate →
+                  <div className={styles.issueBody}>
+                    <div className={styles.tagRow}>
+                      <span className={styles.tagAccent}>{issue.type}</span>
+                      <span className={styles.tag}>{issue.language}</span>
+                      <span className={styles.tagOutline}>Current Edition</span>
+                    </div>
+                    <h3 className={styles.issueTitle}>
+                      <Link href={`/publications/${issue.id}`} className={styles.titleLink}>
+                        {issue.title}
                       </Link>
-                    )}
+                    </h3>
+                    <p className={styles.issueMeta}>
+                      Issue: {issue.month} {issue.year} · {issue.pageCount || 36} Pages
+                    </p>
+                    <p className={styles.synopsis}>{issue.description}</p>
+                    <div className={styles.actions}>
+                      <a
+                        href={issue.downloadUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.actionPrimary}
+                        title="Download verified PDF mirror"
+                      >
+                        Download PDF Mirror ↗
+                      </a>
+                      {issue.readOnlineUrl ? (
+                        <button type="button" onClick={() => setActiveModalPub(issue)} className={styles.actionGhost}>
+                          Read Online
+                        </button>
+                      ) : (
+                        <Link href={`/publications/${issue.id}`} className={styles.actionGhost}>
+                          Archival Bookplate →
+                        </Link>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </article>
-            )}
+                </article>
+              );
+            })}
           </div>
 
-          {/* Chronological Era Navigation Card */}
-          <div className={styles.eraNavCard}>
-            <div className={styles.eraNavHeader}>
+          {/* Era navigation */}
+          <div className={styles.eraCard} data-reveal>
+            <div className={styles.eraHeader}>
               <div>
-                <h3 className={styles.eraNavLabel}>Chronological Archive Navigation</h3>
-                <p className={styles.eraNavSub}>Select a historical era to focus records in the catalogue below</p>
+                <h3 className={styles.eraTitle}>Chronological Archive Navigation</h3>
+                <p className={styles.eraSub}>Select a historical era to focus records in the catalogue below</p>
               </div>
               {selectedEra !== 'All Eras' && (
-                <button
-                  type="button"
-                  className={styles.eraClearBtn}
-                  onClick={() => setSelectedEra('All Eras')}
-                >
+                <button type="button" className={styles.eraClear} onClick={() => setSelectedEra('All Eras')}>
                   Show All Eras
                 </button>
               )}
             </div>
 
-            <div className={styles.eraButtonRow}>
+            <div className={styles.eraRow}>
               <button
                 type="button"
                 className={`${styles.eraBtn} ${selectedEra === 'All Eras' ? styles.eraBtnActive : ''}`}
@@ -577,9 +535,8 @@ export default function PublicationsPage() {
                 }}
               >
                 <span className={styles.eraName}>All Historical Eras</span>
-                <span className={styles.eraPillCount}>{totalCount} Works ({minYear}–{maxYear})</span>
+                <span className={styles.eraCount}>{totalCount} Works ({minYear}–{maxYear})</span>
               </button>
-
               <button
                 type="button"
                 className={`${styles.eraBtn} ${selectedEra === '2020s' ? styles.eraBtnActive : ''}`}
@@ -589,9 +546,8 @@ export default function PublicationsPage() {
                 }}
               >
                 <span className={styles.eraName}>2020–2022 Archive</span>
-                <span className={styles.eraPillCount}>{eraCounts.era2020s} Issues</span>
+                <span className={styles.eraCount}>{eraCounts.era2020s} Issues</span>
               </button>
-
               <button
                 type="button"
                 className={`${styles.eraBtn} ${selectedEra === '2010s' ? styles.eraBtnActive : ''}`}
@@ -601,30 +557,27 @@ export default function PublicationsPage() {
                 }}
               >
                 <span className={styles.eraName}>2019 Archive</span>
-                <span className={styles.eraPillCount}>{eraCounts.era2010s} Issues</span>
+                <span className={styles.eraCount}>{eraCounts.era2010s} Issues</span>
               </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ======================================================================
-          04. SCENE 04 — COMPLETE ARCHIVE: THE FULL CATALOGUE (GATE 5)
-          ====================================================================== */}
-      <section id="archive-browser" className={styles.browserSection} aria-label="Complete Publication Archive">
+      {/* 04. Full catalogue */}
+      <section id="archive-browser" className={styles.browser} aria-labelledby="browser-title">
         <div className="container">
-          <div className={styles.browserHeader}>
-            <span className={styles.sectionOverline}>Complete Digital Repository</span>
-            <h2 className={styles.browserTitle}>The Full Archive Catalogue</h2>
-            <p className={styles.browserLead}>
+          <div className={styles.intro} data-reveal>
+            <span className={styles.overline}>Complete Digital Repository</span>
+            <h2 id="browser-title" className={styles.h2}>The Full Archive Catalogue</h2>
+            <div className={styles.rule} data-rule />
+            <p className={styles.lead}>
               Browse all {totalCount} canonical issues, e-books, and classical texts. Each record retains its authentic verified cover image or ashram archival preservation plate.
             </p>
           </div>
 
-          {/* Subordinated Filter Controls */}
-          <div className={styles.controlsBar}>
-            {/* Category Tabs */}
-            <div className={styles.typeTabs} role="tablist" aria-label="Filter by publication category">
+          <div className={styles.controls} data-reveal>
+            <div className={styles.tabs} role="tablist" aria-label="Filter by publication category">
               {PUBLICATION_TYPES.map((type) => {
                 const count =
                   type === 'All Archive'
@@ -636,7 +589,7 @@ export default function PublicationsPage() {
                     type="button"
                     role="tab"
                     aria-selected={selectedType === type}
-                    className={`${styles.typeTab} ${selectedType === type ? styles.typeTabActive : ''}`}
+                    className={`${styles.tab} ${selectedType === type ? styles.tabActive : ''}`}
                     onClick={() => setSelectedType(type)}
                   >
                     <span>{type}</span>
@@ -646,10 +599,9 @@ export default function PublicationsPage() {
               })}
             </div>
 
-            {/* Sub-Filters: Year & Search */}
-            <div className={styles.subFilterRow}>
-              <div className={styles.yearPills}>
-                <span className={styles.filterLabel}>Year:</span>
+            <div className={styles.subRow}>
+              <div className={styles.yearRow}>
+                <span className={styles.filterLabel}>Year</span>
                 <button
                   type="button"
                   className={`${styles.yearPill} ${selectedYear === 'All Years' ? styles.yearPillActive : ''}`}
@@ -672,19 +624,14 @@ export default function PublicationsPage() {
               <div className={styles.searchWrap}>
                 <input
                   type="search"
-                  placeholder="Search by title, scripture, or topic..."
+                  placeholder="Search by title, scripture, or topic…"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className={styles.searchInput}
                   aria-label="Search publications archive"
                 />
                 {searchQuery && (
-                  <button
-                    type="button"
-                    onClick={() => setSearchQuery('')}
-                    className={styles.clearSearchBtn}
-                    aria-label="Clear search"
-                  >
+                  <button type="button" onClick={() => setSearchQuery('')} className={styles.clearBtn} aria-label="Clear search">
                     ✕
                   </button>
                 )}
@@ -692,9 +639,8 @@ export default function PublicationsPage() {
             </div>
           </div>
 
-          {/* Results Counter & Reset */}
-          <div className={styles.resultsInfoRow}>
-            <span className={styles.resultsCount}>
+          <div className={styles.resultsRow}>
+            <span className={styles.resultsText}>
               Showing <strong>{Math.min(visibleCount, filteredPublications.length)}</strong> of{' '}
               <strong>{filteredPublications.length}</strong> matching records ({totalCount} total in corpus)
             </span>
@@ -707,88 +653,66 @@ export default function PublicationsPage() {
                   setSelectedYear('All Years');
                   setSearchQuery('');
                 }}
-                className={styles.resetFiltersBtn}
+                className={styles.resetBtn}
               >
                 Reset All Filters
               </button>
             )}
           </div>
 
-          {/* Publications Editorial Archive Grid */}
           {filteredPublications.length > 0 ? (
             <>
-              <div className={styles.archiveEditorialGrid}>
+              <div className={styles.grid} data-stagger>
                 {displayedPublications.map((pub) => {
                   const resolvedCover = resolvePublicationCover(pub.id, pub.type, pub.coverImage);
-                  const isVerifiedCover = !!resolvedCover;
-
                   return (
-                    <article key={pub.id} className={styles.pubArchiveItem} data-morph-source="publication">
-                      <div className={styles.pubCoverContainer}>
-                        {isVerifiedCover ? (
+                    <article key={pub.id} className={styles.item}>
+                      <div className={styles.itemCover}>
+                        {resolvedCover ? (
                           <>
-                            <img
-                              src={resolvedCover}
-                              alt={`Cover of ${pub.title}`}
-                              className={styles.pubCoverImg}
-                              loading="lazy"
-                            />
-                            <div className={styles.pubCoverScrim} aria-hidden="true" />
-                            <span className={styles.pubTypeBadgeFloating}>{pub.type}</span>
-                            <span className={styles.statusVerifiedBadge}>Authentic Cover</span>
+                            <img src={resolvedCover} alt={`Cover of ${pub.title}`} className={styles.coverImg} loading="lazy" />
+                            <span className={styles.typeFloat}>{pub.type}</span>
                           </>
                         ) : (
                           <>
                             <PublicationPlaceholder publication={pub} />
-                            <span className={styles.statusArchivalBadge}>Archival Plate</span>
+                            <span className={styles.typeFloat}>Archival Plate</span>
                           </>
                         )}
                       </div>
 
-                      <div className={styles.pubContentBody}>
-                        <div className={styles.pubMetaMini}>
+                      <div className={styles.itemBody}>
+                        <div className={styles.meta}>
                           {pub.year && (
-                            <span className={styles.pubDateMini}>
-                              {pub.month ? `${pub.month} ${pub.year}` : pub.year}
-                            </span>
+                            <span>{pub.month ? `${pub.month} ${pub.year}` : pub.year}</span>
                           )}
-                          <span className={styles.pubLangMini}>{pub.language}</span>
+                          <span>{pub.language}</span>
                         </div>
 
-                        <h3 className={styles.pubTitleMini}>
-                          <Link href={`/publications/${pub.id}`} className={styles.pubTitleLink}>
+                        <h3 className={styles.itemTitle}>
+                          <Link href={`/publications/${pub.id}`} className={styles.titleLink}>
                             {pub.title}
                           </Link>
                         </h3>
-                        {pub.author && <p className={styles.pubAuthorMini}>By {pub.author}</p>}
+                        {pub.author && <p className={styles.byline}>By {pub.author}</p>}
+                        <p className={styles.itemDesc}>{pub.description}</p>
 
-                        <p className={styles.pubDescMini}>{pub.description}</p>
-
-                        <div className={styles.pubActionRowMini}>
+                        <div className={styles.itemActions}>
                           <a
                             href={pub.downloadUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={styles.miniDownloadLink}
+                            className={styles.miniLink}
                             title="Download verified PDF mirror"
                           >
                             PDF Mirror ↗
                           </a>
                           {pub.readOnlineUrl ? (
-                            <button
-                              type="button"
-                              onClick={() => setActiveModalPub(pub)}
-                              className={styles.miniReadBtn}
-                              title="Read Online"
-                            >
-                              Read Online 📖
+                            <button type="button" onClick={() => setActiveModalPub(pub)} className={styles.miniBtn} title="Read Online">
+                              Read Online
                             </button>
                           ) : (
-                            <Link
-                              href={`/publications/${pub.id}`}
-                              className={styles.miniReadBtn}
-                              title="View Publication Plate"
-                            >
+                            <Link href={`/publications/${pub.id}`} className={styles.miniBtn} title="View Publication Plate">
                               Bookplate →
                             </Link>
                           )}
@@ -799,31 +723,20 @@ export default function PublicationsPage() {
                 })}
               </div>
 
-              {/* Progressive Loading Controls (Gate 5 Performance Optimization) */}
               {hasMore && (
-                <div className={styles.loadMoreRow}>
-                  <button
-                    type="button"
-                    onClick={handleLoadMore}
-                    className={styles.btnLoadMore}
-                  >
+                <div className={styles.loadRow}>
+                  <button type="button" onClick={handleLoadMore} className={styles.loadBtn}>
                     Load Next {Math.min(BATCH_INCREMENT, remainingCount)} Works ({remainingCount} remaining)
                   </button>
-                  <button
-                    type="button"
-                    onClick={handleLoadAll}
-                    className={styles.btnLoadAll}
-                  >
+                  <button type="button" onClick={handleLoadAll} className={styles.loadAllBtn}>
                     View All {filteredPublications.length} Matching Records
                   </button>
                 </div>
               )}
             </>
           ) : (
-            <div className={styles.emptyArchiveBox}>
-              <p className={styles.emptyMessage}>
-                No publications found matching the active filter criteria.
-              </p>
+            <div className={styles.empty}>
+              <p className={styles.emptyText}>No publications found matching the active filter criteria.</p>
               <Button
                 variant="outline"
                 onClick={() => {
@@ -840,9 +753,7 @@ export default function PublicationsPage() {
         </div>
       </section>
 
-      {/* ======================================================================
-          05. PRE-FOOTER INVITATION
-          ====================================================================== */}
+      {/* 05. Pre-footer */}
       <CinematicPreFooter
         tag="Literary Transmission"
         heading="Never Neglect Scriptural Study"
@@ -854,12 +765,8 @@ export default function PublicationsPage() {
         ]}
       />
 
-      {/* Reader Modal */}
       {activeModalPub && (
-        <PublicationModal
-          publication={activeModalPub}
-          onClose={() => setActiveModalPub(null)}
-        />
+        <PublicationModal publication={activeModalPub} onClose={() => setActiveModalPub(null)} />
       )}
     </div>
   );

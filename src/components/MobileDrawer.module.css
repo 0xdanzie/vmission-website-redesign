@@ -1,16 +1,50 @@
-/* ============================================================
-   MOBILE DRAWER — MIDNIGHT WALNUT FOUNDATION (PHASE 3A)
-   ============================================================ */
+/* ==========================================================================
+   Mobile drawer — full-height ink panel with saffron accents
+   ========================================================================== */
+
+.drawer {
+  --dr-ink: #0b0b0b;
+  --dr-ink-2: #161616;
+  --dr-paper: #f4f1ea;
+  --dr-mute: rgba(244, 241, 234, 0.6);
+  --dr-line: rgba(244, 241, 234, 0.12);
+  --dr-accent: #e06328;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1100;
+  width: min(440px, 100%);
+  display: flex;
+  flex-direction: column;
+  background: var(--dr-ink);
+  color: var(--dr-paper);
+  transform: translateX(100%);
+  transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: -30px 0 60px -30px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.drawer.open {
+  transform: translateX(0);
+}
+
+.drawer h1,
+.drawer h2,
+.drawer h3,
+.drawer h4 {
+  color: inherit;
+}
 
 .backdrop {
   position: fixed;
   inset: 0;
-  z-index: 1100;
-  background: rgba(14, 10, 8, 0.78);
-  backdrop-filter: blur(6px);
+  z-index: 1090;
+  background: rgba(0, 0, 0, 0.55);
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--vm-ease-base);
+  transition: opacity 0.4s ease;
 }
 
 .backdrop.open {
@@ -18,93 +52,82 @@
   pointer-events: auto;
 }
 
-.drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: min(88vw, 380px);
-  z-index: 1200;
-  background: #1A1512;
-  border-left: 1px solid rgba(197, 160, 89, 0.35);
-  box-shadow: -16px 0 48px rgba(0, 0, 0, 0.6);
-  display: flex;
-  flex-direction: column;
-  transform: translateX(100%);
-  visibility: hidden;
-  pointer-events: none;
-  transition: transform var(--vm-ease-base), visibility var(--vm-ease-base);
-  color: var(--vm-ivory);
-}
+/* ---------- Header ---------- */
 
-.drawer.open {
-  transform: translateX(0);
-  visibility: visible;
-  pointer-events: auto;
-}
-
-/* Header */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--dr-line);
+  flex-shrink: 0;
+}
+
+.header a {
+  display: inline-flex;
+  color: inherit;
+  text-decoration: none;
 }
 
 .closeBtn {
-  width: 44px;
-  height: 44px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--vm-ivory);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--vm-radius-sm);
-  transition: background var(--vm-ease-fast);
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: 1px solid var(--dr-line);
+  border-radius: 50%;
+  color: var(--dr-paper);
+  cursor: pointer;
+  transition: transform 0.4s ease, border-color 0.25s ease;
 }
 
-.closeBtn:hover {
-  background: rgba(224, 99, 40, 0.2);
-  color: var(--vm-bhagwa-hover);
+.closeBtn:hover,
+.closeBtn:focus-visible {
+  transform: rotate(90deg);
+  border-color: var(--dr-accent);
 }
 
-/* Motto Bar */
+/* ---------- Motto ---------- */
+
 .mottoBar {
-  padding: 12px 24px;
-  background: #14100E;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  text-align: left;
+  padding: 1.25rem 1.5rem 1.5rem;
+  border-bottom: 1px solid var(--dr-line);
+  flex-shrink: 0;
 }
 
 .mottoBar span {
-  font-family: var(--font-sanskrit);
-  font-size: 0.88rem;
-  color: var(--vm-brass);
   display: block;
+  margin-bottom: 0.4rem;
+  font-family: var(--font-sanskrit, 'Noto Serif Devanagari', serif);
+  font-size: 0.95rem;
+  color: var(--dr-accent);
 }
 
 .mottoBar p {
-  font-size: 0.76rem;
-  color: #9E948A;
-  margin-top: 2px;
-  line-height: 1.4;
+  margin: 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.1rem;
   font-style: italic;
+  line-height: 1.45;
+  color: var(--dr-mute);
 }
 
-/* Scrollable Nav */
+/* ---------- Navigation body ---------- */
+
 .navContent {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
-  padding: 16px 20px 24px;
+  overscroll-behavior: contain;
+  padding: 0.5rem 0 1rem;
 }
 
 .navList {
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  margin: 0;
+  padding: 0;
 }
 
 .navLink,
@@ -113,129 +136,168 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  min-height: 46px;
-  padding: 10px 14px;
-  border-radius: var(--vm-radius-sm);
-  font-family: var(--font-ui);
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #D6CCC0;
-  text-decoration: none;
-  transition: all var(--vm-ease-fast);
-  background: transparent;
+  padding: 1rem 1.5rem;
+  background: none;
   border: none;
-  cursor: pointer;
+  border-bottom: 1px solid var(--dr-line);
+  color: var(--dr-paper);
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
   text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.25s ease, padding-left 0.35s ease;
 }
 
 .navLink:hover,
+.navLink:focus-visible,
 .accordionToggle:hover,
-.openToggle {
-  background: rgba(224, 99, 40, 0.12);
-  color: var(--vm-ivory);
+.accordionToggle:focus-visible {
+  color: var(--dr-accent);
+  padding-left: 1.85rem;
 }
 
 .navLink.active {
-  color: var(--vm-bhagwa);
-  font-weight: 600;
-  background: rgba(224, 99, 40, 0.16);
-  border-left: 3px solid var(--vm-bhagwa);
+  color: var(--dr-accent);
+}
+
+.navLink.active::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dr-accent);
+}
+
+.accordionItem {
+  border-bottom: none;
+}
+
+.openToggle {
+  color: var(--dr-accent);
 }
 
 .toggleCaret {
-  transition: transform var(--vm-ease-fast);
-  opacity: 0.7;
+  flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .caretRotated {
   transform: rotate(180deg);
-  opacity: 1;
-  color: var(--vm-bhagwa);
 }
 
-/* Accordion Sub-list */
 .subList {
   list-style: none;
-  margin: 4px 0 8px 16px;
-  padding-left: 12px;
-  border-left: 1.5px solid rgba(197, 160, 89, 0.3);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+  margin: 0;
+  padding: 0.25rem 0 0.75rem;
+  background: var(--dr-ink-2);
+  border-bottom: 1px solid var(--dr-line);
 }
 
 .subLink {
   display: block;
-  min-height: 40px;
-  padding: 8px 10px;
-  font-size: 0.86rem;
-  color: #B5ACA1;
+  padding: 0.7rem 1.5rem 0.7rem 2.25rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--dr-mute);
   text-decoration: none;
-  border-radius: var(--vm-radius-sm);
-  transition: color var(--vm-ease-fast), background var(--vm-ease-fast);
+  position: relative;
+  transition: color 0.25s ease;
 }
 
-.subLink:hover {
-  color: var(--vm-bhagwa-hover);
-  background: rgba(255, 255, 255, 0.04);
+.subLink::before {
+  content: '';
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  width: 6px;
+  height: 1px;
+  background: var(--dr-accent);
+  transform: translateY(-50%);
 }
 
-/* Footer Actions */
+.subLink:hover,
+.subLink:focus-visible {
+  color: var(--dr-paper);
+}
+
+/* ---------- Footer actions ---------- */
+
 .footerActions {
-  padding: 20px 24px;
-  background: #14100E;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 0.9rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+  border-top: 1px solid var(--dr-line);
+  background: var(--dr-ink);
 }
 
 .btnDrawerDonate {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 48px;
-  background: var(--vm-gerua);
-  color: #FFF;
-  font-family: var(--font-ui);
-  font-size: 0.95rem;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  border-radius: var(--vm-radius-sm);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dr-ink);
+  background: var(--dr-accent);
+  border-radius: 999px;
   text-decoration: none;
-  border: 1px solid var(--vm-gerua);
-  box-shadow: 0 4px 14px rgba(200, 78, 23, 0.35);
-  transition: all var(--vm-ease-fast);
+  transition: background 0.3s ease;
 }
 
-.btnDrawerDonate:hover {
-  background: var(--vm-bhagwa);
-  border-color: var(--vm-bhagwa);
+.btnDrawerDonate:hover,
+.btnDrawerDonate:focus-visible {
+  background: var(--dr-paper);
 }
 
 .quickContactLinks {
-  display: flex;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
 }
 
 .contactChip {
-  flex: 1;
-  min-height: 42px;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #CFC5B8;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--vm-radius-sm);
+  padding: 0.75rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--dr-paper);
   text-decoration: none;
-  transition: all var(--vm-ease-fast);
+  border: 1px solid var(--dr-line);
+  border-radius: 999px;
+  text-align: center;
+  transition: border-color 0.25s ease, color 0.25s ease;
 }
 
-.contactChip:hover {
-  background: rgba(197, 160, 89, 0.15);
-  border-color: var(--vm-brass);
-  color: var(--vm-brass);
+.contactChip:hover,
+.contactChip:focus-visible {
+  border-color: var(--dr-accent);
+  color: var(--dr-accent);
+}
+
+@media (max-width: 380px) {
+  .navLink,
+  .accordionToggle {
+    font-size: 1.2rem;
+  }
+
+  .quickContactLinks {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .backdrop,
+  .toggleCaret {
+    transition: none;
+  }
 }

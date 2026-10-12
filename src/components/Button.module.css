@@ -74,3 +74,35 @@
   color: var(--vm-bhagwa-hover);
   background: var(--vm-bhagwa-subtle);
 }
+
+/* Dark-surface tone: use on ink or photographic backgrounds */
+.onDark.primary {
+  background: var(--vm-bhagwa, #e06328);
+  border-color: var(--vm-bhagwa, #e06328);
+  color: #0b0b0b;
+  box-shadow: 0 6px 18px rgba(224, 99, 40, 0.28);
+}
+.onDark.primary:hover:not(:disabled) {
+  background: #f4f1ea;
+  border-color: #f4f1ea;
+  color: #0b0b0b;
+}
+.onDark.outline {
+  background: rgba(11, 11, 11, 0.35);
+  color: #f4f1ea;
+  border: 1.5px solid rgba(244, 241, 234, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.onDark.outline:hover:not(:disabled) {
+  background: #f4f1ea;
+  border-color: #f4f1ea;
+  color: #0b0b0b;
+}
+.onDark.ghost {
+  color: #f4f1ea;
+}
+.onDark.ghost:hover:not(:disabled) {
+  color: #e06328;
+  background: rgba(224, 99, 40, 0.12);
+}

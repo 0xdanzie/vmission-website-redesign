@@ -1,19 +1,18 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { getAssetPath } from '@/utils/assetPath';
-import Button from '@/components/Button';
-import CinematicHero from '@/components/cinematic/CinematicHero';
-import TactileFrame from '@/components/cinematic/TactileFrame';
-import SacredDivider from '@/components/cinematic/SacredDivider';
-import CinematicPreFooter from '@/components/cinematic/CinematicPreFooter';
+import Magnetic from '@/components/motion/Magnetic';
+import { useScrollReveals } from '@/components/motion/useScrollReveals';
 import FootprintsArchive from '@/components/FootprintsArchive';
 import styles from './page.module.css';
 
-export const metadata = {
-  title: 'Vedanta Ashram & Sri Gangeshwar Mahadev Mandir | Indore',
-  description:
-    'Step inside Vedanta Ashram in Sudama Nagar, Indore: consecrated Gangeshwar Mahadev Mandir, daily contemplative rhythm, Gurukula study spaces, residential community, and travel directions.',
-};
+gsap.registerPlugin(ScrollTrigger);
+
+const BADGE_ITEMS = ['Sudama Nagar', 'Indore', 'Established 1995'];
 
 export default function AshramPage() {
   const dailyRhythm = [
@@ -86,68 +85,161 @@ export default function AshramPage() {
     },
   ];
 
-  return (
-    <div className={styles.ashramWrapper}>
-      {/* ======================================================================
-          01. CINEMATIC ARRIVAL — THE LIVING SANCTUARY
-          ====================================================================== */}
-      <CinematicHero
-        breadcrumbs={[
-          { label: 'Home', href: '/' },
-          { label: 'Vedanta Ashram' },
-        ]}
-        badge="Sudama Nagar · Indore · Established 1995"
-        sanskritInvocation="शान्तं शिवमद्वैतं चतुर्थं मन्यन्ते स आत्मा स विज्ञेयः"
-        title="Vedanta Ashram"
-        subtitle="Vedanta Ashram &amp; Sri Gangeshwar Mahadev Mandir"
-        lead="Established in 1995 by Poojya Swami Atmananda Saraswati, Vedanta Ashram is a physical Gurukula in Indore where traditional Advaita Vedanta is contemplated, lived, and systematically taught in an environment of monastic peace."
-        backdropImage="/images/vmission/entrance/ashram-entrance-cinematic.jpg"
-        backdropAlt="Entrance and facade of Vedanta Ashram, Indore"
-        focalPoint={{ desktop: { x: 50, y: 32 }, mobile: { x: 50, y: 25 } }}
-        ctas={[
-          { label: 'Sri Gangeshwar Mandir ↓', href: '#mandir', variant: 'primary' },
-          { label: 'Daily Contemplative Rhythm', href: '#rhythm', variant: 'outline' },
-        ]}
-      />
+  const rootRef = useRef<HTMLDivElement>(null);
+  useScrollReveals(rootRef);
 
-      {/* ======================================================================
-          02. SRI GANGESHWAR MAHADEV MANDIR — ARCHITECTURAL SANCTUM
-          ====================================================================== */}
-      <section id="mandir" className={styles.mandirSection} aria-label="Sri Gangeshwar Mahadev Mandir">
-        <div className="container">
-          <div className={styles.mandirLayout}>
-            {/* Left: Architectural Focal Image */}
-            <div className={styles.mandirVisualCol}>
-              <TactileFrame
-                src="/images/vmission/ashram/gangeshwar-dome-closeup.jpg"
-                alt="Consecrated white Shivling dome of Sri Gangeshwar Mahadev Mandir"
-                caption="Sri Gangeshwar Mahadev Mandir — Consecrated in 1995 with unique white Shivling spire"
-                dateTag="Consecrated 1995"
-                aspectRatio="archival"
-                objectPosition="center top"
-                priority={true}
-              />
-              <div className={styles.mandirSecondaryFrame}>
-                <TactileFrame
-                  src="/images/vmission/worship/morning-aarti.jpg"
-                  alt="Morning camphor aarti worship at the sanctum altar"
-                  caption="Morning aarti and consecrated camphor lamp offerings"
-                  aspectRatio="landscape"
-                />
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const ctx = gsap.context(() => {
+      /* Hero intro. Waits for the entry overlay on first visit only. */
+      gsap.set('[data-hero-line] > span', { yPercent: 115 });
+      gsap.set('[data-hero-fade]', { opacity: 0, y: 26 });
+      gsap
+        .timeline({ delay: 0.2, defaults: { ease: 'expo.out' } })
+        .fromTo('[data-hero-img]', { scale: 1.18 }, { scale: 1, duration: 2.4, ease: 'power3.out' }, 0)
+        .to('[data-hero-line] > span', { yPercent: 0, duration: 1.4, stagger: 0.14 }, 0.1)
+        .to('[data-hero-fade]', { opacity: 1, y: 0, duration: 1.1, stagger: 0.08 }, 0.5);
+
+      gsap.to('[data-hero-img]', {
+        yPercent: 18,
+        ease: 'none',
+        scrollTrigger: { trigger: '[data-hero]', start: 'top top', end: 'bottom top', scrub: true },
+      });
+
+      /* Timeline line fills as the rhythm is read */
+      const timeline = root.querySelector<HTMLElement>('[data-timeline]');
+      if (timeline) {
+        gsap.fromTo(
+          '[data-timeline-fill]',
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            ease: 'none',
+            scrollTrigger: { trigger: timeline, start: 'top 70%', end: 'bottom 60%', scrub: true },
+          }
+        );
+      }
+    }, root);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div className={styles.ashram} ref={rootRef}>
+      {/* ==================================================================
+          01 — ARRIVAL
+          ================================================================== */}
+      <section className={styles.hero} data-hero>
+        <div className={styles.heroMedia}>
+          <img
+            data-hero-img
+            src={getAssetPath('/images/vmission/entrance/ashram-entrance-cinematic.jpg')}
+            alt="Entrance and facade of Vedanta Ashram, Indore"
+            className={styles.heroImg}
+            loading="eager"
+          />
+          <div className={styles.heroShade} />
+        </div>
+
+        <div className={styles.heroInner}>
+          <nav className={styles.crumbs} aria-label="Breadcrumb" data-hero-fade>
+            <Link href="/">Home</Link>
+            <span aria-hidden="true">/</span>
+            <span>Vedanta Ashram</span>
+          </nav>
+
+          <div className={styles.heroBadge} data-hero-fade>
+            {BADGE_ITEMS.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
+
+          <h1 className={styles.heroTitle}>
+            <span className={styles.lineMask} data-hero-line>
+              <span>Vedanta</span>
+            </span>{' '}
+            <span className={styles.lineMask} data-hero-line>
+              <span>Ashram</span>
+            </span>
+          </h1>
+
+          <div className={styles.heroFoot}>
+            <div className={styles.heroCopy} data-hero-fade>
+              <p className={styles.heroSub}>Vedanta Ashram &amp; Sri Gangeshwar Mahadev Mandir</p>
+              <p className={styles.heroLead}>
+                Established in 1995 by Poojya Swami Atmananda Saraswati, Vedanta Ashram is a physical Gurukula in Indore where traditional Advaita Vedanta is contemplated, lived, and systematically taught in an environment of monastic peace.
+              </p>
+              <div className={styles.heroCtas}>
+                <Magnetic>
+                  <a href="#mandir" className={styles.btnPrimary}>
+                    Sri Gangeshwar Mandir <span aria-hidden="true">↓</span>
+                  </a>
+                </Magnetic>
+                <Magnetic>
+                  <a href="#rhythm" className={styles.btnGhost}>
+                    Daily Contemplative Rhythm
+                  </a>
+                </Magnetic>
               </div>
             </div>
+            <p className={styles.heroSanskrit} data-hero-fade>
+              शान्तं शिवमद्वैतं चतुर्थं मन्यन्ते स आत्मा स विज्ञेयः
+            </p>
+          </div>
+        </div>
+      </section>
 
-            {/* Right: Sacred Architecture & Context */}
-            <div className={styles.mandirTextCol}>
-              <span className={styles.sectionOverline}>Mandir &amp; Sanctum</span>
-              <h2 className={styles.mandirHeading}>Sri Gangeshwar Mahadev Mandir</h2>
-              <p className={styles.mandirSub}>
+      {/* ==================================================================
+          02 — THE MANDIR
+          ================================================================== */}
+      <section id="mandir" className={styles.mandir}>
+        <div className="container">
+          <div className={styles.mandirGrid}>
+            <div className={styles.mandirVisual}>
+              <figure className={styles.mainFigure}>
+                <div className={styles.mainFrame} data-clip data-zoom>
+                  <img
+                    src={getAssetPath('/images/vmission/ashram/gangeshwar-dome-closeup.jpg')}
+                    alt="Consecrated white Shivling dome of Sri Gangeshwar Mahadev Mandir"
+                    loading="eager"
+                  />
+                </div>
+                <figcaption className={styles.caption}>
+                  <strong>Consecrated 1995</strong>
+                  <span>Sri Gangeshwar Mahadev Mandir — unique white Shivling spire</span>
+                </figcaption>
+              </figure>
+
+              <figure className={styles.secondaryFigure} data-reveal>
+                <div className={styles.secondaryFrame} data-clip data-zoom>
+                  <img
+                    src={getAssetPath('/images/vmission/worship/morning-aarti.jpg')}
+                    alt="Morning camphor aarti worship at the sanctum altar"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption className={styles.caption}>
+                  Morning aarti and consecrated camphor lamp offerings
+                </figcaption>
+              </figure>
+            </div>
+
+            <div className={styles.mandirText}>
+              <span className={styles.overline} data-reveal>Mandir &amp; Sanctum</span>
+              <h2 className={styles.h2} data-reveal>Sri Gangeshwar Mahadev Mandir</h2>
+              <p className={styles.lead} data-reveal>
                 The consecrated heart of the Indore campus, where Advaitic inquiry is grounded in classical devotional worship (Upasana).
               </p>
 
-              <SacredDivider glyph="ॐ नमः शिवाय" />
+              <div className={styles.divider} data-reveal>
+                <span className={styles.devanagari}>ॐ नमः शिवाय</span>
+                <span data-rule className={styles.rule} />
+              </div>
 
-              <div className={styles.mandirNarrative}>
+              <div className={styles.narrative} data-stagger>
                 <p>
                   Consecrated in 1995 alongside the founding of the Indore Ashram, Sri Gangeshwar Mahadev Mandir is crowned by a unique architectural feature: a monumental white sculpted Shivling forming the main spire (Shikhara) of the temple dome.
                 </p>
@@ -156,71 +248,65 @@ export default function AshramPage() {
                 </p>
               </div>
 
-              <div className={styles.mandirFeaturesList}>
-                <div className={styles.featureItem}>
-                  <span className={styles.featureIcon}>🛕</span>
+              <ul className={styles.features} data-stagger>
+                <li className={styles.feature}>
+                  <span className={styles.featureNum}>01</span>
                   <div>
-                    <h4 className={styles.featureTitle}>Monumental Shivling Dome</h4>
-                    <p className={styles.featureDesc}>
-                      Architecturally distinct white Shivling spire visible across Sudama Nagar, signifying Lord Shiva as the embodiment of non-dual consciousness.
-                    </p>
+                    <h4>Monumental Shivling Dome</h4>
+                    <p>Architecturally distinct white Shivling spire visible across Sudama Nagar, signifying Lord Shiva as the embodiment of non-dual consciousness.</p>
                   </div>
-                </div>
-
-                <div className={styles.featureItem}>
-                  <span className={styles.featureIcon}>🔥</span>
+                </li>
+                <li className={styles.feature}>
+                  <span className={styles.featureNum}>02</span>
                   <div>
-                    <h4 className={styles.featureTitle}>Vedic Upasana &amp; Rudrabhisheka</h4>
-                    <p className={styles.featureDesc}>
-                      Daily ritual abhishekams, Vedic chanting of Sri Rudram, and camphor aarti conducted according to scriptural tradition.
-                    </p>
+                    <h4>Vedic Upasana &amp; Rudrabhisheka</h4>
+                    <p>Daily ritual abhishekams, Vedic chanting of Sri Rudram, and camphor aarti conducted according to scriptural tradition.</p>
                   </div>
-                </div>
-
-                <div className={styles.featureItem}>
-                  <span className={styles.featureIcon}>🚪</span>
+                </li>
+                <li className={styles.feature}>
+                  <span className={styles.featureNum}>03</span>
                   <div>
-                    <h4 className={styles.featureTitle}>Carved Wooden Sanctum Doors</h4>
-                    <p className={styles.featureDesc}>
-                      Intricately carved teak sanctum doors greeting seekers entering the inner sanctum for meditation and darshan.
-                    </p>
+                    <h4>Carved Wooden Sanctum Doors</h4>
+                    <p>Intricately carved teak sanctum doors greeting seekers entering the inner sanctum for meditation and darshan.</p>
                   </div>
-                </div>
-              </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ======================================================================
-          03. DAILY CONTEMPLATIVE RHYTHM (DINACHARYA)
-          ====================================================================== */}
-      <section id="rhythm" className={styles.rhythmSection} aria-label="Daily Routine and Schedule">
+      {/* ==================================================================
+          03 — DAILY RHYTHM (dark)
+          ================================================================== */}
+      <section id="rhythm" className={styles.rhythm}>
         <div className="container">
-          <div className={styles.rhythmHeaderWrap}>
-            <span className={styles.sectionOverline}>Monastic Dinacharya</span>
-            <h2 className={styles.rhythmTitle}>The Daily Contemplative Rhythm</h2>
-            <p className={styles.rhythmLead}>
+          <header className={styles.sectionHead}>
+            <span className={styles.overlineLight} data-reveal>Monastic Dinacharya</span>
+            <h2 className={styles.h2Light} data-reveal>The Daily Contemplative Rhythm</h2>
+            <p className={styles.leadLight} data-reveal>
               Life at Vedanta Ashram unfolds in a balanced rhythm of silent meditation, scriptural study, dedicated temple worship, and community service.
             </p>
-          </div>
+          </header>
 
-          <div className={styles.timelineContainer}>
+          <div className={styles.timeline} data-timeline>
+            <div className={styles.timelineTrack} aria-hidden="true">
+              <div className={styles.timelineFill} data-timeline-fill />
+            </div>
             {dailyRhythm.map((item, idx) => (
-              <div key={idx} className={styles.timelineRow}>
-                <div className={styles.timeTagCol}>
+              <article key={idx} className={styles.timelineRow} data-reveal>
+                <div className={styles.timeCol}>
                   <span className={styles.timeDisplay}>{item.time}</span>
-                  <span className={styles.timeCategoryName}>{item.name}</span>
+                  <span className={styles.timeName}>{item.name}</span>
                 </div>
-                <div className={styles.timelineNode}>
-                  <div className={styles.timelineDot} />
-                  {idx < dailyRhythm.length - 1 && <div className={styles.timelineConnector} />}
+                <div className={styles.node} aria-hidden="true">
+                  <span className={styles.nodeDot} />
                 </div>
-                <div className={styles.timeContentCol}>
-                  <h3 className={styles.timeTitle}>{item.title}</h3>
-                  <p className={styles.timeDescription}>{item.desc}</p>
+                <div className={styles.timeContent}>
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
 
@@ -230,33 +316,31 @@ export default function AshramPage() {
         </div>
       </section>
 
-      {/* ======================================================================
-          04. THE ASHRAM SPACES — ARCHITECTURAL REPERTOIRE
-          ====================================================================== */}
-      <section className={styles.spacesSection} aria-label="Ashram Spaces and Facilities">
+      {/* ==================================================================
+          04 — ASHRAM SPACES (alternating editorial rows)
+          ================================================================== */}
+      <section className={styles.spaces}>
         <div className="container">
-          <div className={styles.spacesHeader}>
-            <span className={styles.sectionOverline}>Gurukula Campus</span>
-            <h2 className={styles.spacesTitle}>Ashram Grounds &amp; Study Facilities</h2>
-            <p className={styles.spacesLead}>
+          <header className={styles.sectionHead}>
+            <span className={styles.overline} data-reveal>Gurukula Campus</span>
+            <h2 className={styles.h2} data-reveal>Ashram Grounds &amp; Study Facilities</h2>
+            <p className={styles.lead} data-reveal>
               Designed to support single-pointed contemplation, the Ashram facilities balance traditional aesthetic reverence with quiet monastic simplicity.
             </p>
-          </div>
+          </header>
 
-          <div className={styles.spacesEditorialGrid}>
+          <div className={styles.spaceList}>
             {ashramSpaces.map((space, idx) => (
-              <article key={idx} className={styles.spaceArticle}>
-                <div className={styles.spaceVisual}>
-                  <TactileFrame
-                    src={space.image}
-                    alt={space.caption}
-                    caption={space.caption}
-                    aspectRatio="landscape"
-                  />
-                </div>
-                <div className={styles.spaceText}>
+              <article key={idx} className={`${styles.spaceRow} ${idx % 2 === 1 ? styles.flip : ''}`}>
+                <figure className={styles.spaceFigure} data-reveal>
+                  <div className={styles.spaceImg} data-clip data-zoom>
+                    <img src={getAssetPath(space.image)} alt={space.caption} loading="lazy" />
+                  </div>
+                  <figcaption className={styles.caption}>{space.caption}</figcaption>
+                </figure>
+                <div className={styles.spaceText} data-reveal>
                   <span className={styles.spaceNumber}>0{idx + 1}</span>
-                  <h3 className={styles.spaceHeading}>{space.title}</h3>
+                  <h3 className={styles.h3}>{space.title}</h3>
                   <p className={styles.spaceSub}>{space.subtitle}</p>
                   <p className={styles.spaceDesc}>{space.desc}</p>
                 </div>
@@ -266,19 +350,19 @@ export default function AshramPage() {
         </div>
       </section>
 
-      {/* ======================================================================
-          05. ASHRAM PARIVAR & RESIDENTIAL LIFE
-          ====================================================================== */}
-      <section className={styles.communitySection} aria-label="Ashram Parivar and Community">
+      {/* ==================================================================
+          05 — ASHRAM PARIVAR
+          ================================================================== */}
+      <section className={styles.community}>
         <div className="container">
           <div className={styles.communityGrid}>
-            <div className={styles.communityContentCol}>
-              <span className={styles.sectionOverline}>Living Gurukula Family</span>
-              <h2 className={styles.communityTitle}>The Ashram Parivar</h2>
-              <p className={styles.communityLead}>
+            <div className={styles.communityText}>
+              <span className={styles.overline} data-reveal>Living Gurukula Family</span>
+              <h2 className={styles.h2} data-reveal>The Ashram Parivar</h2>
+              <p className={styles.lead} data-reveal>
                 Vedanta Ashram is sustained by an intimate community of resident monks, renunciants (Brahmacharins), dedicated volunteers, and visiting spiritual seekers united in the common pursuit of Self-knowledge.
               </p>
-              <div className={styles.communityNarrative}>
+              <div className={styles.narrative} data-stagger>
                 <p>
                   During annual Gita Jayanti shivirs, Guru Poornima festivals, and residential retreats, seekers from across India and abroad reside at the Ashram, participating in intensive scriptural inquiry and cooperative seva.
                 </p>
@@ -287,116 +371,136 @@ export default function AshramPage() {
                 </p>
               </div>
 
-              <div className={styles.communityHighlights}>
-                <div className={styles.comHighlightItem}>
-                  <span className={styles.comHighlightNum}>30+</span>
-                  <span className={styles.comHighlightLabel}>Years of Unbroken Gurukula Transmission (Est. 1995)</span>
+              <div className={styles.stats} data-stagger>
+                <div className={styles.stat}>
+                  <span className={styles.statNum}>30+</span>
+                  <span className={styles.statLabel}>Years of Unbroken Gurukula Transmission (Est. 1995)</span>
                 </div>
-                <div className={styles.comHighlightItem}>
-                  <span className={styles.comHighlightNum}>100+</span>
-                  <span className={styles.comHighlightLabel}>Residential Scripture Shivirs &amp; Sadhana Camps Hosted</span>
+                <div className={styles.stat}>
+                  <span className={styles.statNum}>100+</span>
+                  <span className={styles.statLabel}>Residential Scripture Shivirs &amp; Sadhana Camps Hosted</span>
                 </div>
               </div>
             </div>
 
-            <div className={styles.communityVisualCol}>
-              <TactileFrame
-                src="/images/vmission/community/residential-camp-gathering.jpg"
-                alt="Residential scripture shivir gathering at Vedanta Ashram, Indore"
-                caption="Seekers gathered in Pravachan Bhavan during an intensive scriptural retreat"
-                aspectRatio="landscape"
-              />
-              <div className={styles.communitySecondaryFrame}>
-                <TactileFrame
-                  src="/images/vmission/community/satsang-with-acharya.jpg"
-                  alt="Satsang and dialogue with Acharyas in the courtyard"
-                  caption="Informal dialogue and doubt-clearing satsang under the veranda"
-                  aspectRatio="landscape"
-                />
-              </div>
+            <div className={styles.communityVisual}>
+              <figure className={styles.communityMain} data-reveal>
+                <div className={styles.communityFrame} data-clip data-zoom>
+                  <img
+                    src={getAssetPath('/images/vmission/community/residential-camp-gathering.jpg')}
+                    alt="Residential scripture shivir gathering at Vedanta Ashram, Indore"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption className={styles.caption}>
+                  Seekers gathered in Pravachan Bhavan during an intensive scriptural retreat
+                </figcaption>
+              </figure>
+              <figure className={styles.communitySecondary} data-reveal>
+                <div className={styles.communityFrame} data-clip data-zoom>
+                  <img
+                    src={getAssetPath('/images/vmission/community/satsang-with-acharya.jpg')}
+                    alt="Satsang and dialogue with Acharyas in the courtyard"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption className={styles.caption}>
+                  Informal dialogue and doubt-clearing satsang under the veranda
+                </figcaption>
+              </figure>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ======================================================================
-          05B. VM FOOTPRINTS — HISTORICAL DISCOURSE & MAHATMAS ARCHIVE
-          ====================================================================== */}
+      {/* Shared historical archive, styled separately */}
       <FootprintsArchive />
 
-      {/* ======================================================================
-          06. HOW TO REACH / SANCTUARY VISITOR GUIDE
-          ====================================================================== */}
-      <section id="reach" className={styles.reachSection} aria-label="Directions and Reaching the Ashram">
+      {/* ==================================================================
+          06 — REACHING THE ASHRAM
+          ================================================================== */}
+      <section id="reach" className={styles.reach}>
         <div className="container">
-          <div className={styles.reachHeader}>
-            <span className={styles.sectionOverline}>Pilgrim &amp; Visitor Guide</span>
-            <h2 className={styles.reachTitle}>Reaching Vedanta Ashram</h2>
-            <p className={styles.reachLead}>
+          <header className={styles.sectionHead}>
+            <span className={styles.overline} data-reveal>Pilgrim &amp; Visitor Guide</span>
+            <h2 className={styles.h2} data-reveal>Reaching Vedanta Ashram</h2>
+            <p className={styles.lead} data-reveal>
               Located in the quiet residential neighbourhood of Sudama Nagar in Indore, Madhya Pradesh, the Ashram is well-connected by air, rail, and road.
             </p>
-          </div>
+          </header>
 
-          <div className={styles.reachGrid}>
-            <div className={styles.reachCard}>
-              <div className={styles.reachIconWrap}>✈️</div>
-              <h3 className={styles.reachCardTitle}>By Air</h3>
-              <p className={styles.reachLocationName}>Devi Ahilyabai Holkar Airport (IDR)</p>
+          <div className={styles.reachGrid} data-stagger>
+            <article className={styles.reachCard}>
+              <span className={styles.reachIndex}>01 — Air</span>
+              <h3>By Air</h3>
+              <p className={styles.reachLocation}>Devi Ahilyabai Holkar Airport (IDR)</p>
               <p className={styles.reachDistance}>Distance: ~8 km (Approx. 25–30 minutes)</p>
-              <p className={styles.reachCardDesc}>
+              <p className={styles.reachDesc}>
                 Indore Airport has frequent direct flights connecting major Indian cities including Mumbai, Delhi, Bengaluru, Hyderabad, and Ahmedabad. Prepaid taxis and auto-rickshaws are readily available.
               </p>
-            </div>
+            </article>
 
-            <div className={styles.reachCard}>
-              <div className={styles.reachIconWrap}>🚆</div>
-              <h3 className={styles.reachCardTitle}>By Rail</h3>
-              <p className={styles.reachLocationName}>Indore Junction Railway Station (INDB)</p>
+            <article className={styles.reachCard}>
+              <span className={styles.reachIndex}>02 — Rail</span>
+              <h3>By Rail</h3>
+              <p className={styles.reachLocation}>Indore Junction Railway Station (INDB)</p>
               <p className={styles.reachDistance}>Distance: ~6 km (Approx. 20 minutes)</p>
-              <p className={styles.reachCardDesc}>
+              <p className={styles.reachDesc}>
                 Direct superfast and express trains connect Indore with Mumbai, New Delhi, Kolkata, Pune, and Bhopal. Taxis, app cabs, and city buses provide convenient transit to Sudama Nagar.
               </p>
-            </div>
+            </article>
 
-            <div className={styles.reachCard}>
-              <div className={styles.reachIconWrap}>📍</div>
-              <h3 className={styles.reachCardTitle}>Campus Address</h3>
-              <p className={styles.reachLocationName}>Vedanta Ashram &amp; Gangeshwar Mandir</p>
+            <article className={styles.reachCard}>
+              <span className={styles.reachIndex}>03 — Address</span>
+              <h3>Campus Address</h3>
+              <p className={styles.reachLocation}>Vedanta Ashram &amp; Gangeshwar Mandir</p>
               <p className={styles.reachDistance}>Sector E, Sudama Nagar, Indore, M.P. 452009</p>
-              <p className={styles.reachCardDesc}>
+              <p className={styles.reachDesc}>
                 Situated in Western Indore. Landmark: Sri Gangeshwar Mahadev Mandir (prominent white Shivling dome), easily recognized by local transport operators.
               </p>
-            </div>
+            </article>
           </div>
 
-          <div className={styles.visitNoticeBox}>
-            <h4 className={styles.visitNoticeTitle}>Visitor Information &amp; Ashram Protocol</h4>
-            <p className={styles.visitNoticeText}>
+          <div className={styles.notice} data-reveal>
+            <h4>Visitor Information &amp; Ashram Protocol</h4>
+            <p>
               Visitors are welcome to attend the daily morning and evening temple aartis, as well as open morning pravachans. For residential camp participation or overnight lodging requests, please correspond with the Ashram office in advance to confirm accommodation availability.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ======================================================================
-          07. PRE-FOOTER INVITATION
-          ====================================================================== */}
-      <CinematicPreFooter
-        tag="Visitor Information"
-        sanskrit="अथातो ब्रह्मजिज्ञासा"
-        heading="Visiting Vedanta Ashram"
-        subheading="Step inside for study, meditation, and devotional quietude"
-        description="Whether seeking a serene space to reflect on the Upanishads or attending a residential camp, the doors of Vedanta Ashram remain open to every earnest seeker."
-        ctas={[
-          { label: 'Browse Recorded Pravachans', href: '/teachings', variant: 'primary' },
-          { label: 'Explore Our Acharyas', href: '/acharyas', variant: 'outline' },
-        ]}
-        quote={{
-          sanskrit: 'शान्तिः शान्तिः शान्तिः',
-          translation: 'May there be peace in the cosmic realm, peace in the atmosphere, and peace within the heart.',
-          source: 'Taittiriya Upanishad Shanti Patha',
-        }}
-      />
+      {/* ==================================================================
+          07 — INVITATION
+          ================================================================== */}
+      <section className={styles.invite}>
+        <div className="container">
+          <div className={styles.inviteInner}>
+            <span className={styles.inviteTag} data-reveal>Visitor Information</span>
+            <p className={styles.inviteSanskrit} data-reveal>अथातो ब्रह्मजिज्ञासा</p>
+            <h2 className={styles.inviteTitle} data-reveal>Visiting Vedanta Ashram</h2>
+            <p className={styles.inviteSub} data-reveal>Step inside for study, meditation, and devotional quietude</p>
+            <p className={styles.inviteDesc} data-reveal>
+              Whether seeking a serene space to reflect on the Upanishads or attending a residential camp, the doors of Vedanta Ashram remain open to every earnest seeker.
+            </p>
+            <div className={styles.inviteCtas} data-reveal>
+              <Magnetic>
+                <Link href="/teachings" className={styles.btnLight}>
+                  Browse Recorded Pravachans <span aria-hidden="true">→</span>
+                </Link>
+              </Magnetic>
+              <Link href="/acharyas" className={styles.btnGhostLight}>
+                Explore Our Acharyas
+              </Link>
+            </div>
+            <blockquote className={styles.quote} data-reveal>
+              <p className={styles.quoteSanskrit}>शान्तिः शान्तिः शान्तिः</p>
+              <p>May there be peace in the cosmic realm, peace in the atmosphere, and peace within the heart.</p>
+              <cite>Taittiriya Upanishad Shanti Patha</cite>
+            </blockquote>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,161 +1,186 @@
 /* ==========================================================================
-   CINEMATIC PRE-FOOTER — MIDNIGHT WALNUT GROUNDING SECTION
-   Derived strictly from proven /about pre-footer architecture
+   Pre-footer invitation — ink block, pointer-following saffron glow,
+   line-by-line heading reveal, and a quote that sits on a drawn rule.
    ========================================================================== */
 
 .preFooterSection {
+  --pf-ink: #0b0b0b;
+  --pf-paper: #f4f1ea;
+  --pf-mute: rgba(244, 241, 234, 0.66);
+  --pf-line: rgba(244, 241, 234, 0.14);
+  --pf-accent: #e06328;
+
   position: relative;
-  background-color: var(--vm-walnut);
-  color: var(--vm-ivory);
-  padding: var(--space-20) 0;
+  padding: clamp(7rem, 13vw, 12rem) 0;
+  background: var(--pf-ink);
+  color: var(--pf-paper);
   overflow: hidden;
-  border-top: 1px solid rgba(197, 160, 89, 0.28);
+  text-align: center;
+}
+
+.preFooterSection h2 {
+  color: inherit;
 }
 
 .preFooterBackdrop {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(
-      circle at 50% 20%,
-      rgba(224, 99, 40, 0.12) 0%,
-      transparent 60%
-    ),
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(197, 160, 89, 0.08) 0%,
-      transparent 50%
-    );
   pointer-events: none;
+  background-image: radial-gradient(rgba(244, 241, 234, 0.06) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+
+.glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 560px;
+  height: 560px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(224, 99, 40, 0.32) 0%, rgba(224, 99, 40, 0) 65%);
+  filter: blur(8px);
+  pointer-events: none;
+  will-change: transform;
 }
 
 .preFooterContent {
   position: relative;
-  z-index: 2;
-  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 880px;
   margin: 0 auto;
-  text-align: center;
 }
 
 .tagBadge {
   display: inline-block;
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
+  padding: 0.45rem 0.9rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--vm-brass);
-  margin-bottom: var(--space-3);
-  padding: 4px 16px;
-  background: rgba(197, 160, 89, 0.12);
-  border: 1px solid rgba(197, 160, 89, 0.35);
-  border-radius: var(--radius-full);
+  color: var(--pf-accent);
+  border: 1px solid rgba(224, 99, 40, 0.5);
+  border-radius: 999px;
 }
 
 .sanskritInvocation {
-  font-family: var(--font-devanagari);
-  font-size: var(--text-lg);
-  color: var(--vm-brass);
-  letter-spacing: normal;
-  line-height: 1.5;
-  margin: 0 0 var(--space-4) 0;
-  font-weight: 500;
+  margin: 1.75rem 0 0;
+  font-family: var(--font-sanskrit, 'Noto Serif Devanagari', serif);
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+  line-height: 1.8;
+  color: var(--pf-accent);
 }
 
 .heading {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  margin: 1.25rem 0 0;
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
+  font-size: clamp(2.6rem, 6.4vw, 5.6rem);
   font-weight: 700;
-  line-height: 1.18;
-  color: var(--vm-ivory);
-  letter-spacing: -0.015em;
-  margin: 0 0 var(--space-5) 0;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  color: var(--pf-paper);
+}
+
+.lineMask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.lineInner {
+  display: inline-block;
 }
 
 .subheading {
   display: block;
-  font-weight: 400;
+  margin-top: 0.6rem;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
   font-style: italic;
-  color: var(--vm-sandalwood-dark);
-  font-size: 0.9em;
-  margin-top: 4px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--pf-accent);
+}
+
+.rule {
+  display: block;
+  width: 96px;
+  height: 2px;
+  margin: 2rem 0;
+  background: var(--pf-accent);
+  transform-origin: center;
 }
 
 .description {
-  font-family: var(--font-body);
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: rgba(253, 251, 247, 0.85);
-  margin: 0 auto var(--space-8) auto;
-  max-width: 660px;
+  max-width: 58ch;
+  margin: 0;
+  font-size: clamp(1.02rem, 1.25vw, 1.15rem);
+  line-height: 1.75;
+  color: var(--pf-mute);
 }
 
 .quoteCard {
-  background: rgba(20, 15, 12, 0.65);
-  border: 1px solid rgba(197, 160, 89, 0.3);
-  border-radius: var(--radius-sm);
-  padding: var(--space-6) var(--space-8);
-  margin: 0 auto var(--space-8) auto;
-  max-width: 600px;
-  text-align: center;
+  margin: 3rem 0 0;
+  padding: 0 1rem;
+  max-width: 640px;
 }
 
 .quoteSanskrit {
-  font-family: var(--font-devanagari);
-  font-size: 1.25rem;
-  color: var(--vm-brass);
-  margin: 0 0 var(--space-2) 0;
-  line-height: 1.5;
+  margin: 0;
+  font-family: var(--font-sanskrit, 'Noto Serif Devanagari', serif);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--pf-paper);
 }
 
 .quoteTranslation {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
+  margin: 0.9rem 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
   font-style: italic;
-  color: var(--vm-ivory);
-  margin: 0 0 var(--space-2) 0;
+  line-height: 1.4;
+  color: var(--pf-mute);
 }
 
 .quoteSource {
   display: block;
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  letter-spacing: 0.08em;
+  margin-top: 0.9rem;
+  font-style: normal;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--vm-brass-dark);
+  color: var(--pf-accent);
 }
 
 .ctaRow {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--space-4);
-  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
 }
 
 .secondaryBtn {
-  border-color: rgba(197, 160, 89, 0.6) !important;
-  color: var(--vm-ivory) !important;
-  background: rgba(20, 15, 12, 0.4) !important;
-  backdrop-filter: blur(4px);
+  border-color: var(--pf-line);
 }
 
-.secondaryBtn:hover {
-  background: rgba(197, 160, 89, 0.18) !important;
-  border-color: var(--vm-brass) !important;
+@media (max-width: 600px) {
+  .ctaRow > * {
+    width: 100%;
+  }
+
+  .glow {
+    width: 360px;
+    height: 360px;
+  }
 }
 
-@media (max-width: 768px) {
-  .preFooterSection {
-    padding: var(--space-14) 0;
-  }
-
-  .heading {
-    font-size: 2rem;
-  }
-
-  .ctaRow {
-    flex-direction: column;
-    align-items: stretch;
+@media (prefers-reduced-motion: reduce) {
+  .glow {
+    display: none;
   }
 }

@@ -19,9 +19,11 @@
   /* Primary Bhagwa Family */
   --vm-bhagwa: #E06328;
   --vm-bhagwa-hover: #F0753B;
-  --vm-gerua: #C84E17;                  /* Primary Action CTA */
+  --vm-gerua: #C84E17;
+  /* Primary Action CTA */
   --vm-gerua-active: #B34211;
-  --vm-ochre: #A73C0E;                  /* High-contrast text on light surfaces */
+  --vm-ochre: #A73C0E;
+  /* High-contrast text on light surfaces */
   --vm-bhagwa-subtle: rgba(224, 99, 40, 0.08);
   --vm-bhagwa-glow: rgba(224, 99, 40, 0.22);
   --vm-bhagwa-border: rgba(224, 99, 40, 0.28);
@@ -34,7 +36,8 @@
   --vm-saffron-border: var(--vm-bhagwa-border);
 
   /* Neutral Light Reading Surfaces */
-  --vm-ivory: #FDFBF7;                  /* Primary Reading Canvas */
+  --vm-ivory: #FDFBF7;
+  /* Primary Reading Canvas */
   --vm-ivory-warm: #F7F3EB;
   --vm-bg-surface: #FFFFFF;
   --vm-sand: #FAF6EE;
@@ -43,7 +46,8 @@
   --vm-sandalwood-dark: #EADBC8;
   --vm-bg-muted: #F5EFE6;
   --vm-bg-stone: #ECE3D4;
-  --vm-bg-ashram: #F0E9DD;          /* Warm sandstone — used by EventCard, Badge, PublicationCard */
+  --vm-bg-ashram: #F0E9DD;
+  /* Warm sandstone — used by EventCard, Badge, PublicationCard */
 
   /* Aliases for existing components */
   --vm-bg: var(--vm-ivory);
@@ -184,13 +188,20 @@
   --vm-motion-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 
   /* Duration Tiers */
-  --vm-dur-micro: 180ms;       /* Interactive micro-feedback, toggles, chips */
-  --vm-dur-editorial: 320ms;   /* Text lines, headings, metadata, badges */
-  --vm-dur-page: 300ms;        /* Global page editorial cut & hairline */
-  --vm-dur-image: 550ms;       /* Hero image unveils, photo frames */
-  --vm-dur-morph: 520ms;       /* Cross-view shared-element bookplate/card morphs */
-  --vm-dur-ambient: 12s;       /* Slow sacred ambient drifts */
-  --vm-dur-reveal: 650ms;       /* Progressive section scroll reveal */
+  --vm-dur-micro: 180ms;
+  /* Interactive micro-feedback, toggles, chips */
+  --vm-dur-editorial: 320ms;
+  /* Text lines, headings, metadata, badges */
+  --vm-dur-page: 300ms;
+  /* Global page editorial cut & hairline */
+  --vm-dur-image: 550ms;
+  /* Hero image unveils, photo frames */
+  --vm-dur-morph: 520ms;
+  /* Cross-view shared-element bookplate/card morphs */
+  --vm-dur-ambient: 12s;
+  /* Slow sacred ambient drifts */
+  --vm-dur-reveal: 650ms;
+  /* Progressive section scroll reveal */
 
   /* Composite Timing Tokens */
   --vm-transition-micro: var(--vm-dur-micro) var(--vm-motion-ease);
@@ -208,7 +219,9 @@
 /* ============================================================
    4. BASE RESET & FOUNDATIONS
    ============================================================ */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -216,9 +229,21 @@
 
 html {
   font-size: 16px;
-  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
 body {
@@ -246,7 +271,12 @@ body {
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
   color: var(--vm-text-dark);
   line-height: var(--lh-tight);
@@ -262,6 +292,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: var(--lh-snug);
   letter-spacing: -0.015em;
 }
+
 .text-h2 {
   font-family: var(--font-display);
   font-size: var(--text-h2);
@@ -269,6 +300,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--vm-text-dark);
   line-height: var(--lh-snug);
 }
+
 .text-h3 {
   font-family: var(--font-display);
   font-size: var(--text-h3);
@@ -276,6 +308,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--vm-text-dark);
   line-height: var(--lh-snug);
 }
+
 .text-lead {
   font-size: var(--text-lead);
   color: var(--vm-text-muted);
@@ -384,14 +417,27 @@ section[aria-label],
 }
 
 @media (max-width: 1024px) {
-  .grid--4 { grid-template-columns: repeat(2, 1fr); }
-  .grid--3 { grid-template-columns: repeat(2, 1fr); }
+  .grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid--3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 640px) {
-  .grid--4 { grid-template-columns: 1fr; }
-  .grid--3 { grid-template-columns: 1fr; }
-  .grid--2 { grid-template-columns: 1fr; }
+  .grid--4 {
+    grid-template-columns: 1fr;
+  }
+
+  .grid--3 {
+    grid-template-columns: 1fr;
+  }
+
+  .grid--2 {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Sacred Eyebrow */
@@ -510,18 +556,37 @@ section[aria-label],
    8. ANIMATIONS & MICRO-INTERACTIONS
    ============================================================ */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.97); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .animate-fadeUp {
@@ -573,7 +638,7 @@ section[aria-label],
   opacity: 0;
   transform: translateY(18px);
   transition: opacity var(--vm-dur-reveal, 650ms) cubic-bezier(0.16, 1, 0.3, 1),
-              transform var(--vm-dur-reveal, 650ms) cubic-bezier(0.16, 1, 0.3, 1);
+    transform var(--vm-dur-reveal, 650ms) cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -591,7 +656,10 @@ section[aria-label],
 
 /* Reduced Motion Compliance */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -626,7 +694,7 @@ section[aria-label],
    CINEMATIC ENTRY OVERLAY — FULL VIEWPORT IMMERSION
    Ensure website header/navbar stays underneath overlay during intro
    ============================================================ */
-html:not(.vm-entry-seen) body > #main-content,
+html:not(.vm-entry-seen) body>#main-content,
 html:not(.vm-entry-seen) [class*="pageWrapper"] {
   transform: none !important;
   will-change: auto !important;
@@ -640,3 +708,9 @@ html:not(.vm-entry-seen) body {
   overflow: hidden;
 }
 
+/* ============================================================
+   CUSTOM CURSOR — hides native pointer only when the custom one is live
+   ============================================================ */
+html.vm-cursor-active *:not(input):not(textarea):not(select):not(audio):not(video) {
+  cursor: none !important;
+}

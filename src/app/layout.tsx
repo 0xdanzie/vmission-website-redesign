@@ -1,14 +1,17 @@
 import type { Metadata } from 'next';
+import 'lenis/dist/lenis.css';
 import './globals.css';
 import { AudioPlayerProvider } from '@/context/AudioPlayerContext';
 import { ToastProvider } from '@/context/ToastContext';
 import { DataProvider } from '@/context/DataContext';
+import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AudioPlayerDock from '@/components/AudioPlayerDock';
 import ToastStack from '@/components/ToastStack';
 import PageTransition from '@/components/cinematic/PageTransition';
 import ScrollMotion from '@/components/cinematic/ScrollMotion';
+import CustomCursor from '@/components/motion/CustomCursor';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://vmission.org.in'),
@@ -67,7 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
         <link rel="icon" type="image/svg+xml" href="/brand/vedanta-mission/FAVICON/favicon.svg?v=2026" />
@@ -85,14 +88,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ToastProvider>
           <DataProvider>
             <AudioPlayerProvider>
-              <Navbar />
-              <PageTransition>
-                <main id="main-content">{children}</main>
-              </PageTransition>
-              <Footer />
-              <AudioPlayerDock />
-              <ToastStack />
-              <ScrollMotion />
+              <SmoothScrollProvider>
+                <Navbar />
+                <PageTransition>
+                  <main id="main-content">{children}</main>
+                </PageTransition>
+                <Footer />
+                <AudioPlayerDock />
+                <ToastStack />
+                <ScrollMotion />
+                <CustomCursor />
+              </SmoothScrollProvider>
             </AudioPlayerProvider>
           </DataProvider>
         </ToastProvider>

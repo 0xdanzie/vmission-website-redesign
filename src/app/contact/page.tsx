@@ -1,13 +1,18 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import Link from 'next/link';
-import CinematicHero from '@/components/cinematic/CinematicHero';
+import React, { useEffect, useState, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CinematicPreFooter from '@/components/cinematic/CinematicPreFooter';
+import Magnetic from '@/components/motion/Magnetic';
+import TiltCard from '@/components/motion/TiltCard';
+import { useScrollReveals } from '@/components/motion/useScrollReveals';
 import { useToast } from '@/context/ToastContext';
 import { useData } from '@/context/DataContext';
 import { getAssetPath } from '@/utils/assetPath';
 import styles from './page.module.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface PathwayItem {
   id: string;
@@ -66,6 +71,71 @@ export default function ContactPage() {
   const [selectedPathway, setSelectedPathway] = useState<string | null>(null);
 
   const formRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useScrollReveals(rootRef);
+
+  useEffect(() => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ctx = gsap.context(() => {
+      if (reduce) return;
+
+      // Hero intro: title rises through masks, entrance photo unveils
+      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+      tl.fromTo('[data-ct-hero-line]', { yPercent: 110 }, { yPercent: 0, duration: 1.3, stagger: 0.12 })
+        .fromTo('[data-ct-hero-fade]', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, stagger: 0.1 }, 0.5)
+        .fromTo(
+          '[data-ct-hero-img]',
+          { clipPath: 'inset(0% 100% 0% 0%)' },
+          { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'expo.inOut' },
+          0.2
+        )
+        .fromTo('[data-ct-hero-img] img', { scale: 1.25 }, { scale: 1, duration: 2.2, ease: 'power3.out' }, 0.2);
+
+      // Hero image parallax
+      gsap.to('[data-ct-hero-img] img', {
+        yPercent: 12,
+        ease: 'none',
+        scrollTrigger: { trigger: '[data-ct-hero]', start: 'top top', end: 'bottom top', scrub: true },
+      });
+
+      // Scroll progress rail
+      gsap.fromTo(
+        '[data-ct-progress]',
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          ease: 'none',
+          scrollTrigger: { trigger: rootRef.current, start: 'top top', end: 'bottom bottom', scrub: true },
+        }
+      );
+
+      // Temple darshan hours: the bar draws across its width on arrival
+      gsap.fromTo(
+        '[data-ct-rule]',
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: 1.4,
+          ease: 'expo.out',
+          scrollTrigger: { trigger: '[data-ct-rule]', start: 'top 88%', once: true },
+        }
+      );
+
+      // Visit image: the photo settles from a slight scale as it enters
+      gsap.fromTo(
+        '[data-ct-visit-img]',
+        { scale: 1.15 },
+        {
+          scale: 1,
+          ease: 'none',
+          scrollTrigger: { trigger: '[data-ct-visit]', start: 'top bottom', end: 'bottom top', scrub: true },
+        }
+      );
+    }, rootRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const handleSelectPathway = (pathway: PathwayItem) => {
     setSelectedPathway(pathway.id);
@@ -128,26 +198,51 @@ export default function ContactPage() {
   )}`;
 
   return (
-    <div className={styles.mainWrap}>
-      {/* 7.1 Cinematic Editorial Hero */}
-      <CinematicHero
-        badge="VEDANTA ASHRAM · INDORE"
-        title="Connect with the Ashram"
-        lead="The doors of Vedanta Ashram are open to sincere seekers of Truth. Whether inquiring about traditional Vedantic study, forthcoming assemblies, publications, or planning a reverent visit to Sri Gangeshwar Mahadev Mandir, reach the Ashram through our direct channels."
-        backdropImage="/images/vmission/entrance/ashram-entrance-cinematic.jpg"
-        backdropAlt="Entrance gateway to Vedanta Ashram, Indore"
-        backdropPositionClass={styles.contactHeroBackdrop}
-        focalPoint={{ desktop: { x: 50, y: 35 }, mobile: { x: 50, y: 26 } }}
-        ctas={[
-          { label: 'SEND AN ENQUIRY', href: '#enquiry-form', variant: 'primary' },
-          { label: 'FIND THE ASHRAM', href: '#visit-ashram', variant: 'outline' },
-        ]}
-      />
+    <div ref={rootRef} className={styles.mainWrap}>
+      <div className={styles.progressRail} aria-hidden="true">
+        <div className={styles.progressFill} data-ct-progress />
+      </div>
+
+      {/* 7.1 Hero */}
+      <header className={styles.hero} data-ct-hero aria-labelledby="contact-hero-title">
+        <div className={styles.heroGrid}>
+          <div className={styles.heroText}>
+            <p className={styles.heroBadge} data-ct-hero-fade>VEDANTA ASHRAM · INDORE</p>
+            <h1 id="contact-hero-title" className={styles.heroTitle}>
+              <span className={styles.heroLineMask}>
+                <span className={styles.heroLine} data-ct-hero-line>Connect</span>
+              </span>
+              <span className={styles.heroLineMask}>
+                <span className={styles.heroLine} data-ct-hero-line>with the Ashram</span>
+              </span>
+            </h1>
+            <p className={styles.heroLead} data-ct-hero-fade>
+              The doors of Vedanta Ashram are open to sincere seekers of Truth. Whether inquiring about traditional Vedantic study, forthcoming assemblies, publications, or planning a reverent visit to Sri Gangeshwar Mahadev Mandir, reach the Ashram through our direct channels.
+            </p>
+            <div className={styles.heroCtas} data-ct-hero-fade>
+              <Magnetic strength={0.22}>
+                <a href="#enquiry-form" className={styles.ctaPrimary}>SEND AN ENQUIRY</a>
+              </Magnetic>
+              <Magnetic strength={0.22}>
+                <a href="#visit-ashram" className={styles.ctaOutline}>FIND THE ASHRAM</a>
+              </Magnetic>
+            </div>
+          </div>
+
+          <figure className={styles.heroFigure} data-ct-hero-img>
+            <img
+              src={getAssetPath('/images/vmission/entrance/ashram-entrance-cinematic.jpg')}
+              alt="Entrance gateway to Vedanta Ashram, Indore"
+              className={styles.heroImg}
+            />
+          </figure>
+        </div>
+      </header>
 
       {/* 7.2 Contact Information — Institutional Plate */}
       <section className={styles.plateSection} aria-label="Institutional Contact Plate">
         <div className={styles.plateContainer}>
-          <div className={styles.plateCard}>
+          <div className={styles.plateCard} data-reveal>
             <div className={styles.plateHeader}>
               <div>
                 <span className={styles.plateEyebrow}>
@@ -292,6 +387,7 @@ export default function ContactPage() {
 
             {/* Temple Darshan Hours Bar */}
             <div className={styles.templeHoursBanner}>
+              <span className={styles.templeRule} aria-hidden="true" data-ct-rule />
               <div className={styles.templeHoursTitle}>
                 <span aria-hidden="true">🕉️</span>
                 <span>Sri Gangeshwar Mahadev Mandir Darshan</span>
@@ -319,20 +415,21 @@ export default function ContactPage() {
             {ENQUIRY_PATHWAYS.map((p) => {
               const isSelected = selectedPathway === p.id || topic === p.topicValue;
               return (
-                <button
-                  key={p.id}
-                  type="button"
-                  className={`${styles.pathwayCard} ${isSelected ? styles.pathwayActive : ''}`}
-                  onClick={() => handleSelectPathway(p)}
-                  aria-pressed={isSelected}
-                >
-                  <span className={styles.pathwayNumber}>{p.number}</span>
-                  <h3 className={styles.pathwayTitle}>{p.title}</h3>
-                  <p className={styles.pathwayDesc}>{p.desc}</p>
-                  <span className={styles.pathwayActionPrompt}>
-                    {isSelected ? 'Selected Topic ✓' : 'Select Topic →'}
-                  </span>
-                </button>
+                <TiltCard key={p.id} className={styles.tiltWrap} max={5}>
+                  <button
+                    type="button"
+                    className={`${styles.pathwayCard} ${isSelected ? styles.pathwayActive : ''}`}
+                    onClick={() => handleSelectPathway(p)}
+                    aria-pressed={isSelected}
+                  >
+                    <span className={styles.pathwayNumber}>{p.number}</span>
+                    <h3 className={styles.pathwayTitle}>{p.title}</h3>
+                    <p className={styles.pathwayDesc}>{p.desc}</p>
+                    <span className={styles.pathwayActionPrompt}>
+                      {isSelected ? 'Selected Topic ✓' : 'Select Topic →'}
+                    </span>
+                  </button>
+                </TiltCard>
               );
             })}
           </div>
@@ -347,7 +444,7 @@ export default function ContactPage() {
         aria-label="Ashram Enquiry Form"
       >
         <div className={styles.formContainer}>
-          <div className={styles.formBox}>
+          <div className={styles.formBox} data-reveal>
             <div className={styles.formTitleRow}>
               <h2 className={styles.formBoxTitle}>Send a Message to the Ashram</h2>
               <p className={styles.formBoxDesc}>
@@ -544,12 +641,12 @@ export default function ContactPage() {
       </section>
 
       {/* 7.5 Visit the Ashram Section */}
-      <section id="visit-ashram" className={styles.visitSection} aria-label="Visit the Physical Ashram">
+      <section id="visit-ashram" className={styles.visitSection} data-ct-visit aria-labelledby="visit-ashram-title">
         <div className={styles.visitContainer}>
           <div className={styles.visitGrid}>
-            <div>
+            <div data-reveal>
               <span className={styles.visitEyebrow}>Physical Threshold</span>
-              <h2 className={styles.visitHeading}>Visit Vedanta Ashram</h2>
+              <h2 id="visit-ashram-title" className={styles.visitHeading}>Visit Vedanta Ashram</h2>
               <p className={styles.visitLead}>
                 Situated in Indore, Madhya Pradesh, the Ashram provides a quiet, dedicated environment for contemplation, scriptural study, and daily worship. Sincere seekers wishing to visit are requested to review travel connections below.
               </p>
@@ -617,6 +714,7 @@ export default function ContactPage() {
                   src={getAssetPath('/images/vmission/ashram/courtyard-with-guruji.jpg')}
                   alt="Courtyard and serene atmosphere of Vedanta Ashram, Indore"
                   className={styles.visitImage}
+                  data-ct-visit-img
                   loading="lazy"
                 />
                 <div className={styles.visitImageCaption}>

@@ -59,11 +59,12 @@ export default function MobileDrawer({ open, onClose, pathname }: Props) {
         role="dialog"
         aria-modal="true"
         aria-label="Mobile Navigation Menu"
+        data-lenis-prevent
       >
         {/* Header */}
         <div className={styles.header}>
           <Link href="/" onClick={onClose} aria-label="Vedanta Mission Home">
-            <BrandLogo variant="mobile" size="md" />
+            <BrandLogo variant="emblem-white" size="md" />
           </Link>
           <button
             type="button"

@@ -1,83 +1,73 @@
-/* Phase 4B: Global Cinematic Page Transition Language */
-/* Midnight Walnut / warm ivory / restrained Bhagwa / thin brass editorial line */
+/* ==========================================================================
+   Page transition — saffron hairline on navigation, then a soft editorial
+   fade-in of the destination page.
+   ========================================================================== */
 
-/* Top Editorial Hairline Indicator — Instant Click Feedback */
 .hairlineTrack {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 2px;
-  background: transparent;
-  z-index: 9999;
+  z-index: 1200;
   pointer-events: none;
-  overflow: hidden;
+  background: transparent;
 }
 
 .hairlineProgress {
   height: 100%;
   width: 100%;
-  background: linear-gradient(
-    90deg,
-    var(--vm-bhagwa, #E06328) 0%,
-    var(--vm-brass, #C5A059) 50%,
-    var(--vm-bhagwa-hover, #F0753B) 100%
-  );
-  transform: translateX(-100%);
+  background: #e06328;
   transform-origin: left center;
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease;
+  transform: scaleX(0);
   opacity: 0;
 }
 
 .hairlineActive {
   opacity: 1;
-  transform: translateX(-15%);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.05s linear;
+  transform: scaleX(0.7);
+  transition: transform 1.1s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease;
 }
 
 .hairlineCompleting {
   opacity: 1;
-  transform: translateX(0%);
-  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scaleX(1);
+  transition: transform 0.3s ease-out, opacity 0.35s ease 0.15s;
 }
 
 .hairlineDone {
   opacity: 0;
-  transform: translateX(0%);
-  transition: opacity 0.15s ease 0.05s;
+  transform: scaleX(0);
+  transition: none;
 }
 
-/* Route Content Wrapper: Fast Editorial Cut */
 .pageWrapper {
   position: relative;
-  width: 100%;
-  min-height: calc(100vh - 200px);
+  min-height: 100vh;
 }
 
 .editorialEntering {
-  animation: pageEditorialCut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, opacity;
+  animation: ptEditorialIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-@keyframes pageEditorialCut {
-  0% {
-    opacity: 0.88;
-    transform: translateY(6px);
+@keyframes ptEditorialIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Reduced Motion: Immediate Cut with Zero Decorative Motion */
 @media (prefers-reduced-motion: reduce) {
-  .hairlineTrack {
-    display: none !important;
+  .hairlineActive,
+  .hairlineCompleting {
+    transition: none;
   }
+
   .editorialEntering {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
+    animation: none;
   }
 }

@@ -1,12 +1,19 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
-import CinematicHero from '@/components/cinematic/CinematicHero';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CinematicPreFooter from '@/components/cinematic/CinematicPreFooter';
+import Magnetic from '@/components/motion/Magnetic';
+import TiltCard from '@/components/motion/TiltCard';
+import { useScrollReveals } from '@/components/motion/useScrollReveals';
 import { useToast } from '@/context/ToastContext';
 import { useData } from '@/context/DataContext';
+import { getAssetPath } from '@/utils/assetPath';
 import styles from './page.module.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export interface SevaOfferingItem {
   id: string;
@@ -320,9 +327,72 @@ export default function DonatePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isPrepared, setIsPrepared] = useState(false);
 
+  const rootRef = useRef<HTMLDivElement>(null);
   const methodsSectionRef = useRef<HTMLDivElement>(null);
   const formSectionRef = useRef<HTMLDivElement>(null);
   const categoriesSectionRef = useRef<HTMLDivElement>(null);
+
+  useScrollReveals(rootRef);
+
+  useEffect(() => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ctx = gsap.context(() => {
+      if (reduce) return;
+
+      // Hero intro: title lines rise through masks, image unveils, lead fades in
+      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+      tl.fromTo('[data-dn-hero-line]', { yPercent: 110 }, { yPercent: 0, duration: 1.3, stagger: 0.12 })
+        .fromTo('[data-dn-hero-fade]', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, stagger: 0.1 }, 0.5)
+        .fromTo(
+          '[data-dn-hero-img]',
+          { clipPath: 'inset(0% 0% 100% 0%)' },
+          { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.6, ease: 'expo.inOut' },
+          0.2
+        )
+        .fromTo('[data-dn-hero-img] img', { scale: 1.25 }, { scale: 1, duration: 2.2, ease: 'power3.out' }, 0.2);
+
+      // Hero image parallax
+      gsap.to('[data-dn-hero-img] img', {
+        yPercent: 12,
+        ease: 'none',
+        scrollTrigger: { trigger: '[data-dn-hero]', start: 'top top', end: 'bottom top', scrub: true },
+      });
+
+      // Giant outlined "Dana" word drifts across the context section
+      gsap.fromTo(
+        '[data-dn-ghost]',
+        { xPercent: 12 },
+        {
+          xPercent: -12,
+          ease: 'none',
+          scrollTrigger: { trigger: '[data-dn-context]', start: 'top bottom', end: 'bottom top', scrub: true },
+        }
+      );
+
+      // Scroll progress rail across the page
+      gsap.fromTo(
+        '[data-dn-progress]',
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          ease: 'none',
+          scrollTrigger: { trigger: rootRef.current, start: 'top top', end: 'bottom bottom', scrub: true },
+        }
+      );
+
+      // Step numerals fill saffron as each step enters
+      gsap.utils.toArray<HTMLElement>('[data-dn-step]').forEach((el) => {
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top 82%',
+          once: true,
+          onEnter: () => el.classList.add(styles.stepOn),
+        });
+      });
+    }, rootRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const copyToClipboard = (text: string, label: string) => {
     if (navigator?.clipboard?.writeText) {
@@ -924,27 +994,54 @@ ${donorName}`;
   const activeMethodDef = PAYMENT_METHODS.find((m) => m.id === activeMethodId)!;
 
   return (
-    <div className={styles.mainWrap}>
-      {/* 8.1 Seva Hero with Focal Positioning */}
-      <CinematicHero
-        badge="VEDANTA MISSION · SEVA"
-        title="Seva"
-        lead="In the sacred Gurukula tradition, the supreme wisdom of Advaita Vedanta is shared freely with all sincere seekers without commercial fees. The Ashram, its teachings, daily temple worship, and student welfare are sustained entirely through voluntary Seva and reverent offerings (Dana)."
-        backdropImage="/images/vmission/ashram/gangeshwar-dome-closeup.jpg"
-        backdropAlt="Sri Gangeshwar Mahadev Mandir dome and sanctum at Vedanta Ashram"
-        backdropPositionClass={styles.donateHeroBackdrop}
-        focalPoint={{ desktop: { x: 50, y: 28 }, mobile: { x: 50, y: 20 } }}
-        ctas={[
-          { label: 'EXPLORE SEVA OFFERINGS ↓', href: '#seva-purposes', variant: 'primary' },
-          { label: 'VIEW PAYMENT METHODS', href: '#offering-methods', variant: 'outline' },
-        ]}
-      />
+    <div ref={rootRef} className={styles.mainWrap}>
+      <div className={styles.progressRail} aria-hidden="true">
+        <div className={styles.progressFill} data-dn-progress />
+      </div>
+
+      {/* 8.1 Seva Hero */}
+      <header className={styles.hero} data-dn-hero aria-labelledby="seva-hero-title">
+        <div className={styles.heroGrid}>
+          <div className={styles.heroText}>
+            <p className={styles.heroBadge} data-dn-hero-fade>VEDANTA MISSION · SEVA</p>
+            <h1 id="seva-hero-title" className={styles.heroTitle}>
+              <span className={styles.heroLineMask}>
+                <span className={styles.heroLine} data-dn-hero-line>Seva</span>
+              </span>
+            </h1>
+            <p className={styles.heroLead} data-dn-hero-fade>
+              In the sacred Gurukula tradition, the supreme wisdom of Advaita Vedanta is shared freely with all sincere seekers without commercial fees. The Ashram, its teachings, daily temple worship, and student welfare are sustained entirely through voluntary Seva and reverent offerings (Dana).
+            </p>
+            <div className={styles.heroCtas} data-dn-hero-fade>
+              <Magnetic strength={0.22}>
+                <a href="#seva-purposes" className={styles.ctaPrimary}>EXPLORE SEVA OFFERINGS ↓</a>
+              </Magnetic>
+              <Magnetic strength={0.22}>
+                <a href="#offering-methods" className={styles.ctaOutline}>VIEW PAYMENT METHODS</a>
+              </Magnetic>
+            </div>
+          </div>
+
+          <figure className={styles.heroFigure} data-dn-hero-img>
+            <img
+              src={getAssetPath('/images/vmission/ashram/gangeshwar-dome-closeup.jpg')}
+              alt="Sri Gangeshwar Mahadev Mandir dome and sanctum at Vedanta Ashram"
+              className={styles.heroImg}
+            />
+          </figure>
+        </div>
+      </header>
 
       {/* 8.2 Seva Context */}
-      <section className={styles.contextSection} aria-label="The Spirit of Seva">
-        <div className={styles.contextContainer}>
+      <section
+        className={styles.contextSection}
+        data-dn-context
+        aria-labelledby="spirit-of-dana-title"
+      >
+        <div className={styles.contextContainer} data-reveal>
+          <span className={styles.ghostWord} aria-hidden="true" data-dn-ghost>Dana</span>
           <span className={styles.contextEyebrow}>Participation &amp; Support</span>
-          <h2 className={styles.contextTitle}>The Spirit of Dana</h2>
+          <h2 id="spirit-of-dana-title" className={styles.contextTitle}>The Spirit of Dana</h2>
           <p className={styles.contextText}>
             For centuries, the Gurukula system has flourished on mutual reverence: teachers impart self-knowledge unconditionally, and society supports the ashram facilities so that the teaching of Vedanta continues unhindered. Every contribution made to the Ashram directly supports this continuity.
           </p>
@@ -971,12 +1068,12 @@ ${donorName}`;
             </p>
           </div>
 
-          <div className={styles.categoriesGrid}>
+          <div className={styles.categoriesGrid} data-stagger>
             {SEVA_CATEGORIES.map((cat) => {
               const isCatActive = selectedCat.id === cat.id;
               return (
+                <TiltCard key={cat.id} className={styles.tiltWrap} max={5}>
                 <div
-                  key={cat.id}
                   className={`${styles.categoryCard} ${isCatActive ? styles.categoryCardActive : ''}`}
                 >
                   <div className={styles.cardTopRow}>
@@ -1035,6 +1132,7 @@ ${donorName}`;
                     })}
                   </div>
                 </div>
+                </TiltCard>
               );
             })}
           </div>
@@ -1160,7 +1258,7 @@ ${donorName}`;
               </p>
 
               <div className={styles.stepsList}>
-                <div className={styles.stepItem}>
+                <div className={styles.stepItem} data-dn-step>
                   <div className={styles.stepNumber} aria-hidden="true">
                     1
                   </div>
@@ -1172,7 +1270,7 @@ ${donorName}`;
                   </div>
                 </div>
 
-                <div className={styles.stepItem}>
+                <div className={styles.stepItem} data-dn-step>
                   <div className={styles.stepNumber} aria-hidden="true">
                     2
                   </div>
@@ -1184,7 +1282,7 @@ ${donorName}`;
                   </div>
                 </div>
 
-                <div className={styles.stepItem}>
+                <div className={styles.stepItem} data-dn-step>
                   <div className={styles.stepNumber} aria-hidden="true">
                     3
                   </div>

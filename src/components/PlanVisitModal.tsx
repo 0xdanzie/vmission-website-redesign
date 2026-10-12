@@ -55,8 +55,8 @@ export default function PlanVisitModal({ isOpen, onClose }: Props) {
   };
 
   return (
-    <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Plan Your Visit to Vedanta Ashram">
-      <div className={styles.modal}>
+    <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Plan Your Visit to Vedanta Ashram" data-lenis-prevent>
+      <div className={styles.modal} data-lenis-prevent>
         {/* Header */}
         <div className={styles.header}>
           <div>

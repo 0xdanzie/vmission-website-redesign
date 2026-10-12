@@ -38,8 +38,9 @@ export default function PublicationModal({ publication, onClose }: Props) {
       aria-modal="true"
       aria-label={`Digital Reader: ${publication.title}`}
       onClick={onClose}
+      data-lenis-prevent
     >
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()} data-lenis-prevent>
         {/* Header Bar */}
         <div className={styles.header}>
           <div>

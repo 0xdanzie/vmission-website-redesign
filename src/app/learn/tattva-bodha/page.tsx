@@ -1,22 +1,79 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import SectionHeader from '@/components/SectionHeader';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Magnetic from '@/components/motion/Magnetic';
+import TiltCard from '@/components/motion/TiltCard';
+import { useScrollReveals } from '@/components/motion/useScrollReveals';
 import Button from '@/components/Button';
 import Badge from '@/components/Badge';
 import CourseApplicationModal from '@/components/CourseApplicationModal';
 import { getCourseBySlug } from '@/data/courses';
 import { useToast } from '@/context/ToastContext';
-import motionStyles from '@/styles/motion.module.css';
 import Image from 'next/image';
 import { getAssetPath } from '@/utils/assetPath';
 import styles from './page.module.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function TattvaBodhaDetailPage() {
   const course = getCourseBySlug('tattva-bodha');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { showToast } = useToast();
+  const rootRef = useRef<HTMLElement>(null);
+  const heroImgRef = useRef<HTMLImageElement>(null);
+  useScrollReveals(rootRef);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap
+        .timeline({ defaults: { ease: 'power4.out' } })
+        .fromTo('[data-tb-mask]', { clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0% 0 0 0)', duration: 1.4 }, 0)
+        .fromTo('[data-tb-line]', { yPercent: 115 }, { yPercent: 0, duration: 1.1, stagger: 0.12 }, 0.4)
+        .fromTo('[data-tb-fade]', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.9, stagger: 0.08 }, 0.85)
+        .fromTo('[data-tb-book]', { rotateY: -18, opacity: 0, x: 40 }, { rotateY: -6, opacity: 1, x: 0, duration: 1.6, ease: 'power3.out' }, 0.3);
+
+      // Reading progress along the top of the study desk
+      gsap.fromTo(
+        '[data-read-progress]',
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          ease: 'none',
+          scrollTrigger: { trigger: '[data-study-desk]', start: 'top top', end: 'bottom bottom', scrub: 0.3 },
+        }
+      );
+
+      // Shloka and the sanskrit verse settle in as the desk is entered
+      gsap.utils.toArray<HTMLElement>('[data-verse]').forEach((el) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 30, filter: 'blur(6px)' },
+          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true } }
+        );
+      });
+
+      // Sticky lesson rail: the active step is highlighted as the reader moves through the sections
+      gsap.utils.toArray<HTMLElement>('[data-rail-section]').forEach((section) => {
+        const id = section.id;
+        ScrollTrigger.create({
+          trigger: section,
+          start: 'top 55%',
+          end: 'bottom 55%',
+          onToggle: (self) => {
+            if (self.isActive) {
+              document.querySelectorAll('[data-rail-link]').forEach((link) => {
+                link.classList.toggle('is-current', link.getAttribute('href') === `#${id}`);
+              });
+            }
+          },
+        });
+      });
+    }, rootRef);
+    return () => ctx.revert();
+  }, []);
 
   if (!course) return <div>Course not found</div>;
 
@@ -28,113 +85,248 @@ export default function TattvaBodhaDetailPage() {
   };
 
   return (
-    <article className={styles.studyPage}>
-      {/* Hero Header */}
-      <header className={styles.hero} aria-label="Course Hero" data-morph-target="course">
+    <article className={styles.study} ref={rootRef}>
+      <div className={styles.readProgress} aria-hidden="true">
+        <span className={styles.readProgressFill} data-read-progress />
+      </div>
+
+      {/* 01. Hero */}
+      <header className={styles.hero} aria-labelledby="tb-title">
         <div className="container">
-          <div className={`${motionStyles.editorialReveal} ${styles.heroGrid}`}>
-            <div style={{ maxWidth: '680px' }}>
-              <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+          <div className={styles.heroGrid}>
+            <div className={styles.heroCopy}>
+              <nav className={styles.breadcrumb} aria-label="Breadcrumb" data-tb-fade>
                 <Link href="/learn" prefetch={true} className={styles.backLink}>
                   ← Back to Four Learning Doors
                 </Link>
               </nav>
 
-              {/* Course -> Lesson -> Study Journey Trail */}
-              <div className={styles.journeyTrail} aria-label="Study Path Progression">
+              <div className={styles.trail} aria-label="Study Path Progression" data-tb-fade>
                 <span className={styles.trailCourse}>Course: Tattva Bodha</span>
                 <span className={styles.trailSep}>›</span>
-                <span className={styles.trailLesson}>Session 1 · Lesson 01</span>
+                <span>Session 1 · Lesson 01</span>
                 <span className={styles.trailSep}>›</span>
-                <span className={styles.trailStudy}>Study Desk (Mūla Shloka 01)</span>
+                <span>Study Desk (Mūla Shloka 01)</span>
               </div>
 
-              <div className={styles.badgeRow}>
+              <div className={styles.badgeRow} data-tb-fade>
                 <Badge variant="open" label="Available Now · Open Access Reader" />
-                <span className={styles.categoryPill}>Prakarana Grantha</span>
-                <span className={styles.feeBadge}>Voluntary Donation Model</span>
+                <span className={styles.pill}>Prakarana Grantha</span>
+                <span className={styles.pillOutline}>Voluntary Donation Model</span>
               </div>
 
-              <h1 className={styles.title}>{course.title}</h1>
-              <p className={styles.subtitle}>{course.subtitle}</p>
-              <p className={styles.lead}>{course.description}</p>
+              <h1 id="tb-title" className={styles.title}>
+                <span className={styles.lineMask}><span className={styles.lineInner} data-tb-line>{course.title}</span></span>
+              </h1>
+              <p className={styles.subtitle} data-tb-fade>{course.subtitle}</p>
+              <p className={styles.lead} data-tb-fade>{course.description}</p>
 
-              <div className={styles.heroBtns}>
-                <a href="#lesson-1-study-desk" className={styles.primaryStudyBtn} id="btn-begin-study-desk">
-                  Enter Lesson 01 Study Desk ↓
-                </a>
-                <Button
-                  variant="secondary"
-                  onClick={() => setIsModalOpen(true)}
-                  id="btn-submit-answers-hero"
-                >
+              <div className={styles.heroBtns} data-tb-fade>
+                <Magnetic strength={0.22}>
+                  <a href="#lesson-1-study-desk" className={styles.primaryBtn} id="btn-begin-study-desk">
+                    Enter Lesson 01 Study Desk ↓
+                  </a>
+                </Magnetic>
+                <Button variant="outline" tone="dark" onClick={() => setIsModalOpen(true)} id="btn-submit-answers-hero">
                   Submit Reflection Answers →
                 </Button>
               </div>
             </div>
 
-            <div className={styles.heroCoverCol}>
-              <div className={styles.heroBookCard}>
-                <Image
-                  src={getAssetPath('/images/vmission/publications/study-text-tb-mula.jpg')}
-                  alt="Tattva Bodha Mula Study Manuscript"
-                  width={200}
-                  height={280}
-                  className={styles.heroBookImg}
-                  priority
-                />
-                <span className={styles.heroBookCaption}>Mula Text · Adi Shankaracharya</span>
-              </div>
+            <div className={styles.heroCover}>
+              <TiltCard max={6} className={styles.bookTilt}>
+                <div className={styles.bookWrap} data-tb-book>
+                  <Image
+                    src={getAssetPath('/images/vmission/publications/study-text-tb-mula.jpg')}
+                    alt="Tattva Bodha Mula Study Manuscript"
+                    width={200}
+                    height={280}
+                    className={styles.bookImg}
+                    priority
+                  />
+                </div>
+              </TiltCard>
+              <span className={styles.bookCaption} data-tb-fade>Mula Text · Adi Shankaracharya</span>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Curriculum Focus & Meta Specs */}
-      <section className="section" aria-label="Course Overview">
+      {/* 02. Curriculum & specs */}
+      <section className={styles.overview} aria-labelledby="curriculum-title">
         <div className="container">
-          <div className={styles.twoCol}>
-            <div className={styles.curriculumBox}>
-              <SectionHeader
-                tag="Course Curriculum"
-                title="What You Will Learn in Tattva Bodha"
-                subtitle="The foundational framework of Advaita Vedanta unpacked step by step."
-              />
-              <ul className={styles.learnList}>
+          <div className={styles.overviewGrid}>
+            <div data-reveal>
+              <span className={styles.overline}>Course Curriculum</span>
+              <h2 id="curriculum-title" className={styles.h2}>What You Will Learn in Tattva Bodha</h2>
+              <div className={styles.rule} data-rule />
+              <p className={styles.lead}>The foundational framework of Advaita Vedanta unpacked step by step.</p>
+
+              <ul className={styles.learnList} data-stagger>
                 {course.whatYouLearn.map((item, idx) => (
                   <li key={idx} className={styles.learnItem}>
-                    <span className={styles.checkIcon}>✓</span>
+                    <span className={styles.checkIcon} aria-hidden="true">✓</span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className={styles.metaCard}>
-              <h3 className={styles.metaCardTitle}>Program Specifications</h3>
-              <div className={styles.metaRow}>
-                <span className={styles.metaLabel}>Faculty</span>
-                <span className={styles.metaVal}>{course.teacher}</span>
-              </div>
-              <div className={styles.metaRow}>
-                <span className={styles.metaLabel}>Format</span>
-                <span className={styles.metaVal}>{course.format} (Self-paced correspondence)</span>
-              </div>
-              <div className={styles.metaRow}>
-                <span className={styles.metaLabel}>Duration</span>
-                <span className={styles.metaVal}>{course.duration}</span>
-              </div>
-              <div className={styles.metaRow}>
-                <span className={styles.metaLabel}>Eligibility</span>
-                <span className={styles.metaVal}>{course.eligibility}</span>
-              </div>
-              <div className={styles.metaRow}>
-                <span className={styles.metaLabel}>Course Contribution</span>
-                <span className={styles.metaVal}>{course.fee}</span>
-              </div>
-              <div style={{ marginTop: 'var(--space-5)' }}>
+            <aside className={styles.specs} data-reveal>
+              <h3 className={styles.specsTitle}>Program Specifications</h3>
+              <dl className={styles.specList}>
+                <div className={styles.specRow}>
+                  <dt>Faculty</dt>
+                  <dd>{course.teacher}</dd>
+                </div>
+                <div className={styles.specRow}>
+                  <dt>Format</dt>
+                  <dd>{course.format} (Self-paced correspondence)</dd>
+                </div>
+                <div className={styles.specRow}>
+                  <dt>Duration</dt>
+                  <dd>{course.duration}</dd>
+                </div>
+                <div className={styles.specRow}>
+                  <dt>Eligibility</dt>
+                  <dd>{course.eligibility}</dd>
+                </div>
+                <div className={styles.specRow}>
+                  <dt>Course Contribution</dt>
+                  <dd>{course.fee}</dd>
+                </div>
+              </dl>
+              <div className={styles.specCta}>
                 <Button variant="primary" fullWidth onClick={() => setIsModalOpen(true)} id="btn-enroll-tattva">
                   Enroll in Tattva Bodha →
+                </Button>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      {/* Chapter marker */}
+      <div className={styles.marker} aria-hidden="true" id="lesson-1-study-desk">
+        <span className={styles.markerLine} />
+        <span className={styles.markerText}>
+          <span className={styles.markerNum}>Lesson 01 of 40</span>
+          <span className={styles.markerDot}>◆</span>
+          Open Access Study Desk
+        </span>
+        <span className={styles.markerLine} />
+      </div>
+
+      {/* 03. Study desk */}
+      <section className={styles.desk} aria-labelledby="desk-title" data-study-desk>
+        <div className="container">
+          <div className={styles.deskHeader} data-reveal>
+            <span className={styles.overline}>Open Access Study Desk</span>
+            <h2 id="desk-title" className={styles.h2}>Lesson 1: Introduction to Vedanta &amp; Tattva Bodha</h2>
+            <p className={styles.lead}>
+              The first lesson of Tattva Bodha is open to all sincere seekers to begin the traditional study of Vedantic inquiry.
+            </p>
+          </div>
+
+          <div className={styles.progression} data-reveal>
+            <div className={styles.progHeader}>
+              <span className={styles.progTag}>Session 1 of 4 · Prakarana Grantha</span>
+              <span className={styles.progNote}>Lessons 2–10 available sequentially upon teacher review</span>
+            </div>
+            <div className={styles.progSteps}>
+              <span className={`${styles.progStep} ${styles.progActive}`}>01 Introduction &amp; Tattva Viveka (Open Now)</span>
+              <span className={styles.progStep}>02 Sadhana Chatushtaya</span>
+              <span className={styles.progStep}>03 Viveka &amp; Vairagya</span>
+              <span className={styles.progStep}>04–10 Sharira Traya &amp; Kosha Viveka</span>
+            </div>
+          </div>
+
+          <div className={styles.reader}>
+            <aside className={styles.railCol}>
+              <nav className={styles.rail} aria-label="Study Desk Section Navigation">
+                <span className={styles.railVerse}>Mūla Shloka 01: Pratijñā (Proposition)</span>
+                <a href="#mula-shloka" className={styles.railLink} data-rail-link>Root Verse</a>
+                <a href="#anvaya-translation" className={styles.railLink} data-rail-link>Word Analysis &amp; Translation</a>
+                <a href="#commentary-exposition" className={styles.railLink} data-rail-link>Exposition</a>
+                <a href="#reflection-desk" className={styles.railLink} data-rail-link>Questionnaire</a>
+                <span className={styles.railMode}>Classical Gurukula Method</span>
+              </nav>
+            </aside>
+
+            <div className={styles.readerMain}>
+              <div className={styles.readerHead}>
+                <span className={styles.readerBadge}>Lesson 01 · Prakarana Grantha</span>
+                <h3 className={styles.readerTitle}>The Inquiry into the Ultimate Truth (Tattva Vichara)</h3>
+              </div>
+
+              <section className={styles.shloka} id="mula-shloka" data-rail-section aria-label="Root verse">
+                <span className={styles.tag}>Root Verse 01 (Mūla Shloka)</span>
+                <p className={styles.sanskrit} data-verse>
+                  साधनचतुष्टयसम्पन्नाधिकारिणां मोक्षसाधनभूतं तत्त्वविवेकप्रकारं वक्ष्यामः ॥
+                </p>
+                <p className={styles.roman} data-verse>
+                  sādhanacatuṣṭayasampannādhikāriṇāṁ mokṣasādhanabhūtaṁ tattvavivekaprakāraṁ vakṣyāmaḥ ||
+                </p>
+                <div className={styles.verseRule} />
+                <span className={styles.tagSmall}>Prose Translation:</span>
+                <p className={styles.translation}>
+                  &ldquo;We shall explain the method of discrimination of Truth (Tattva Viveka), which is the direct means to liberation (Moksha), for those qualified seekers endowed with the four-fold spiritual qualifications (Sadhana Chatushtaya).&rdquo;
+                </p>
+              </section>
+
+              <section className={styles.anvaya} id="anvaya-translation" data-rail-section aria-label="Word-by-word analysis">
+                <span className={styles.tag}>Word-by-Word Analysis (Anvaya &amp; Padārtha)</span>
+                <ul className={styles.anvayaList} data-stagger>
+                  <li className={styles.anvayaItem}>
+                    <strong className={styles.term}>sādhana-catuṣṭaya-sampanna-adhikāriṇām:</strong>
+                    <span>For qualified seekers endowed with the fourfold spiritual disciplines</span>
+                  </li>
+                  <li className={styles.anvayaItem}>
+                    <strong className={styles.term}>mokṣa-sādhana-bhūtam:</strong>
+                    <span>That which serves as the direct means to spiritual liberation (Moksha)</span>
+                  </li>
+                  <li className={styles.anvayaItem}>
+                    <strong className={styles.term}>tattva-viveka-prakāram:</strong>
+                    <span>The methodology of discriminating the Real (Truth) from the unreal</span>
+                  </li>
+                  <li className={styles.anvayaItem}>
+                    <strong className={styles.term}>vakṣyāmaḥ:</strong>
+                    <span>We shall systematically unfold and expound</span>
+                  </li>
+                </ul>
+              </section>
+
+              <section className={styles.exposition} id="commentary-exposition" data-rail-section aria-label="Exposition">
+                <h4 className={styles.expH}>1. What is Vedanta?</h4>
+                <p className={styles.expP}>
+                  Vedanta literally means the end or culmination (<em>Anta</em>) of the Vedas. It refers to the Upanishads, which reveal the fundamental truth about human existence, the world, and the ultimate reality (Brahman). The study of Vedanta is not an abstract speculative philosophy; it is a valid means of knowledge (<dfn className={styles.dfn}>Pramana</dfn>) specifically operating to free the human mind from the persistent sense of limitation, lack, and fundamental sorrow.
+                </p>
+
+                <blockquote className={styles.callout} data-reveal>
+                  <span className={styles.calloutTag}>Gurukula Study Principle</span>
+                  <p className={styles.calloutText}>
+                    &ldquo;In the Advaita tradition, the scriptures are not an object of mere intellectual curiosity, but a valid means of knowledge (Pramana) that directly removes avidya (ignorance) when heard under the guidance of an Acharya.&rdquo;
+                  </p>
+                </blockquote>
+
+                <h4 className={styles.expH}>2. The Central Question: Who Am I?</h4>
+                <p className={styles.expP}>
+                  Every human being seeks enduring happiness, peace, and freedom from limitation. Yet worldly pursuits yield only transient joy followed by recurring dissatisfaction. Vedanta addresses this universal predicament directly by shifting the inquiry from the known objects to the knower: <strong>Who is the experiencer behind all experiences? What is my true, unconditioned nature?</strong>
+                </p>
+
+                <h4 className={styles.expH}>3. The Role of Tattva Bodha</h4>
+                <p className={styles.expP}>
+                  Composed by Bhagavan Adi Shankaracharya, <em>Tattva Bodha</em> serves as the indispensable guidebook for every student entering Advaita Vedanta. It systematically introduces essential terminology and insights: the <dfn className={styles.dfn}>Adhikari</dfn> (the qualified seeker), the <dfn className={styles.dfn}>Pancha Koshas</dfn> (the five sheaths of personality), the <dfn className={styles.dfn}>Sharira Traya</dfn> (the three bodies), and the ultimate identity of the individual self (<dfn className={styles.dfn}>Jiva</dfn>) and the universal reality (<dfn className={styles.dfn}>Ishwara</dfn>).
+                </p>
+              </section>
+
+              <div className={styles.readerFoot} data-reveal>
+                <div>
+                  <p className={styles.footTitle}>Ready to continue with Lesson 2?</p>
+                  <p className={styles.footDesc}>Submit your reflections to the questionnaire below to receive personal feedback from the Ashram Acharyas and continue your study.</p>
+                </div>
+                <Button variant="primary" onClick={() => setIsModalOpen(true)} id="btn-submit-reader-answers">
+                  Submit Lesson 1 Answers →
                 </Button>
               </div>
             </div>
@@ -142,203 +334,55 @@ export default function TattvaBodhaDetailPage() {
         </div>
       </section>
 
-      {/* Chapter Marker: Entering Lesson Environment */}
-      <div className={styles.chapterTransition} aria-hidden="true" id="lesson-1-study-desk">
-        <div className={styles.chapterLine} />
-        <div className={styles.chapterBadge}>
-          <span className={styles.chapterNum}>LESSON 01 OF 40</span>
-          <span className={styles.chapterDot}>◆</span>
-          <span className={styles.chapterText}>OPEN ACCESS STUDY DESK</span>
-        </div>
-        <div className={styles.chapterLine} />
-      </div>
-
-      {/* Lesson 1 Study Reader */}
-      <section className={`section ${styles.studyDeskSection}`} aria-label="Lesson 1 Open Access Study Reader">
-        <div className="container container--md">
-          <SectionHeader
-            tag="Open Access Study Desk"
-            title="Lesson 1: Introduction to Vedanta &amp; Tattva Bodha"
-            subtitle="The first lesson of Tattva Bodha is open to all sincere seekers to begin the traditional study of Vedantic inquiry."
-            align="center"
-          />
-
-          {/* Session Progression Rail */}
-          <div className={styles.progressionRail}>
-            <div className={styles.railHeader}>
-              <span className={styles.railTag}>Session 1 of 4 · Prakarana Grantha</span>
-              <span className={styles.railNote}>Lessons 2–10 available sequentially upon teacher review</span>
-            </div>
-            <div className={styles.railSteps}>
-              <span className={`${styles.railStep} ${styles.railActive}`}>
-                01 Introduction &amp; Tattva Viveka (Open Now)
-              </span>
-              <span className={styles.railStep}>
-                02 Sadhana Chatushtaya
-              </span>
-              <span className={styles.railStep}>
-                03 Viveka &amp; Vairagya
-              </span>
-              <span className={styles.railStep}>
-                04–10 Sharira Traya &amp; Kosha Viveka
-              </span>
-            </div>
+      {/* 04. Questionnaire */}
+      <section className={styles.questions} id="reflection-desk" data-rail-section aria-labelledby="q-title">
+        <div className="container">
+          <div className={styles.intro} data-reveal>
+            <span className={styles.overlineLight}>Student Questionnaire</span>
+            <h2 id="q-title" className={styles.h2Light}>Lesson 1 Reflection Questions</h2>
+            <p className={styles.leadLight}>
+              After contemplating Lesson 1, students reflect upon these five core questions before submitting their responses to the Ashram.
+            </p>
           </div>
 
-          <div className={styles.lessonReader}>
-            <div className={styles.readerHeader}>
-              <span className={styles.readerBadge}>Lesson 01 · Prakarana Grantha</span>
-              <h3 className={styles.readerTitle}>The Inquiry into the Ultimate Truth (Tattva Vichara)</h3>
-            </div>
-
-            {/* In-Desk Study Navigation Rail */}
-            <div className={styles.studyNavRail} aria-label="Study Desk Section Navigation">
-              <span className={styles.navRailVerse}>
-                Mūla Shloka 01: Pratijñā (Proposition)
-              </span>
-              <div className={styles.navRailLinks}>
-                <a href="#mula-shloka" className={styles.navRailLink}>Root Verse</a>
-                <a href="#anvaya-translation" className={styles.navRailLink}>Word Analysis &amp; Translation</a>
-                <a href="#commentary-exposition" className={styles.navRailLink}>Exposition</a>
-                <a href="#reflection-desk" className={styles.navRailLink}>Questionnaire</a>
-              </div>
-              <span className={styles.navRailMode}>Classical Gurukula Method</span>
-            </div>
-
-            <div className={styles.readerBody}>
-              {/* Shloka Container */}
-              <div className={styles.shlokaBox} id="mula-shloka">
-                <span className={styles.shlokaTag}>Root Verse 01 (Mūla Shloka)</span>
-                <p className={styles.sanskritVerse}>
-                  साधनचतुष्टयसम्पन्नाधिकारिणां मोक्षसाधनभूतं तत्त्वविवेकप्रकारं वक्ष्यामः ॥
-                </p>
-                <p className={styles.romanVerse}>
-                  sādhanacatuṣṭayasampannādhikāriṇāṁ mokṣasādhanabhūtaṁ tattvavivekaprakāraṁ vakṣyāmaḥ ||
-                </p>
-                <div className={styles.verseDivider} />
-                <div className={styles.translationWrap}>
-                  <span className={styles.translationLabel}>Prose Translation:</span>
-                  <p className={styles.verseTranslation}>
-                    &ldquo;We shall explain the method of discrimination of Truth (Tattva Viveka), which is the direct means to liberation (Moksha), for those qualified seekers endowed with the four-fold spiritual qualifications (Sadhana Chatushtaya).&rdquo;
-                  </p>
-                </div>
-              </div>
-
-              {/* Word-by-Word Anvaya Plate */}
-              <div className={styles.anvayaBox} id="anvaya-translation">
-                <span className={styles.anvayaTag}>Word-by-Word Analysis (Anvaya &amp; Padārtha)</span>
-                <ul className={styles.anvayaList}>
-                  <li className={styles.anvayaItem}>
-                    <strong className={styles.anvayaTerm}>sādhana-catuṣṭaya-sampanna-adhikāriṇām:</strong>
-                    <span>For qualified seekers endowed with the fourfold spiritual disciplines</span>
-                  </li>
-                  <li className={styles.anvayaItem}>
-                    <strong className={styles.anvayaTerm}>mokṣa-sādhana-bhūtam:</strong>
-                    <span>That which serves as the direct means to spiritual liberation (Moksha)</span>
-                  </li>
-                  <li className={styles.anvayaItem}>
-                    <strong className={styles.anvayaTerm}>tattva-viveka-prakāram:</strong>
-                    <span>The methodology of discriminating the Real (Truth) from the unreal</span>
-                  </li>
-                  <li className={styles.anvayaItem}>
-                    <strong className={styles.anvayaTerm}>vakṣyāmaḥ:</strong>
-                    <span>We shall systematically unfold and expound</span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Commentary & Traditional Exposition */}
-              <div className={styles.commentarySection} id="commentary-exposition">
-                <div className={styles.readingMeasure}>
-                  <h4>1. What is Vedanta?</h4>
-                  <p>
-                    Vedanta literally means the end or culmination (<em>Anta</em>) of the Vedas. It refers to the Upanishads, which reveal the fundamental truth about human existence, the world, and the ultimate reality (Brahman). The study of Vedanta is not an abstract speculative philosophy; it is a valid means of knowledge (<dfn className={styles.vedicTerm}>Pramana</dfn>) specifically operating to free the human mind from the persistent sense of limitation, lack, and fundamental sorrow.
-                  </p>
-
-                  <div className={styles.ashramCallout}>
-                    <span className={styles.calloutTag}>Gurukula Study Principle</span>
-                    <p className={styles.calloutText}>
-                      &ldquo;In the Advaita tradition, the scriptures are not an object of mere intellectual curiosity, but a valid means of knowledge (Pramana) that directly removes avidya (ignorance) when heard under the guidance of an Acharya.&rdquo;
-                    </p>
-                  </div>
-
-                  <h4>2. The Central Question: Who Am I?</h4>
-                  <p>
-                    Every human being seeks enduring happiness, peace, and freedom from limitation. Yet worldly pursuits yield only transient joy followed by recurring dissatisfaction. Vedanta addresses this universal predicament directly by shifting the inquiry from the known objects to the knower: <strong>Who is the experiencer behind all experiences? What is my true, unconditioned nature?</strong>
-                  </p>
-
-                  <h4>3. The Role of Tattva Bodha</h4>
-                  <p>
-                    Composed by Bhagavan Adi Shankaracharya, <em>Tattva Bodha</em> serves as the indispensable guidebook for every student entering Advaita Vedanta. It systematically introduces essential terminology and insights: the <dfn className={styles.vedicTerm}>Adhikari</dfn> (the qualified seeker), the <dfn className={styles.vedicTerm}>Pancha Koshas</dfn> (the five sheaths of personality), the <dfn className={styles.vedicTerm}>Sharira Traya</dfn> (the three bodies), and the ultimate identity of the individual self (<dfn className={styles.vedicTerm}>Jiva</dfn>) and the universal reality (<dfn className={styles.vedicTerm}>Ishwara</dfn>).
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.readerFooter}>
-              <div>
-                <p className={styles.rfTitle}>Ready to continue with Lesson 2?</p>
-                <p className={styles.rfDesc}>Submit your reflections to the questionnaire below to receive personal feedback from the Ashram Acharyas and continue your study.</p>
-              </div>
-              <Button variant="primary" onClick={() => setIsModalOpen(true)} id="btn-submit-reader-answers">
-                Submit Lesson 1 Answers →
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Lesson 1 Reflection Questions Desk */}
-      <section className="section" aria-label="Reflection Questions" id="reflection-desk">
-        <div className="container container--md">
-          <SectionHeader
-            tag="Student Questionnaire"
-            title="Lesson 1 Reflection Questions"
-            subtitle="After contemplating Lesson 1, students reflect upon these five core questions before submitting their responses to the Ashram."
-          />
-
-          <div className={styles.guidanceBox}>
-            <span className={styles.guidanceTag}>Ashram Review Protocol</span>
-            <p className={styles.guidanceText}>
+          <div className={styles.protocol} data-reveal>
+            <span className={styles.protocolTag}>Ashram Review Protocol</span>
+            <p className={styles.protocolText}>
               Contemplate each question thoughtfully. Once submitted, your reflections are personally reviewed by the Acharyas of Vedanta Ashram, Indore, who will provide guidance for continuing into Lesson 2.
             </p>
           </div>
 
-          <div className={styles.questionHeaderActions}>
+          <div className={styles.copyRow}>
             <button
               type="button"
               onClick={copyQuestions}
-              className={styles.copyQuestionsBtn}
+              className={styles.copyBtn}
               id="btn-copy-questionnaire"
               aria-label="Copy reflection questions to clipboard"
             >
-              <span>📋 Copy Questions for Offline Contemplation</span>
+              📋 Copy Questions for Offline Contemplation
             </button>
           </div>
 
-          <div className={styles.questionList}>
+          <ol className={styles.qList} data-stagger>
             {course.questionnaire?.map((q, idx) => (
-              <div key={idx} className={styles.questionItem}>
+              <li key={idx} className={styles.qItem}>
                 <span className={styles.qNum}>0{idx + 1}</span>
                 <p className={styles.qText}>{q}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
 
-          <div className={styles.submissionCtaWrap}>
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={() => setIsModalOpen(true)}
-              id="btn-open-application-modal"
-            >
-              Open Submission Form &amp; Send Responses →
-            </Button>
+          <div className={styles.submitWrap} data-reveal>
+            <Magnetic strength={0.2}>
+              <Button variant="primary" size="lg" onClick={() => setIsModalOpen(true)} id="btn-open-application-modal">
+                Open Submission Form &amp; Send Responses →
+              </Button>
+            </Magnetic>
           </div>
         </div>
       </section>
 
-      {/* Course Application Modal */}
       <CourseApplicationModal
         course={course}
         isOpen={isModalOpen}
