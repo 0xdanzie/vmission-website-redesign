@@ -201,12 +201,6 @@ export default function HomePage() {
         </div>
 
         <div className={styles.heroInner}>
-          <div className={styles.heroMeta} data-hero-fade>
-            <span>Traditional Advaita Vedanta</span>
-            <span>Indore Gurukula</span>
-            <span>Lineage of Adi Shankaracharya</span>
-          </div>
-
           <h1 className={styles.heroTitle}>
             <span className={styles.lineMask} data-hero-line>
               <span>Vedanta</span>
