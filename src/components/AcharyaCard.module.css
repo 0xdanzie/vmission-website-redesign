@@ -2,6 +2,17 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  height: 100%;
+  border-radius: var(--vm-radius-portrait, 14px);
+  border: 1px solid rgba(11, 11, 11, 0.12);
+  background: #ffffff;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(11, 11, 11, 0.28);
+  box-shadow: 0 24px 38px -24px rgba(11, 11, 11, 0.28);
 }
 
 /* Portrait */
@@ -13,6 +24,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  border-top-left-radius: var(--vm-radius-portrait, 14px);
+  border-top-right-radius: var(--vm-radius-portrait, 14px);
 }
 
 .initials {
@@ -85,13 +98,34 @@
 }
 
 .link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--vm-saffron);
-  transition: letter-spacing var(--vm-ease-fast);
-  margin-top: var(--space-2);
+  text-decoration: none;
+  transition: gap 0.3s ease, color 0.3s ease;
+  margin-top: auto;
+  padding-top: var(--space-2);
 }
 
 .link:hover {
-  letter-spacing: 0.01em;
+  gap: 0.7rem;
+  color: var(--vm-saffron-hover, #f0753b);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--vm-saffron);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .link {
+    transition: none !important;
+    transform: none !important;
+  }
 }

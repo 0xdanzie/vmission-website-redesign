@@ -117,16 +117,6 @@ export default function AboutPage() {
 
         <div className="container">
           <div className={styles.heroContent}>
-            <div className={styles.heroIdentity} data-about-hero-fade>
-              <span>Traditional Advaita Vedanta</span>
-              <span className={styles.heroDot}>·</span>
-              <span>Lineage of Adi Shankaracharya</span>
-              <span className={styles.heroDot}>·</span>
-              <span>Founded 1992</span>
-            </div>
-
-            <p className={styles.heroSanskrit} data-about-hero-fade>सत्यं ज्ञानमनन्तं ब्रह्म</p>
-
             <h1 className={styles.heroTitle}>
               <span className={styles.lineMask}>
                 <span className={styles.lineInner} data-about-hero-line>Revealing the Eternal</span>

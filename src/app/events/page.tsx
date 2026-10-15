@@ -290,14 +290,6 @@ export default function EventsPage() {
 
         <div className="container">
           <div className={styles.heroContent}>
-            <div className={styles.heroBadges} data-ev-fade>
-              <span className={styles.heroBadge}>The Living Ashram Tradition</span>
-              <span className={styles.heroDot}>·</span>
-              <span>Gather · Experience · Remember</span>
-              <span className={styles.heroDot}>·</span>
-              <span>Reconciled: 19 September 2026</span>
-            </div>
-
             <h1 id="events-hero-title" className={styles.heroTitle}>
               <span className={styles.lineMask}><span className={styles.lineInner} data-ev-line>Spiritual Gatherings &amp;</span></span>
               <span className={styles.lineMask}><span className={`${styles.lineInner} ${styles.heroItalic}`} data-ev-line>Living Tradition</span></span>
@@ -482,7 +474,13 @@ export default function EventsPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               {searchQuery && (
-                <button type="button" className={styles.clearBtn} onClick={() => setSearchQuery('')} aria-label="Clear search query">
+                <button
+                  type="button"
+                  className={styles.clearBtn}
+                  onClick={() => setSearchQuery('')}
+                  aria-label="Clear search query"
+                  title="Clear search"
+                >
                   ✕
                 </button>
               )}

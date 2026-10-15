@@ -244,16 +244,6 @@ export default function PublicationsPage() {
 
         <div className="container">
           <div className={styles.heroContent}>
-            <nav className={styles.crumbs} aria-label="Breadcrumb" data-pub-fade>
-              <Link href="/">Home</Link>
-              <span>/</span>
-              <span>Literary Archive</span>
-            </nav>
-
-            <p className={styles.heroBadge} data-pub-fade>
-              {totalCount} Canonical Works · {minYear}–{maxYear} Documented Corpus
-            </p>
-
             <h1 id="pub-hero-title" className={styles.heroTitle}>
               <span className={styles.lineMask}><span className={styles.lineInner} data-pub-line>The Literary</span></span>
               <span className={styles.lineMask}><span className={`${styles.lineInner} ${styles.heroItalic}`} data-pub-line>Archive</span></span>
@@ -631,7 +621,13 @@ export default function PublicationsPage() {
                   aria-label="Search publications archive"
                 />
                 {searchQuery && (
-                  <button type="button" onClick={() => setSearchQuery('')} className={styles.clearBtn} aria-label="Clear search">
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    className={styles.clearBtn}
+                    aria-label="Clear search"
+                    title="Clear search"
+                  >
                     ✕
                   </button>
                 )}

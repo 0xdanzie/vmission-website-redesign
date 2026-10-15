@@ -47,7 +47,8 @@
 /* ---------- Hero ---------- */
 
 .hero {
-  padding-block: clamp(3.5rem, 8vw, 7rem) clamp(3rem, 6vw, 5rem);
+  position: relative;
+  padding-block: calc(var(--nav-height, 76px) + 2.5rem) clamp(3rem, 6vw, 5rem);
   border-bottom: 1px solid var(--rule);
 }
 
@@ -65,29 +66,22 @@
   min-width: 0;
 }
 
-.heroBadge {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 0 0 1.5rem;
-}
-
 .heroTitle {
   font-family: var(--serif);
   font-size: clamp(3rem, 8.5vw, 7.25rem);
   font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.025em;
-  margin: 0 0 1.75rem;
+  margin: 0 0 1.5rem;
   color: var(--ink);
 }
 
 .heroLineMask {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.06em;
+  padding-top: 0.08em;
+  margin-top: -0.08em;
+  padding-bottom: 0.08em;
 }
 
 .heroLine {
@@ -157,15 +151,18 @@
   aspect-ratio: 4 / 5;
   position: relative;
   clip-path: inset(0% 0% 0% 0%);
+  border-radius: var(--vm-radius-image, 16px);
 }
 
 .heroImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 35%;
   display: block;
   transform-origin: center;
   will-change: transform;
+  border-radius: inherit;
 }
 
 /* ---------- Shared section heads ---------- */
@@ -240,6 +237,7 @@
   padding: clamp(1.5rem, 4vw, 3.5rem);
   position: relative;
   overflow: hidden;
+  border-radius: var(--vm-radius-card, 16px);
 }
 
 .plateCard::after {
@@ -550,20 +548,25 @@
   text-align: left;
   font: inherit;
   cursor: pointer;
-  transition: background 0.4s ease, color 0.4s ease;
+  border-radius: var(--vm-radius-card, 16px);
+  transition: background 0.4s ease, color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
 }
 
 .pathwayCard:hover {
   background: var(--paper-2);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 30px -16px rgba(11, 11, 11, 0.2);
 }
 
 .pathwayActive {
   background: var(--ink);
   color: var(--paper);
+  box-shadow: 0 16px 30px -16px rgba(11, 11, 11, 0.35);
 }
 
 .pathwayActive:hover {
   background: var(--ink);
+  transform: translateY(-3px);
 }
 
 .pathwayCard:focus-visible {
@@ -640,6 +643,7 @@
   background: var(--paper);
   border: 1px solid var(--ink);
   padding: clamp(1.5rem, 4vw, 3rem);
+  border-radius: var(--vm-radius-card, 16px);
 }
 
 .formTitleRow {
@@ -701,14 +705,19 @@
 .select,
 .textarea {
   width: 100%;
-  padding: 0.85rem 0.95rem;
+  padding: 0.85rem 1rem;
   font-family: inherit;
   font-size: 0.95rem;
   color: var(--ink);
   background: var(--paper-2);
   border: 1px solid var(--ink);
-  border-radius: 0;
-  transition: box-shadow 0.25s ease, background 0.25s ease;
+  border-radius: var(--vm-radius-md, 8px);
+  transition: box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.input,
+.select {
+  min-height: 48px;
 }
 
 .textarea {
@@ -727,7 +736,8 @@
 .textarea:focus {
   outline: none;
   background: var(--paper);
-  box-shadow: inset 0 0 0 1px var(--ink), 0 0 0 3px rgba(224, 99, 40, 0.35);
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent), 0 0 0 3px rgba(224, 99, 40, 0.25);
 }
 
 .inputError {
@@ -934,15 +944,18 @@
   aspect-ratio: 4 / 5;
   position: sticky;
   top: 6rem;
+  border-radius: var(--vm-radius-image, 16px);
 }
 
 .visitImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 25%;
   display: block;
   transform-origin: center;
   will-change: transform;
+  border-radius: inherit;
 }
 
 .visitImageCaption {

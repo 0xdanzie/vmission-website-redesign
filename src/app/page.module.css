@@ -408,14 +408,25 @@
   overflow: hidden;
   aspect-ratio: 4 / 5;
   background: var(--paper-2);
+  border-radius: var(--vm-radius-image, 16px);
 }
 
-.landmarkFrame img,
+.landmarkFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  border-radius: inherit;
+}
+
 .vignetteImg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 30%;
   display: block;
+  border-radius: inherit;
 }
 
 .caption {
@@ -525,6 +536,7 @@
   overflow: hidden;
   aspect-ratio: 3 / 4;
   background: var(--paper-2);
+  border-radius: var(--vm-radius-image, 16px);
 }
 
 .vignetteImg img {
@@ -882,7 +894,7 @@
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  border-radius: 3px;
+  border-radius: var(--vm-radius-book, 8px);
   box-shadow: 0 30px 60px -30px rgba(11, 11, 11, 0.45);
 }
 
@@ -1125,6 +1137,10 @@
   .landmark {
     position: relative;
     top: auto;
+  }
+
+  .landmarkFrame {
+    aspect-ratio: 16 / 10;
   }
 
 

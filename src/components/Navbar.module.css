@@ -247,6 +247,11 @@
   transform: translateY(-1px);
 }
 
+.btnDonate:focus-visible {
+  outline: 2px solid var(--nb-accent);
+  outline-offset: 2px;
+}
+
 /* ---------- Hamburger ---------- */
 
 .hamburger {
@@ -262,6 +267,17 @@
   border-radius: 50%;
   cursor: pointer;
   color: var(--nb-paper);
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.hamburger:hover {
+  border-color: var(--nb-paper);
+}
+
+.hamburger:focus-visible {
+  outline: 2px solid var(--nb-accent);
+  outline-offset: 2px;
+  border-color: var(--nb-accent);
 }
 
 .hamburgerBar {

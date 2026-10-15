@@ -2,6 +2,8 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  border-radius: var(--vm-radius-book, 8px);
 }
 
 /* Cover */
@@ -13,6 +15,9 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  flex-shrink: 0;
+  border-top-left-radius: var(--vm-radius-book, 8px);
+  border-top-right-radius: var(--vm-radius-book, 8px);
 }
 
 .coverImg {
@@ -22,6 +27,7 @@
   background: #2a1608;
   display: block;
   transition: transform 0.4s ease;
+  border-radius: var(--vm-radius-book, 8px);
 }
 
 .card:hover .coverImg {
@@ -97,6 +103,12 @@
   font-weight: 600;
   color: var(--vm-text);
   line-height: 1.40;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.8em;
 }
 
 .pages {
@@ -108,29 +120,35 @@
 .actions {
   display: flex;
   gap: var(--space-2);
-  margin-top: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
   flex-wrap: wrap;
 }
 
 .readBtn {
   flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 9px var(--space-4);
   background: var(--vm-saffron);
   color: var(--vm-text-inverse);
   border-radius: var(--vm-radius-md);
   font-size: 0.875rem;
   font-weight: 600;
-  transition: background var(--vm-ease-fast);
-  min-height: 40px;
+  transition: background var(--vm-ease-fast), transform 0.2s ease;
+  min-height: 44px;
 }
 
 .readBtn:hover {
   background: var(--vm-saffron-hover);
+  transform: translateY(-1px);
 }
 
 .downloadBtn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-1);
   padding: 9px var(--space-4);
   border: 1.5px solid var(--vm-border);
@@ -138,17 +156,34 @@
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--vm-text-muted);
-  transition: border-color var(--vm-ease-fast), color var(--vm-ease-fast);
-  min-height: 40px;
+  transition: border-color var(--vm-ease-fast), color var(--vm-ease-fast), transform 0.2s ease;
+  min-height: 44px;
   white-space: nowrap;
 }
 
 .downloadBtn:hover {
   border-color: var(--vm-saffron);
   color: var(--vm-saffron);
+  transform: translateY(-1px);
 }
 
 .downloadBtn[aria-disabled="true"] {
   opacity: 0.4;
   pointer-events: none;
+}
+
+.readBtn:focus-visible,
+.downloadBtn:focus-visible {
+  outline: 2px solid var(--vm-saffron);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .coverImg,
+  .readBtn,
+  .downloadBtn {
+    transition: none !important;
+    transform: none !important;
+  }
 }

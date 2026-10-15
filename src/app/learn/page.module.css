@@ -88,7 +88,9 @@
 .lineMask {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.06em;
+  padding-top: 0.08em;
+  margin-top: -0.08em;
+  padding-bottom: 0.08em;
 }
 
 .lineInner {
@@ -99,10 +101,10 @@
 
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: flex-end;
-  padding: 10rem 0 6rem;
+  padding: calc(var(--nav-height, 76px) + 3rem) 0 clamp(3rem, 7vh, 5.5rem);
   background: var(--ink);
   color: var(--paper);
   overflow: hidden;
@@ -129,33 +131,17 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(11, 11, 11, 0.5) 0%, rgba(11, 11, 11, 0.12) 32%, rgba(11, 11, 11, 0.95) 100%),
-    linear-gradient(90deg, rgba(11, 11, 11, 0.7) 0%, transparent 65%);
+    linear-gradient(180deg, rgba(11, 11, 11, 0.6) 0%, rgba(11, 11, 11, 0.18) 32%, rgba(11, 11, 11, 0.95) 100%),
+    linear-gradient(90deg, rgba(11, 11, 11, 0.72) 0%, transparent 68%);
 }
 
 .heroContent {
   position: relative;
-  max-width: 1000px;
-}
-
-.heroBadges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.9rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(244, 241, 234, 0.7);
-}
-
-.heroBadge,
-.heroDot {
-  color: var(--accent);
+  max-width: 1040px;
 }
 
 .heroTitle {
-  margin: 1.5rem 0 0;
+  margin: 0;
   font-family: 'Inter Tight', var(--font-ui, sans-serif);
   font-size: clamp(3rem, 9vw, 9rem);
   font-weight: 700;
@@ -266,6 +252,7 @@
   padding: clamp(2rem, 4vw, 3rem) 1.5rem 1.5rem;
   background: var(--ink);
   color: var(--paper);
+  border-radius: var(--vm-radius-card, 16px);
 }
 
 .desk::after {
@@ -293,6 +280,7 @@
   width: 280px;
   height: auto;
   max-width: 100%;
+  border-radius: var(--vm-radius-book, 8px);
   box-shadow: 22px 26px 44px -18px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(244, 241, 234, 0.08);
 }
 
@@ -427,8 +415,9 @@
 .primaryBtn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   min-height: 48px;
-  padding: 0.95rem 1.6rem;
+  padding: 0.85rem 1.6rem;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -436,26 +425,41 @@
   background: var(--accent);
   border-radius: 999px;
   text-decoration: none;
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease, color 0.3s ease;
 }
 
 .primaryBtn:hover {
   background: var(--ink);
   color: var(--paper);
+  transform: translateY(-1px);
+}
+
+.primaryBtn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .secondaryLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--ink);
   text-decoration: none;
   border-bottom: 1px solid var(--accent);
-  padding-bottom: 0.2rem;
-  transition: color 0.25s ease;
+  padding: 0 2px 0.2rem;
+  transition: color 0.25s ease, border-color 0.25s ease;
 }
 
 .secondaryLink:hover {
   color: var(--accent);
+}
+
+.secondaryLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 .studyNote {
@@ -573,6 +577,13 @@
 }
 
 /* ---------- Responsive ---------- */
+
+@media (min-width: 861px) and (max-height: 850px) {
+  .hero {
+    padding-top: calc(var(--nav-height, 76px) + 1.5rem);
+    padding-bottom: clamp(2rem, 4vh, 3rem);
+  }
+}
 
 @media (max-width: 1024px) {
   .featuredGrid,

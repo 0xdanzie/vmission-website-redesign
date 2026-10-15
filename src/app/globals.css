@@ -168,6 +168,12 @@
   --vm-radius-arch: 140px 140px 16px 16px;
   --vm-radius-pill: 9999px;
 
+  /* Soft-corner Image Design System Tokens */
+  --vm-radius-image: 16px;      /* 14–18px for general content photography, ashram spaces, galleries */
+  --vm-radius-portrait: 14px;   /* 12–16px for Acharya portraits */
+  --vm-radius-book: 8px;        /* 6–10px for publication covers & book artwork */
+  --vm-radius-card: 16px;       /* 14–18px for content cards & photo frames */
+
   --vm-shadow-xs: 0 2px 6px rgba(30, 25, 22, 0.04);
   --vm-shadow-sm: 0 4px 14px rgba(30, 25, 22, 0.06);
   --vm-shadow-md: 0 10px 28px rgba(30, 25, 22, 0.08);

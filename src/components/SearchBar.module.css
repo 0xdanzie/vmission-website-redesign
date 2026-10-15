@@ -8,45 +8,61 @@
 
 .icon {
   position: absolute;
-  left: var(--space-4);
-  color: var(--vm-text-faint);
+  left: var(--space-4, 1rem);
+  color: var(--vm-text-faint, #A89F91);
   display: flex;
   align-items: center;
   pointer-events: none;
+  z-index: 2;
 }
 
 .input {
   width: 100%;
   height: 48px;
-  padding: 12px var(--space-10) 12px 46px;
-  background: var(--vm-bg-surface);
-  border: 1.5px solid var(--vm-border);
-  border-radius: var(--vm-radius-pill);
-  font-size: var(--text-body);
-  color: var(--vm-text);
+  min-height: 48px;
+  padding: 12px 52px 12px 46px;
+  background: var(--vm-bg-surface, #FFFFFF);
+  border: 1.5px solid var(--vm-border, #E0D7C8);
+  border-radius: var(--vm-radius-pill, 9999px);
+  font-size: var(--text-body, 1rem);
+  color: var(--vm-text, #21170F);
   outline: none;
-  transition: all var(--vm-ease-fast);
+  transition: all var(--vm-ease-fast, 0.2s ease);
 }
 
+.input:focus-visible,
 .input:focus {
-  border-color: var(--vm-border-focus);
-  box-shadow: 0 0 0 3px var(--vm-saffron-glow);
+  border-color: var(--vm-saffron, #C05A28);
+  box-shadow: 0 0 0 3px rgba(192, 90, 40, 0.22);
+  outline: 2px solid var(--vm-saffron, #C05A28);
+  outline-offset: 1px;
 }
 
 .clearBtn {
   position: absolute;
-  right: var(--space-3);
-  width: 28px;
-  height: 28px;
+  right: 4px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 50%;
+  border: none;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--vm-text-faint);
-  transition: all var(--vm-ease-fast);
+  color: var(--vm-text-muted, #73695E);
+  cursor: pointer;
+  transition: all var(--vm-ease-fast, 0.2s ease);
+  z-index: 2;
 }
 
 .clearBtn:hover {
-  background: var(--vm-bg-muted);
-  color: var(--vm-text);
+  background: var(--vm-bg-muted, #EFEAE1);
+  color: var(--vm-saffron, #C05A28);
+}
+
+.clearBtn:focus-visible {
+  outline: 2px solid var(--vm-saffron, #C05A28);
+  outline-offset: 2px;
 }

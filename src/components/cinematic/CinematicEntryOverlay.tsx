@@ -2,7 +2,6 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import { createPortal } from 'react-dom';
 import { usePathname } from 'next/navigation';
 import { getAssetPath } from '@/utils/assetPath';
 import styles from './CinematicEntryOverlay.module.css';
@@ -20,35 +19,16 @@ const MOBILE_DURATION_MS = 1000;  // <= 1.50s max on mobile (1.00s)
 export default function CinematicEntryOverlay() {
   const pathname = usePathname();
   const overlayRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState<boolean>(false);
 
   // If feature flag is off, or not strictly on the homepage route '/', do not render.
   const isHomepage = pathname === '/' || pathname === '';
 
-  const [isActive, setIsActive] = useState<boolean>(() => {
-    if (!ENTRY_SCENE_ENABLED || !isHomepage) {
-      return false;
-    }
-    if (typeof window !== 'undefined') {
-      const search = window.location.search || '';
-      if (search.includes('intro=0')) {
-        return false;
-      }
-      try {
-        const seen = sessionStorage.getItem(SESSION_STORAGE_KEY) === 'true';
-        const force = search.includes('intro=1');
-        if (seen && !force) {
-          return false;
-        }
-      } catch {
-        // sessionStorage unavailable
-      }
-    }
-    return true;
-  });
+  // Initial state matches on both server and client to guarantee 0 hydration mismatches.
+  // The inline <head> script and CSS (:global(html.vm-entry-seen) .overlay { display: none !important; })
+  // handle instant visual suppression on repeat visits before mount.
+  const [isActive, setIsActive] = useState<boolean>(ENTRY_SCENE_ENABLED && isHomepage);
 
   useEffect(() => {
-    setMounted(true);
 
     if (!ENTRY_SCENE_ENABLED || !isHomepage) {
       setIsActive(false);
@@ -111,7 +91,7 @@ export default function CinematicEntryOverlay() {
 
     function finishEntry() {
       setIsActive(false);
-      document.body.style.overflow = originalOverflow || '';
+      document.body.style.overflow = '';
       if (typeof window !== 'undefined' && window.lenisInstance) {
         window.lenisInstance.start();
       }
@@ -125,7 +105,7 @@ export default function CinematicEntryOverlay() {
 
     return () => {
       clearTimeout(timer);
-      document.body.style.overflow = originalOverflow || '';
+      document.body.style.overflow = '';
       if (typeof window !== 'undefined' && window.lenisInstance) {
         window.lenisInstance.start();
       }
@@ -205,10 +185,7 @@ export default function CinematicEntryOverlay() {
       <link rel="preload" href={atmosphereSrc} as="image" type="image/webp" />
       <link rel="preload" href={shivlingSrc} as="image" type="image/webp" />
 
-      {/* Mount directly to document.body on client to cover entire website viewport and navbar */}
-      {mounted && typeof document !== 'undefined'
-        ? createPortal(overlayElement, document.body)
-        : overlayElement}
+      {overlayElement}
     </>
   );
 }

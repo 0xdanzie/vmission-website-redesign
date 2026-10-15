@@ -170,16 +170,6 @@ export default function AcharyaProfileClient({
               <span className={styles.crumbCurrent}>{acharya.name}</span>
             </nav>
 
-            <p className={styles.heroBadge} data-ap-hero-fade>
-              {acharya.role} · Dashanami Saraswati Order
-            </p>
-
-            <p className={styles.sanskritInvocation} data-ap-hero-fade>
-              {isFounder
-                ? 'गुरुर्ब्रह्मा गुरुर्विष्णुः गुरुर्देवो महेश्वरः । गुरुः साक्षात् परं ब्रह्म तस्मै श्रीगुरवे नमः ॥'
-                : 'श्रोत्रियं ब्रह्मनिष्ठम्'}
-            </p>
-
             <h1 id="ap-hero-title" className={styles.heroTitle}>
               <span className={styles.heroLineMask}>
                 <span className={styles.heroLine} data-ap-hero-line>{acharya.name}</span>

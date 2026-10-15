@@ -315,6 +315,7 @@
   padding: 1.25rem 1.5rem;
   border: 1px solid var(--ink);
   background: var(--paper-2);
+  border-radius: var(--vm-radius-card, 16px);
 }
 
 .spotifyBannerIcon {
@@ -340,7 +341,9 @@
 .spotifyBannerBtn {
   display: inline-flex;
   align-items: center;
-  padding: 0.8rem 1.25rem;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.75rem 1.35rem;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -386,6 +389,7 @@
   padding: clamp(1.75rem, 4vw, 3.25rem);
   background: var(--paper-2);
   border: 1px solid var(--ink);
+  border-radius: var(--vm-radius-card, 16px);
 }
 
 .sectionOverline,
@@ -530,6 +534,8 @@
   background: var(--ink);
   color: var(--paper);
   position: relative;
+  border-radius: var(--vm-radius-card, 16px);
+  overflow: hidden;
 }
 
 .companionTextCard::before {
@@ -628,6 +634,7 @@
   padding: clamp(1.25rem, 2.5vw, 1.75rem);
   border: 1px solid var(--ink);
   background: var(--paper);
+  border-radius: var(--vm-radius-card, 16px);
 }
 
 .acharyaSidebarCard {
@@ -748,6 +755,7 @@
   border: 1px solid var(--rule-light);
   background: #111;
   overflow: hidden;
+  border-radius: var(--vm-radius-card, 16px);
   transition: border-color 0.4s ease, background 0.4s ease;
 }
 
@@ -863,6 +871,8 @@
 .videoDeskFrame {
   background: var(--ink);
   border: 1px solid var(--ink);
+  border-radius: var(--vm-radius-card, 16px);
+  overflow: hidden;
   box-shadow: 0 0 0 1px var(--paper), 0 0 0 6px var(--paper), 0 0 0 7px var(--ink);
 }
 
@@ -871,6 +881,9 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   background: #000;
+  border-top-left-radius: var(--vm-radius-card, 16px);
+  border-top-right-radius: var(--vm-radius-card, 16px);
+  overflow: hidden;
 }
 
 .videoIframe {
@@ -991,6 +1004,7 @@
   background: var(--ink);
   overflow: hidden;
   border: 1px solid var(--ink);
+  border-radius: var(--vm-radius-card, 16px);
 }
 
 .videoFallbackPosterWrap {

@@ -9,7 +9,7 @@
 .imageContainer {
   position: relative;
   width: 100%;
-  border-radius: var(--vm-radius-lg);
+  border-radius: var(--vm-radius-image, 16px);
   overflow: hidden;
   border: 1px solid var(--vm-brass-border);
   box-shadow: var(--vm-shadow-xs);
@@ -29,6 +29,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: inherit;
 }
 
 .watermarkText {

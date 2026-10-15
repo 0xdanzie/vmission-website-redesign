@@ -288,19 +288,15 @@ function TeachingsLibrary() {
         </div>
 
         <div className={styles.heroInner}>
-          <div className={styles.heroIdentity} data-hero-fade>
-            <span className={styles.sanskritInvocation}>ज्ञानगङ्गा</span>
-            <span className={styles.eyebrowText}>JNANA GANGA</span>
-          </div>
-
-          <h1 className={styles.heroTitle}>
-            <span className={styles.lineMask} data-hero-line>
-              <span>The Living Stream</span>
-            </span>
-            <span className={styles.lineMask} data-hero-line>
-              <span className={styles.heroTitleSub}>of Vedanta</span>
-            </span>
-          </h1>
+          <div className={styles.heroMain}>
+            <h1 className={styles.heroTitle}>
+              <span className={styles.lineMask} data-hero-line>
+                <span>The Living Stream</span>
+              </span>
+              <span className={styles.lineMask} data-hero-line>
+                <span className={styles.heroTitleSub}>of Vedanta</span>
+              </span>
+            </h1>
 
           <div className={styles.heroFoot}>
             <div className={styles.heroCopy} data-hero-fade>
@@ -328,7 +324,8 @@ function TeachingsLibrary() {
             </a>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* ==================================================================
           02 — BEGIN YOUR INQUIRY
@@ -589,6 +586,7 @@ function TeachingsLibrary() {
                   onClick={handleClearSearch}
                   className={styles.clearBtn}
                   aria-label="Clear search input"
+                  title="Clear search"
                 >
                   ✕
                 </button>

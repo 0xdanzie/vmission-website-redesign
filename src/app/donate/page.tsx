@@ -1003,7 +1003,6 @@ ${donorName}`;
       <header className={styles.hero} data-dn-hero aria-labelledby="seva-hero-title">
         <div className={styles.heroGrid}>
           <div className={styles.heroText}>
-            <p className={styles.heroBadge} data-dn-hero-fade>VEDANTA MISSION · SEVA</p>
             <h1 id="seva-hero-title" className={styles.heroTitle}>
               <span className={styles.heroLineMask}>
                 <span className={styles.heroLine} data-dn-hero-line>Seva</span>

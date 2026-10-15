@@ -12,7 +12,6 @@ import styles from './page.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const BADGE_ITEMS = ['Sudama Nagar', 'Indore', 'Established 1995'];
 
 export default function AshramPage() {
   const dailyRhythm = [
@@ -145,49 +144,36 @@ export default function AshramPage() {
         </div>
 
         <div className={styles.heroInner}>
-          <nav className={styles.crumbs} aria-label="Breadcrumb" data-hero-fade>
-            <Link href="/">Home</Link>
-            <span aria-hidden="true">/</span>
-            <span>Vedanta Ashram</span>
-          </nav>
+          <div className={styles.heroMain}>
+            <h1 className={styles.heroTitle}>
+              <span className={styles.lineMask} data-hero-line>
+                <span>Vedanta</span>
+              </span>{' '}
+              <span className={styles.lineMask} data-hero-line>
+                <span>Ashram</span>
+              </span>
+            </h1>
 
-          <div className={styles.heroBadge} data-hero-fade>
-            {BADGE_ITEMS.map((item) => (
-              <span key={item}>{item}</span>
-            ))}
-          </div>
-
-          <h1 className={styles.heroTitle}>
-            <span className={styles.lineMask} data-hero-line>
-              <span>Vedanta</span>
-            </span>{' '}
-            <span className={styles.lineMask} data-hero-line>
-              <span>Ashram</span>
-            </span>
-          </h1>
-
-          <div className={styles.heroFoot}>
-            <div className={styles.heroCopy} data-hero-fade>
-              <p className={styles.heroSub}>Vedanta Ashram &amp; Sri Gangeshwar Mahadev Mandir</p>
-              <p className={styles.heroLead}>
-                Established in 1995 by Poojya Swami Atmananda Saraswati, Vedanta Ashram is a physical Gurukula in Indore where traditional Advaita Vedanta is contemplated, lived, and systematically taught in an environment of monastic peace.
-              </p>
-              <div className={styles.heroCtas}>
-                <Magnetic>
-                  <a href="#mandir" className={styles.btnPrimary}>
-                    Sri Gangeshwar Mandir <span aria-hidden="true">↓</span>
-                  </a>
-                </Magnetic>
-                <Magnetic>
-                  <a href="#rhythm" className={styles.btnGhost}>
-                    Daily Contemplative Rhythm
-                  </a>
-                </Magnetic>
+            <div className={styles.heroFoot}>
+              <div className={styles.heroCopy} data-hero-fade>
+                <p className={styles.heroSub}>Vedanta Ashram &amp; Sri Gangeshwar Mahadev Mandir</p>
+                <p className={styles.heroLead}>
+                  Established in 1995 by Poojya Swami Atmananda Saraswati, Vedanta Ashram is a physical Gurukula in Indore where traditional Advaita Vedanta is contemplated, lived, and systematically taught in an environment of monastic peace.
+                </p>
+                <div className={styles.heroCtas}>
+                  <Magnetic>
+                    <a href="#mandir" className={styles.btnPrimary}>
+                      Sri Gangeshwar Mandir <span aria-hidden="true">↓</span>
+                    </a>
+                  </Magnetic>
+                  <Magnetic>
+                    <a href="#rhythm" className={styles.btnGhost}>
+                      Daily Contemplative Rhythm
+                    </a>
+                  </Magnetic>
+                </div>
               </div>
             </div>
-            <p className={styles.heroSanskrit} data-hero-fade>
-              शान्तं शिवमद्वैतं चतुर्थं मन्यन्ते स आत्मा स विज्ञेयः
-            </p>
           </div>
         </div>
       </section>
