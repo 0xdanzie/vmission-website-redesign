@@ -14,6 +14,7 @@
   background: linear-gradient(175deg, #FAF7F0 0%, #F3EDE0 55%, #EBE2D0 100%);
   color: var(--vm-text-charcoal, #21170F);
   border: 1px solid var(--vm-sand-border, #DFD7C7);
+  border-radius: var(--vm-radius-book, 8px);
   box-shadow: inset 0 0 20px rgba(197, 160, 89, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
   user-select: none;
   overflow: hidden;
@@ -112,6 +113,7 @@
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -163,6 +165,7 @@
 .detailVariant .title {
   font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   -webkit-line-clamp: 6;
+  line-clamp: 6;
 }
 
 .detailVariant .seriesBadge {

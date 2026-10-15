@@ -154,20 +154,6 @@ export default function AcharyasPage() {
 
         <div className="container">
           <div className={styles.heroContent}>
-            <nav className={styles.crumbs} aria-label="Breadcrumb" data-hero-fade>
-              <Link href="/">Home</Link>
-              <span>/</span>
-              <span>The Acharyas</span>
-            </nav>
-
-            <p className={styles.heroBadge} data-hero-fade>
-              Guru-Shishya Parampara · Dashanami Saraswati Order
-            </p>
-
-            <p className={styles.heroSanskrit} data-hero-fade>
-              सदाशिवसमारम्भां शङ्कराचार्यमध्यमाम् । अस्मदाचार्यपर्यन्तां वन्दे गुरुपरम्पराम् ॥
-            </p>
-
             <h1 className={styles.heroTitle}>
               <span className={styles.lineMask}>
                 <span className={styles.lineInner} data-hero-line>The Monastic</span>

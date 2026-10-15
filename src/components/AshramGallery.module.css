@@ -9,7 +9,7 @@
 }
 
 .card {
-  border-radius: var(--vm-radius-lg);
+  border-radius: var(--vm-radius-image, 16px);
   overflow: hidden;
   border: 1px solid var(--vm-brass-border);
   background: var(--vm-bg-surface);
@@ -22,6 +22,11 @@
   transform: translateY(-3px);
   border-color: var(--vm-brass);
   box-shadow: var(--vm-shadow-md);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--vm-saffron);
+  outline-offset: 3px;
 }
 
 .imgWrapper {
@@ -124,8 +129,8 @@
   position: absolute;
   top: var(--space-4);
   right: var(--space-4);
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.6);
   color: #FFFFFF;
@@ -135,10 +140,17 @@
   justify-content: center;
   z-index: 10;
   transition: all var(--vm-ease-fast);
+  cursor: pointer;
 }
 
 .btnClose:hover {
   background: var(--vm-saffron);
+}
+
+.btnClose:focus-visible,
+.navBtn:focus-visible {
+  outline: 2px solid var(--vm-saffron);
+  outline-offset: 2px;
 }
 
 .navBtn {

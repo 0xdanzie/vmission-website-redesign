@@ -10,6 +10,7 @@ interface GalleryItem {
   title: string;
   category: string;
   caption: string;
+  objectPosition?: string;
 }
 
 const GALLERY_ITEMS: GalleryItem[] = [
@@ -19,6 +20,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Ashram Campus & Grounds',
     category: 'Campus',
     caption: 'The main campus and residential building of Vedanta Ashram, located in Sudama Nagar, Indore.',
+    objectPosition: 'center 35%',
   },
   {
     id: 'gal-2',
@@ -26,6 +28,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Main Building Facade',
     category: 'Architecture',
     caption: 'Exterior of Vedanta Ashram Indore, founded in 1992 by Poojya Swami Atmananda Saraswati.',
+    objectPosition: 'center 40%',
   },
   {
     id: 'gal-3',
@@ -33,6 +36,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Sri Gangeshwar Mahadev Temple',
     category: 'Sanctum',
     caption: 'The consecrated Shivalingam at Sri Gangeshwar Mahadev Mandir on campus with daily Rudrabhishek and aartis.',
+    objectPosition: 'center 20%',
   },
   {
     id: 'gal-4',
@@ -40,6 +44,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Discourse & Lecture Hall',
     category: 'Facilities',
     caption: 'Airy lecture hall equipped for daily Vedanta discourses, chanting, and residential retreat sessions.',
+    objectPosition: 'center 40%',
   },
   {
     id: 'gal-5',
@@ -47,6 +52,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Guest & Inmate Accommodations',
     category: 'Stay',
     caption: 'Modest and clean guest quarters with attached western toilets and 24-hour running water (~24 capacity).',
+    objectPosition: 'center 25%',
   },
   {
     id: 'gal-6',
@@ -54,6 +60,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Inner Garden Courtyard',
     category: 'Courtyard',
     caption: 'Quiet green courtyard for personal introspection, scriptural reading, and walking meditation.',
+    objectPosition: 'center 25%',
   },
   {
     id: 'gal-7',
@@ -61,6 +68,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Annual Vedanta Camp Gathering',
     category: 'Events',
     caption: 'Devoted spiritual seekers participating in a residential Gyana Yagna at Vedanta Ashram.',
+    objectPosition: 'center 30%',
   },
   {
     id: 'gal-8',
@@ -68,6 +76,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Guru Poornima Celebrations',
     category: 'Celebrations',
     caption: 'Annual Guru Poornima festival assembly, Pada Puja, and collective prasadam distribution in Indore.',
+    objectPosition: 'center 30%',
   },
 ];
 
@@ -133,6 +142,7 @@ export default function AshramGallery() {
                 src={getAssetPath(item.src)}
                 alt={item.title}
                 className={styles.img}
+                style={{ objectPosition: item.objectPosition || 'center center' }}
                 loading="lazy"
               />
               <div className={styles.overlay}>

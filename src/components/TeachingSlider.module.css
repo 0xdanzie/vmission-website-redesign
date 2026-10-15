@@ -7,7 +7,7 @@
   position: relative;
   background: linear-gradient(135deg, #1C1612 0%, #231C16 50%, #17120E 100%);
   border: 1px solid rgba(217, 93, 57, 0.25);
-  border-radius: var(--vm-radius-xl, 16px);
+  border-radius: var(--vm-radius-card, 16px);
   padding: var(--space-8, 2rem);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.05);
   color: #FFFBF4;
@@ -38,7 +38,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  border-radius: var(--vm-radius-lg, 12px);
+  border-radius: var(--vm-radius-image, 16px);
   overflow: hidden;
   background-color: #100C09;
   border: 1px solid rgba(230, 163, 97, 0.3);
@@ -72,6 +72,7 @@
   object-fit: cover;
   object-position: center;
   display: block;
+  border-radius: inherit;
 }
 
 .imageVignette {
@@ -271,8 +272,8 @@
 }
 
 .navBtn {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--vm-radius-md, 6px);
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -298,8 +299,8 @@
 }
 
 .playPauseBtn {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--vm-radius-md, 6px);
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -318,6 +319,12 @@
   color: #FFF;
 }
 
+.navBtn:focus-visible,
+.playPauseBtn:focus-visible {
+  outline: 2px solid #D95D39;
+  outline-offset: 2px;
+}
+
 .indicatorTrack {
   display: flex;
   align-items: center;
@@ -325,24 +332,43 @@
 }
 
 .indicatorPill {
-  width: 18px;
-  height: 6px;
-  border-radius: var(--vm-radius-pill, 9999px);
-  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+  width: 22px;
+  height: 28px;
+  background: transparent;
   border: none;
-  padding: 0;
+  padding: 11px 0;
   cursor: pointer;
   transition: all var(--transition-fast, 0.2s ease);
 }
 
-.indicatorPill:hover {
+.indicatorPill::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 6px;
+  border-radius: var(--vm-radius-pill, 9999px);
+  background: rgba(255, 255, 255, 0.2);
+  transition: all var(--transition-fast, 0.2s ease);
+}
+
+.indicatorPill:hover::before {
   background: rgba(255, 255, 255, 0.5);
 }
 
 .indicatorActive {
-  width: 32px;
+  width: 36px;
+}
+
+.indicatorActive::before {
   background: #D95D39;
   box-shadow: 0 0 8px rgba(217, 93, 57, 0.6);
+}
+
+.indicatorPill:focus-visible {
+  outline: 2px solid #D95D39;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* ---------- RESPONSIVE BREAKPOINTS ---------- */

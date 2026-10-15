@@ -244,6 +244,33 @@ const SCENE_CONFIG: Record<
   },
 };
 
+const FOCAL_POINT_MAP: Partial<Record<AshramImageType, string>> = {
+  'swami-atmananda': 'center 20%',
+  'swami-atmananda-portrait': 'center 20%',
+  'swamini-amitananda': 'center 20%',
+  'swamini-samatananda': 'center 20%',
+  'swamini-poornananda': 'center 20%',
+  'teaching-closeup': 'center 25%',
+  'gangeshwar-dome-closeup': 'center 20%',
+  'sanctum-doors': 'center 30%',
+  'gangeshwar-mandir': 'center 30%',
+  'meditation-hall': 'center 40%',
+  'library': 'center 40%',
+  'dining-hall': 'center 35%',
+  'rooms': 'center 25%',
+  'garden': 'center 25%',
+  'satsang': 'center 30%',
+  'gathering': 'center 35%',
+  'scriptural-study': 'center 35%',
+  'ashram-hero': 'center 35%',
+  'ashram-hero-cinematic': 'center 35%',
+  'ashram-exterior': 'center 30%',
+  'ashram-entrance': 'center 35%',
+  'ashram-entrance-cinematic': 'center 35%',
+  'vedanta-sandesh': 'center top',
+  'vedanta-piyush': 'center top',
+};
+
 export default function AshramImage({
   type,
   alt,
@@ -283,6 +310,10 @@ export default function AshramImage({
             src={getAssetPath(assetSrc)}
             alt={alt}
             className={styles.realImg}
+            style={{
+              objectPosition: FOCAL_POINT_MAP[type] || 'center center',
+              objectFit: type.includes('vedanta-') ? 'contain' : 'cover',
+            }}
             loading="lazy"
           />
         ) : (

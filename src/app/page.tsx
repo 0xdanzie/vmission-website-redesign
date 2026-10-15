@@ -53,8 +53,13 @@ export default function HomePage() {
 
     const ctx = gsap.context(() => {
       /* ---------- Hero intro ---------- */
-      // First visit plays the entry overlay (≈1.7s); wait for it to clear.
-      const introDelay = document.documentElement.classList.contains('vm-entry-seen') ? 0.15 : 1.5;
+      // First visit plays the entry overlay (≈1.7s desktop, ≈1.0s mobile); wait for it to clear.
+      const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+      const introDelay = document.documentElement.classList.contains('vm-entry-seen')
+        ? 0.15
+        : isMobile
+        ? 0.95
+        : 1.5;
       gsap.set('[data-hero-line] > span', { yPercent: 115 });
       gsap.set('[data-hero-fade]', { opacity: 0, y: 26 });
 
@@ -201,12 +206,6 @@ export default function HomePage() {
         </div>
 
         <div className={styles.heroInner}>
-          <div className={styles.heroMeta} data-hero-fade>
-            <span>Traditional Advaita Vedanta</span>
-            <span>Indore Gurukula</span>
-            <span>Lineage of Adi Shankaracharya</span>
-          </div>
-
           <h1 className={styles.heroTitle}>
             <span className={styles.lineMask} data-hero-line>
               <span>Vedanta</span>

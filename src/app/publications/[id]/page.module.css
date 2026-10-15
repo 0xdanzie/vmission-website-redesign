@@ -162,7 +162,7 @@
 .coverWrapper {
   background: #FFFFFF;
   border: 1px solid rgba(197, 160, 89, 0.4);
-  border-radius: 8px;
+  border-radius: var(--vm-radius-book, 8px);
   padding: 0.75rem;
   box-shadow: 0 12px 36px rgba(44, 26, 14, 0.12), -4px 6px 20px rgba(0, 0, 0, 0.08);
 }
@@ -171,7 +171,7 @@
   position: relative;
   aspect-ratio: 1 / 1.42;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: calc(var(--vm-radius-book, 8px) - 2px);
   background: #120D0A;
 }
 
@@ -299,6 +299,12 @@
 .readOnlineBtn:hover {
   background: var(--vm-sand, #F4EEE2);
   border-color: var(--vm-brass, #C5A059);
+}
+
+.primaryDownloadBtn:focus-visible,
+.readOnlineBtn:focus-visible {
+  outline: 2px solid var(--vm-gerua, #C84E17);
+  outline-offset: 2px;
 }
 
 /* Right Details Column */

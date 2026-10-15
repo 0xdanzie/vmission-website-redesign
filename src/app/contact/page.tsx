@@ -207,7 +207,6 @@ export default function ContactPage() {
       <header className={styles.hero} data-ct-hero aria-labelledby="contact-hero-title">
         <div className={styles.heroGrid}>
           <div className={styles.heroText}>
-            <p className={styles.heroBadge} data-ct-hero-fade>VEDANTA ASHRAM · INDORE</p>
             <h1 id="contact-hero-title" className={styles.heroTitle}>
               <span className={styles.heroLineMask}>
                 <span className={styles.heroLine} data-ct-hero-line>Connect</span>

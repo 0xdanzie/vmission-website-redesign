@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './SearchBar.module.css';
 
 interface Props {
@@ -6,6 +6,7 @@ interface Props {
   onChange: (val: string) => void;
   placeholder?: string;
   onClear?: () => void;
+  ariaLabel?: string;
 }
 
 export default function SearchBar({
@@ -13,7 +14,16 @@ export default function SearchBar({
   onChange,
   placeholder = 'Search teachings, scriptures, or teachers...',
   onClear,
+  ariaLabel = 'Search',
 }: Props) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleClear = () => {
+    onChange('');
+    if (onClear) onClear();
+    inputRef.current?.focus();
+  };
+
   return (
     <div className={styles.wrapper}>
       <span className={styles.icon} aria-hidden="true">
@@ -23,25 +33,24 @@ export default function SearchBar({
         </svg>
       </span>
       <input
+        ref={inputRef}
         type="search"
         className={styles.input}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        aria-label="Search"
+        aria-label={ariaLabel}
       />
       {value && (
         <button
           type="button"
           className={styles.clearBtn}
-          onClick={() => {
-            onChange('');
-            if (onClear) onClear();
-          }}
+          onClick={handleClear}
           aria-label="Clear search"
+          title="Clear search"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 2L12 12M12 2L2 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M2 2L12 12M12 2L2 12" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
           </svg>
         </button>
       )}

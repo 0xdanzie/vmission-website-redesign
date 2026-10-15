@@ -1,27 +1,27 @@
 .container {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-6);
+  gap: var(--space-3, 0.75rem);
+  margin-bottom: var(--space-6, 1.5rem);
   flex-wrap: wrap;
   max-width: 100%;
 }
 
 .label {
-  font-size: var(--text-meta);
-  font-weight: 600;
+  font-size: var(--text-meta, 0.75rem);
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--vm-text-faint);
+  letter-spacing: 0.08em;
+  color: var(--vm-text-muted, #73695E);
   flex-shrink: 0;
 }
 
 .scrollWrapper {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-2, 0.5rem);
   overflow-x: auto;
-  padding-block: var(--space-1);
+  padding-block: var(--space-1, 0.25rem);
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   min-width: 0;
@@ -37,35 +37,46 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
-  background: var(--vm-bg-surface);
-  border: 1.5px solid var(--vm-border-light);
-  border-radius: var(--vm-radius-pill);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--vm-text-muted);
+  padding: 10px 18px;
+  min-height: 44px;
+  background: var(--vm-bg-surface, #FFFFFF);
+  border: 1.5px solid var(--vm-border-light, #E8E0D2);
+  border-radius: var(--vm-radius-pill, 9999px);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--vm-text-muted, #73695E);
   white-space: nowrap;
-  transition: all var(--vm-ease-fast);
+  transition: all var(--vm-ease-fast, 0.2s ease);
   cursor: pointer;
-  min-height: 38px;
+  outline: none;
 }
 
 .pill:hover {
-  border-color: var(--vm-saffron-border);
-  color: var(--vm-text);
-  background: var(--vm-saffron-light);
+  border-color: var(--vm-saffron, #C05A28);
+  color: var(--vm-text, #21170F);
+  background: var(--vm-saffron-light, rgba(192, 90, 40, 0.08));
+}
+
+.pill:focus-visible {
+  outline: 2px solid var(--vm-saffron, #C05A28);
+  outline-offset: 2px;
 }
 
 .active {
-  background: var(--vm-saffron);
-  border-color: var(--vm-saffron);
-  color: var(--vm-text-inverse);
-  font-weight: 600;
-  box-shadow: var(--vm-shadow-xs);
+  background: var(--vm-saffron, #C05A28);
+  border-color: var(--vm-saffron, #C05A28);
+  color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(192, 90, 40, 0.35);
 }
 
 .active:hover {
-  background: var(--vm-saffron-hover);
-  border-color: var(--vm-saffron-hover);
-  color: var(--vm-text-inverse);
+  background: var(--vm-saffron-hover, #A84A1E);
+  border-color: var(--vm-saffron-hover, #A84A1E);
+  color: #FFFFFF;
+}
+
+.active:focus-visible {
+  outline: 2px solid var(--vm-saffron-hover, #A84A1E);
+  outline-offset: 2px;
 }

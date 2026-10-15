@@ -102,14 +102,6 @@ export default function LearnPage() {
 
         <div className="container">
           <div className={styles.heroContent}>
-            <div className={styles.heroBadges} data-lrn-fade>
-              <span className={styles.heroBadge}>The Digital Gurukula</span>
-              <span className={styles.heroDot}>·</span>
-              <span>Enter · Study · Progress</span>
-              <span className={styles.heroDot}>·</span>
-              <span>Vedanta Ashram · Indore</span>
-            </div>
-
             <h1 id="learn-hero-title" className={styles.heroTitle}>
               <span className={styles.lineMask}><span className={styles.lineInner} data-lrn-line>Systematic</span></span>
               <span className={styles.lineMask}><span className={`${styles.lineInner} ${styles.heroItalic}`} data-lrn-line>Scriptural Study</span></span>

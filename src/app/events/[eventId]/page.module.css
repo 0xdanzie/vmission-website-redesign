@@ -30,6 +30,12 @@
   transform: translateX(-2px);
 }
 
+.backLink:focus-visible {
+  outline: 2px solid var(--vm-bhagwa-orange, #C05A28);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 .badgeRow {
   display: flex;
   align-items: center;
@@ -120,7 +126,7 @@
 /* Media Figure */
 .mediaFigure {
   margin-block: var(--space-8);
-  border-radius: var(--vm-radius-lg, 12px);
+  border-radius: var(--vm-radius-image, 16px);
   overflow: hidden;
   border: 1.5px solid var(--vm-brass-border, rgba(197, 155, 75, 0.4));
   background: var(--vm-bg-surface, #FFFFFF);
@@ -133,6 +139,7 @@
   max-height: 420px;
   overflow: hidden;
   background: var(--vm-bg-muted, #EFEAE1);
+  border-radius: var(--vm-radius-image, 16px) var(--vm-radius-image, 16px) 0 0;
 }
 
 .eventImage {
@@ -140,7 +147,9 @@
   height: auto;
   max-height: 420px;
   object-fit: cover;
+  object-position: center 30%;
   display: block;
+  border-radius: inherit;
   transition: transform 0.5s ease;
 }
 

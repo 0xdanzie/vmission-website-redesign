@@ -14,6 +14,7 @@ export interface TeachingSlide {
   theme: string;
   scripture: string;
   alt: string;
+  objectPosition?: string;
 }
 
 export const TEACHING_SLIDES: TeachingSlide[] = [
@@ -27,6 +28,7 @@ export const TEACHING_SLIDES: TeachingSlide[] = [
     theme: 'Mahavakya of the Chandogya Upanishad',
     scripture: 'Chandogya Upanishad 6.8.7',
     alt: 'Swami Atmananda Saraswati addressing a packed gathering on the truth of Tat Tvam Asi',
+    objectPosition: 'center 22%',
   },
   {
     id: 'slide-02',
@@ -38,6 +40,7 @@ export const TEACHING_SLIDES: TeachingSlide[] = [
     theme: 'Self-Knowledge & The Immutable Substratum',
     scripture: 'Atma-Anatma Viveka',
     alt: 'Swami Atmananda Saraswati meditating on the nature of the changeless Witness',
+    objectPosition: 'center 25%',
   },
   {
     id: 'slide-03',
@@ -49,6 +52,7 @@ export const TEACHING_SLIDES: TeachingSlide[] = [
     theme: 'Preparedness for Self-Knowledge (Sadhana Chatushtaya)',
     scripture: 'Bhagavad Gita 4.39',
     alt: 'Swamini Samatananda Saraswati conducting scriptural exposition before attentive seekers',
+    objectPosition: 'center 22%',
   },
   {
     id: 'slide-04',
@@ -60,6 +64,7 @@ export const TEACHING_SLIDES: TeachingSlide[] = [
     theme: 'Transcending Empirical Cognition',
     scripture: 'Kena Upanishad 1.4',
     alt: 'Swamini Amitananda Saraswati speaking on the transcendental nature of Brahman',
+    objectPosition: 'center 20%',
   },
   {
     id: 'slide-05',
@@ -71,6 +76,7 @@ export const TEACHING_SLIDES: TeachingSlide[] = [
     theme: 'The Living Guidance of the Acharya',
     scripture: 'Chandogya Upanishad 6.14.2',
     alt: 'Swamini Poornananda Saraswati and Swami Atmananda Saraswati by the river',
+    objectPosition: 'center 25%',
   },
   {
     id: 'slide-06',
@@ -82,6 +88,7 @@ export const TEACHING_SLIDES: TeachingSlide[] = [
     theme: 'Unbroken Parampara of Spiritual Masters',
     scripture: 'Advaita Guru Parampara',
     alt: 'The four Acharyas of Vedanta Ashram assembled before the Shivling dome',
+    objectPosition: 'center 25%',
   },
   {
     id: 'slide-07',
@@ -93,6 +100,7 @@ export const TEACHING_SLIDES: TeachingSlide[] = [
     theme: 'Karma Yoga & Equanimity in Action',
     scripture: 'Bhagavad Gita 2.50',
     alt: 'Large congregation of seekers immersed in discourse on the art of detached action',
+    objectPosition: 'center 35%',
   },
 ];
 
@@ -194,6 +202,7 @@ export default function TeachingSlider() {
                   src={getAssetPath(slide.imageSrc)}
                   alt={slide.alt}
                   className={styles.archivalImg}
+                  style={{ objectPosition: slide.objectPosition || 'center 25%' }}
                   loading={idx === 0 ? 'eager' : 'lazy'}
                 />
                 <div className={styles.imageVignette} />

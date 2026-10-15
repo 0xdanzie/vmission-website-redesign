@@ -32,22 +32,27 @@
   0% {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
   }
   61.76% { /* 1.05s — Brief hold concludes, continuous morph handoff commences (0.65s handoff) */
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
   }
-  82.35% { /* 1.40s — Homepage hero begins becoming visible underneath */
-    opacity: 0.55;
+  80% { /* Hand off pointer events as soon as homepage becomes visible */
+    opacity: 0.6;
     visibility: visible;
+    pointer-events: none;
   }
   98.5% {
     opacity: 0.02;
     visibility: visible;
+    pointer-events: none;
   }
   100% {
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
   }
 }
 
@@ -373,10 +378,12 @@
    ============================================================ */
 :global(html.vm-entry-seen) .overlay {
   display: none !important;
+  pointer-events: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .overlay {
     display: none !important;
+    pointer-events: none !important;
   }
 }
