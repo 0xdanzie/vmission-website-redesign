@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useData } from '@/context/DataContext';
 import { useToast } from '@/context/ToastContext';
 import BrandLogo from '@/components/BrandLogo';
-import { createClient } from '@/lib/supabase/client';
+import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
 import {
   OverviewIcon,
   ContentIcon,
@@ -94,6 +94,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   useEffect(() => {
     const checkStaff = async () => {
+      if (!isSupabaseConfigured()) {
+        return;
+      }
       try {
         const supabase = createClient();
         const { data: { user } } = await supabase.auth.getUser();

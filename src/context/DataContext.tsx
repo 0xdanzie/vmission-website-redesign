@@ -6,7 +6,7 @@ import { courses as defaultCourses, Course } from '@/data/courses';
 import { teachings as defaultTeachings, Teaching } from '@/data/teachings';
 import { publications as defaultPublications, Publication } from '@/data/publications';
 import { acharyas as defaultAcharyas, Acharya } from '@/data/acharyas';
-import { createClient } from '@/lib/supabase/client';
+import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
 import { dbToTeaching, teachingToDb } from '@/lib/teachings-mapper';
 import {
   dbToAcharya,
@@ -200,6 +200,10 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   const [isLoadingDonations, setIsLoadingDonations] = useState(true);
 
   const refreshUserRole = async () => {
+    if (!isSupabaseConfigured()) {
+      setUserRole(null);
+      return;
+    }
     try {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
@@ -235,6 +239,10 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   // Supabase Fetchers
   // ---------------------------------------------------------------------------
   const refreshTeachings = async () => {
+    if (!isSupabaseConfigured()) {
+      setIsLoadingTeachings(false);
+      return;
+    }
     try {
       const supabase = createClient();
       const { data, error } = await supabase
@@ -253,6 +261,10 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   };
 
   const refreshAcharyas = async () => {
+    if (!isSupabaseConfigured()) {
+      setIsLoadingAcharyas(false);
+      return;
+    }
     try {
       const supabase = createClient();
       const { data, error } = await supabase
@@ -271,6 +283,10 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   };
 
   const refreshCourses = async () => {
+    if (!isSupabaseConfigured()) {
+      setIsLoadingCourses(false);
+      return;
+    }
     try {
       const supabase = createClient();
       const { data, error } = await supabase
@@ -289,6 +305,10 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   };
 
   const refreshEvents = async () => {
+    if (!isSupabaseConfigured()) {
+      setIsLoadingEvents(false);
+      return;
+    }
     try {
       const supabase = createClient();
       const { data, error } = await supabase
@@ -307,6 +327,10 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   };
 
   const refreshPublications = async () => {
+    if (!isSupabaseConfigured()) {
+      setIsLoadingPublications(false);
+      return;
+    }
     try {
       const supabase = createClient();
       const { data, error } = await supabase
@@ -326,6 +350,10 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   };
 
   const refreshInquiries = async () => {
+    if (!isSupabaseConfigured()) {
+      setIsLoadingInquiries(false);
+      return;
+    }
     setIsLoadingInquiries(true);
     try {
       const supabase = createClient();
@@ -345,6 +373,10 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   };
 
   const refreshDonations = async () => {
+    if (!isSupabaseConfigured()) {
+      setIsLoadingDonations(false);
+      return;
+    }
     setIsLoadingDonations(true);
     try {
       const supabase = createClient();
@@ -365,21 +397,6 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
 
   // Load live Supabase data on mount with fallback
   useEffect(() => {
-    refreshUserRole();
-    refreshTeachings();
-    refreshAcharyas();
-    refreshCourses();
-    refreshEvents();
-    refreshPublications();
-    refreshInquiries();
-    refreshDonations();
-
-    const supabase = createClient();
-    const { data: authListener } = supabase.auth.onAuthStateChange(() => {
-      refreshUserRole();
-      refreshDonations();
-    });
-
     const initData = () => {
       try {
         const CURRENT_DATA_VERSION = 'v4d_forensic_verified';
@@ -419,8 +436,40 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       }
     }
 
+    if (!isSupabaseConfigured()) {
+      setIsLoadingTeachings(false);
+      setIsLoadingAcharyas(false);
+      setIsLoadingCourses(false);
+      setIsLoadingEvents(false);
+      setIsLoadingPublications(false);
+      setIsLoadingInquiries(false);
+      setIsLoadingDonations(false);
+      return;
+    }
+
+    refreshUserRole();
+    refreshTeachings();
+    refreshAcharyas();
+    refreshCourses();
+    refreshEvents();
+    refreshPublications();
+    refreshInquiries();
+    refreshDonations();
+
+    let authSubscription: { unsubscribe: () => void } | null = null;
+    try {
+      const supabase = createClient();
+      const { data } = supabase.auth.onAuthStateChange(() => {
+        refreshUserRole();
+        refreshDonations();
+      });
+      authSubscription = data?.subscription ?? null;
+    } catch (e) {
+      console.warn('Supabase auth state listener error:', e);
+    }
+
     return () => {
-      authListener.subscription.unsubscribe();
+      authSubscription?.unsubscribe();
     };
   }, []);
 

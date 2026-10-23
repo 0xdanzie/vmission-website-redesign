@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { PUBLICATIONS, getPublicationById, Publication } from '@/data/publications';
-import { createClient } from '@/lib/supabase/server';
+import { createClient, isSupabaseConfigured } from '@/lib/supabase/server';
 import { dbToPublication } from '@/lib/cms-mappers';
 import SacredDivider from '@/components/cinematic/SacredDivider';
 import { resolvePublicationCover } from '@/lib/media-identity';
@@ -18,6 +18,10 @@ interface PageProps {
 }
 
 async function getLivePublication(id: string): Promise<Publication | undefined> {
+  if (!isSupabaseConfigured()) {
+    return getPublicationById(id);
+  }
+
   try {
     const supabase = createClient();
     const { data, error } = await supabase

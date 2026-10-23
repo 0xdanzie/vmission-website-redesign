@@ -10,7 +10,7 @@ import {
 } from '@/data/teachings';
 import { acharyas } from '@/data/acharyas';
 import TeachingDetailClient from './TeachingDetailClient';
-import { createClient } from '@/lib/supabase/server';
+import { createClient, isSupabaseConfigured } from '@/lib/supabase/server';
 import { dbToTeaching } from '@/lib/teachings-mapper';
 
 interface PageProps {
@@ -21,6 +21,10 @@ export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
 
 async function fetchTeachingRecord(idOrSlug: string): Promise<Teaching | null> {
+  if (!isSupabaseConfigured()) {
+    return getTeachingById(idOrSlug) || null;
+  }
+
   try {
     const supabase = createClient();
     const { data: row } = await supabase

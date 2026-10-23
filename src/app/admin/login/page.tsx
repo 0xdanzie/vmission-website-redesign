@@ -4,7 +4,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import BrandLogo from '@/components/BrandLogo';
-import { createClient } from '@/lib/supabase/client';
+import { createClient, isSupabaseConfigured } from '@/lib/supabase/client';
 import { LockIcon, ArrowRightIcon, ArrowLeftIcon } from '@/components/admin/AdminIcons';
 import styles from './login.module.css';
 
@@ -32,6 +32,12 @@ function LoginForm() {
     e.preventDefault();
     setErrorMsg('');
     setIsSubmitting(true);
+
+    if (!isSupabaseConfigured()) {
+      setErrorMsg('Database connection is not configured on this environment. Please ensure NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY are set in Vercel.');
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const supabase = createClient();

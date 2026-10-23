@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { events, getEventById, VMEvent } from '@/data/events';
-import { createClient } from '@/lib/supabase/server';
+import { createClient, isSupabaseConfigured } from '@/lib/supabase/server';
 import { dbToEvent } from '@/lib/cms-mappers';
 import EventDetailClient from './EventDetailClient';
 
@@ -13,6 +13,10 @@ interface PageProps {
 }
 
 async function getLiveEvent(id: string): Promise<VMEvent | undefined> {
+  if (!isSupabaseConfigured()) {
+    return getEventById(id);
+  }
+
   try {
     const supabase = createClient();
     const { data, error } = await supabase

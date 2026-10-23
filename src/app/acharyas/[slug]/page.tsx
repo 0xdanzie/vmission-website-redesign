@@ -2,7 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import { getAcharyaBySlug, acharyas, Acharya } from '@/data/acharyas';
 import { teachings } from '@/data/teachings';
-import { createClient } from '@/lib/supabase/server';
+import { createClient, isSupabaseConfigured } from '@/lib/supabase/server';
 import { dbToAcharya } from '@/lib/cms-mappers';
 import AcharyaProfileClient from './AcharyaProfileClient';
 
@@ -14,6 +14,10 @@ interface PageProps {
 }
 
 async function getLiveAcharya(slug: string): Promise<Acharya | undefined> {
+  if (!isSupabaseConfigured()) {
+    return getAcharyaBySlug(slug);
+  }
+
   try {
     const supabase = createClient();
     const { data, error } = await supabase

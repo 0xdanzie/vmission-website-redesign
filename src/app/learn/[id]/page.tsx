@@ -2,7 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { courses, getCourseBySlug, Course } from '@/data/courses';
-import { createClient } from '@/lib/supabase/server';
+import { createClient, isSupabaseConfigured } from '@/lib/supabase/server';
 import { dbToCourse } from '@/lib/cms-mappers';
 import CourseDetailClient from './CourseDetailClient';
 
@@ -14,6 +14,10 @@ interface PageProps {
 }
 
 async function getLiveCourse(id: string): Promise<Course | undefined> {
+  if (!isSupabaseConfigured()) {
+    return getCourseBySlug(id) || courses.find((c) => c.id === id || c.canonicalId === id);
+  }
+
   try {
     const supabase = createClient();
     const { data, error } = await supabase
