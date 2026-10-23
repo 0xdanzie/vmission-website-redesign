@@ -477,73 +477,68 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   // Acharyas Methods
   // ---------------------------------------------------------------------------
   const addAcharya = async (aData: Omit<Acharya, 'sort_order'> & { sort_order?: number }) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Acharyas cannot be modified.');
+    }
     const slug = aData.slug || aData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 50);
     const sort_order = aData.sort_order ?? acharyas.length;
     const is_published = aData.is_published ?? true;
     const newAcharya: Acharya = { ...aData, slug, sort_order, is_published };
 
-    setAcharyas((prev) => [...prev, newAcharya]);
-
-    try {
-      const supabase = createClient();
-      const dbPayload = acharyaToDb(newAcharya);
-      const { data, error } = await supabase.from('acharyas').insert(dbPayload).select().single();
-      if (!error && data) {
-        const persisted = dbToAcharya(data);
-        setAcharyas((prev) => prev.map((a) => (a.slug === slug ? persisted : a)));
-        return persisted;
-      } else if (error) {
-        console.error('Supabase addAcharya error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase addAcharya network error:', e);
+    const supabase = createClient();
+    const dbPayload = acharyaToDb(newAcharya);
+    const { data, error } = await supabase.from('acharyas').insert(dbPayload).select().single();
+    if (error) {
+      console.error('Supabase addAcharya error:', error);
+      throw error;
     }
-    return newAcharya;
+    const persisted = dbToAcharya(data);
+    setAcharyas((prev) => [...prev, persisted]);
+    return persisted;
   };
 
   const updateAcharya = async (slug: string, updated: Partial<Acharya>) => {
-    setAcharyas((prev) => prev.map((a) => (a.slug === slug ? { ...a, ...updated } : a)));
-
-    try {
-      const supabase = createClient();
-      const dbPayload = acharyaToDb(updated);
-      const { data, error } = await supabase
-        .from('acharyas')
-        .update(dbPayload)
-        .eq('slug', slug)
-        .select()
-        .single();
-
-      if (!error && data) {
-        const persisted = dbToAcharya(data);
-        setAcharyas((prev) => prev.map((a) => (a.slug === slug ? persisted : a)));
-        return persisted;
-      } else if (error) {
-        console.error('Supabase updateAcharya error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase updateAcharya network error:', e);
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Acharyas cannot be modified.');
     }
+    const supabase = createClient();
+    const dbPayload = acharyaToDb(updated);
+    const { data, error } = await supabase
+      .from('acharyas')
+      .update(dbPayload)
+      .eq('slug', slug)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Supabase updateAcharya error:', error);
+      throw error;
+    }
+    const persisted = dbToAcharya(data);
+    setAcharyas((prev) => prev.map((a) => (a.slug === slug ? persisted : a)));
+    return persisted;
   };
 
   const deleteAcharya = async (slug: string) => {
-    setAcharyas((prev) => prev.filter((a) => a.slug !== slug));
-
-    try {
-      const supabase = createClient();
-      const { error } = await supabase.from('acharyas').delete().eq('slug', slug);
-      if (error) {
-        console.error('Supabase deleteAcharya error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase deleteAcharya network error:', e);
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Acharyas cannot be modified.');
     }
+    const supabase = createClient();
+    const { error } = await supabase.from('acharyas').delete().eq('slug', slug);
+    if (error) {
+      console.error('Supabase deleteAcharya error:', error);
+      throw error;
+    }
+    setAcharyas((prev) => prev.filter((a) => a.slug !== slug));
   };
 
   // ---------------------------------------------------------------------------
   // Courses Methods
   // ---------------------------------------------------------------------------
   const addCourse = async (courseData: Omit<Course, 'id' | 'slug'> & { id?: string; slug?: string }) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Courses cannot be modified.');
+    }
     const rawSlug = courseData.slug || courseData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 50);
     const id = courseData.id || rawSlug;
     const slug = rawSlug;
@@ -551,320 +546,293 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     const is_published = courseData.is_published ?? true;
     const newCourse: Course = { ...courseData, id, slug, sort_order, is_published };
 
-    setCourses((prev) => [...prev, newCourse]);
-    save('vm_courses', [...courses, newCourse]);
-
-    try {
-      const supabase = createClient();
-      const dbPayload = courseToDb(newCourse);
-      const { data, error } = await supabase.from('courses').insert(dbPayload).select().single();
-      if (!error && data) {
-        const persisted = dbToCourse(data);
-        setCourses((prev) => prev.map((c) => (c.id === id ? persisted : c)));
-        return persisted;
-      } else if (error) {
-        console.error('Supabase addCourse error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase addCourse network error:', e);
+    const supabase = createClient();
+    const dbPayload = courseToDb(newCourse);
+    const { data, error } = await supabase.from('courses').insert(dbPayload).select().single();
+    if (error) {
+      console.error('Supabase addCourse error:', error);
+      throw error;
     }
-    return newCourse;
-  };
-
-  const updateCourse = async (id: string, updated: Partial<Course>) => {
+    const persisted = dbToCourse(data);
     setCourses((prev) => {
-      const next = prev.map((c) => (c.id === id ? { ...c, ...updated } : c));
+      const next = [...prev, persisted];
       save('vm_courses', next);
       return next;
     });
+    return persisted;
+  };
 
-    try {
-      const supabase = createClient();
-      const dbPayload = courseToDb(updated);
-      const { data, error } = await supabase
-        .from('courses')
-        .update(dbPayload)
-        .eq('id', id)
-        .select()
-        .single();
-
-      if (!error && data) {
-        const persisted = dbToCourse(data);
-        setCourses((prev) => prev.map((c) => (c.id === id ? persisted : c)));
-        return persisted;
-      } else if (error) {
-        console.error('Supabase updateCourse error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase updateCourse network error:', e);
+  const updateCourse = async (id: string, updated: Partial<Course>) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Courses cannot be modified.');
     }
+    const supabase = createClient();
+    const dbPayload = courseToDb(updated);
+    const { data, error } = await supabase
+      .from('courses')
+      .update(dbPayload)
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Supabase updateCourse error:', error);
+      throw error;
+    }
+    const persisted = dbToCourse(data);
+    setCourses((prev) => {
+      const next = prev.map((c) => (c.id === id ? persisted : c));
+      save('vm_courses', next);
+      return next;
+    });
+    return persisted;
   };
 
   const deleteCourse = async (id: string) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Courses cannot be modified.');
+    }
+    const supabase = createClient();
+    const { error } = await supabase.from('courses').delete().eq('id', id);
+    if (error) {
+      console.error('Supabase deleteCourse error:', error);
+      throw error;
+    }
     setCourses((prev) => {
       const next = prev.filter((c) => c.id !== id);
       save('vm_courses', next);
       return next;
     });
-
-    try {
-      const supabase = createClient();
-      const { error } = await supabase.from('courses').delete().eq('id', id);
-      if (error) {
-        console.error('Supabase deleteCourse error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase deleteCourse network error:', e);
-    }
   };
 
   // ---------------------------------------------------------------------------
   // Events Methods
   // ---------------------------------------------------------------------------
   const addEvent = async (eventData: Omit<VMEvent, 'id'> & { id?: string }) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Events cannot be modified.');
+    }
     const rawSlug = eventData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40);
     const id = eventData.id || `event-${rawSlug}-${Date.now()}`;
     const is_published = eventData.is_published ?? true;
     const newEvent: VMEvent = { id, ...eventData, is_published };
 
+    const supabase = createClient();
+    const dbPayload = eventToDb(newEvent);
+    const { data, error } = await supabase.from('events').insert(dbPayload).select().single();
+    if (error) {
+      console.error('Supabase addEvent error:', error);
+      throw error;
+    }
+    const persisted = dbToEvent(data);
     setEvents((prev) => {
-      const next = [newEvent, ...prev];
+      const next = [persisted, ...prev];
       save('vm_events', next);
       return next;
     });
-
-    try {
-      const supabase = createClient();
-      const dbPayload = eventToDb(newEvent);
-      const { data, error } = await supabase.from('events').insert(dbPayload).select().single();
-      if (!error && data) {
-        const persisted = dbToEvent(data);
-        setEvents((prev) => prev.map((e) => (e.id === id ? persisted : e)));
-        return persisted;
-      } else if (error) {
-        console.error('Supabase addEvent error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase addEvent network error:', e);
-    }
-    return newEvent;
+    return persisted;
   };
 
   const updateEvent = async (id: string, updated: Partial<VMEvent>) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Events cannot be modified.');
+    }
+    const supabase = createClient();
+    const dbPayload = eventToDb(updated);
+    const { data, error } = await supabase
+      .from('events')
+      .update(dbPayload)
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Supabase updateEvent error:', error);
+      throw error;
+    }
+    const persisted = dbToEvent(data);
     setEvents((prev) => {
-      const next = prev.map((e) => (e.id === id ? { ...e, ...updated } : e));
+      const next = prev.map((e) => (e.id === id ? persisted : e));
       save('vm_events', next);
       return next;
     });
-
-    try {
-      const supabase = createClient();
-      const dbPayload = eventToDb(updated);
-      const { data, error } = await supabase
-        .from('events')
-        .update(dbPayload)
-        .eq('id', id)
-        .select()
-        .single();
-
-      if (!error && data) {
-        const persisted = dbToEvent(data);
-        setEvents((prev) => prev.map((e) => (e.id === id ? persisted : e)));
-        return persisted;
-      } else if (error) {
-        console.error('Supabase updateEvent error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase updateEvent network error:', e);
-    }
+    return persisted;
   };
 
   const deleteEvent = async (id: string) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Events cannot be modified.');
+    }
+    const supabase = createClient();
+    const { error } = await supabase.from('events').delete().eq('id', id);
+    if (error) {
+      console.error('Supabase deleteEvent error:', error);
+      throw error;
+    }
     setEvents((prev) => {
       const next = prev.filter((e) => e.id !== id);
       save('vm_events', next);
       return next;
     });
-
-    try {
-      const supabase = createClient();
-      const { error } = await supabase.from('events').delete().eq('id', id);
-      if (error) {
-        console.error('Supabase deleteEvent error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase deleteEvent network error:', e);
-    }
   };
 
   // ---------------------------------------------------------------------------
   // Teaching Methods
   // ---------------------------------------------------------------------------
   const addTeaching = async (tData: Omit<Teaching, 'id'>) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Teachings cannot be modified.');
+    }
     const rawSlug = tData.slug || tData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 50);
     const id = (tData as any).id || `teaching-${rawSlug}-${Date.now()}`;
     const slug = rawSlug;
     const is_published = (tData as any).is_published ?? false;
 
     const newTeaching: Teaching = { id, slug, ...tData, is_published };
-    setTeachings((prev) => [newTeaching, ...prev]);
 
-    try {
-      const supabase = createClient();
-      const dbPayload = teachingToDb(newTeaching as any);
-      const { data, error } = await supabase.from('teachings').insert(dbPayload).select().single();
-      if (!error && data) {
-        const persisted = dbToTeaching(data);
-        setTeachings((prev) => prev.map((t) => (t.id === id ? persisted : t)));
-        return persisted;
-      } else if (error) {
-        console.error('Supabase addTeaching error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase addTeaching network error:', e);
+    const supabase = createClient();
+    const dbPayload = teachingToDb(newTeaching as any);
+    const { data, error } = await supabase.from('teachings').insert(dbPayload).select().single();
+    if (error) {
+      console.error('Supabase addTeaching error:', error);
+      throw error;
     }
-    return newTeaching;
+    const persisted = dbToTeaching(data);
+    setTeachings((prev) => [persisted, ...prev]);
+    return persisted;
   };
 
   const updateTeaching = async (id: string, updated: Partial<Teaching>) => {
-    setTeachings((prev) => prev.map((t) => (t.id === id ? { ...t, ...updated } : t)));
-
-    try {
-      const supabase = createClient();
-      const dbPayload: any = {};
-      if (updated.title !== undefined) dbPayload.title = updated.title;
-      if (updated.slug !== undefined) dbPayload.slug = updated.slug;
-      if (updated.scripture !== undefined) dbPayload.scripture = updated.scripture;
-      if (updated.teacher !== undefined) dbPayload.teacher = updated.teacher;
-      if (updated.format !== undefined) dbPayload.format = updated.format;
-      if (updated.language !== undefined) dbPayload.language = updated.language;
-      if (updated.duration !== undefined) dbPayload.duration = updated.duration;
-      if (updated.description !== undefined) dbPayload.description = updated.description;
-      if (updated.topic !== undefined) dbPayload.topic = updated.topic;
-      if (updated.category !== undefined) dbPayload.category_slug = updated.category;
-      if (updated.categoryName !== undefined) dbPayload.category_name = updated.categoryName;
-      if (updated.src !== undefined) dbPayload.src = updated.src;
-      if (updated.audioUrl !== undefined) dbPayload.audio_url = updated.audioUrl;
-      if (updated.youtubePlaylistId !== undefined) dbPayload.youtube_playlist_id = updated.youtubePlaylistId;
-      if (updated.youtubeVideoId !== undefined) dbPayload.youtube_video_id = updated.youtubeVideoId;
-      if (updated.thumbnailSrc !== undefined) dbPayload.thumbnail_src = updated.thumbnailSrc;
-      if (updated.is_published !== undefined) dbPayload.is_published = updated.is_published;
-
-      const { data, error } = await supabase
-        .from('teachings')
-        .update(dbPayload)
-        .eq('id', id)
-        .select()
-        .single();
-
-      if (!error && data) {
-        const persisted = dbToTeaching(data);
-        setTeachings((prev) => prev.map((t) => (t.id === id ? persisted : t)));
-        return persisted;
-      } else if (error) {
-        console.error('Supabase updateTeaching error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase updateTeaching network error:', e);
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Teachings cannot be modified.');
     }
+    const supabase = createClient();
+    const dbPayload: any = {};
+    if (updated.title !== undefined) dbPayload.title = updated.title;
+    if (updated.slug !== undefined) dbPayload.slug = updated.slug;
+    if (updated.scripture !== undefined) dbPayload.scripture = updated.scripture;
+    if (updated.teacher !== undefined) dbPayload.teacher = updated.teacher;
+    if (updated.format !== undefined) dbPayload.format = updated.format;
+    if (updated.language !== undefined) dbPayload.language = updated.language;
+    if (updated.duration !== undefined) dbPayload.duration = updated.duration;
+    if (updated.description !== undefined) dbPayload.description = updated.description;
+    if (updated.topic !== undefined) dbPayload.topic = updated.topic;
+    if (updated.category !== undefined) dbPayload.category_slug = updated.category;
+    if (updated.categoryName !== undefined) dbPayload.category_name = updated.categoryName;
+    if (updated.src !== undefined) dbPayload.src = updated.src;
+    if (updated.audioUrl !== undefined) dbPayload.audio_url = updated.audioUrl;
+    if (updated.youtubePlaylistId !== undefined) dbPayload.youtube_playlist_id = updated.youtubePlaylistId;
+    if (updated.youtubeVideoId !== undefined) dbPayload.youtube_video_id = updated.youtubeVideoId;
+    if (updated.thumbnailSrc !== undefined) dbPayload.thumbnail_src = updated.thumbnailSrc;
+    if (updated.is_published !== undefined) dbPayload.is_published = updated.is_published;
+
+    const { data, error } = await supabase
+      .from('teachings')
+      .update(dbPayload)
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Supabase updateTeaching error:', error);
+      throw error;
+    }
+    const persisted = dbToTeaching(data);
+    setTeachings((prev) => prev.map((t) => (t.id === id ? persisted : t)));
+    return persisted;
   };
 
   const deleteTeaching = async (id: string) => {
-    setTeachings((prev) => prev.filter((t) => t.id !== id));
-
-    try {
-      const supabase = createClient();
-      const { error } = await supabase.from('teachings').delete().eq('id', id);
-      if (error) {
-        console.error('Supabase deleteTeaching error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase deleteTeaching network error:', e);
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Teachings cannot be modified.');
     }
+    const supabase = createClient();
+    const { error } = await supabase.from('teachings').delete().eq('id', id);
+    if (error) {
+      console.error('Supabase deleteTeaching error:', error);
+      throw error;
+    }
+    setTeachings((prev) => prev.filter((t) => t.id !== id));
   };
 
   // ---------------------------------------------------------------------------
   // Publications Methods
   // ---------------------------------------------------------------------------
   const addPublication = async (pubData: Omit<Publication, 'id'> & { id?: string }) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Publications cannot be modified.');
+    }
     const id = pubData.id || `pub-${Date.now()}`;
     const is_published = pubData.is_published ?? true;
     const newPub: Publication = { id, ...pubData, is_published };
 
+    const supabase = createClient();
+    const dbPayload = publicationToDb(newPub);
+    const { data, error } = await supabase.from('publications').insert(dbPayload).select().single();
+    if (error) {
+      console.error('Supabase addPublication error:', error);
+      throw error;
+    }
+    const persisted = dbToPublication(data);
     setPublications((prev) => {
-      const next = [newPub, ...prev];
+      const next = [persisted, ...prev];
       save('vm_publications', next);
       return next;
     });
-
-    try {
-      const supabase = createClient();
-      const dbPayload = publicationToDb(newPub);
-      const { data, error } = await supabase.from('publications').insert(dbPayload).select().single();
-      if (!error && data) {
-        const persisted = dbToPublication(data);
-        setPublications((prev) => prev.map((p) => (p.id === id ? persisted : p)));
-        return persisted;
-      } else if (error) {
-        console.error('Supabase addPublication error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase addPublication network error:', e);
-    }
-    return newPub;
+    return persisted;
   };
 
   const updatePublication = async (id: string, updated: Partial<Publication>) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Publications cannot be modified.');
+    }
+    const supabase = createClient();
+    const dbPayload = publicationToDb(updated);
+    const { data, error } = await supabase
+      .from('publications')
+      .update(dbPayload)
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Supabase updatePublication error:', error);
+      throw error;
+    }
+    const persisted = dbToPublication(data);
     setPublications((prev) => {
-      const next = prev.map((p) => (p.id === id ? { ...p, ...updated } : p));
+      const next = prev.map((p) => (p.id === id ? persisted : p));
       save('vm_publications', next);
       return next;
     });
-
-    try {
-      const supabase = createClient();
-      const dbPayload = publicationToDb(updated);
-      const { data, error } = await supabase
-        .from('publications')
-        .update(dbPayload)
-        .eq('id', id)
-        .select()
-        .single();
-
-      if (!error && data) {
-        const persisted = dbToPublication(data);
-        setPublications((prev) => prev.map((p) => (p.id === id ? persisted : p)));
-        return persisted;
-      } else if (error) {
-        console.error('Supabase updatePublication error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase updatePublication network error:', e);
-    }
+    return persisted;
   };
 
   const deletePublication = async (id: string) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Publications cannot be modified.');
+    }
+    const supabase = createClient();
+    const { error } = await supabase.from('publications').delete().eq('id', id);
+    if (error) {
+      console.error('Supabase deletePublication error:', error);
+      throw error;
+    }
     setPublications((prev) => {
       const next = prev.filter((p) => p.id !== id);
       save('vm_publications', next);
       return next;
     });
-
-    try {
-      const supabase = createClient();
-      const { error } = await supabase.from('publications').delete().eq('id', id);
-      if (error) {
-        console.error('Supabase deletePublication error:', error);
-      }
-    } catch (e) {
-      console.warn('Supabase deletePublication network error:', e);
-    }
   };
 
   // ---------------------------------------------------------------------------
   // Inquiry & Donation Methods (Supabase Backed with Local Cache Fallback)
   // ---------------------------------------------------------------------------
   const addInquiry = async (inq: Omit<Inquiry, 'id' | 'date' | 'status'> & { id?: string; date?: string; status?: Inquiry['status'] }) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Contact inquiries cannot be submitted at this time.');
+    }
+
     const id = inq.id || 'inq-' + Date.now();
     const date = inq.date || new Date().toISOString().split('T')[0];
     const status = inq.status || 'New';
@@ -875,17 +843,12 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       status,
     };
 
-    if (isSupabaseConfigured()) {
-      try {
-        const supabase = createClient();
-        const dbPayload = inquiryToDb(newInq, false);
-        const { error } = await supabase.from('inquiries').insert(dbPayload);
-        if (error) {
-          console.error('Supabase addInquiry error:', error);
-        }
-      } catch (e) {
-        console.warn('Supabase addInquiry error, saved locally:', e);
-      }
+    const supabase = createClient();
+    const dbPayload = inquiryToDb(newInq, false);
+    const { error } = await supabase.from('inquiries').insert(dbPayload);
+    if (error) {
+      console.error('Supabase addInquiry error:', error);
+      throw error;
     }
 
     setInquiries((prev) => {
@@ -898,43 +861,41 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updateInquiryStatus = async (id: string, status: Inquiry['status']) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Inquiry review status cannot be updated.');
+    }
+
+    const supabase = createClient();
+    const { error } = await supabase.from('inquiries').update({ status }).eq('id', id);
+    if (error) {
+      console.error('Supabase updateInquiryStatus error:', error);
+      throw error;
+    }
+
     setInquiries((prev) => {
       const next = prev.map((i) => (i.id === id ? { ...i, status } : i));
       save('vm_inquiries', next);
       return next;
     });
-
-    if (isSupabaseConfigured()) {
-      try {
-        const supabase = createClient();
-        const { error } = await supabase.from('inquiries').update({ status }).eq('id', id);
-        if (error) {
-          console.error('Supabase updateInquiryStatus error:', error);
-        }
-      } catch (e) {
-        console.warn('Supabase updateInquiryStatus network error:', e);
-      }
-    }
   };
 
   const deleteInquiry = async (id: string) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Inquiries cannot be deleted.');
+    }
+
+    const supabase = createClient();
+    const { error } = await supabase.from('inquiries').delete().eq('id', id);
+    if (error) {
+      console.error('Supabase deleteInquiry error:', error);
+      throw error;
+    }
+
     setInquiries((prev) => {
       const next = prev.filter((i) => i.id !== id);
       save('vm_inquiries', next);
       return next;
     });
-
-    if (isSupabaseConfigured()) {
-      try {
-        const supabase = createClient();
-        const { error } = await supabase.from('inquiries').delete().eq('id', id);
-        if (error) {
-          console.error('Supabase deleteInquiry error:', error);
-        }
-      } catch (e) {
-        console.warn('Supabase deleteInquiry network error:', e);
-      }
-    }
   };
 
   const addDonation = async (don: Omit<DonationRecord, 'id' | 'date' | 'verificationStatus'> & { id?: string; date?: string; verificationStatus?: DonationRecord['verificationStatus']; notes?: string }): Promise<DonationRecord | void> => {
@@ -956,6 +917,10 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       });
     }
 
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Seva donation offerings cannot be recorded at this time.');
+    }
+
     const id = don.id || 'don-' + Date.now();
     const date = don.date || new Date().toISOString().split('T')[0];
     const newDon: DonationRecord = {
@@ -967,18 +932,13 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       receiptStatus: 'Pending',
     };
 
-    if (isSupabaseConfigured()) {
-      try {
-        const supabase = createClient();
-        // Exclude server-controlled columns verification_status, receipt_status, and notes on public INSERT
-        const dbPayload = donationToDb(newDon, false);
-        const { error } = await supabase.from('donations').insert(dbPayload);
-        if (error) {
-          console.error('Supabase addDonation error:', error);
-        }
-      } catch (e) {
-        console.warn('Supabase addDonation error, saved locally:', e);
-      }
+    const supabase = createClient();
+    // Exclude server-controlled columns verification_status, receipt_status, and notes on public INSERT
+    const dbPayload = donationToDb(newDon, false);
+    const { error } = await supabase.from('donations').insert(dbPayload);
+    if (error) {
+      console.error('Supabase addDonation error:', error);
+      throw error;
     }
 
     setDonations((prev) => {
@@ -991,50 +951,49 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logAdminDonation = async (don: Omit<DonationRecord, 'id' | 'date'> & { id?: string; date?: string; notes?: string }): Promise<DonationRecord> => {
-    let createdRecord: DonationRecord = {
-      id: don.id || 'don-' + Date.now(),
-      donorName: don.donorName.trim(),
-      donorEmail: don.donorEmail ? don.donorEmail.trim() : undefined,
-      donorPhone: don.donorPhone ? don.donorPhone.trim() : undefined,
-      donorPan: don.donorPan ? don.donorPan.trim() : undefined,
-      category: don.category.trim(),
-      amount: Number(don.amount),
-      date: don.date || new Date().toISOString().split('T')[0],
-      method: don.method.trim(),
-      utrNumber: don.utrNumber.trim(),
-      verificationStatus: don.verificationStatus || 'Verified',
-      receiptStatus: don.receiptStatus || 'Issued',
-      notes: don.notes ? don.notes.trim() : undefined,
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Admin offerings cannot be logged.');
+    }
+
+    const supabase = createClient();
+    const payload = {
+      p_donor_name: don.donorName.trim(),
+      p_category: don.category.trim(),
+      p_amount: Number(don.amount),
+      p_method: don.method.trim(),
+      p_utr_number: don.utrNumber.trim(),
+      p_donor_email: don.donorEmail ? don.donorEmail.trim() : null,
+      p_donor_phone: don.donorPhone ? don.donorPhone.trim() : null,
+      p_donor_pan: don.donorPan ? don.donorPan.trim() : null,
+      p_verification_status: don.verificationStatus || 'Verified',
+      p_receipt_status: don.receiptStatus || 'Issued',
+      p_tx_date: don.date || new Date().toISOString().split('T')[0],
+      p_notes: don.notes ? don.notes.trim() : null,
     };
 
-    if (isSupabaseConfigured()) {
-      try {
-        const supabase = createClient();
-        const payload = {
-          p_donor_name: don.donorName.trim(),
-          p_category: don.category.trim(),
-          p_amount: Number(don.amount),
-          p_method: don.method.trim(),
-          p_utr_number: don.utrNumber.trim(),
-          p_donor_email: don.donorEmail ? don.donorEmail.trim() : null,
-          p_donor_phone: don.donorPhone ? don.donorPhone.trim() : null,
-          p_donor_pan: don.donorPan ? don.donorPan.trim() : null,
-          p_verification_status: don.verificationStatus || 'Verified',
-          p_receipt_status: don.receiptStatus || 'Issued',
-          p_tx_date: don.date || new Date().toISOString().split('T')[0],
-          p_notes: don.notes ? don.notes.trim() : null,
-        };
-
-        const { data, error } = await supabase.rpc('log_admin_donation', payload);
-        if (error) {
-          console.error('Supabase logAdminDonation error:', error);
-        } else if (data) {
-          createdRecord = dbToDonation(data as DatabaseDonationRow);
-        }
-      } catch (e) {
-        console.warn('Supabase logAdminDonation network error:', e);
-      }
+    const { data, error } = await supabase.rpc('log_admin_donation', payload);
+    if (error) {
+      console.error('Supabase logAdminDonation error:', error);
+      throw error;
     }
+
+    const createdRecord: DonationRecord = data
+      ? dbToDonation(data as DatabaseDonationRow)
+      : {
+          id: don.id || 'don-' + Date.now(),
+          donorName: don.donorName.trim(),
+          donorEmail: don.donorEmail ? don.donorEmail.trim() : undefined,
+          donorPhone: don.donorPhone ? don.donorPhone.trim() : undefined,
+          donorPan: don.donorPan ? don.donorPan.trim() : undefined,
+          category: don.category.trim(),
+          amount: Number(don.amount),
+          date: don.date || new Date().toISOString().split('T')[0],
+          method: don.method.trim(),
+          utrNumber: don.utrNumber.trim(),
+          verificationStatus: don.verificationStatus || 'Verified',
+          receiptStatus: don.receiptStatus || 'Issued',
+          notes: don.notes ? don.notes.trim() : undefined,
+        };
 
     setDonations((prev) => {
       const next = [createdRecord, ...prev.filter((d) => d.id !== createdRecord.id)];
@@ -1046,49 +1005,47 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updateDonationVerification = async (id: string, verificationStatus: DonationRecord['verificationStatus']) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Verification status cannot be updated.');
+    }
+
+    const supabase = createClient();
+    const { error } = await supabase.rpc('update_donation_verification', {
+      p_donation_id: id,
+      p_verification_status: verificationStatus,
+    });
+    if (error) {
+      console.error('Supabase updateDonationVerification error:', error);
+      throw error;
+    }
+
     setDonations((prev) => {
       const next = prev.map((d) => (d.id === id ? { ...d, verificationStatus } : d));
       save('vm_donations', next);
       return next;
     });
-
-    if (isSupabaseConfigured()) {
-      try {
-        const supabase = createClient();
-        const { error } = await supabase.rpc('update_donation_verification', {
-          p_donation_id: id,
-          p_verification_status: verificationStatus,
-        });
-        if (error) {
-          console.error('Supabase updateDonationVerification error:', error);
-        }
-      } catch (e) {
-        console.warn('Supabase updateDonationVerification network error:', e);
-      }
-    }
   };
 
   const updateDonationReceipt = async (id: string, receiptStatus: NonNullable<DonationRecord['receiptStatus']>) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Receipt status cannot be updated.');
+    }
+
+    const supabase = createClient();
+    const { error } = await supabase.rpc('update_donation_receipt', {
+      p_donation_id: id,
+      p_receipt_status: receiptStatus,
+    });
+    if (error) {
+      console.error('Supabase updateDonationReceipt error:', error);
+      throw error;
+    }
+
     setDonations((prev) => {
       const next = prev.map((d) => (d.id === id ? { ...d, receiptStatus } : d));
       save('vm_donations', next);
       return next;
     });
-
-    if (isSupabaseConfigured()) {
-      try {
-        const supabase = createClient();
-        const { error } = await supabase.rpc('update_donation_receipt', {
-          p_donation_id: id,
-          p_receipt_status: receiptStatus,
-        });
-        if (error) {
-          console.error('Supabase updateDonationReceipt error:', error);
-        }
-      } catch (e) {
-        console.warn('Supabase updateDonationReceipt network error:', e);
-      }
-    }
   };
 
   const updateDonationStatus = async (id: string, receiptStatus: NonNullable<DonationRecord['receiptStatus']>) => {
@@ -1096,25 +1053,24 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   };
 
   const deleteDonation = async (id: string) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error('Database service is not configured. Donations cannot be deleted.');
+    }
+
+    const supabase = createClient();
+    const { error } = await supabase.rpc('delete_admin_donation', {
+      p_donation_id: id,
+    });
+    if (error) {
+      console.error('Supabase deleteDonation error:', error);
+      throw error;
+    }
+
     setDonations((prev) => {
       const next = prev.filter((d) => d.id !== id);
       save('vm_donations', next);
       return next;
     });
-
-    if (isSupabaseConfigured()) {
-      try {
-        const supabase = createClient();
-        const { error } = await supabase.rpc('delete_admin_donation', {
-          p_donation_id: id,
-        });
-        if (error) {
-          console.error('Supabase deleteDonation error:', error);
-        }
-      } catch (e) {
-        console.warn('Supabase deleteDonation network error:', e);
-      }
-    }
   };
 
   const resetToDefaults = () => {
