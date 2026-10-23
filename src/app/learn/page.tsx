@@ -32,6 +32,7 @@ export default function LearnPage() {
 
   const filteredCourses = useMemo(() => {
     const list = courses.filter((c) => {
+      if (c.is_published === false) return false;
       if (selectedFilter === 'All Formats') return true;
       return c.format === selectedFilter;
     });

@@ -3,26 +3,41 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { PUBLICATIONS, getPublicationById, Publication } from '@/data/publications';
+import { createClient } from '@/lib/supabase/server';
+import { dbToPublication } from '@/lib/cms-mappers';
 import SacredDivider from '@/components/cinematic/SacredDivider';
 import { resolvePublicationCover } from '@/lib/media-identity';
 import PublicationPlaceholder from '@/components/PublicationPlaceholder';
 import styles from './page.module.css';
 
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string }> | { id: string };
 }
 
-export async function generateStaticParams() {
-  const primaryIds = PUBLICATIONS.map((p) => ({ id: p.id }));
-  const canonicalIds = PUBLICATIONS.filter((p) => p.canonicalId && p.canonicalId !== p.id).map((p) => ({
-    id: p.canonicalId as string,
-  }));
-  return [...primaryIds, ...canonicalIds];
+async function getLivePublication(id: string): Promise<Publication | undefined> {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from('publications')
+      .select('*')
+      .or(`id.eq.${id},canonical_id.eq.${id}`)
+      .maybeSingle();
+
+    if (!error && data) {
+      return dbToPublication(data);
+    }
+  } catch (e) {
+    console.warn('Supabase getLivePublication fallback:', e);
+  }
+  return getPublicationById(id);
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { id } = await params;
-  const publication = getPublicationById(id);
+  const resolved = await Promise.resolve(params);
+  const publication = await getLivePublication(resolved.id);
   if (!publication) {
     return { title: 'Publication Not Found — Literary Archive | Vedanta Mission' };
   }
@@ -33,8 +48,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function PublicationDetailPage({ params }: PageProps) {
-  const { id } = await params;
-  const publication = getPublicationById(id);
+  const resolved = await Promise.resolve(params);
+  const publication = await getLivePublication(resolved.id);
 
   if (!publication) {
     notFound();

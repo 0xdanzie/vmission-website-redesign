@@ -1244,7 +1244,8 @@
 
 .mediaAudio,
 .mediaVideo {
-  /* Same ink treatment for both; kept as hooks for future differentiation. */
+  /* Inherit ink treatment; maintained as semantic hooks for format styling. */
+  color: inherit;
 }
 
 .mediaLabel {

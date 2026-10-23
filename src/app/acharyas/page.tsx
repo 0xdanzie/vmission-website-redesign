@@ -4,8 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { acharyas } from '@/data/acharyas';
-import { teachings } from '@/data/teachings';
+import { useData } from '@/context/DataContext';
 import { getAssetPath } from '@/utils/assetPath';
 import Button from '@/components/Button';
 import Magnetic from '@/components/motion/Magnetic';
@@ -54,6 +53,7 @@ function Words({ text }: { text: string }) {
 }
 
 export default function AcharyasPage() {
+  const { acharyas, teachings } = useData();
   const rootRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
@@ -61,9 +61,10 @@ export default function AcharyasPage() {
   const railRef = useRef<HTMLDivElement>(null);
   const heroImgRef = useRef<HTMLImageElement>(null);
 
-  const founder = acharyas.find((a) => a.isFounder) || acharyas[0];
-  const residentAcharyas = acharyas.filter((a) => !a.isFounder);
-  const featuredTeachings = teachings.slice(0, 3);
+  const publicAcharyas = acharyas.filter((a) => a.is_published !== false);
+  const founder = publicAcharyas.find((a) => a.isFounder) || publicAcharyas[0];
+  const residentAcharyas = publicAcharyas.filter((a) => !a.isFounder);
+  const featuredTeachings = teachings.filter((t) => t.is_published !== false).slice(0, 3);
 
   useScrollReveals(rootRef);
 

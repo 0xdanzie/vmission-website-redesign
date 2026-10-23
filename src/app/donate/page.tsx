@@ -451,7 +451,7 @@ MICR Code: 452240003`;
     return Object.keys(errs).length === 0;
   };
 
-  const handlePrepareAcknowledgement = (e: React.FormEvent) => {
+  const handlePrepareAcknowledgement = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateProofForm()) {
       showToast('Please correct the highlighted fields.', 'error');
@@ -459,23 +459,30 @@ MICR Code: 452240003`;
     }
 
     const numericAmount = parseFloat(amount.replace(/[^0-9.]/g, '')) || 1001;
-    const resolvedMethod = method.includes('UPI') ? 'UPI' : method.includes('Cheque') ? 'Cheque' : 'NEFT/RTGS';
+    const resolvedMethod = method.trim() || 'NEFT / RTGS';
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      // Save locally to DataContext for session memory & admin view
-      addDonation({
+    try {
+      await addDonation({
         donorName: donorName.trim(),
+        donorEmail: donorEmail.trim() || undefined,
+        donorPhone: donorPhone.trim() || undefined,
+        donorPan: donorPan.trim() || undefined,
         category: `${selectedCat.title} — ${selectedOffering.name}`,
         amount: numericAmount,
         method: resolvedMethod,
         utrNumber: utrNumber.trim(),
         receiptStatus: 'Pending',
+        date: txDate || new Date().toISOString().split('T')[0],
       });
-      setIsSubmitting(false);
       setIsPrepared(true);
-      showToast('Acknowledgement details prepared for transmission.', 'success');
-    }, 400);
+      showToast('Acknowledgement details registered and logged to Ashram Records.', 'success');
+    } catch (err: any) {
+      console.error('Donation acknowledgement submission error:', err);
+      showToast('Could not record offering in database. Please verify your network or transmit via email directly.', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const purposeString = `${selectedCat.title}: ${selectedOffering.name}`;

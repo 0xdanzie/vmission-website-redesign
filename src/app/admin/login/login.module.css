@@ -1,24 +1,30 @@
+/* ============================================================
+   VEDANTA MISSION CMS — STAFF LOGIN EXPERIENCE
+   Serene, Dignified, Authentic Institutional Presentation
+   ============================================================ */
+
 .loginContainer {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #F4F6F8;
-  padding: var(--space-6) var(--space-4);
-  font-family: var(--font-sans);
+  background: var(--vm-sand, #FAF6EE);
+  background-image: radial-gradient(circle at 50% 20%, rgba(224, 99, 40, 0.04) 0%, transparent 65%);
+  padding: var(--space-6, 24px) var(--space-4, 16px);
+  font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
 }
 
 .loginCard {
   width: 100%;
   max-width: 440px;
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  padding: var(--space-8);
+  border: 1px solid var(--vm-sand-border, #DFD7C7);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(30, 25, 22, 0.06), 0 1px 3px rgba(30, 25, 22, 0.04);
+  padding: 36px 32px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-5, 20px);
 }
 
 .brandHeader {
@@ -29,51 +35,55 @@
 }
 
 .logoWrap {
-  margin-bottom: var(--space-3);
+  margin-bottom: 12px;
   display: flex;
   justify-content: center;
 }
 
 .brandTitle {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
+  font-family: var(--font-serif, "Cormorant Garamond", serif);
+  font-size: 1.5rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  color: #1A202C;
+  letter-spacing: 0.06em;
+  color: var(--vm-text, #221D1A);
   text-transform: uppercase;
+  margin: 0;
 }
 
 .consoleTag {
   font-size: 0.8125rem;
-  color: #718096;
-  margin-top: 2px;
+  color: var(--vm-text-muted, #665D55);
+  margin-top: 3px;
   font-weight: 500;
 }
 
-.prototypeNotice {
-  background: #FEF3C7;
-  border: 1px solid #F59E0B;
+.securityNotice {
+  background: var(--vm-ivory, #FDFBF7);
+  border: 1px solid var(--vm-sand-border, #DFD7C7);
+  border-left: 3px solid var(--vm-bhagwa, #E06328);
   border-radius: 6px;
-  padding: 10px 12px;
+  padding: 10px 14px;
   display: flex;
   gap: 10px;
   align-items: flex-start;
 }
 
 .noticeIcon {
-  font-size: 1rem;
-  line-height: 1.2;
+  color: var(--vm-bhagwa, #E06328);
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .noticeText {
   font-size: 0.75rem;
-  color: #92400E;
-  line-height: 1.4;
+  color: var(--vm-text-muted, #665D55);
+  line-height: 1.45;
 }
 
 .noticeText strong {
   display: block;
   font-weight: 700;
+  color: var(--vm-text, #221D1A);
   margin-bottom: 2px;
 }
 
@@ -81,82 +91,91 @@
   margin: 0;
 }
 
+.errorAlert {
+  background-color: var(--vm-error-bg, #FDF1EF);
+  border: 1px solid rgba(185, 56, 38, 0.3);
+  border-radius: 6px;
+  color: var(--vm-error, #B93826);
+  font-size: 0.8125rem;
+  padding: 10px 14px;
+  line-height: 1.4;
+}
+
 .form {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: 16px;
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
 .label {
-  font-size: 0.78125rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: #4A5568;
+  color: var(--vm-text, #221D1A);
 }
 
-.input,
-.select {
+.input {
   width: 100%;
-  padding: 9px 12px;
-  border: 1px solid #CBD5E0;
+  padding: 10px 14px;
+  border: 1px solid var(--vm-sand-border, #DFD7C7);
   border-radius: 6px;
   font-size: 0.875rem;
-  color: #1A202C;
+  color: var(--vm-text, #221D1A);
   background: #FFFFFF;
-  transition: border-color var(--vm-ease-fast), box-shadow var(--vm-ease-fast);
+  transition: border-color var(--vm-ease-fast, 150ms ease), box-shadow var(--vm-ease-fast, 150ms ease);
 }
 
-.input:focus,
-.select:focus {
+.input:focus {
   outline: none;
-  border-color: #D95D39;
-  box-shadow: 0 0 0 3px rgba(217, 93, 57, 0.15);
+  border-color: var(--vm-bhagwa, #E06328);
+  box-shadow: 0 0 0 3px rgba(224, 99, 40, 0.15);
 }
 
 .input:disabled {
-  background: #F7FAFC;
-  color: #A0AEC0;
+  background: var(--vm-sand, #FAF6EE);
+  color: var(--vm-text-faint, #8E847A);
   cursor: not-allowed;
 }
 
-.hint {
-  font-size: 0.6875rem;
-  color: #A0AEC0;
-  margin-top: 2px;
-}
-
 .submitBtn {
-  margin-top: var(--space-2);
-  padding: 10px 16px;
-  background: #D95D39;
+  margin-top: 6px;
+  padding: 11px 18px;
+  background: var(--vm-bhagwa, #E06328);
   color: #FFFFFF;
   border: none;
   border-radius: 6px;
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background var(--vm-ease-fast);
-  box-shadow: 0 1px 3px rgba(217, 93, 57, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all var(--vm-ease-fast, 150ms ease);
+  box-shadow: 0 1px 3px rgba(224, 99, 40, 0.3);
 }
 
 .submitBtn:hover:not(:disabled) {
-  background: #BF4D2B;
+  background: var(--vm-gerua, #C84E17);
+  box-shadow: 0 3px 8px rgba(200, 78, 23, 0.35);
+  transform: translateY(-1px);
 }
 
 .submitBtn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+  transform: none;
 }
 
 .cardFooter {
   text-align: center;
-  padding-top: var(--space-4);
-  border-top: 1px solid #EDF2F7;
+  padding-top: var(--space-4, 16px);
+  border-top: 1px solid var(--vm-sand-border, #DFD7C7);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -164,16 +183,23 @@
 
 .returnLink {
   font-size: 0.8125rem;
-  color: #9E381C;
+  color: var(--vm-gerua, #C84E17);
   text-decoration: none;
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: all var(--vm-ease-fast, 150ms ease);
 }
 
 .returnLink:hover {
+  color: var(--vm-bhagwa, #E06328);
   text-decoration: underline;
 }
 
 .copyright {
   font-size: 0.6875rem;
-  color: #A0AEC0;
+  color: var(--vm-text-faint, #8E847A);
+  margin: 0;
 }

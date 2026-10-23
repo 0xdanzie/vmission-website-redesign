@@ -23,6 +23,8 @@ export interface Acharya {
   milestones?: AcharyaMilestone[];
   verificationState: 'SOURCE-VERIFIED' | 'SUMMARY-VERIFIED';
   archivalNotice?: string;
+  is_published?: boolean;
+  sort_order?: number;
 }
 
 export const acharyas: Acharya[] = [

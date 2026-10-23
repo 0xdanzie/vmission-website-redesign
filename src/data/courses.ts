@@ -27,6 +27,8 @@ export interface Course {
   dressCode?: string;
   sampleLessons?: Lesson[];
   questionnaire?: string[];
+  is_published?: boolean;
+  sort_order?: number;
 }
 
 export const courses: Course[] = [

@@ -82,8 +82,8 @@ function getVerifiedEventMedia(event: VMEvent): EventMediaResult | null {
   return null;
 }
 
-export default function EventDetailClient({ eventId }: { eventId: string }) {
-  const event = getEventById(eventId || 'guru-poornima-2026');
+export default function EventDetailClient({ eventId, initialEvent }: { eventId: string; initialEvent?: VMEvent }) {
+  const event = initialEvent || getEventById(eventId || 'guru-poornima-2026');
   const { showToast } = useToast();
 
   const [isRegistered, setIsRegistered] = useState(false);

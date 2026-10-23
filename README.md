@@ -1,9 +1,9 @@
-﻿# Vedanta Mission — Digital Ashram & Advaita Vedanta Portal
+# Vedanta Mission — Digital Ashram & Advaita Vedanta Portal
 
 [![Next.js](https://img.shields.io/badge/Next.js-14.2.15-000000?style=flat&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=flat&logo=react)](https://react.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5.3-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![Static Export](https://img.shields.io/badge/Static%20Pages-680%20Prerendered-2D4F38?style=flat)](https://vmission-website-redesign.vercel.app/)
+[![Database](https://img.shields.io/badge/Database-Supabase%20PostgreSQL-2D4F38?style=flat&logo=supabase)](https://supabase.com)
 [![License](https://img.shields.io/badge/Heritage-Vedanta%20Parmarthic%20Sewa%20Trust-C84E17?style=flat)](https://vmission.org.in)
 
 The official web portal and scriptural knowledge repository for **Vedanta Mission & Vedanta Ashram, Indore**, dedicated to the authentic study and dissemination of Advaita Vedanta, the Principal Upanishads, the Bhagavad Gita, and the Brahma Sutras under the traditional Shankaracharya lineage and the guidance of **Poojya Swami Atmananda Saraswati**.
@@ -131,48 +131,49 @@ The application is built on a modern, decoupled architecture designed for absolu
 
 | Component | Technology | Version | Purpose |
 |---|---|---|---|
-| **Framework** | Next.js (App Router) | `14.2.15` | Application framework, routing, and static HTML generation |
+| **Framework** | Next.js (App Router) | `14.2.15` | Application framework, routing, server components & API handlers |
 | **Runtime & UI** | React | `18.3.1` | Component architecture and client hydration |
 | **Language** | TypeScript | `5.5.3` | Type safety and reliable data contracts across all modules |
 | **Styling** | CSS Modules | Native | Scoped, zero-runtime styling using native CSS custom properties |
-| **Export Target** | Static Site Generation | `output: 'export'` | Complete pre-compilation into static HTML, CSS, and JS |
-| **State Management** | React Context | Native | Client-side continuous audio playback and transient UI state |
+| **Database & Auth** | Supabase PostgreSQL | `^2.118.0` | Relational database, Auth, RLS policies, and secure RPC functions |
+| **SSR / Session** | `@supabase/ssr` | `^0.12.7` | Cookie-based session management in Server Components & Middleware |
+| **State Management** | React Context | Native | Continuous audio playback, optimistic updates, and admin permissions |
 | **Fonts** | Google Fonts | CDN | Cormorant Garamond, Plus Jakarta Sans, Noto Serif Devanagari |
-| **Deployment** | Vercel / Edge CDN | Production | Global content delivery, instant edge caching, and SSL termination |
+| **Deployment** | Vercel / Node.js Runtime | Production | Next.js hosting with server middleware, edge caching, and SSL |
 
 ### Application Architecture
 
 ```
                     ┌───────────────────────────────┐
-                    │     Canonical Datasets        │
-                    │   (src/data/*.ts contracts)   │
-                    └───────────────┬───────────────┘
-                                    │
-                                    ▼
-                    ┌───────────────────────────────┐
                     │      Next.js App Router       │
-                    │  generateStaticParams() (SSG) │
-                    └───────────────┬───────────────┘
-                                    │
-                                    ▼
-                    ┌───────────────────────────────┐
-                    │     Static Export Bundle      │
-                    │    680 Pre-rendered Pages     │
-                    │            (out/)             │
-                    └───────────────┬───────────────┘
-                                    │
-           ┌────────────────────────┴────────────────────────┐
-           ▼                                                 ▼
-┌─────────────────────────────┐                   ┌─────────────────────────────┐
-│   Global Edge CDN Hosting   │                   │    Client Hydration Layer   │
-│  (Vercel / Cloudflare Pages)│                   │   (Audio Dock, Modals, Nav) │
-└─────────────────────────────┘                   └─────────────────────────────┘
+                    │   (Public & Admin Interfaces) │
+                    └───────┬───────────────┬───────┘
+                            │               │
+             (Public Routes)│               │(Admin Routes & Auth)
+                            ▼               ▼
+            ┌─────────────────────┐   ┌─────────────────────────────┐
+            │   Page Pre-render   │   │   Next.js Session Guard     │
+            │   & Edge Caching    │   │     (src/middleware.ts)     │
+            └─────────┬───────────┘   └──────────────┬──────────────┘
+                      │                              │
+                      ▼                              ▼
+            ┌───────────────────────────────────────────────┐
+            │               State Layer                     │
+            │           (src/context/DataContext)           │
+            └───────┬───────────────────────────────┬───────┘
+                    │                               │
+     (Read / Write) │                               │ (Fallback Offline)
+                    ▼                               ▼
+    ┌─────────────────────────────┐   ┌─────────────────────────────┐
+    │     Supabase PostgreSQL     │   │      Canonical Datasets     │
+    │  Row-Level Security & RPCs  │   │  (src/data/*.ts contracts)  │
+    └─────────────────────────────┘   └─────────────────────────────┘
 ```
 
-1. **Pure Static Export:** All 680 application routes—including every dynamic discourse chapter and monthly ezine issue—are pre-rendered into static HTML during `npm run build`. No Node.js runtime or server execution is required in production.
-2. **Client Hydration Islands:** Static pages hydrate lightweight client components where interactivity is required (audio dock, mobile menu drawer, filter bars, inquiry modals, and scroll reveal observers).
-3. **Continuous Audio Stream:** Audio playback is decoupled from page routing via `AudioPlayerContext`, maintaining playback across route transitions.
-4. **Structured Canonical Data:** Scriptural texts, event schedules, acharya biographies, and publication archives are managed in type-safe TypeScript models within `src/data/`, serving as the single source of truth.
+1. **Hybrid Rendering & Performance:** Public scriptural discourses, periodicals, retreat schedules, and curriculum pages benefit from Next.js caching and static optimization, while administrative record management and payment verification interact directly with Supabase PostgreSQL.
+2. **Server-Side Session Middleware:** All `/admin/*` operations (excluding `/admin/login/`) are guarded at the server level by `src/middleware.ts`, validating authenticated sessions and staff roles before rendering pages or executing operations.
+3. **Continuous Audio Stream:** Audio playback is decoupled from page routing via `AudioPlayerContext`, maintaining uninterrupted listening across all navigation flows.
+4. **Resilient Data Architecture:** PostgreSQL schemas in `supabase/migrations/` enforce data constraints, foreign keys, and audit timestamps. When operating without active Supabase credentials during development, `DataContext` automatically falls back to bundled canonical datasets in `src/data/`.
 
 ---
 
@@ -187,11 +188,14 @@ The application is built on a modern, decoupled architecture designed for absolu
 │   │   └── vmission/            # Curated canonical photography of Ashram and Acharyas
 │   ├── _headers                 # Edge CDN security headers (CSP, HSTS, X-Frame-Options)
 │   └── robots.txt               # Directives disallowing /admin from crawler indexing
+├── scripts/                     # Idempotent database seed utilities (seed-teachings.js, seed-batch2.js)
+├── supabase/
+│   └── migrations/              # Versioned SQL migrations (schema, RLS, indexes, and secure RPCs)
 ├── src/
 │   ├── app/                     # Next.js App Router (public pages & admin console)
 │   │   ├── about/               # About the Mission & Gurukula
 │   │   ├── acharyas/            # Lineage & Acharya biographies
-│   │   ├── admin/               # Operations & CMS prototype console
+│   │   ├── admin/               # Staff operations & Supabase CMS console
 │   │   ├── ashram/              # Ashram facilities & Mandir information
 │   │   ├── contact/             # Contact information & visit planner
 │   │   ├── donate/              # Seva offerings & 80-G receipt workflow
@@ -202,12 +206,17 @@ The application is built on a modern, decoupled architecture designed for absolu
 │   │   ├── globals.css          # Design tokens, color system, and motion variables
 │   │   └── layout.tsx           # Root HTML structure, fonts, and global providers
 │   ├── components/              # Modular UI components, modals, audio dock, navigation
+│   │   ├── admin/               # Admin console SVG icon library (AdminIcons.tsx)
 │   │   ├── cinematic/           # Entry overlay, PageTransition, ScrollMotion, TactileFrame
 │   │   └── immersive/           # AshramAscent visual component
 │   ├── context/                 # React Contexts (AudioPlayerContext, DataContext, ToastContext)
 │   ├── data/                    # Canonical datasets (acharyas, teachings, publications, events)
+│   ├── lib/                     # Supabase SSR client/server utilities and data mappers
+│   │   ├── supabase/            # Browser client (client.ts) and server client (server.ts)
+│   │   └── cms-mappers.ts       # Type mappers between database rows and frontend models
+│   ├── middleware.ts            # Next.js session refresh and /admin route protection
 │   └── styles/                  # Motion utilities, responsive breakpoints, and keyframes
-├── next.config.js               # Static export configuration (output: 'export', trailingSlash)
+├── next.config.js               # Next.js configuration (trailingSlash, unoptimized images)
 ├── package.json                 # Project dependencies and npm scripts
 ├── package-lock.json            # Deterministic dependency lockfile
 ├── tsconfig.json                # TypeScript strict configuration
@@ -243,16 +252,18 @@ The application is built on a modern, decoupled architecture designed for absolu
 
 ---
 
-## Administrative Console & Prototype Notice
+## Administrative Console & Supabase CMS
 
 The portal includes an administrative operations console accessible at `/admin`.
 
-### Important Prototype Notice
+### CMS Capabilities & Role Governance
 
-- **Frontend Prototype Only:** The `/admin` console is a client-side interface built to demonstrate editorial workflows, content catalog indexing, enquiry reviews, and 80-G receipt management.
-- **Local Client State:** Data modifications made in `/admin` are handled via `DataContext` and stored in browser `localStorage`.
-- **No Server Authentication:** The interface does not include server-side authentication, session encryption, or a production database connection.
-- **Production Precaution:** Production deployments must either gate the `/admin` path behind edge authentication (e.g., Cloudflare Access, HTTP Basic Auth, or OAuth) or exclude the route prior to public publication.
+- **Institutional Operations Console:** Accessible at `/admin`, providing authenticated Ashram staff with tools to manage discourses, publications, retreats, courses, seeker stay inquiries, and Section 80-G tax exemption seva donations.
+- **Role-Aware Authorization:**
+  - **Administrator:** Full content catalog management, seva offering verification, 80-G tax receipt issuance, internal donation creation, deletion capabilities, and system audit logs.
+  - **Editor:** Content publishing and seeker inquiry review, with permission to verify payments via secure RPC (`verify_payment`) while masking sensitive donor PAN and contact data (`get_staff_donations`). Editors are restricted from issuing tax receipts, deleting donations, or accessing raw financial donor information.
+- **Database Security:** Protected by PostgreSQL Row-Level Security (RLS) policies and security-definer RPCs. Public or anonymous requests cannot tamper with administrative records or access private donor contact/tax information.
+- **Development Baseline Simulation:** In local development environments without an active Supabase connection, `DataContext` automatically provides a local simulated baseline for offline UI/UX testing.
 - **Search Engine Isolation:** All administrative routes are excluded from search crawler indexing via `<meta name="robots" content="noindex, nofollow, noarchive" />` and `public/robots.txt`.
 
 ---
@@ -285,7 +296,45 @@ Install all project dependencies deterministically from `package-lock.json`:
 npm ci
 ```
 
-### 2. Development Server
+### 2. Environment Configuration
+
+Create a `.env.local` file in the project root:
+
+```bash
+# Public Supabase Project Coordinates (Required for live CMS operations)
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-publishable-key
+
+# Optional base path (leave empty for root deployment)
+# NEXT_PUBLIC_BASE_PATH=
+```
+
+> [!NOTE]
+> **Development vs. Production Projects:** Use a dedicated development Supabase project or local Supabase instance during development. Production deployments must configure their own production Supabase project via hosting provider environment variables (e.g. Vercel Project Settings). Never commit `.env.local`, credentials, or secret keys to version control.
+
+### 3. Database Migrations & Canonical Seeding
+
+The repository contains versioned SQL migrations under `supabase/migrations/`:
+
+1. `20261022141500_create_teachings_and_admin_profiles.sql` — Core teachings schema, admin profiles, and staff authentication.
+2. `20261022164500_create_publications_courses_events_acharyas.sql` — Publications, courses, retreats, and acharya profiles.
+3. `20261022231000_create_inquiries_and_donations.sql` — Seeker inquiries and seva donation records.
+4. `20261023120000_secure_donations_editor_verification.sql` — Corrective RPCs enforcing donor privacy and role-restricted operations.
+
+To populate initial institutional records into Supabase, the repository provides idempotent seed scripts:
+
+```bash
+# Validate data contracts without writing to database:
+node scripts/seed-teachings.js --dry-run
+node scripts/seed-batch2.js --dry-run
+
+# Execute import against the configured development Supabase instance:
+# Requires SUPABASE_SECRET_KEY in environment or .env.local
+node scripts/seed-teachings.js
+node scripts/seed-batch2.js
+```
+
+### 4. Development Server
 
 Start the local development server:
 
@@ -295,48 +344,40 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser. The application will hot-reload as source files change.
 
-### 3. Type Checking
+### 5. Type Checking & Quality
 
 Validate TypeScript types across the entire codebase:
 
 ```bash
 npm run typecheck
-```
-
-### 4. Linting
-
-Run ESLint to check for code style and syntax issues:
-
-```bash
 npm run lint
 ```
 
-### 5. Production Build
+### 6. Production Build
 
-Compile the project and generate the complete static site:
+Compile the Next.js project:
 
 ```bash
 npm run build
 ```
 
-This generates **680 static HTML pages** along with optimized CSS and JavaScript bundles inside the `out/` directory.
+This compiles all public pages and dynamic administrative routes, verifying types, lint rules, and route configurations.
 
 ---
 
 ## Deployment
 
-Because the application exports as a pure static bundle (`output: 'export'`), it can be hosted on any modern edge platform or web server:
+The application runs as a standard Next.js 14 App Router project with Node.js runtime support for middleware session handling:
 
-- **Vercel (Current Production Host):** Connect the GitHub repository. Vercel automatically runs `next build` and serves the static output across its global edge network.
-- **Cloudflare Pages / Netlify:** Configure the build command as `npm run build` and the publish directory as `out`. Preconfigured security headers from `public/_headers` are automatically applied.
-- **Apache / Nginx / Traditional Web Server:** Copy the contents of `out/` directly to the web root. Configure standard URL rewrite rules to serve `index.html` files for directory routes and apply the security headers defined in `public/_headers`.
+- **Vercel (Production Host):** Connect the GitHub repository. Configure `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in Project Settings > Environment Variables. Vercel automatically runs `next build` and serves the application with Edge Middleware and global CDN optimization.
+- **Self-Hosted Node.js / Docker:** Run `npm run build` and launch the production server with `npm start` (or a container running `next start` on Node.js >= 18.17.0). Configure a reverse proxy (e.g., Nginx, Caddy, Cloudflare) with HTTPS termination and standard headers.
 
 ---
 
 ## Project Status
 
-- **Public Website:** Production-ready. All public routes, media collections, and publication archives are fully compiled and deployed.
-- **Administrative Console:** Frontend prototype for demonstration and workflow modeling.
+- **Public Website:** Production-ready. All scriptural discourse collections, ezines, and Gurukula course materials are compiled and active.
+- **Administrative CMS:** Production-ready. Fully integrated with Supabase PostgreSQL, role-based access control (Admin vs Editor), secure donation verification, and audit logging.
 
 ---
 

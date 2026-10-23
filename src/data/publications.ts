@@ -38,6 +38,7 @@ export interface Publication {
   sourceCoverUrl?: string;
   canonicalSource?: string;
   alternateSources?: string[];
+  is_published?: boolean;
 }
 
 export const PUBLICATIONS: Publication[] = [
