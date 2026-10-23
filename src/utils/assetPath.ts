@@ -12,7 +12,11 @@ export function getAssetPath(path?: string | null): string {
   ) {
     return path;
   }
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const isVercel = process.env.VERCEL === '1';
+  const rawBasePath = (process.env.NEXT_PUBLIC_BASE_PATH || '').trim();
+  const basePath = !isVercel && rawBasePath && rawBasePath !== '/'
+    ? rawBasePath.replace(/\/+$/, '')
+    : '';
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
   return `${basePath}${cleanPath}`;
 }

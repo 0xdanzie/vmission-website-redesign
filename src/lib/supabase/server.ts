@@ -6,16 +6,22 @@ export function isSupabaseConfigured(): boolean {
   const key =
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  return Boolean(url && key && url !== 'https://placeholder.supabase.co');
+  return Boolean(url && key);
 }
 
 export function createClient() {
-  const cookieStore = cookies();
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey =
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-    'placeholder-anon-key';
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error(
+      'Supabase server client cannot be initialized: NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY must be configured in Vercel environment variables.'
+    );
+  }
+
+  const cookieStore = cookies();
 
   return createServerClient(supabaseUrl, supabaseKey, {
     cookies: {

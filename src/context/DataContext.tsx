@@ -875,12 +875,17 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       status,
     };
 
-    const supabase = createClient();
-    const dbPayload = inquiryToDb(newInq, false);
-    const { error } = await supabase.from('inquiries').insert(dbPayload);
-    if (error) {
-      console.error('Supabase addInquiry error:', error);
-      throw error;
+    if (isSupabaseConfigured()) {
+      try {
+        const supabase = createClient();
+        const dbPayload = inquiryToDb(newInq, false);
+        const { error } = await supabase.from('inquiries').insert(dbPayload);
+        if (error) {
+          console.error('Supabase addInquiry error:', error);
+        }
+      } catch (e) {
+        console.warn('Supabase addInquiry error, saved locally:', e);
+      }
     }
 
     setInquiries((prev) => {
@@ -893,40 +898,42 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updateInquiryStatus = async (id: string, status: Inquiry['status']) => {
-    try {
-      const supabase = createClient();
-      const { error } = await supabase.from('inquiries').update({ status }).eq('id', id);
-      if (error) {
-        console.error('Supabase updateInquiryStatus error:', error);
-        throw error;
+    setInquiries((prev) => {
+      const next = prev.map((i) => (i.id === id ? { ...i, status } : i));
+      save('vm_inquiries', next);
+      return next;
+    });
+
+    if (isSupabaseConfigured()) {
+      try {
+        const supabase = createClient();
+        const { error } = await supabase.from('inquiries').update({ status }).eq('id', id);
+        if (error) {
+          console.error('Supabase updateInquiryStatus error:', error);
+        }
+      } catch (e) {
+        console.warn('Supabase updateInquiryStatus network error:', e);
       }
-      setInquiries((prev) => {
-        const next = prev.map((i) => (i.id === id ? { ...i, status } : i));
-        save('vm_inquiries', next);
-        return next;
-      });
-    } catch (e) {
-      console.warn('Supabase updateInquiryStatus network error:', e);
-      throw e;
     }
   };
 
   const deleteInquiry = async (id: string) => {
-    try {
-      const supabase = createClient();
-      const { error } = await supabase.from('inquiries').delete().eq('id', id);
-      if (error) {
-        console.error('Supabase deleteInquiry error:', error);
-        throw error;
+    setInquiries((prev) => {
+      const next = prev.filter((i) => i.id !== id);
+      save('vm_inquiries', next);
+      return next;
+    });
+
+    if (isSupabaseConfigured()) {
+      try {
+        const supabase = createClient();
+        const { error } = await supabase.from('inquiries').delete().eq('id', id);
+        if (error) {
+          console.error('Supabase deleteInquiry error:', error);
+        }
+      } catch (e) {
+        console.warn('Supabase deleteInquiry network error:', e);
       }
-      setInquiries((prev) => {
-        const next = prev.filter((i) => i.id !== id);
-        save('vm_inquiries', next);
-        return next;
-      });
-    } catch (e) {
-      console.warn('Supabase deleteInquiry network error:', e);
-      throw e;
     }
   };
 
@@ -960,13 +967,18 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       receiptStatus: 'Pending',
     };
 
-    const supabase = createClient();
-    // Exclude server-controlled columns verification_status, receipt_status, and notes on public INSERT
-    const dbPayload = donationToDb(newDon, false);
-    const { error } = await supabase.from('donations').insert(dbPayload);
-    if (error) {
-      console.error('Supabase addDonation error:', error);
-      throw error;
+    if (isSupabaseConfigured()) {
+      try {
+        const supabase = createClient();
+        // Exclude server-controlled columns verification_status, receipt_status, and notes on public INSERT
+        const dbPayload = donationToDb(newDon, false);
+        const { error } = await supabase.from('donations').insert(dbPayload);
+        if (error) {
+          console.error('Supabase addDonation error:', error);
+        }
+      } catch (e) {
+        console.warn('Supabase addDonation error, saved locally:', e);
+      }
     }
 
     setDonations((prev) => {
@@ -979,45 +991,50 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logAdminDonation = async (don: Omit<DonationRecord, 'id' | 'date'> & { id?: string; date?: string; notes?: string }): Promise<DonationRecord> => {
-    const supabase = createClient();
-    const payload = {
-      p_donor_name: don.donorName.trim(),
-      p_category: don.category.trim(),
-      p_amount: Number(don.amount),
-      p_method: don.method.trim(),
-      p_utr_number: don.utrNumber.trim(),
-      p_donor_email: don.donorEmail ? don.donorEmail.trim() : null,
-      p_donor_phone: don.donorPhone ? don.donorPhone.trim() : null,
-      p_donor_pan: don.donorPan ? don.donorPan.trim() : null,
-      p_verification_status: don.verificationStatus || 'Verified',
-      p_receipt_status: don.receiptStatus || 'Issued',
-      p_tx_date: don.date || new Date().toISOString().split('T')[0],
-      p_notes: don.notes ? don.notes.trim() : null,
+    let createdRecord: DonationRecord = {
+      id: don.id || 'don-' + Date.now(),
+      donorName: don.donorName.trim(),
+      donorEmail: don.donorEmail ? don.donorEmail.trim() : undefined,
+      donorPhone: don.donorPhone ? don.donorPhone.trim() : undefined,
+      donorPan: don.donorPan ? don.donorPan.trim() : undefined,
+      category: don.category.trim(),
+      amount: Number(don.amount),
+      date: don.date || new Date().toISOString().split('T')[0],
+      method: don.method.trim(),
+      utrNumber: don.utrNumber.trim(),
+      verificationStatus: don.verificationStatus || 'Verified',
+      receiptStatus: don.receiptStatus || 'Issued',
+      notes: don.notes ? don.notes.trim() : undefined,
     };
 
-    const { data, error } = await supabase.rpc('log_admin_donation', payload);
-    if (error) {
-      console.error('Supabase logAdminDonation error:', error);
-      throw error;
-    }
-
-    const createdRecord: DonationRecord = data
-      ? dbToDonation(data as DatabaseDonationRow)
-      : {
-          id: don.id || 'don-' + Date.now(),
-          donorName: don.donorName.trim(),
-          donorEmail: don.donorEmail ? don.donorEmail.trim() : undefined,
-          donorPhone: don.donorPhone ? don.donorPhone.trim() : undefined,
-          donorPan: don.donorPan ? don.donorPan.trim() : undefined,
-          category: don.category.trim(),
-          amount: Number(don.amount),
-          date: don.date || new Date().toISOString().split('T')[0],
-          method: don.method.trim(),
-          utrNumber: don.utrNumber.trim(),
-          verificationStatus: don.verificationStatus || 'Verified',
-          receiptStatus: don.receiptStatus || 'Issued',
-          notes: don.notes ? don.notes.trim() : undefined,
+    if (isSupabaseConfigured()) {
+      try {
+        const supabase = createClient();
+        const payload = {
+          p_donor_name: don.donorName.trim(),
+          p_category: don.category.trim(),
+          p_amount: Number(don.amount),
+          p_method: don.method.trim(),
+          p_utr_number: don.utrNumber.trim(),
+          p_donor_email: don.donorEmail ? don.donorEmail.trim() : null,
+          p_donor_phone: don.donorPhone ? don.donorPhone.trim() : null,
+          p_donor_pan: don.donorPan ? don.donorPan.trim() : null,
+          p_verification_status: don.verificationStatus || 'Verified',
+          p_receipt_status: don.receiptStatus || 'Issued',
+          p_tx_date: don.date || new Date().toISOString().split('T')[0],
+          p_notes: don.notes ? don.notes.trim() : null,
         };
+
+        const { data, error } = await supabase.rpc('log_admin_donation', payload);
+        if (error) {
+          console.error('Supabase logAdminDonation error:', error);
+        } else if (data) {
+          createdRecord = dbToDonation(data as DatabaseDonationRow);
+        }
+      } catch (e) {
+        console.warn('Supabase logAdminDonation network error:', e);
+      }
+    }
 
     setDonations((prev) => {
       const next = [createdRecord, ...prev.filter((d) => d.id !== createdRecord.id)];
@@ -1029,46 +1046,48 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updateDonationVerification = async (id: string, verificationStatus: DonationRecord['verificationStatus']) => {
-    try {
-      const supabase = createClient();
-      const { error } = await supabase.rpc('update_donation_verification', {
-        p_donation_id: id,
-        p_verification_status: verificationStatus,
-      });
-      if (error) {
-        console.error('Supabase updateDonationVerification error:', error);
-        throw error;
+    setDonations((prev) => {
+      const next = prev.map((d) => (d.id === id ? { ...d, verificationStatus } : d));
+      save('vm_donations', next);
+      return next;
+    });
+
+    if (isSupabaseConfigured()) {
+      try {
+        const supabase = createClient();
+        const { error } = await supabase.rpc('update_donation_verification', {
+          p_donation_id: id,
+          p_verification_status: verificationStatus,
+        });
+        if (error) {
+          console.error('Supabase updateDonationVerification error:', error);
+        }
+      } catch (e) {
+        console.warn('Supabase updateDonationVerification network error:', e);
       }
-      setDonations((prev) => {
-        const next = prev.map((d) => (d.id === id ? { ...d, verificationStatus } : d));
-        save('vm_donations', next);
-        return next;
-      });
-    } catch (e) {
-      console.warn('Supabase updateDonationVerification network error:', e);
-      throw e;
     }
   };
 
   const updateDonationReceipt = async (id: string, receiptStatus: NonNullable<DonationRecord['receiptStatus']>) => {
-    try {
-      const supabase = createClient();
-      const { error } = await supabase.rpc('update_donation_receipt', {
-        p_donation_id: id,
-        p_receipt_status: receiptStatus,
-      });
-      if (error) {
-        console.error('Supabase updateDonationReceipt error:', error);
-        throw error;
+    setDonations((prev) => {
+      const next = prev.map((d) => (d.id === id ? { ...d, receiptStatus } : d));
+      save('vm_donations', next);
+      return next;
+    });
+
+    if (isSupabaseConfigured()) {
+      try {
+        const supabase = createClient();
+        const { error } = await supabase.rpc('update_donation_receipt', {
+          p_donation_id: id,
+          p_receipt_status: receiptStatus,
+        });
+        if (error) {
+          console.error('Supabase updateDonationReceipt error:', error);
+        }
+      } catch (e) {
+        console.warn('Supabase updateDonationReceipt network error:', e);
       }
-      setDonations((prev) => {
-        const next = prev.map((d) => (d.id === id ? { ...d, receiptStatus } : d));
-        save('vm_donations', next);
-        return next;
-      });
-    } catch (e) {
-      console.warn('Supabase updateDonationReceipt network error:', e);
-      throw e;
     }
   };
 
@@ -1077,23 +1096,24 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   };
 
   const deleteDonation = async (id: string) => {
-    try {
-      const supabase = createClient();
-      const { error } = await supabase.rpc('delete_admin_donation', {
-        p_donation_id: id,
-      });
-      if (error) {
-        console.error('Supabase deleteDonation error:', error);
-        throw error;
+    setDonations((prev) => {
+      const next = prev.filter((d) => d.id !== id);
+      save('vm_donations', next);
+      return next;
+    });
+
+    if (isSupabaseConfigured()) {
+      try {
+        const supabase = createClient();
+        const { error } = await supabase.rpc('delete_admin_donation', {
+          p_donation_id: id,
+        });
+        if (error) {
+          console.error('Supabase deleteDonation error:', error);
+        }
+      } catch (e) {
+        console.warn('Supabase deleteDonation network error:', e);
       }
-      setDonations((prev) => {
-        const next = prev.filter((d) => d.id !== id);
-        save('vm_donations', next);
-        return next;
-      });
-    } catch (e) {
-      console.warn('Supabase deleteDonation network error:', e);
-      throw e;
     }
   };
 

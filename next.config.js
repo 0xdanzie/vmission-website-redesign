@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const rawBasePath = (process.env.NEXT_PUBLIC_BASE_PATH || '').trim();
+// The website is hosted at the root of a domain on Vercel.
+// Never set a subpath basePath on Vercel or when rawBasePath is root '/' or empty.
+const isVercel = process.env.VERCEL === '1';
+const normalizedBasePath =
+  !isVercel && rawBasePath && rawBasePath !== '/'
+    ? rawBasePath.replace(/\/+$/, '')
+    : undefined;
 
 const nextConfig = {
   reactStrictMode: true,
@@ -7,8 +14,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: basePath ? basePath : undefined,
-  assetPrefix: basePath ? `${basePath}/` : undefined,
+  basePath: normalizedBasePath,
 };
 
 module.exports = nextConfig;
