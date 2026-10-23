@@ -42,80 +42,84 @@ export default function PublicationsPage() {
   // =========================================================================
   // GATE 1 — AUTHORITATIVE DYNAMIC DATA DERIVATION (NEVER HARDCODED)
   // =========================================================================
-  const totalCount = publications.length;
+  const publicPublications = useMemo(() => {
+    return publications.filter((p) => p.is_published !== false);
+  }, [publications]);
+
+  const totalCount = publicPublications.length;
 
   const sandeshCount = useMemo(
-    () => publications.filter((p) => p.type === 'Vedanta Sandesh').length,
-    [publications]
+    () => publicPublications.filter((p) => p.type === 'Vedanta Sandesh').length,
+    [publicPublications]
   );
   const piyushCount = useMemo(
-    () => publications.filter((p) => p.type === 'Vedanta Piyush').length,
-    [publications]
+    () => publicPublications.filter((p) => p.type === 'Vedanta Piyush').length,
+    [publicPublications]
   );
   const ebooksCount = useMemo(
-    () => publications.filter((p) => p.type === 'E-Books').length,
-    [publications]
+    () => publicPublications.filter((p) => p.type === 'E-Books').length,
+    [publicPublications]
   );
   const studyTextsCount = useMemo(
-    () => publications.filter((p) => p.type === 'Study & Chant Texts').length,
-    [publications]
+    () => publicPublications.filter((p) => p.type === 'Study & Chant Texts').length,
+    [publicPublications]
   );
 
   // Derive distinct valid years and era distributions dynamically
   const { minYear, maxYear, availableYearsList, eraCounts } = useMemo(() => {
-    const validYears = publications
+    const validYears = publicPublications
       .map((p) => p.year)
       .filter((y): y is number => typeof y === 'number' && !isNaN(y));
     const uniqueYears = Array.from(new Set(validYears)).sort((a, b) => b - a);
     const min = validYears.length > 0 ? Math.min(...validYears) : 2019;
     const max = validYears.length > 0 ? Math.max(...validYears) : 2022;
-    const era2020s = publications.filter((p) => p.year && p.year >= 2020).length;
-    const era2010s = publications.filter((p) => p.year && p.year < 2020).length;
+    const era2020s = publicPublications.filter((p) => p.year && p.year >= 2020).length;
+    const era2010s = publicPublications.filter((p) => p.year && p.year < 2020).length;
     return {
       minYear: min,
       maxYear: max,
       availableYearsList: uniqueYears,
       eraCounts: { era2020s, era2010s },
     };
-  }, [publications]);
+  }, [publicPublications]);
 
   // Year counts mapping for quick-filter labels
   const yearCountsMap = useMemo(() => {
     const counts: Record<number, number> = {};
-    publications.forEach((p) => {
+    publicPublications.forEach((p) => {
       if (typeof p.year === 'number') {
         counts[p.year] = (counts[p.year] || 0) + 1;
       }
     });
     return counts;
-  }, [publications]);
+  }, [publicPublications]);
 
   // =========================================================================
   // GATE 3 — THE SIX AUTHENTIC RECOVERED E-BOOKS
   // =========================================================================
   const ebooksList = useMemo(
-    () => publications.filter((p) => p.type === 'E-Books'),
-    [publications]
+    () => publicPublications.filter((p) => p.type === 'E-Books'),
+    [publicPublications]
   );
 
   // =========================================================================
   // GATE 4 — LATEST VERIFIED ANCHOR PERIODICALS
   // =========================================================================
   const latestSandesh = useMemo(() => {
-    const verified = publications.filter(
+    const verified = publicPublications.filter(
       (p) => p.type === 'Vedanta Sandesh' && resolvePublicationCover(p.id, p.type, p.coverImage)
     );
     return verified.sort((a, b) => (b.year || 0) - (a.year || 0))[0] ||
-      publications.filter((p) => p.type === 'Vedanta Sandesh')[0];
-  }, [publications]);
+      publicPublications.filter((p) => p.type === 'Vedanta Sandesh')[0];
+  }, [publicPublications]);
 
   const latestPiyush = useMemo(() => {
-    const verified = publications.filter(
+    const verified = publicPublications.filter(
       (p) => p.type === 'Vedanta Piyush' && resolvePublicationCover(p.id, p.type, p.coverImage)
     );
     return verified.sort((a, b) => (b.year || 0) - (a.year || 0))[0] ||
-      publications.filter((p) => p.type === 'Vedanta Piyush')[0];
-  }, [publications]);
+      publicPublications.filter((p) => p.type === 'Vedanta Piyush')[0];
+  }, [publicPublications]);
 
   // Reset pagination batch when filters change
   useEffect(() => {
@@ -126,7 +130,7 @@ export default function PublicationsPage() {
   // GATE 5 — FILTERING ACROSS THE COMPLETE 250-RECORD DATASET
   // =========================================================================
   const filteredPublications = useMemo(() => {
-    return publications.filter((pub) => {
+    return publicPublications.filter((pub) => {
       // Type filter
       if (selectedType !== 'All Archive' && pub.type !== selectedType) {
         return false;
@@ -158,7 +162,7 @@ export default function PublicationsPage() {
       }
       return true;
     });
-  }, [publications, selectedType, selectedEra, selectedYear, searchQuery]);
+  }, [publicPublications, selectedType, selectedEra, selectedYear, searchQuery]);
 
   // Sliced items for safe progressive DOM mounting (Gate 5 performance optimization)
   const displayedPublications = useMemo(() => {

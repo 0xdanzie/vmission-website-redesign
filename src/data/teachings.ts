@@ -120,6 +120,7 @@ export interface Teaching {
   migrationStatus?: 'MIGRATED' | 'MIGRATION_PENDING';
   relatedPublicationIds?: string[];
   relatedStudyText?: RelatedStudyText;
+  is_published?: boolean;
 }
 
 export const teachings: Teaching[] = [

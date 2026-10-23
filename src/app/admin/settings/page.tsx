@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { ShieldIcon, LockIcon, CheckIcon } from '@/components/admin/AdminIcons';
 import styles from '../events/eventsAdmin.module.css';
 
 export default function AdminSettingsPage() {
@@ -8,84 +9,183 @@ export default function AdminSettingsPage() {
     <div className={styles.container}>
       <div className={styles.header}>
         <div>
-          <h1 className={styles.title}>System Settings &amp; Institutional Configuration</h1>
+          <h1 className={styles.title}>System Settings &amp; Governance Architecture</h1>
           <p className={styles.subtitle}>
-            Configuration parameters, production deployment architecture, and staff access roles.
+            Configuration parameters, hosting infrastructure, database security, and staff access roles.
           </p>
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6, 24px)' }}>
         {/* Environment & Architecture Information */}
-        <div style={{ background: '#FFFFFF', padding: 'var(--space-6)', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
-          <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#1A202C', marginBottom: '8px' }}>
-            System Environment &amp; Hosting Architecture
+        <div style={{
+          background: '#FFFFFF',
+          padding: '24px',
+          borderRadius: '10px',
+          border: '1px solid var(--vm-sand-border, #DFD7C7)',
+          boxShadow: '0 1px 3px rgba(34, 29, 26, 0.04)',
+        }}>
+          <h3 style={{
+            fontFamily: 'var(--font-serif, "Cormorant Garamond", serif)',
+            fontSize: '1.25rem',
+            fontWeight: 700,
+            color: 'var(--vm-text, #221D1A)',
+            marginBottom: '6px',
+          }}>
+            System Infrastructure &amp; Deployment Configuration
           </h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px', marginTop: '16px' }}>
-            <div style={{ background: '#F8FAFC', padding: '12px 16px', borderRadius: '6px', border: '1px solid #EDF2F7' }}>
-              <span style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#718096', textTransform: 'uppercase' }}>Mode</span>
-              <p style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#D97706', marginTop: '2px' }}>
-                Local Development Prototype
+          <p style={{ fontSize: '0.8125rem', color: 'var(--vm-text-muted, #665D55)', marginBottom: '16px' }}>
+            Current deployment specifications and security boundaries enforced by the institutional CMS.
+          </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px' }}>
+            <div style={{
+              background: 'var(--vm-ivory, #FDFBF7)',
+              padding: '16px',
+              borderRadius: '8px',
+              border: '1px solid var(--vm-sand-border, #DFD7C7)',
+            }}>
+              <span style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--vm-text-faint, #8E847A)', textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                Database Engine
+              </span>
+              <p style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--vm-forest, #2D4F38)', marginTop: '4px', marginBottom: '2px' }}>
+                PostgreSQL · Row Level Security
               </p>
-              <span style={{ fontSize: '0.75rem', color: '#718096' }}>Client-side state simulation</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--vm-text-muted, #665D55)' }}>
+                Granular caller policies on tables and RPC functions
+              </span>
             </div>
 
-            <div style={{ background: '#F8FAFC', padding: '12px 16px', borderRadius: '6px', border: '1px solid #EDF2F7' }}>
-              <span style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#718096', textTransform: 'uppercase' }}>Authentication Strategy</span>
-              <p style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#2D3748', marginTop: '2px' }}>
-                Server-Side Authentication Required
+            <div style={{
+              background: 'var(--vm-ivory, #FDFBF7)',
+              padding: '16px',
+              borderRadius: '8px',
+              border: '1px solid var(--vm-sand-border, #DFD7C7)',
+            }}>
+              <span style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--vm-text-faint, #8E847A)', textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                Authentication Strategy
+              </span>
+              <p style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--vm-text, #221D1A)', marginTop: '4px', marginBottom: '2px' }}>
+                Server-Side Authentication
               </p>
-              <span style={{ fontSize: '0.75rem', color: '#718096' }}>No hardcoded credentials or client secrets</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--vm-text-muted, #665D55)' }}>
+                Zero secrets in client code; verified via admin_profiles
+              </span>
             </div>
 
-            <div style={{ background: '#F8FAFC', padding: '12px 16px', borderRadius: '6px', border: '1px solid #EDF2F7' }}>
-              <span style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#718096', textTransform: 'uppercase' }}>Search Indexing</span>
-              <p style={{ fontSize: '0.9375rem', fontWeight: 600, color: '#15803D', marginTop: '2px' }}>
-                Excluded (noindex / nofollow)
+            <div style={{
+              background: 'var(--vm-ivory, #FDFBF7)',
+              padding: '16px',
+              borderRadius: '8px',
+              border: '1px solid var(--vm-sand-border, #DFD7C7)',
+            }}>
+              <span style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--vm-text-faint, #8E847A)', textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+                Search Engine Indexing
+              </span>
+              <p style={{ fontSize: '0.9375rem', fontWeight: 700, color: 'var(--vm-forest, #2D4F38)', marginTop: '4px', marginBottom: '2px' }}>
+                Strictly Excluded
               </p>
-              <span style={{ fontSize: '0.75rem', color: '#718096' }}>Robots.txt: Disallow /admin/*</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--vm-text-muted, #665D55)' }}>
+                noindex, nofollow, and robots.txt disallow /admin/*
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Future Role-Based Access Configuration */}
-        <div style={{ background: '#FFFFFF', padding: 'var(--space-6)', borderRadius: '8px', border: '1px solid #E2E8F0' }}>
-          <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#1A202C', marginBottom: '8px' }}>
-            Staff Access Roles (Production Specification)
+        {/* Role-Based Access Configuration */}
+        <div style={{
+          background: '#FFFFFF',
+          padding: '24px',
+          borderRadius: '10px',
+          border: '1px solid var(--vm-sand-border, #DFD7C7)',
+          boxShadow: '0 1px 3px rgba(34, 29, 26, 0.04)',
+        }}>
+          <h3 style={{
+            fontFamily: 'var(--font-serif, "Cormorant Garamond", serif)',
+            fontSize: '1.25rem',
+            fontWeight: 700,
+            color: 'var(--vm-text, #221D1A)',
+            marginBottom: '6px',
+          }}>
+            Staff Access Role Matrix
           </h3>
-          <p style={{ fontSize: '0.8125rem', color: '#64748B', lineHeight: 1.5, marginBottom: '16px' }}>
-            In production deployments, user sessions are validated against the Ashram LDAP/OAuth provider with the following role matrix:
+          <p style={{ fontSize: '0.8125rem', color: 'var(--vm-text-muted, #665D55)', lineHeight: 1.5, marginBottom: '16px' }}>
+            Privileges are granted according to the principle of least privilege. Editors handle content creation and payment verification, while Administrators govern financial receipts, deletions, and site settings.
           </p>
 
           <div className={styles.tableWrap}>
             <table className={styles.table}>
               <thead>
                 <tr>
-                  <th>Role</th>
-                  <th>Permission Scope</th>
-                  <th>Status</th>
+                  <th>Role Name</th>
+                  <th>Permission Scope &amp; Responsibilities</th>
+                  <th>Policy Enforcement</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>Administrator</strong></td>
-                  <td>Full console access, system settings, staff management, audit log access</td>
-                  <td><span className={styles.regBadge} style={{ background: '#D1FAE5', color: '#065F46' }}>Configured</span></td>
+                  <td>
+                    <strong style={{ color: 'var(--vm-text, #221D1A)' }}>Administrator</strong>
+                  </td>
+                  <td>Full console access, 80-G tax receipt issuance, donation record deletion, staff role assignment, system audit inspection</td>
+                  <td>
+                    <span className={styles.regBadge} style={{
+                      background: 'var(--vm-forest-light, #EAF2EC)',
+                      color: 'var(--vm-forest, #2D4F38)',
+                      border: '1px solid rgba(45, 79, 56, 0.25)',
+                    }}>
+                      <CheckIcon size={11} />
+                      <span>Active</span>
+                    </span>
+                  </td>
                 </tr>
                 <tr>
-                  <td><strong>Editor</strong></td>
-                  <td>Editorial workflows for Publications, Teachings, Events, and Courses</td>
-                  <td><span className={styles.regBadge} style={{ background: '#D1FAE5', color: '#065F46' }}>Configured</span></td>
+                  <td>
+                    <strong style={{ color: 'var(--vm-text, #221D1A)' }}>Editor</strong>
+                  </td>
+                  <td>Discourse creation, retreat scheduling, course updates, publication archive publishing, offering payment verification</td>
+                  <td>
+                    <span className={styles.regBadge} style={{
+                      background: 'var(--vm-forest-light, #EAF2EC)',
+                      color: 'var(--vm-forest, #2D4F38)',
+                      border: '1px solid rgba(45, 79, 56, 0.25)',
+                    }}>
+                      <CheckIcon size={11} />
+                      <span>Active</span>
+                    </span>
+                  </td>
                 </tr>
                 <tr>
-                  <td><strong>Media Manager</strong></td>
-                  <td>Upload and organize Audio discourses, Video lectures, and photo archives</td>
-                  <td><span className={styles.regBadge} style={{ background: '#D1FAE5', color: '#065F46' }}>Configured</span></td>
+                  <td>
+                    <strong style={{ color: 'var(--vm-text, #221D1A)' }}>Media Archivist</strong>
+                  </td>
+                  <td>Cataloging and organizing audio recordings, video lectures, and archival photographs</td>
+                  <td>
+                    <span className={styles.regBadge} style={{
+                      background: 'var(--vm-forest-light, #EAF2EC)',
+                      color: 'var(--vm-forest, #2D4F38)',
+                      border: '1px solid rgba(45, 79, 56, 0.25)',
+                    }}>
+                      <CheckIcon size={11} />
+                      <span>Configured</span>
+                    </span>
+                  </td>
                 </tr>
                 <tr>
-                  <td><strong>Seva / Office Staff</strong></td>
-                  <td>Visitor inquiry responses and 80-G donation receipt reconciliation</td>
-                  <td><span className={styles.regBadge} style={{ background: '#D1FAE5', color: '#065F46' }}>Configured</span></td>
+                  <td>
+                    <strong style={{ color: 'var(--vm-text, #221D1A)' }}>Seva Coordinator</strong>
+                  </td>
+                  <td>Visitor stay inquiry correspondence and ashram seva communications</td>
+                  <td>
+                    <span className={styles.regBadge} style={{
+                      background: 'var(--vm-forest-light, #EAF2EC)',
+                      color: 'var(--vm-forest, #2D4F38)',
+                      border: '1px solid rgba(45, 79, 56, 0.25)',
+                    }}>
+                      <CheckIcon size={11} />
+                      <span>Configured</span>
+                    </span>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -94,15 +194,27 @@ export default function AdminSettingsPage() {
 
         {/* Security Declaration */}
         <div style={{
-          background: '#FEF3C7',
-          border: '1px solid #F59E0B',
+          padding: '18px 22px',
+          background: 'var(--vm-ivory, #FDFBF7)',
+          border: '1px solid var(--vm-sand-border, #DFD7C7)',
+          borderLeft: '3px solid var(--vm-bhagwa, #E06328)',
           borderRadius: '8px',
-          padding: 'var(--space-5)',
-          color: '#92400E',
           fontSize: '0.8125rem',
-          lineHeight: 1.5,
+          color: 'var(--vm-text-muted, #665D55)',
+          lineHeight: 1.55,
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: '14px',
         }}>
-          ⚠️ <strong>Security Notice:</strong> The public website does not expose an unsecured admin system. Client-side authentication is intentionally non-existent; zero credentials or API keys are placed in source code or <code>NEXT_PUBLIC_*</code> environment variables. Real server-side authentication must guard this area in production.
+          <div style={{ color: 'var(--vm-bhagwa, #E06328)', marginTop: '2px' }}>
+            <LockIcon size={18} />
+          </div>
+          <div>
+            <strong style={{ color: 'var(--vm-text, #221D1A)', display: 'block', marginBottom: '3px' }}>
+              Security Architecture Declaration:
+            </strong>
+            The public website does not expose an unsecured admin endpoint. All administrative interfaces require verified authenticated sessions, and database mutations are strictly validated against row-level authorization rules in <code>admin_profiles</code>. No service-role keys or sensitive credentials are ever exposed to the client.
+          </div>
         </div>
       </div>
     </div>

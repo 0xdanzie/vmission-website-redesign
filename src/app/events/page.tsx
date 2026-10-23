@@ -84,24 +84,28 @@ export default function EventsPage() {
   const [selectedType, setSelectedType] = useState('All Assemblies');
   const [searchQuery, setSearchQuery] = useState('');
 
+  const publicEvents = useMemo(() => {
+    return events.filter((e) => e.is_published !== false);
+  }, [events]);
+
   // Dynamically segment events based strictly on reconciled dates and isPast flag
   const activeEvents = useMemo(() => {
-    return events.filter(
+    return publicEvents.filter(
       (e) => !e.isPast && e.startDate <= CURRENT_RECONCILED_DATE && e.endDate >= CURRENT_RECONCILED_DATE
     );
-  }, [events]);
+  }, [publicEvents]);
 
   const upcomingEvents = useMemo(() => {
-    return events.filter(
+    return publicEvents.filter(
       (e) => !e.isPast && e.startDate > CURRENT_RECONCILED_DATE
     );
-  }, [events]);
+  }, [publicEvents]);
 
   const concludedEvents = useMemo(() => {
-    return events.filter(
+    return publicEvents.filter(
       (e) => e.isPast || e.endDate < CURRENT_RECONCILED_DATE
     );
-  }, [events]);
+  }, [publicEvents]);
 
   // Primary active/focal gathering spread
   const focalGathering = activeEvents[0] || upcomingEvents[0] || events.find((e) => !e.isPast);

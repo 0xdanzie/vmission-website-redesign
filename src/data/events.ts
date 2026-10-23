@@ -20,6 +20,7 @@ export interface VMEvent {
   isPast?: boolean;
   isArchival?: boolean;
   sourceUrl?: string;
+  is_published?: boolean;
 }
 
 export const events: VMEvent[] = [

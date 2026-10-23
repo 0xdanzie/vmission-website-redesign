@@ -1,17 +1,39 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { getAcharyaBySlug, acharyas } from '@/data/acharyas';
+import { getAcharyaBySlug, acharyas, Acharya } from '@/data/acharyas';
 import { teachings } from '@/data/teachings';
+import { createClient } from '@/lib/supabase/server';
+import { dbToAcharya } from '@/lib/cms-mappers';
 import AcharyaProfileClient from './AcharyaProfileClient';
 
-export function generateStaticParams() {
-  return acharyas.map((a) => ({
-    slug: a.slug,
-  }));
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+
+interface PageProps {
+  params: Promise<{ slug: string }> | { slug: string };
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const acharya = getAcharyaBySlug(params?.slug);
+async function getLiveAcharya(slug: string): Promise<Acharya | undefined> {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from('acharyas')
+      .select('*')
+      .eq('slug', slug)
+      .maybeSingle();
+
+    if (!error && data) {
+      return dbToAcharya(data);
+    }
+  } catch (e) {
+    console.warn('Supabase getLiveAcharya fallback:', e);
+  }
+  return getAcharyaBySlug(slug);
+}
+
+export async function generateMetadata({ params }: PageProps) {
+  const resolvedParams = await Promise.resolve(params);
+  const acharya = await getLiveAcharya(resolvedParams?.slug);
   if (!acharya) return { title: 'Acharya Profile | Vedanta Mission' };
   return {
     title: `${acharya.honorific} ${acharya.name} — ${acharya.role} | Vedanta Mission`,
@@ -19,13 +41,10 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
-export default function AcharyaDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const slug = params?.slug;
-  const acharya = getAcharyaBySlug(slug);
+export default async function AcharyaDetailPage({ params }: PageProps) {
+  const resolvedParams = await Promise.resolve(params);
+  const slug = resolvedParams?.slug;
+  const acharya = await getLiveAcharya(slug);
 
   if (!acharya) {
     notFound();

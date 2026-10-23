@@ -1,28 +1,39 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { courses, getCourseBySlug } from '@/data/courses';
+import { courses, getCourseBySlug, Course } from '@/data/courses';
+import { createClient } from '@/lib/supabase/server';
+import { dbToCourse } from '@/lib/cms-mappers';
 import CourseDetailClient from './CourseDetailClient';
 
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string }> | { id: string };
 }
 
-export async function generateStaticParams() {
-  const slugs = courses.map((c) => ({
-    id: c.slug,
-  }));
-  const canonicalIds = courses
-    .filter((c) => c.canonicalId && c.canonicalId !== c.slug)
-    .map((c) => ({
-      id: c.canonicalId as string,
-    }));
-  return [...slugs, ...canonicalIds];
+async function getLiveCourse(id: string): Promise<Course | undefined> {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from('courses')
+      .select('*')
+      .or(`id.eq.${id},slug.eq.${id},canonical_id.eq.${id}`)
+      .maybeSingle();
+
+    if (!error && data) {
+      return dbToCourse(data);
+    }
+  } catch (e) {
+    console.warn('Supabase getLiveCourse fallback:', e);
+  }
+  return getCourseBySlug(id) || courses.find((c) => c.id === id || c.canonicalId === id);
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { id } = await params;
-  const course = getCourseBySlug(id) || courses.find((c) => c.id === id || c.canonicalId === id);
+  const resolved = await Promise.resolve(params);
+  const course = await getLiveCourse(resolved.id);
   if (!course) {
     return { title: 'Course Not Found — Learn Vedanta | Vedanta Mission' };
   }
@@ -33,8 +44,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function CourseDetailPage({ params }: PageProps) {
-  const { id } = await params;
-  const course = getCourseBySlug(id) || courses.find((c) => c.id === id || c.canonicalId === id);
+  const resolved = await Promise.resolve(params);
+  const course = await getLiveCourse(resolved.id);
 
   if (!course) {
     notFound();

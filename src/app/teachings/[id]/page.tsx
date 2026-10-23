@@ -6,25 +6,43 @@ import {
   getTeachingById,
   getRelatedTeachings,
   CANONICAL_CATEGORIES,
+  Teaching,
 } from '@/data/teachings';
 import { acharyas } from '@/data/acharyas';
 import TeachingDetailClient from './TeachingDetailClient';
+import { createClient } from '@/lib/supabase/server';
+import { dbToTeaching } from '@/lib/teachings-mapper';
 
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-export async function generateStaticParams() {
-  const ids = teachings.map((t) => ({ id: t.id }));
-  const slugs = teachings
-    .filter((t) => t.slug && t.slug !== t.id)
-    .map((t) => ({ id: t.slug }));
-  return [...ids, ...slugs];
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+
+async function fetchTeachingRecord(idOrSlug: string): Promise<Teaching | null> {
+  try {
+    const supabase = createClient();
+    const { data: row } = await supabase
+      .from('teachings')
+      .select('*')
+      .or(`id.eq.${idOrSlug},slug.eq.${idOrSlug}`)
+      .maybeSingle();
+
+    if (row) {
+      return dbToTeaching(row);
+    }
+  } catch (e) {
+    console.warn('Supabase fetch teaching detail error:', e);
+  }
+
+  // Fallback to static catalog (for pre-built baseline / offline resilience)
+  return getTeachingById(idOrSlug) || null;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const teaching = getTeachingById(id);
+  const teaching = await fetchTeachingRecord(id);
   if (!teaching) {
     return { title: 'Discourse Not Found — Jnana Ganga | Vedanta Mission' };
   }
@@ -36,7 +54,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function TeachingDetailPage({ params }: PageProps) {
   const { id } = await params;
-  const teaching = getTeachingById(id);
+  const teaching = await fetchTeachingRecord(id);
 
   if (!teaching) {
     notFound();

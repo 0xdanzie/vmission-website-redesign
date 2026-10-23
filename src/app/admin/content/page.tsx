@@ -3,6 +3,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { useData } from '@/context/DataContext';
+import {
+  PublicationsIcon,
+  TeachingsIcon,
+  EventsIcon,
+  CoursesIcon,
+  AcharyasIcon,
+  ArrowRightIcon,
+} from '@/components/admin/AdminIcons';
 import styles from '../events/eventsAdmin.module.css';
 
 export default function AdminContentOverviewPage() {
@@ -11,121 +19,158 @@ export default function AdminContentOverviewPage() {
   const activeEventsCount = events.filter((e) => !e.isPast).length;
   const latestPubsCount = publications.filter((p) => p.isLatest).length;
 
+  const contentModules = [
+    {
+      title: 'Publications & Ezines',
+      category: 'Monthly Archive',
+      icon: PublicationsIcon,
+      desc: 'Vedanta Sandesh (English / Hindi) & Vedanta Piyush (Hindi / Gujarati) digital e-journals.',
+      stat: `${publications.length} Issues`,
+      statSub: `${latestPubsCount} Current Editions`,
+      href: '/admin/publications',
+      action: 'Manage Publications',
+    },
+    {
+      title: 'Teachings & Discourses',
+      category: 'Jnana Ganga Audio',
+      icon: TeachingsIcon,
+      desc: 'Discourses covering Bhagavad Gita, Principal Upanishads, Prakarana Granthas, and Meditation.',
+      stat: `${teachings.length} Discourses`,
+      statSub: 'Scriptural Series & Audio',
+      href: '/admin/teachings',
+      action: 'Manage Teachings',
+    },
+    {
+      title: 'Events & Study Camps',
+      category: 'Retreats & Satsangs',
+      icon: EventsIcon,
+      desc: 'Residential study camps, Mandir festival commemorations, and regional lecture tours.',
+      stat: `${events.length} Scheduled`,
+      statSub: `${activeEventsCount} Upcoming Camps`,
+      href: '/admin/events',
+      action: 'Manage Events',
+    },
+    {
+      title: 'Gurukula Courses',
+      category: 'Systematic Study',
+      icon: CoursesIcon,
+      desc: 'Structured correspondence lessons, Tattva Bodha curriculum, and Gita study circles.',
+      stat: `${courses.length} Courses`,
+      statSub: 'Correspondence & Online',
+      href: '/admin/courses',
+      action: 'Manage Courses',
+    },
+    {
+      title: 'Acharyas & Lineage',
+      category: 'Teacher Lineage',
+      icon: AcharyasIcon,
+      desc: 'Traditional Dashanami Saraswati lineage profiles and milestone chronologies.',
+      stat: `${acharyas.length} Acharyas`,
+      statSub: 'Biographies & Lineage',
+      href: '/admin/acharyas',
+      action: 'View Acharya Profiles',
+    },
+  ];
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div>
-          <h1 className={styles.title}>Content Management Index</h1>
+          <h1 className={styles.title}>Content Management Library</h1>
           <p className={styles.subtitle}>
-            Editorial overview of verified publications, teachings, events, courses, and Acharya lineages.
+            Editorial overview of verified publications, audio teachings, ashram retreat schedules, and academic courses.
           </p>
         </div>
       </div>
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: 'var(--space-5)',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gap: 'var(--space-5, 20px)',
       }}>
-        {/* Publications Card */}
-        <div style={{ background: '#FFFFFF', padding: 'var(--space-6)', borderRadius: '8px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '1.25rem' }}>📰</span>
-              <span className={styles.categoryBadge}>MONTHLY ARCHIVE</span>
-            </div>
-            <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#1A202C' }}>Publications</h3>
-            <p style={{ fontSize: '0.8125rem', color: '#718096', marginTop: '4px', lineHeight: 1.4 }}>
-              Vedanta Sandesh (English / Hindi) &amp; Vedanta Piyush (Hindi / Gujarati) digital e-journals.
-            </p>
-            <p style={{ marginTop: '12px', fontSize: '1.25rem', fontWeight: 700, color: '#2D3748' }}>
-              {publications.length} <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#718096' }}>Total Issues ({latestPubsCount} Current)</span>
-            </p>
-          </div>
-          <Link href="/admin/publications" className={styles.btnAdd} style={{ marginTop: '16px', textDecoration: 'none', textAlign: 'center', display: 'block' }}>
-            Manage Publications →
-          </Link>
-        </div>
+        {contentModules.map((mod) => {
+          const Icon = mod.icon;
+          return (
+            <div
+              key={mod.title}
+              style={{
+                background: '#FFFFFF',
+                padding: '24px',
+                borderRadius: '10px',
+                border: '1px solid var(--vm-sand-border, #DFD7C7)',
+                boxShadow: '0 1px 3px rgba(34, 29, 26, 0.04)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                transition: 'all var(--vm-ease-fast, 150ms ease)',
+              }}
+            >
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                  <div style={{
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: '8px',
+                    background: 'var(--vm-sand, #FAF6EE)',
+                    color: 'var(--vm-bhagwa, #E06328)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <Icon size={19} />
+                  </div>
+                  <span className={styles.categoryBadge}>{mod.category}</span>
+                </div>
+                <h3 style={{
+                  fontFamily: 'var(--font-serif, "Cormorant Garamond", serif)',
+                  fontSize: '1.25rem',
+                  fontWeight: 700,
+                  color: 'var(--vm-text, #221D1A)',
+                }}>
+                  {mod.title}
+                </h3>
+                <p style={{
+                  fontSize: '0.8125rem',
+                  color: 'var(--vm-text-muted, #665D55)',
+                  marginTop: '6px',
+                  lineHeight: 1.45,
+                }}>
+                  {mod.desc}
+                </p>
+                <div style={{ marginTop: '16px', display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+                  <span style={{
+                    fontFamily: 'var(--font-serif, "Cormorant Garamond", serif)',
+                    fontSize: '1.5rem',
+                    fontWeight: 700,
+                    color: 'var(--vm-text, #221D1A)',
+                  }}>
+                    {mod.stat}
+                  </span>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 500, color: 'var(--vm-text-faint, #8E847A)' }}>
+                    ({mod.statSub})
+                  </span>
+                </div>
+              </div>
 
-        {/* Teachings Card */}
-        <div style={{ background: '#FFFFFF', padding: 'var(--space-6)', borderRadius: '8px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '1.25rem' }}>🎙️</span>
-              <span className={styles.categoryBadge}>AUDIO &amp; DISCOURSES</span>
+              <Link
+                href={mod.href}
+                className={styles.btnAdd}
+                style={{
+                  marginTop: '20px',
+                  textDecoration: 'none',
+                  textAlign: 'center',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: '6px',
+                }}
+              >
+                <span>{mod.action}</span>
+                <ArrowRightIcon size={13} />
+              </Link>
             </div>
-            <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#1A202C' }}>Teachings &amp; Jnana Ganga</h3>
-            <p style={{ fontSize: '0.8125rem', color: '#718096', marginTop: '4px', lineHeight: 1.4 }}>
-              Discourses covering the Gita, Principal Upanishads, Prakarana Granthas, and Meditation.
-            </p>
-            <p style={{ marginTop: '12px', fontSize: '1.25rem', fontWeight: 700, color: '#2D3748' }}>
-              {teachings.length} <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#718096' }}>Active Discourse Series</span>
-            </p>
-          </div>
-          <Link href="/admin/teachings" className={styles.btnAdd} style={{ marginTop: '16px', textDecoration: 'none', textAlign: 'center', display: 'block' }}>
-            Manage Teachings →
-          </Link>
-        </div>
-
-        {/* Events Card */}
-        <div style={{ background: '#FFFFFF', padding: 'var(--space-6)', borderRadius: '8px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '1.25rem' }}>📅</span>
-              <span className={styles.categoryBadge}>RETREATS &amp; SATSANGS</span>
-            </div>
-            <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#1A202C' }}>Events &amp; Gyana Yagnas</h3>
-            <p style={{ fontSize: '0.8125rem', color: '#718096', marginTop: '4px', lineHeight: 1.4 }}>
-              Residential study camps, Mandir festival commemorations, and regional lecture tours.
-            </p>
-            <p style={{ marginTop: '12px', fontSize: '1.25rem', fontWeight: 700, color: '#2D3748' }}>
-              {events.length} <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#718096' }}>Scheduled ({activeEventsCount} Upcoming)</span>
-            </p>
-          </div>
-          <Link href="/admin/events" className={styles.btnAdd} style={{ marginTop: '16px', textDecoration: 'none', textAlign: 'center', display: 'block' }}>
-            Manage Events →
-          </Link>
-        </div>
-
-        {/* Courses Card */}
-        <div style={{ background: '#FFFFFF', padding: 'var(--space-6)', borderRadius: '8px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '1.25rem' }}>📚</span>
-              <span className={styles.categoryBadge}>SYSTEMATIC GURUKULA</span>
-            </div>
-            <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#1A202C' }}>Study Courses</h3>
-            <p style={{ fontSize: '0.8125rem', color: '#718096', marginTop: '4px', lineHeight: 1.4 }}>
-              Structured correspondence lessons, Tattva Bodha curriculum, and Gita study circles.
-            </p>
-            <p style={{ marginTop: '12px', fontSize: '1.25rem', fontWeight: 700, color: '#2D3748' }}>
-              {courses.length} <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#718096' }}>Curriculum Offerings</span>
-            </p>
-          </div>
-          <Link href="/admin/courses" className={styles.btnAdd} style={{ marginTop: '16px', textDecoration: 'none', textAlign: 'center', display: 'block' }}>
-            Manage Courses →
-          </Link>
-        </div>
-
-        {/* Acharyas Card */}
-        <div style={{ background: '#FFFFFF', padding: 'var(--space-6)', borderRadius: '8px', border: '1px solid #E2E8F0', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontSize: '1.25rem' }}>🪔</span>
-              <span className={styles.categoryBadge}>TEACHER LINEAGE</span>
-            </div>
-            <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#1A202C' }}>Acharyas</h3>
-            <p style={{ fontSize: '0.8125rem', color: '#718096', marginTop: '4px', lineHeight: 1.4 }}>
-              Traditional Dashanami Saraswati lineage profiles and milestone chronologies.
-            </p>
-            <p style={{ marginTop: '12px', fontSize: '1.25rem', fontWeight: 700, color: '#2D3748' }}>
-              {acharyas.length} <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#718096' }}>Verified Acharyas</span>
-            </p>
-          </div>
-          <Link href="/admin/acharyas" className={styles.btnAdd} style={{ marginTop: '16px', textDecoration: 'none', textAlign: 'center', display: 'block' }}>
-            View Acharya Profiles →
-          </Link>
-        </div>
+          );
+        })}
       </div>
     </div>
   );

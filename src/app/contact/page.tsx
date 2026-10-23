@@ -169,7 +169,7 @@ export default function ContactPage() {
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) {
       showToast('Please correct the highlighted fields before submitting.', 'error');
@@ -177,18 +177,22 @@ export default function ContactPage() {
     }
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      addInquiry({
+    try {
+      await addInquiry({
         name: name.trim(),
         email: email.trim(),
         phone: phone.trim() || undefined,
         purpose: topic,
         message: message.trim(),
       });
-      setIsSubmitting(false);
       setIsSubmitted(true);
       showToast('Enquiry received and logged to Ashram Inquiries.', 'success');
-    }, 450);
+    } catch (err: any) {
+      console.error('Contact form submission error:', err);
+      showToast('Could not record enquiry in database. Please try again or reach us via email directly.', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const mailtoHref = `mailto:vmission@gmail.com?subject=${encodeURIComponent(
