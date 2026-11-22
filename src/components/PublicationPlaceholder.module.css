@@ -218,7 +218,7 @@
 }
 
 .catPiyush .seriesBadge {
-  color: #C84E17; /* Sacred Gerua */
+  color: var(--vm-brand-orange, #C96622); /* Canonical Brand Orange */
 }
 
 .catEbook .seriesBadge {

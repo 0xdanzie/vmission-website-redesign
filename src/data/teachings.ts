@@ -2,14 +2,15 @@
 // Single Canonical Source of Truth for Unified Knowledge Library
 // Traceable to Phase 3B.0 Master Content Inventory and Phase 3D.1 Forensic Content Verification
 
-export type TeachingFormat = 'Audio' | 'Video' | 'PDF' | 'E-Book';
+export type TeachingFormat = 'Audio' | 'Video' | 'PDF' | 'E-Book' | 'Article';
 export type TeachingLanguage =
   | 'English'
   | 'Hindi'
   | 'Sanskrit'
   | 'Gujarati'
   | 'Hindi / Sanskrit'
-  | 'Sanskrit / Hindi';
+  | 'Sanskrit / Hindi'
+  | 'English / Hindi';
 
 export const teachingTeachers = [
   'All Teachers',
@@ -121,6 +122,11 @@ export interface Teaching {
   relatedPublicationIds?: string[];
   relatedStudyText?: RelatedStudyText;
   is_published?: boolean;
+  articleBody?: string;
+  publishedDate?: string;
+  canonicalId?: string;
+  canonicalSource?: string;
+  sourcePostId?: number;
 }
 
 export const teachings: Teaching[] = [
@@ -136,8 +142,7 @@ export const teachings: Teaching[] = [
     "category": "prakarana-granth",
     "categoryName": "Prakarana Granth",
     "topic": "Prakarana Granth",
-    "src": "/audio/demo-discourse.mp3",
-    "audioUrl": "https://archive.org/download/SwamiAtmanandaVedanticMeditation_Day1/day1.mp3",
+    "src": "",
     "youtubePlaylistId": "PLVT0gU53weD3Ri0TEQdZcEv-g85I6H_oj",
     "youtubeVideoId": "DefzkQ0BAr0",
     "thumbnailSrc": "/images/vmission/teaching/01-swami-atmananda-teaching-restored.jpg",
@@ -147,10 +152,10 @@ export const teachings: Teaching[] = [
     "migrationStatus": "MIGRATED",
     "description": "An authentic, verse-by-verse exposition of Drig Drushya Viveka (\"Discrimination of the Seer and the Seen\") delivered by Poojya Swami Atmananda Saraswati. Unfolds the central inquiry: who is the true unchanging witness behind all sensory and mental experience?",
     "relatedPublicationIds": [
-      "pub-txt-drig-drushya-mula"
+      "study-text-000393"
     ],
     "relatedStudyText": {
-      "id": "pub-txt-drig-drushya-mula",
+      "id": "study-text-000393",
       "title": "Drig Drushya Viveka Mula Grantha (दृग्दृश्यविवेक मूलग्रन्थः)",
       "type": "Study Text",
       "href": "/publications"
@@ -177,10 +182,10 @@ export const teachings: Teaching[] = [
     "migrationStatus": "MIGRATED",
     "description": "Sri Adi Shankaracharya’s introductory treatise on Self-Knowledge (Atma-bodha). Swami Atmananda Saraswati unfolds the prerequisites for spiritual inquiry and why direct Self-Knowledge is the sole direct means to absolute freedom (Moksha).",
     "relatedPublicationIds": [
-      "pub-txt-atmabodha-mula"
+      "study-text-000384"
     ],
     "relatedStudyText": {
-      "id": "pub-txt-atmabodha-mula",
+      "id": "study-text-000384",
       "title": "Atmabodha Mula Grantha (आत्मबोधः मूलग्रन्थः)",
       "type": "Study Text",
       "href": "/publications"
@@ -207,10 +212,10 @@ export const teachings: Teaching[] = [
     "migrationStatus": "MIGRATED",
     "description": "A verse-by-verse exposition of Chapter 3 of the Bhagavad Gita on Karma Yoga — the yoga of dedicated action. Swami Atmananda Saraswati clarifies the vital distinction between renunciation of action (karma-sannyasa) and action performed with inner equipoise (karma-yoga).",
     "relatedPublicationIds": [
-      "pub-ebk-gita"
+      "book-000434"
     ],
     "relatedStudyText": {
-      "id": "pub-ebk-gita",
+      "id": "book-000434",
       "title": "Articles on Gita (English)",
       "type": "Monograph",
       "href": "/publications"
@@ -233,7 +238,7 @@ export const teachings: Teaching[] = [
     "migrationStatus": "MIGRATION_PENDING",
     "description": "The profound opening inquiry of the Kena Upanishad: \"By whom willed and directed does the mind light upon its objects?\" Swami Atmananda Saraswati reveals that the ultimate knower cannot be objectified by any organ of perception.",
     "relatedPublicationIds": [
-      "pub-ebk-va01"
+      "book-000352"
     ]
   },
   {
@@ -248,7 +253,7 @@ export const teachings: Teaching[] = [
     "category": "meditation",
     "categoryName": "Meditation",
     "topic": "Meditation",
-    "src": "/audio/swami-atmananda-meditation-day1.mp3",
+    "src": "",
     "audioUrl": "https://archive.org/download/SwamiAtmanandaVedanticMeditation_Day1/day1.mp3",
     "sourceHost": "Archive.org & Local CDN",
     "sourceStatus": "SOURCE-VERIFIED",
@@ -256,7 +261,7 @@ export const teachings: Teaching[] = [
     "migrationStatus": "MIGRATED",
     "description": "A guided contemplation and exposition on Vedantic meditation (Nididhyasana). Swami Atmananda Saraswati explains the difference between mental concentration (dharana) and abiding as the witness consciousness (sakshi-bhava).",
     "relatedPublicationIds": [
-      "pub-ebk-va03"
+      "book-000350"
     ]
   },
   {
@@ -280,7 +285,7 @@ export const teachings: Teaching[] = [
     "migrationStatus": "MIGRATED",
     "description": "Sequential, traditional recitation of the nine meditative verses on Srimad Bhagavad Gita (Gita Dhyanam) by Swamini Samatananda Saraswati.",
     "relatedPublicationIds": [
-      "pub-ebk-gita"
+      "book-000434"
     ]
   },
   {
@@ -303,10 +308,10 @@ export const teachings: Teaching[] = [
     "migrationStatus": "MIGRATED",
     "description": "Adi Shankaracharya’s concise five-verse blueprint outlining forty sequential disciplines for spiritual seekers from Karma Yoga to final liberation.",
     "relatedPublicationIds": [
-      "pub-txt-sadhana-panchakam-mula"
+      "study-text-000402"
     ],
     "relatedStudyText": {
-      "id": "pub-txt-sadhana-panchakam-mula",
+      "id": "study-text-000402",
       "title": "Sadhana Panchakam Mula Grantha (साधनपञ्चकम् मूलग्रन्थः)",
       "type": "Study Text",
       "href": "/publications"
@@ -352,10 +357,10 @@ export const teachings: Teaching[] = [
     "migrationStatus": "MIGRATED",
     "description": "Bhagavan Ramana Maharshi’s thirty verses presenting the synthesis of Karma, Bhakti, Yoga, and Jnana. Unfolded with clarity by Swami Atmananda Saraswati.",
     "relatedPublicationIds": [
-      "pub-txt-upadesha-saram"
+      "study-text-000405"
     ],
     "relatedStudyText": {
-      "id": "pub-txt-upadesha-saram",
+      "id": "study-text-000405",
       "title": "Upadesha Saram (उपदेश सारम्)",
       "type": "Study Text",
       "href": "/publications"
@@ -381,10 +386,10 @@ export const teachings: Teaching[] = [
     "migrationStatus": "MIGRATED",
     "description": "Adi Shankaracharya’s renowned Prakarana text on dispassion and discriminative inquiry. Swami Atmananda Saraswati unfolds the verses on the fleeting nature of worldly attachments and the essential pursuit of Self-knowledge.",
     "relatedPublicationIds": [
-      "pub-txt-bhaja-govindam"
+      "study-text-000390"
     ],
     "relatedStudyText": {
-      "id": "pub-txt-bhaja-govindam",
+      "id": "study-text-000390",
       "title": "Bhaja Govindam (भजगोविन्दम्)",
       "type": "Study Text",
       "href": "/publications"
@@ -430,10 +435,10 @@ export const teachings: Teaching[] = [
     "migrationStatus": "MIGRATED",
     "description": "Discourses by Swamini Amitananda Saraswati on Hastamalaka Stotram, Sri Shankara’s disciple’s spontaneous declaration of Self-identity as eternal consciousness.",
     "relatedPublicationIds": [
-      "pub-txt-hastamalaka"
+      "study-text-000396"
     ],
     "relatedStudyText": {
-      "id": "pub-txt-hastamalaka",
+      "id": "study-text-000396",
       "title": "Hastamalaka Stotram (हस्तामलकस्तोत्रम्)",
       "type": "Study Text",
       "href": "/publications"
@@ -459,10 +464,10 @@ export const teachings: Teaching[] = [
     "migrationStatus": "MIGRATED",
     "description": "Swami Vidyaranya’s theatrical metaphor of the witness consciousness (Sakshi Chaitanya) as the stage lamp illuminating the drama of mind and world without being affected.",
     "relatedPublicationIds": [
-      "pub-txt-panchadashi-natak-deep"
+      "study-text-000399"
     ],
     "relatedStudyText": {
-      "id": "pub-txt-panchadashi-natak-deep",
+      "id": "study-text-000399",
       "title": "Panchadashi — Nataka Deepa (पञ्चदशी - नाटकदीपः)",
       "type": "Study Text",
       "href": "/publications"
@@ -488,10 +493,10 @@ export const teachings: Teaching[] = [
     "migrationStatus": "MIGRATED",
     "description": "Sri Shankaracharya’s concise exposition of the Mahavakya \"Aham Brahmasmi\". Swamini Amitananda unfolds the method of resolving the individual self into the non-dual reality.",
     "relatedPublicationIds": [
-      "pub-txt-laghu-vakyavritti-mula"
+      "study-text-000397"
     ],
     "relatedStudyText": {
-      "id": "pub-txt-laghu-vakyavritti-mula",
+      "id": "study-text-000397",
       "title": "Laghu Vakyavritti Mula Grantha (लघुवाक्यवृत्तिः मूलग्रन्थः)",
       "type": "Study Text",
       "href": "/publications"
@@ -1067,14 +1072,273 @@ export const teachings: Teaching[] = [
     "migrationStatus": "MIGRATED",
     "description": "Exposition and chanting of the majestic hymn by Pushpadanta extolling the cosmic and transcendental glory of Lord Shiva.",
     "relatedPublicationIds": [
-      "pub-txt-shiv-mahimna"
+      "study-text-000436"
     ],
     "relatedStudyText": {
-      "id": "pub-txt-shiv-mahimna",
+      "id": "study-text-000436",
       "title": "Shiva Mahimna Stotram (शिव महिम्नः स्तोत्रम्)",
       "type": "Study Text",
       "href": "/publications"
     }
+  }
+,
+  {
+    "id": "teaching-article-antifragility",
+    "slug": "antifragility-sanyas",
+    "title": "Antifragility & Sanyas",
+    "scripture": "Vairagya & Sanyasa Viveka",
+    "teacher": "Swami Atmananda Saraswati",
+    "format": "Article",
+    "language": "English",
+    "category": "prakarana-granth",
+    "categoryName": "Prakarana Granth",
+    "topic": "Philosophical Treatise on Vairagya",
+    "sourceHost": "Vedanta Sandesh (Jan 2023)",
+    "sourceStatus": "SOURCE-VERIFIED",
+    "verificationStatus": "SOURCE-VERIFIED",
+    "migrationStatus": "MIGRATED",
+    "canonicalId": "canonical-post-009163",
+    "canonicalSource": "https://www.vmission.org.in/antifragility-sanyas/",
+    "sourcePostId": 9163,
+    "publishedDate": "2023-03-06",
+    "description": "An illuminating philosophical treatise by Poojya Guruji Swami Atmananda Saraswati examining Nassim Nicholas Taleb's concept of Antifragility through the timeless lens of Advaita Vedanta, traditional Sanyasa, and spiritual resilience.",
+    "articleBody": "Antifragility & Sanyas\n\nby Poojya Guruji Swami Atmanandaji (Published in Vedanta Sandesh Jan 2023)\n\nAntifragility & Sanyas\n\nThe Antifragility Concept\n\nAntifragility is a concept introduced by Nassim Nicholas Taleb in his book, “Antifragile: Things That Gain from Disorder”. It refers to the ability of a system, organism, or institution to not only withstand but also thrive in the face of chaos and uncertainty. The concept of antifragility can be applied to various aspects of human life, including the Institution of Sanyas.\n\nComfort Zone\n\nOrdinarily man aspires to create a comfort zone in his life in the form of properties, pleasures & various comforts. All this just to create his own comfortable heaven here on earth. Heavens in any system just represent the ultimate comfort zone we can dream of. Obviously comfort zones provide us comfort and a zone of undistracted & focused pursuit of anything which is dear to us, and it could be studies, research, writing, arts, meditation or even simple pursuit of undistracted pleasures & gratifications. Comfort zones also provide us with relaxation and de stressing, They have rather become an epitome of a successful & wealthy life. Big bungalows, luxurious flats & other properties. Greater the comfort zone greater the success. No wonder the world over every person aspires to create their own comfortable homes & zones. The Positive side of Comfort Zones\n\nComfort zones do have a positive side, after a tiring day this is where we come back & relax & rejuvenate. If we use our comfort zones to pursue something higher then they become great blessings. Like we have universities and even Ashrams with good comforts, so that we can keep doing our studies & research or sadhanas without any distractions. However, more often these comfort zones become oasis where we revert to just relax & rejuvenate, which by itself is also very important & good. However, when we do not pursue anything higher - no sadhanas, no studies, no arts nothing special at all, yet keep on living in these zones then we simply vegetate and even rot. We become complacent, devoid of any enthusiasm and energy. Just eat, sleep and rest. Such a life may appear relaxing & peaceful, but this is where all diseases - physical & mental start creeping in. It is a challenge of various health experts to motivate these people to at least do some exercises, yoga or even walk.\n\nPerils of Comfort Zone\n\nExperts tell us that some of the most evident perils of our comfort zones are stagnation, lack of creativity, missing out on various opportunities, and of course various kinds of regrets. Various sportsmen tell us that they achieved the best of their dreams only when they kept on challenging themselves. Health enthusiasts know that only when they workout vigorously that they fulfil their dreams, Defence personnel’s are trained in rigorous conditions to help them invoke their latent strength & potentialities. Too much of comfort zones is their death knell. Comfort zones help us to relax, & rejuvenate so that we pursue our dreams all the more vigorously then they definitely become blessings, not otherwise. Be devoid of any passion then we shall simply vegetate & become weak.\n\nGruhastha Ashram\n\nAn ideal household definitely needs a comfortable house, which can provide us our comfort zone - to relax, rejuvenate, procreate, take care of children, educate and prepare for something dear. However, living in such a zone, one should definitely keep pursuing something higher passionately, otherwise all the above mentioned perils of comfort zones just keep waiting to pounce on us and make our lives a hell. Taking up duties, responsibilities and working to attain them is the main objective of such an order. Challenges help to get the best out of us, and even invoke intelligence. Thereafter there are other stages of life, which nowadays very rarely people even think about - and that is a life of simplicity & austerity and finally a life of Sanyas. Sanyas Ashram\n\nVery few people, including many Hindus, rightly appreciate the objective & nature of Sanyas Ashram. Here are some people who worked hard, had their homes & relatives, earned money, fulfilled their responsibilities in the best possible manner, yet at some point in time voluntarily take to a life of simplicity, austerity and even recluse. Some fear such a life, but some rare few voluntarily opt for it. They definitely appreciate the role & importance of comfort & wealth when it comes to taking care of their family & jobs, however, they also appreciate that austere life helps them to invoke their best. We can either take necessary comforts from extraneous things, or can strive to wake up and actualize self-realization. Gita tells us that a man of knowledge is contended in himself by himself. For this obviously we need to stop any conscious or unconscious dependence on extraneous factors, which was our life earlier. Antifragility & Sanyas\n\nThis is what makes us see the positive role of the concept of Antifragility in this institution of Sanyas. Every situation we come across has two options to choose from. One is a path of comfort & convenience and the other is the one of challenge. One a beaten path and the other a less trodden path. Bhagwad Gita says that the path of Sattwic Sukha initially has lots of difficulties in the beginning, but this alone opens up the gate of enlightenment and immortality later. The so-called Preya Marg is the one of ego fulfilment and the Shreya Marg is all about surrender and negation of ego, so as to wake up to a realm which transcends the ego. Fragile is a relative word, and is in relation to the capacities & fears of the ego, while those who rather believe in the philosophy of non-duality and the intrinsic divinity of all dare to keep aside the concerns of ego and enter into the so called world of antifragility and growth. Can we imagine that in one of the Upanishads a seeker of truth has a dialogue with the Lord of Death himself. Ego is always Fragile\n\nThe concept of Antifragility tells us that in every fragile situation there are two curves, one going up and the other going down. The possibility of going up is just by being more intelligent, positive and creative. Those who are devoid of these qualities obviously take a safer & convenient way of assuring their personal conveniences & security. If someone prefers to remain a small, insecure & fragile individual then obviously all challenges bring us to the crossroads of fragility, however when philosophically you believe that the substratum of all change is the changeless infinite divinity then you can dare to make the concerns of the individual subservient. This is exactly what a Sanyasi does and this choice alone makes all the difference and opens up the gates of the so called enlightenment & freedom.\n\nOm Tat Sat.",
+    "is_published": true
+  },
+  {
+    "id": "teaching-article-love-nature",
+    "slug": "love-nature",
+    "title": "Love Nature — Seeing God in Creation",
+    "scripture": "Ishwara Darshan in Prakruti",
+    "teacher": "Swami Atmananda Saraswati",
+    "format": "Article",
+    "language": "English",
+    "category": "meditation",
+    "categoryName": "Meditation",
+    "topic": "Avian Vibhooti & Nature",
+    "sourceHost": "Vedanta Ashram Blog",
+    "sourceStatus": "SOURCE-VERIFIED",
+    "verificationStatus": "SOURCE-VERIFIED",
+    "migrationStatus": "MIGRATED",
+    "canonicalId": "canonical-post-004888",
+    "canonicalSource": "https://www.vmission.org.in/love-nature/",
+    "sourcePostId": 4888,
+    "publishedDate": "2020-02-10",
+    "description": "Poojya Guruji Swami Atmananda Saraswati unfolds why loving and respecting nature is essential for spiritual inquiry. By contemplating the wondrous manifestations of Prakruti, seekers learn to see the all-pervasive Ishwara.",
+    "articleBody": "10 Feb 2020\n\nLOVE NATURE\n\nAvian Vibhooti's\n\nGod - The Creator\n\nGod is the creator of the world, and the best way to appreciate the nature, knowledge & capacities of God is by looking at his creation. It is by looking at effect alone that one can get an idea of the cause. We are all part of this awesome nature - prakruti. Our lives are run by the powers of nature alone. The air we breathe, the food we eat, the joys we aspire for, are all parts of this big & beautiful world. Everyone needs to not only love nature but also respect it. For this the journey has to begin by getting as close to nature as possible. Go to the mountains, valleys, forests, visit lakes or even oceans. See the diverse life forms. All living beings are part of our big family, and all of them directly or indirectly contribute to the running of the whole eco-system.\n\nNature's Blessings\n\nThose who go near nature, shall always be blessed with better health and nice, peaceful & sensitive mind. Good health and sensitive mind paves the way for better intelligence too, and all this alone is the objective of Yoga. Therefore do take out time to go in the wilderness, go for walks and just see around. So many life-forms exist so happily there. The birds, insects, animals - and all of them so healthy, active and lively. Everyone gets their food and shelter there. Mother Nature takes care of all her children. Let us learn to see God in the nature. That is what all the Vedic Rishis taught us. Lord Krishna tells us to see the glories of God in the various manifestations around, in fact see the whole Viswa as his Roopa\n\nDon't ignore Nature\n\nVarious problems being faced by mankind are all a result of our ignoring nature, in fact we have rather destroyed nature in a very big way in our greed. World bodies are discussing problems like global warming ozone depletion and all-pervasive pollution - of air, water & earth. All this can be handled if we once again rejuvenate our old cultural & religious traditions & values of respecting nature. Let us make this habit of going in the lap of nature - silently & peacefully, more to appreciate it more closely. All those who do this shall definitely be blessed in hundreds of ways, including a better understanding of the creator of the world and ourself.\n\n“The Earth has its music for those who will listen.”\n\nSwami Atmanandaji Saraswati\n\nAnanda Pics",
+    "is_published": true
+  },
+  {
+    "id": "teaching-ashram-parivar-yojna",
+    "slug": "ashram-parivar-yojna",
+    "title": "Ashram Parivar Yojna (वेदान्त आश्रम परिवार)",
+    "scripture": "Gurukula Seva & Satsang",
+    "teacher": "Swami Atmananda Saraswati",
+    "format": "Article",
+    "language": "Hindi",
+    "category": "devotional",
+    "categoryName": "Devotional",
+    "topic": "Ashram Parivar Silver Jubilee",
+    "sourceHost": "Vedanta Ashram",
+    "sourceStatus": "SOURCE-VERIFIED",
+    "verificationStatus": "SOURCE-VERIFIED",
+    "migrationStatus": "MIGRATED",
+    "canonicalId": "canonical-post-005780",
+    "canonicalSource": "https://www.vmission.org.in/ashram-parivar-yojna/",
+    "sourcePostId": 5780,
+    "publishedDate": "2021-01-15",
+    "description": "वेदान्त आश्रम, इन्दौर की स्थापना की रजत जयंती के अवसर पर पूज्य गुरुजी स्वामी आत्मानन्दजी सरस्वती का संदेश। आश्रम परिवार योजना का पावन उद्देश्य, साधक-परिवार का परस्पर जुड़ाव और अद्वैत वेदान्त ज्ञान-प्रचार।",
+    "articleBody": "ASHRAM PARIVAR YOJNA\n\nस्वामी आत्मानन्दजी सरस्वती\n\nवेदान्त आश्रम परिवार\n\nवेदान्त आश्रम के 25 वर्ष\n\nवेदान्त आश्रम, इन्दौर कि स्थापना की रजत जयंती पर आप सभी भक्तों एवं शिष्यों को शुभाशीष देते हैं कि उनके ही सहयोग से देश-विदेश के अनेकों जिज्ञासु लोग अद्वैत वेदांत के ज्ञान से सतत लाभान्वित होते आए हैं। रजत जयंती के अवसर पर वेदान्त आश्रम द्वारा आश्रम परिवार की सदस्यता आरम्भ की जा रही हैं। आप हमारे आश्रम परिवार के सदस्य बनें और इस ज्ञान की ज्योत को निरंतर प्रज्ज्वलित रखने में अपना योगदान प्रदान करें।\n\nआश्रम परिवार की सदस्यता के प्रकार\n\nप्रधान संरक्षक\n\nरु. 5000/- प्रति माह\n\nसंरक्षक\n\nरु. 2000/- प्रति माह\n\nसदस्य\n\nरु. 1000/- प्रति माह\n\nसहयोगी\n\nरु. 500/- प्रति माह\n\nभक्त\n\nरु. 250/- प्रति माह\n\nआश्रम परिवार के सदस्यों के लाभ :\n\n1. आश्रम परिवार के सदस्यों का ही एक अलग WhatsApp (Broadcast) Group बनाया जाएगा; जिसमें दिन में मात्र दो post भेजी जाएगी, जो कि उपनिषद्, गीता, रामायण आदि पर आधारित सुविचार अथवा प्रेरक प्रसंग रहेंगे।\n\n2. आश्रम परिवार के सदस्यों को आपस में चर्चा व परिचय हेतु एक अलग WhatsApp (Discussion) Group बनाया जाएगा। 3. आश्रम परिवार के सदस्यों का Facebook पर एक विशेष Private Group होगा। जिसमें Chanting, धर्म और संस्कृति ज्ञान, ध्यान आदि Share किये जाएंगे।\n\n4. आश्रम परिवार के सदस्यों के साथ प्रति शनिवार सायं 8 बजे साप्ताहिक ऑनलाइन वीडियो सत्संग आयोजित किया जाएगा, जिसकी पूर्व सूचना प्रत्येक सदस्य को WhatsApp Group के माध्यम से भेजी जाएगी।\n\nसत्संग का श्रीगणेश 30 जनवरी को सायं काल 8.00 बजे होगा।\n\n5. आश्रम परिवार के सदस्यों के लिए 3 महिने में एक बार online वेदान्त श्रवण माला आयोजित करी जाएगी, जिसके द्वारा वे सब विधिवत शास्त्रों का अध्ययन करते रहेंगे ।\n\n6. आश्रम परिवार के सदस्यों के जन्मदिन पर आश्रम में उनके नाम से मंगल कामना का संकल्प करते हुए पूजा की जाएगी।\n\n7. आश्रम परिवार के सदस्यों को वर्ष में तीन दिन के लिए वेदान्त आश्रम में सत्संग हेतु निःशुल्क रहने की अनुमति (शिविर से अन्य समय में ) दी जाएगी। इसकी सूचना पहले से ही देकर अनुमति लेनी होगी।\n\nLoading…\n\nCHOOSE PAYMENT OPTION\n\nBy UPI\n\n1. For PC users: Open any UPI App in your mobile and send money to swamita@upi of SWAMINI AMITANANDA SARASWATI\n\nor, just scan the QR Code below – with any UPI App scanner in your mobile to initiate payment :\n\n2. For Mobile/Tablet users: Click on THIS LINK to initiate the payment in any of your UPI App.\n\nAfter payment: Please let us know by Email / WhatsApp at the following id’s so that we can follow up the matter at our end :\n\nSwamini Amitananda Saraswati\n\nEmail id: swamita@gmail.com\n\nWhatsApp No: +91 7000361938\n\nBy PayTm\n\nIf you wish to use PayTm, then please open the app in your mobile and send money to 9826959480.\n\nor, just scan the QR Code below and initiate payment.\n\nBy NEFT\n\nDetails:\n\nBank Account Name: Swamini Amitananda Saraswati\n\nSaving Bank Account Number: 02811000010325\n\nIFSC Code: HDFC0001771\n\nOur Bank Branch Address :\n\nHDFC Bank Ltd (Annapoorna Road Branch)64 Sector A, Bhawanipur Colony,Annapoorna Road, Indore-452009\n\nYou are thereafter requested to please let us know immediately by Email and WhatsApp at the following id’s so that we can follow up the matter at our end and acknowledge the receipt of your donation\n\nEmail id: swamita@gmail.com\n\nWhatsApp No: +91 7000361938\n\nBy Cheque\n\nPlease write a Crossed Cheque in the name of:\n\nSwamini Amitananda Saraswati\n\nDeposit the cheque in any HDFC Bank Branch in your city or Drop the cheque in the Dropbox of any HDFC Bank ATM or Send the cheque to us by post to the following address:\n\nVedanta Ashram,E/2948, Sudama Nagar,\n\nIndore-452009. MP, India\n\nAfter depositing / dropping / mailing the cheque, pl send the cheque details (preferably a photo of the cheque) to us at the earliest by Email and also WhatsApp at id’s below, so that we can follow up the matter at our end and also acknowledge at the earliest :\n\nEmail id: swamita@gmail.com\n\nWhatsApp No: +91 7000361938\n\nBy Credit / Debit Card\n\nPlease click on the link of the Payment Gateway below to initiate the process of sending your donation to us using your Credit / Debit Card :\n\nYou are thereafter requested to please let us know immediately by Email and WhatsApp at the following id’s so that we can follow up the matter at our end and acknowledge the receipt of your donation :\n\nEmail id: swamita@gmail.com\n\nWhatsApp No: +91 7000361938\n\nMoney Transfer by 1st four options (NEFT, UPI, eWallet & Cheque) is free. But there will be around 2.5% deduction if you send money by Debit / Credit Card.\n\n।। धर्मो रक्षति रक्षित: ।।",
+    "is_published": true
+  },
+  {
+    "id": "teaching-kathopanishad-gyana-yagna",
+    "slug": "kathopanishad-gyana-yagna",
+    "title": "Sampoorna Kathopanishad Gyana Yagna (सम्पूर्ण कठोपनिषद ज्ञान यज्ञ)",
+    "scripture": "Kathopanishad",
+    "teacher": "Swami Atmananda Saraswati",
+    "format": "Video",
+    "language": "Hindi",
+    "category": "upanishads",
+    "categoryName": "Upanishads",
+    "topic": "Kathopanishad Gyana Yagna",
+    "sourceHost": "YouTube (Official Video Playlist)",
+    "sourceStatus": "SOURCE-VERIFIED",
+    "verificationStatus": "SOURCE-VERIFIED",
+    "migrationStatus": "MIGRATED",
+    "canonicalId": "canonical-post-006293",
+    "canonicalSource": "https://www.vmission.org.in/kathopanishad-gyana-yagna/",
+    "sourcePostId": 6293,
+    "publishedDate": "2020-09-12",
+    "description": "४६ दिनों के सम्पूर्ण कठोपनिषद ज्ञान यज्ञ का विवरण एवं पूज्य गुरुजी स्वामी आत्मानन्दजी सरस्वती द्वारा नचिकेता-यम संवाद पर आधारित आत्म-विद्या का विशद विवेचन।",
+    "articleBody": "SEPT 2020\n\nसम्पूर्ण कठोपनिषद ज्ञान यज्ञ\n\n(Online)\n\nस्वामी आत्मानन्दजी सरस्वती\n\nKATHOPANISHAD PLAY LIST\n\nKATHOPANISHAD CHANTING\n\n~ ४६ दिनों के इस आगामी ज्ञान यज्ञ का शुभारम्भ १ सितम्बर से हुआ। प्रतिदिन सायं काल ७ बजे यूट्यूब पर इसका प्रवचन प्रकाशित किया जा रहा है। ~ कठोपनिषद में दो अध्याय है, और प्रत्येक अध्याय में ३-३ वल्ली (खण्ड ) हैं। कुल मिलाकर इसमें (७१+४८) ११९ मंत्र हैं। कठोपनिषद, यजुर्वेद के अंतर्गत आता है।\n\n~ कठोपनिषद में मृत्यु के देवता यमराज एवं नचिकेत नामक शिष्य का मृत्यु एवं मुक्ति से सम्बद्ध विषय पर संवाद है। इसमें यमराज जी खुद - मृत्यु और मृत्यु के उपरान्त का रहस्य बताते हैं।\n\n~ अतः यह श्राद्ध एवं अधिक मॉस के समय निश्चित रूप से श्रवण और चिंतन योग्य है।\n\n~ यह एक अत्यंत आदरणीय उपनिषद् है - जिसके ऊपर भगवान् श्री आदि शंकराचार्य जी महाराज ने भाष्य भी लिखी है।\n\nसम्पूर्ण कठोपनिषद ऑनलाइन ज्ञान यज्ञ का पहला पड़ाव प्रथम वल्ली के समापन के साथ ९ सितम्बर को पूरा हुआ, इस प्रवचन से दूसरी वल्ली का शुभारम्भ हुआ। इस वल्ली के प्रारम्भ में नचिकेत के पूज्य गुरुदेव यमराज जी महाराज एक अत्यंत महत्त्व पूर्ण विषय की चर्चा से अपने प्रवचन का श्रीगणेश किया। वे हमको श्रेय और प्रेय के विवेक के बारे में बताते हैं जिसके द्वारा नचिकेत जैसी पात्रता प्राप्त हो जाती है। वे बताते हैं की जीवन की प्रत्येक परिस्थिति की प्राप्ति के समय हमारे अंदर दो प्रकार की प्रतिक्रिया संभव हो सकती हैं। एक, हम वो करें जो हमें अच्छा लगे, या वो करें जो कि उचित हो। जो व्यक्ति सदैव उचित के मार्ग और विकल्प का चयन करता है वो एक अच्छा, स्वस्थ, और बुद्धिमान इंसान बन जाता है, और जो मात्र अपनी अहम् की संतुष्टि अथवा अपने योग और क्षेम से प्रेरित होता है वो व्यक्ति अंततः मंद बुद्धि होता चला जाता है और अपने जीवन की समस्त संभावनाओं से च्युत अर्थात गिर जाता है। उसके जीवन की इस असफलता और पतन का कारण ईश्वर अथवा कोई किस्मत आदि नहीं होते है बल्कि वो स्वयं अपने प्रेय पथ के चयन के कारण जीवन की सम्भावनाएं से वंचित रह जाता है।\n\nMORE to WATCH on YOUTUBE\n\nSHIV-MAHIMNA STOTRAM (46 videos)\n\nBHAJA GOVINDAM (35 videos)\n\nHANUMAN CHALISA (45 videos)\n\nSHIV-MAHIMNA CHANTING CLASS\n\nKATHOPANISHAD CHANTING & HINDI MEANING",
+    "is_published": true,
+    "youtubePlaylistId": "PLVT0gU53weD0MUCE3h5-qePnGa7_FCoQZ"
+  },
+  {
+    "id": "teaching-sampoorna-gita-gyana-mahayagna",
+    "slug": "sampoorna-gita-gyana-mahayagna",
+    "title": "Sampoorna Gita Gyana Mahayagna (सम्पूर्ण भगवद-गीता महायज्ञ)",
+    "scripture": "Bhagavad Gita",
+    "teacher": "Swami Atmananda Saraswati",
+    "format": "Video",
+    "language": "Hindi",
+    "category": "bhagavad-gita",
+    "categoryName": "Bhagavad Gita",
+    "topic": "Complete Gita Gyana Mahayagna",
+    "sourceHost": "YouTube (Official Video Playlist)",
+    "sourceStatus": "SOURCE-VERIFIED",
+    "verificationStatus": "SOURCE-VERIFIED",
+    "migrationStatus": "MIGRATED",
+    "canonicalId": "canonical-post-006490",
+    "canonicalSource": "https://www.vmission.org.in/sampoorna-gita-gyana-mahayagna/",
+    "sourcePostId": 6490,
+    "publishedDate": "2020-12-28",
+    "description": "२१ दिनों के सम्पूर्ण भगवद-गीता महायज्ञ का पावन शुभारंभ गीता जयंती के दिन से। पूज्य गुरुजी द्वारा गीता के सभी १८ अध्यायों का सारगर्भित एवं जीवनोपयोगी विवेचन।",
+    "articleBody": "DEC 2020\n\nगीता महायज्ञ\n\n(Online)\n\nस्वामी आत्मानन्दजी सरस्वती\n\nGITA VIDEO PRAVACHAN PLAY LIST\n\nGITA PDF (Slokas with Meaning)\n\n~ 21 दिनों के इस सम्पूर्ण भगवद-गीता के महायज्ञ का शुभारम्भ २५ दिसम्बर को गीता जयंती के दिन से हुआ। प्रतिदिन सायं काल ७ बजे यूट्यूब पर इसका प्रवचन प्रकाशित किया जा रहा है। ~ श्रीमद भगवद गीता में १८ अध्याय है। कुल मिलाकर इसमें ७०० श्लोक हैं। गीता महर्षि वेदव्यासजी द्वारा रचित महाकाव्य \"महाभारत के शांति पर्व\" के अंतर्गत प्राप्त होती है।\n\n~ गीता का उपदेश भगवान् श्री कृष्ण ने अर्जुन को युद्ध के मैदान में दिया था। गीता का उपदेश भगवान् श्री कृष्ण ने अर्जुन को युद्ध के मैदान में दिया था। उस दिन को गीता जयंती जाना जाता है।\n\n~ गीता जयंती हिन्दू पंचांग के अनुरूप मार्गशीर्ष शुक्ल पक्ष की एकादशी को होती है।\n\n~ इसका उपदेश सार्वभौमिक और सर्वकालिक प्रासंगिक है। अत :यह एक अत्यंत आदरणीय ग्रन्थ है - जिसके ऊपर भगवान् श्री आदि शंकराचार्य जी महाराज ने भाष्य भी लिखी है। तथा वेदांत प्रस्थानत्रयी में भी उसे स्थान प्राप्त है।\n\nसम्पूर्ण भगवद-गीता के महायज्ञ” की प्रवचन श्रंखला का प्रारम्भ करते हुए वेदान्त आश्रम, इंदौर के पूज्य गुरूजी श्री स्वामी आत्मानन्द जी महाराज ने अपनी भूमिका में बताया कि महाभारत युद्ध एक धर्म युद्ध था। इसमें पांडव लोग धर्म के पक्ष वाले थे और कौरव अधर्म के। धर्म, पूरी दुनियाँ को सर्वज्ञ, सर्व-शक्ति के धाम, करुणानिधान ईश्वर को मध्य में रखकर जीवन जीने की कला है, एवं अधर्म एक छोटे, असुरक्षित, अपूर्ण व्यक्ति को मध्य में रखकर जीवन जीने का तरीका है। धर्ममय व्यक्ति उद्दात, धन्य, और सब के कल्याण के लिए जीने वाला होता है, तथा अधर्म के पथ पे चलने वाला व्यक्ति असुरक्षित और सदैव अपने स्वार्थ की पूर्ती के लिए प्रेरित होता है। ये दो प्रकार की जीवन जीने की कलाएँ होती हैं। जब तक ईश्वरीय सत्ता का ज्ञान नहीं होता है तब तक प्रत्येक मनुष्य स्वार्थ से ही प्रेरित होता है एवं अधर्म के पथ का ही अनुसरण करता है। जो भी अधर्म के पथ पर चलता है उसको सदैव चिंता एवं शोक का सामना करना पड़ता है। गीता मूल रूप से मनुष्य को शोक के मुक्ति का पथ बताती है। यह ही भगवद गीता का विषय और प्रयोजन है।\n\nMORE to WATCH on YOUTUBE\n\nSAMPOORNA KATHOPANISHAD PRAVACHAN\n\nSHIV-MAHIMNA STOTRAM (46 videos)\n\nBHAJA GOVINDAM (35 videos)\n\nHANUMAN CHALISA (45 videos)\n\nKATHOPANISHAD CHANTING & HINDI MEANING",
+    "is_published": true,
+    "youtubePlaylistId": "PLVT0gU53weD0E6-bZ9F1w3v2_vX2aZ8uN"
+  },
+  {
+    "id": "teaching-shiva-mahimna-yagna",
+    "slug": "shiva-mahimna-stotram",
+    "title": "Shiva Mahimna Stotram Gyana Yagna (शिव महिम्न: स्तोत्र यज्ञ)",
+    "scripture": "Shiva Mahimna Stotram",
+    "teacher": "Swami Atmananda Saraswati",
+    "format": "Video",
+    "language": "Hindi",
+    "category": "chanting",
+    "categoryName": "Chanting & Bhajans",
+    "topic": "Shravan Shiva Mahimna Yagna",
+    "sourceHost": "YouTube (Verified Playlist)",
+    "sourceStatus": "SOURCE-VERIFIED",
+    "verificationStatus": "SOURCE-VERIFIED",
+    "migrationStatus": "MIGRATED",
+    "canonicalId": "canonical-post-006031",
+    "canonicalSource": "https://www.vmission.org.in/shiva-mahimna-stotram/",
+    "sourcePostId": 6031,
+    "publishedDate": "2020-08-20",
+    "description": "श्रावण मास में पूज्य गुरुजी स्वामी आत्मानन्दजी सरस्वती द्वारा गन्धर्वराज पुष्पदन्त विरचित शिव महिम्नः स्तोत्र पर ऑनलाइन ज्ञान यज्ञ एवं प्रवचन श्रृंखला।",
+    "articleBody": "SHIVA_MAHIMNA STOTRAM (Online Satsang) :\n\nJULy 2020\n\nSHIV MAHIMNA STOTRAM\n\nSWAMI ATMTNANDAJI SARASWATI\n\nशिव महिम्न: स्तोत्र यज्ञ\n\nगुरु पूर्णिमा के अगले दिन से सावन का पवित्र महीना प्रारम्भ हुआ। पूज्य गुरूजी ने ६ जुलाई, सावन के प्रथम दिन से आरम्भ कर के जन्माष्टमी पर्व तक शिव-महिम्न ज्ञान यज्ञ करते हुए पूरे सावन माह को शिव की भक्तिमय बना दिया। प्रत्येक दिन का प्रवचन किसी न किसी भक्त के द्वारा प्रायोजित किया गया। प्रवचन के अंत में उनका व्यक्तिगत नाम लेकर पूज्य गुरूजी ने विशेष आशीर्वाद दिएं।\n\nशिव महिम्न स्तोत्रम, शिवजी की महिमा के गुण गान के लिए एक अत्यंत प्रसिद्द एवं आदरणीय प्राचीन रचना है। इसके रचयिता पुष्पदंत नामक एक गन्धर्व थे।\n\nस्तोत्र विषय\n\nइस स्तोत्र के रचयिता श्री पुष्पदन्तजी एक अत्यंत बुद्धिमान, विद्वान, भक्त-ह्रदय, एवं सुन्दर वाणी के धनी, और संगीत प्रेमी गन्धर्व थे। उन्हें राजा ने बंदी बना लिया था, लेकिन अपने बंदी-गृह में रहने के समय का अत्यंत सुन्दर प्रयोग किया और इस अमर स्तोत्र की रचना की। इसके पुण्य प्रताप से वे न केवल मुक्त हो गए, किन्तु सभी शिव भक्तों को एक अनुपम स्तुति की विधा बता गएं ।\n\nइस स्तोत्र के ३४ श्लोका है, उसके आगे अन्य महात्माओं के द्वारा इसी स्तोत्र की महिमा और फलश्रुति बताई गई है, वे स्तोत्र के अंग रूप से जाने जाते हैं।\n\nश्री पुष्पदंतजी पहले श्लोक में ही अपने अध्भुत ज्ञान का परिचय देते है। वे अपने ज्ञान के कारण निरभिमानता और विनम्रता से युक्त दिखते है। वे एक प्रश्न उठाते हैं की - क्या कोई भी जीव ईश्वर की महिमा गाने या लिखने में समर्थ है? इसका स्पष्ट उत्तर है - नहीं। कहाँ जीव और कहाँ ईश्वर? सबसे मूलभूत बात तो यह है की हम ईश्वर की महिमा को ठीक से जानते तक नहीं हैं? ईश्वर की महिमा अपरम्पार है और हमारी बुद्धि बहुत ही अल्प है, अतः हम उनकी महिमा जानने तक में असमर्थ हैं। अगर ऐसा है तो आप कैसे यह रचना लिखने जा रहे है?\n\nपुष्पदंतजी कहते हैं कि यह सत्य है की ईश्वर की महिमा अपरम्पार और अनिर्वचनीय है, और एक अल्प ज्ञान और अल्प सामर्थ्य वाले जीव की स्तुति यथार्थ परक नहीं हो सकती है। लेकिन अगर कोई व्यक्ति विनम्रता और निरभिमानता से अपनी अल्प बुद्धि से भी मात्र अपने ज्ञान और अनुभव को लिखता है, तो वो स्तुति निर्दोष हो जाती है, क्योंकि वह व्यक्ति ईश्वर के समग्र गुणों के वर्णन का अभिमान नहीं रख रहा है, बल्कि मात्र अपनी अल्प ज्ञान और अनुभूति बता रहा है, तब वह स्तुति उचित और निर्दोष हो जाती है।\n\nयहाँ शिवजी के वेदांत प्रतिपाद्य तत्त्व निर्गुण निराकार से आरम्भ करके लीला विग्रह तक के तत्त्व को बहुत सुन्दर और अनोखे ढंग से वर्णन करते हैं। यद्यपि प्रत्येक बिन्दु के साथ उनकी अपूर्व विद्वत्ता और अद्भुत समन्वय द्योतित होता है, किन्तु कहीं पर भी उनकी विनम्र भक्त की गरिमा के साथ समझोता नहीं होता है। निश्चित रूप से यह एक अलौकिक रचना है। प्रत्येक श्लोक के ऊपर व्याख्या के रूप में पूज्य गुरूजी के ४२ प्रवचनों की सम्पूर्ण श्रृंखला youTube चैनल पर उपलब्ध है।\n\nOUR VIDEOS PLAYLISTS\n\nBhaja Govindam\n\nHanuman Chalisa\n\nShiva Mahimna Stotram",
+    "is_published": true,
+    "youtubePlaylistId": "PLVT0gU53weD3LnwG2cwduzTX0mBv4q2qB"
+  },
+  {
+    "id": "teaching-hanumaan-chalisa-satsang",
+    "slug": "hanumaan-chalisa",
+    "title": "Hanuman Chalisa Online Satsang (हनुमान चालीसा सत्संग)",
+    "scripture": "Hanuman Chalisa",
+    "teacher": "Swami Atmananda Saraswati",
+    "format": "Video",
+    "language": "Hindi",
+    "category": "devotional",
+    "categoryName": "Devotional",
+    "topic": "Hanuman Chalisa Online Satsang",
+    "sourceHost": "YouTube (Verified Playlist)",
+    "sourceStatus": "SOURCE-VERIFIED",
+    "verificationStatus": "SOURCE-VERIFIED",
+    "migrationStatus": "MIGRATED",
+    "canonicalId": "canonical-post-005545",
+    "canonicalSource": "https://www.vmission.org.in/hanumaan-chalisa/",
+    "sourcePostId": 5545,
+    "publishedDate": "2020-05-08",
+    "description": "मई २०२० में लॉकडाउन के दौरान पूज्य गुरुजी स्वामी आत्मानन्दजी सरस्वती द्वारा आयोजित विशेष हनुमान चालीसा ज्ञान यज्ञ एवं प्रतिदिन के सत्संग का विवरण।",
+    "articleBody": "HANUMAN CHALISA (Online Satsang) :\n\nVA Channel Videos\n\nHanuman Chalisa\n\nMAY 2020\n\nCorona के प्रकोप से जहां चारो और Lockdown के चलते सत्संग प्रेमी इसे भगवान की कृपा देकः रहे हैं और उसका पूरा लाभ उठा रहे हैं. ऐसे में पूज्य गुरुजी कि कृपा से आधुनिक संसाधन का प्रयोग हुए Youtube पर भज गोविन्दम् पर Online सत्संग क समापन हुआ | उसके साथ ही दिनांक १ मई २०२० से हनुमान चालीसा के प्रवचन की नई श्रंखला का शुभारम्भ हुआ । प्रतिदिन हनुमान चालीसा की एक चोपाई पर पूज्य गुरुजी क प्रवचन होगा| इस प्रकार हनुमान चालीसा के प्रवचनों कि शृङ्खला करीब 50 दिन तक चलने की सम्भावना है | इस प्रवचन का देश विदेश में असंख्य भक्तगण श्रवणलाभ ले रहे हैं|\n\nHanuman Chalisa\n\nBhaja Govindam\n\nहनुमान चालीसा, प्रभु राम के परं भक्त पवनपुत्र हनुमानजी की स्तुति की अमर रचना है, जो की रामचरितमानस के रचयिता गोस्वामी तुलसीदास जी द्वारा रचित है। इसकी सुंदरता और महिमा का यह आलम है की यह दुनिया भर में नित्य गाई जाती है, और करोड़ों भक्तों को कंठस्थ भी है। हनुमानजी एक समग्र व्यक्तित्व के धनी हैं, अतः वे प्रत्येक मनुष्य के लिए सबसे सुन्दर श्रद्धा के पात्र हैं। हम सब के कोई न कोई श्रद्धेय होते हैं, और जैसे हमारे श्रद्धेय होते हैं हम खुद भी वैसे ही बनते हैं। अतः अगर हम अपने परिवार, समाज, देश और दुनिया का भला चाहते हैं तो उनके अंदर हनुमानजी के प्रति श्रद्धा और भक्ति उन्पन्न करनी चाहिए। इसके लिए हनुमान चालीसा के अर्थ के ज्ञान सहित नित्य पाठ करना सबसे सुन्दर और सरल तरीका होता है। इसीलिए परम पूज्य गुरूजी श्री स्वामी आत्मानंदजी ने यह उपक्रम प्रारम्भ किया है।",
+    "is_published": true,
+    "youtubePlaylistId": "PLVT0gU53weD2w5gK2H-1K1j8zJ3rF7v0L"
+  },
+  {
+    "id": "teaching-bhaja-govindam-satsang",
+    "slug": "bg",
+    "title": "Bhaja Govindam Online Satsang (भज गोविन्दम् सत्संग)",
+    "scripture": "Bhaja Govindam",
+    "teacher": "Swami Atmananda Saraswati",
+    "format": "Video",
+    "language": "Hindi",
+    "category": "prakarana-granth",
+    "categoryName": "Prakarana Granth",
+    "topic": "Bhaja Govindam Online Satsang",
+    "sourceHost": "YouTube (Verified Playlist)",
+    "sourceStatus": "SOURCE-VERIFIED",
+    "verificationStatus": "SOURCE-VERIFIED",
+    "migrationStatus": "MIGRATED",
+    "canonicalId": "canonical-post-005212",
+    "canonicalSource": "https://www.vmission.org.in/bg/",
+    "sourcePostId": 5212,
+    "publishedDate": "2020-04-03",
+    "description": "अप्रैल २०२० में लॉकडाउन के समय पूज्य गुरुजी स्वामी आत्मानन्दजी सरस्वती द्वारा आदि शंकराचार्य विरचित 'मोह मुद्गर' (भज गोविन्दम्) पर दैनिक ऑनलाइन प्रवचन श्रृंखला।",
+    "articleBody": "Bhaja Govindam (Online Satsang) :\n\nVA Channel Videos\n\nVedanta Mission\n\nTalks on Bhaja Govindam by Pujya Guruji Swami Atmanandaji Saraswati, Vedanta Ashram, Indore. We have started this series of pravachans during the Corona Lockdown in the country (Mar 2020) - wishing & praying that - may everyone use this time positively for some adhyatmic studies and sadhana. Bhaja Govindam is great to chant and sing, and also great to deeply reflect upon. May all be benefitted by this exercise.\n\nIn this first talk, Poojya Guruji reveals the importance of aiming for a mind with love & joy, and the best way to acquire this is by devotion unto the feet of God. Therefore the name Bhaja Govindam.\n\nLINKS OF PRAVACHANS\n\nBHAJA GOVINDAM - 02\n\nTalks on Bhaja Govindam by Pujya Guruji Swami Atmanandaji Saraswati, of Vedanta Ashram, Indore. In this second pravachan (Hindi), Poojya Guruji tells about the importance of Sanskrit language and also the importance of viveka of End & Means, the Sadhya and Sadhana. God is the goal, and devotion unto Him is the means.\n\nWe started this series of pravachans during the Corona Lockdown in the country (Mar 2020) - wishing & praying that - may everyone use this time positively for some adhyatmic studies and sadhana. Bhaja Govindam is great to chant and sing, and also great to deeply reflect upon. May all be benefitted by this exercise.\n\nBHAJA GOVINDAM - 03\n\nभज गोविन्दं के तीसरे प्रवचन में पूज्य गुरूजी ने गोविन्द शब्द के विविध अर्थ बताये। १. जो गौ आदि पशुओं को अर्थात समस्त प्रकृति को जानने वाले हैं। २. जो पृथिवी को बनाने एवं धारण करने वाले हैं। ३. जो अपनी चेतन स्वरूपता से इन्द्रियों के स्वामी हैं। ४. जो समस्त वेदों के ज्ञाता हैं - अर्थात गुरु रूप से स्थित हमारे श्रोत्रिय एवं ब्रह्म-निष्ठ आचार्य हैं। ऐसे गोविन्द की जब महिमा का ज्ञान होता है तभी सिर आदर से झुक जाता है और हृदय से भजन हो पाता है।\n\nGET MORE VIDEO PRAVACHANS\n\nBhaja Govindam, VM\n\nBhaja Govindam Playlist\n\nVA Channel Videos",
+    "is_published": true,
+    "youtubePlaylistId": "PLVT0gU53weD3p5DnAq26CPBY4DSOac0Fj"
+  },
+  {
+    "id": "teaching-vedanta-shravana-satra",
+    "slug": "vedanta-shravana-satra",
+    "title": "Vedanta Shravana Satra & Shankardoot Training (वेदान्त श्रवण सत्र - शङ्करदूत)",
+    "scripture": "Shankara Bhashya Upodghata",
+    "teacher": "Swami Atmananda Saraswati",
+    "format": "Article",
+    "language": "Hindi",
+    "category": "prakarana-granth",
+    "categoryName": "Prakarana Granth",
+    "topic": "Shankardoot Training Program",
+    "sourceHost": "Vedanta Ashram",
+    "sourceStatus": "SOURCE-VERIFIED",
+    "verificationStatus": "SOURCE-VERIFIED",
+    "migrationStatus": "MIGRATED",
+    "canonicalId": "canonical-post-010410",
+    "canonicalSource": "https://www.vmission.org.in/10410-2/",
+    "sourcePostId": 10410,
+    "publishedDate": "2024-05-29",
+    "description": "वेदान्त आश्रम, इंदौर में दिनांक २६ मई २०२४ को 'अद्वैत क्लब' के 'शङ्करदूत' नामक सदस्यों के लिए आयोजित एक दिवसीय वेदान्त श्रवण सत्र एवं प्रशिक्षण कार्यक्रम का विस्तृत विवरण।",
+    "articleBody": "Vedanta Shravana Satr\n\nby P. Guruji Swami Atmanandaji Saraswati @ Vedanta Ashram\n\nआश्रम में 'शंकरदूत प्रशिक्षण कार्यक्रम'\n\nशंकरदूत प्रशिक्षण\n\nवेदान्त आश्रम, इंदौर में दिनांक २६ मई २०२४ को 'अद्वैत क्लब', इंदौर के 'शङ्करदूत' नामक सदस्यों के लिए एक दिवसीय 'वेदान्त श्रवण सत्र' का अत्यंत संतोषजनक आयोजन हुआ। ये सभी सदस्यगण भगवान् श्री आदि शंकराचार्य जी के व्यक्तित्व एवं ज्ञान से अत्यन्त प्रभावित हैं, अतः भगवद गीता पर लिखी गयी शाङ्कर भाष्य की भूमिका खंड को जानने के लिए श्रद्धा और उत्साह से आश्रम में उपस्थित हुए। यह कार्यक्रम प्रातः ८.३० बजे से प्रारम्भ होकर सायंकाल ६.३० बजे तक चला।\n\nकार्यक्रम में सर्वप्रथम पू स्वामिनी अमितानन्द जी ने सबका स्वागत किया और भगवान् शंकराचार्यजी की आरती के बाद 'गीता ध्यान श्लोक' के कुछ श्लोकों का पाठ सबको सिखाया।\n\n९.३० बजे पू गुरूजी श्री स्वामी आत्मानन्द जी का प्रवचन प्रारम्भ हुआ। प्रारम्भ में कुछ शकरदूतों ने व्यासपीठ की पूजा करी। प्रवचन का विषय भगवद गीता पर लिखी गयी शाङ्कर भाष्य के उपोद्घात का एक प्रारंभिक खंड था। सभी श्रोताओं ने पूरी श्रद्धा और एकाग्रता से विषय का श्रवण किया। दो घंटे के इस सत्र के बाद सबने भोजन ग्रहण किया और कुछ समय विश्राम किया।\n\nभोजनान्तर सत्र का प्रारम्भ भगवद गीता के पन्द्रवें अध्याय के श्लोकों के पाठ की कक्षा से हुआ - इसे पू स्वामिनी समतानन्द जी ने संचालित किया। सभी आश्रमों में भोजन के पहले इस अध्याय का पाठ होता है अतः इसे सबसे पहले सिखाया जाता है। इसके बाद कुछ जल-पान के बाद पू.गुरूजी का दूसरा प्रवचन हुआ। उन्होंने भाष्य के विषय को आगे बढ़ाया, और धर्म के विशिष्ट प्रयोजनों के चर्चा तक विषय को ले कर गए। प्रवचन के बाद प्रश्नोत्तर का सत्र हुआ जिसमें श्रोताओं के कुछ प्रश्नों का समाधान किया गया।\n\nकार्यक्रम का समापन पुनः भगवद्पाद भगवान् शंकराचार्य जी की आरती से हुआ, जिनका एक अत्यंत सुन्दर और दिव्य विग्रह सत्संग भवन में विराजमान है। भोपाल से पधारे एकात्म-धाम के संचालक श्री मनीष पांडेजी ने पू गुरुदेव को शाल और श्रीफल भेंट कर सबकी तरफ से कृतज्ञता अभिव्यक्त करी और इस कार्यक्रम और संघटन का परिचय दिया।। आगे भी इस तरह के कार्यक्रम करने का निवेदन किया गया।\n\nPhoto Albums\n\nClick Here",
+    "is_published": true
+  },
+  {
+    "id": "teaching-vs-apr-2023",
+    "slug": "vs-apr-2023",
+    "title": "Vedanta Sandesh April 2023 — Editorial Reflection",
+    "scripture": "Vedanta Sandesh",
+    "teacher": "Swamini Samatananda Saraswati",
+    "format": "Article",
+    "language": "English / Hindi",
+    "category": "inspiring-stories",
+    "categoryName": "Inspiring Stories",
+    "topic": "Editorial Reflection",
+    "sourceHost": "Vedanta Sandesh",
+    "sourceStatus": "SOURCE-VERIFIED",
+    "verificationStatus": "SOURCE-VERIFIED",
+    "migrationStatus": "MIGRATED",
+    "canonicalId": "canonical-post-009741",
+    "canonicalSource": "https://www.vmission.org.in/vs-apr-2023/",
+    "sourcePostId": 9741,
+    "publishedDate": "2023-03-29",
+    "description": "Editorial introduction and spiritual reflections by Swamini Samatanandaji for the April 2023 issue of Vedanta Sandesh e-magazine.",
+    "articleBody": "Vedanta Sandesh Apr 2023\n\nEditor – Swamini Samatanandaji\n\nVedanta Sandesh\n\nOur monthly newsletter and magazine contains inspiring and enlightening articles on Vedanta & Hinduism, and also the various news of the activities of Vedanta Mission & Vedanta Ashram.\n\nwe publish the magazine on the following platforms. You can freely read it online, or download it to read offline at your convenience.\n\nThe magazine is published dot on the 1st of every month on various platforms like Issuu, Google, Pcloud, Archives & Flipbook. You can freely read it online, or download it to read offline at your convenience.\n\nInside VS Apr 2023\n\nPoojya Guruji's Msg on &#8220;Dhiyo yo nah prachodayat&#8221;\n\nCommentary on Drig Drishya Viveka Shloka – 4\n\nAn Article from &#8220;The Art of Man Making&#8221; ( by H.H. Swami Chinmayanandaji) on &#8220;Freedom of the Realised&#8221;\n\nAn Article from &#8220;Wandering InHimalayas&#8221; ( by H.H. Swami Tapovan Maharaj) on &#8220;The Great Silver Mountain&#8221;\n\nStory &#8220;Gudi Padawa&#8221;\n\nMission News, Albums & Programs\n\nInternet Links of Audio/Video pravachans & PDFs.\n\nLinks to VS Apr 2023\n\nIssuu\n\nGoogle\n\nBox\n\nPcloud\n\nArchive\n\nFlipbook",
+    "is_published": true
+  },
+  {
+    "id": "teaching-vs-may-2023",
+    "slug": "vedanta-sandesh-may-2023",
+    "title": "Vedanta Sandesh May 2023 — Editorial Reflection",
+    "scripture": "Vedanta Sandesh",
+    "teacher": "Swamini Samatananda Saraswati",
+    "format": "Article",
+    "language": "English / Hindi",
+    "category": "inspiring-stories",
+    "categoryName": "Inspiring Stories",
+    "topic": "Editorial Reflection",
+    "sourceHost": "Vedanta Sandesh",
+    "sourceStatus": "SOURCE-VERIFIED",
+    "verificationStatus": "SOURCE-VERIFIED",
+    "migrationStatus": "MIGRATED",
+    "canonicalId": "canonical-post-009950",
+    "canonicalSource": "https://www.vmission.org.in/vedanta-sandesh-may-2023/",
+    "sourcePostId": 9950,
+    "publishedDate": "2023-05-03",
+    "description": "Editorial introduction and spiritual reflections by Swamini Samatanandaji for the May 2023 issue of Vedanta Sandesh e-magazine.",
+    "articleBody": "Vedanta Sandesh May 2023\n\nEditor – Swamini Samatanandaji\n\nVedanta Sandesh\n\nOur monthly newsletter and magazine contains inspiring and enlightening articles on Vedanta & Hinduism, and also the various news of the activities of Vedanta Mission & Vedanta Ashram.\n\nThe magazine is published dot on the 1st of every month on various platforms like Issuu, Google, Pcloud, Archives & Flipbook. You can freely read it online, or download it to read offline at your convenience.\n\nIn this issue\n\nPoojya Guruji's Msg on &#8220;Meditation – the Gita Way&#8221;\n\nCommentary on Drig Drishya Viveka Shloka – 5\n\nAn Article from &#8220;The Art of Man Making&#8221; ( by H.H. Swami Chinmayanandaji) & An Article from &#8220;Wandering in Himalaya&#8221; (by H. H. Swami TapovanJi)\n\nStory &#8220;The Unused Weapon: Pashupatastra&#8221;\n\nMission News, Albums & Programs & Internet Links of Audio/Video pravachans & PDFs.",
+    "is_published": true
   }
 ];
 

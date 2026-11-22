@@ -1,0 +1,290 @@
+/* ============================================================
+   ASHRAM SUBPAGES — Unified Editorial Design System
+   Matches Ashram & About page aesthetic: paper, ink, saffron
+   ============================================================ */
+
+.subpage {
+  --ink: #0b0b0b;
+  --paper: #f3f1ec;
+  --paper-2: #e7e4dc;
+  --paper-card: #fdfcf9;
+  --mute: #5c5750;
+  --mute-dark: #8c877f;
+  --line: rgba(11, 11, 11, 0.12);
+  --line-heavy: rgba(11, 11, 11, 0.22);
+  --accent: var(--vm-brand-orange, #C96622);
+  --accent-deep: #882B1B;
+  --tight: 'Inter Tight', system-ui, sans-serif;
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui, system-ui, sans-serif);
+  min-height: 100vh;
+  padding-bottom: 5rem;
+}
+
+/* Breadcrumbs */
+.breadcrumbNav {
+  padding: 1.25rem 0 0.5rem;
+  font-size: 0.82rem;
+  color: var(--mute);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.breadcrumbNav a {
+  color: var(--mute);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumbNav a:hover {
+  color: var(--accent-deep);
+}
+
+.breadcrumbSep {
+  opacity: 0.4;
+}
+
+.breadcrumbCurrent {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Hero Banner */
+.hero {
+  padding: 3rem 0 2.5rem;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(231, 228, 220, 0.5) 0%, transparent 100%);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-family: var(--tight);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin: 0 0 1rem;
+}
+
+.rule {
+  width: 72px;
+  height: 2px;
+  background: var(--accent);
+  margin: 1.25rem 0;
+}
+
+.subtitle {
+  font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+  line-height: 1.65;
+  color: var(--mute);
+  max-width: 65ch;
+  margin: 0;
+}
+
+/* Main Content Area */
+.mainContent {
+  padding: 3rem 0;
+}
+
+.editorialBody {
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.prose {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #242220;
+}
+
+.prose p {
+  margin-bottom: 1.5rem;
+}
+
+.prose h2 {
+  font-family: var(--tight);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 2.75rem 0 1rem;
+  color: var(--ink);
+}
+
+.prose h3 {
+  font-family: var(--tight);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+  color: var(--accent-deep);
+}
+
+.prose ul,
+.prose ol {
+  margin: 1rem 0 1.75rem 1.5rem;
+  padding: 0;
+}
+
+.prose li {
+  margin-bottom: 0.6rem;
+  line-height: 1.7;
+}
+
+/* Cards & Grid */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+.card {
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+.cardIcon {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+.cardTitle {
+  font-family: var(--tight);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+}
+
+.cardText {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--mute);
+  margin: 0;
+}
+
+/* Callout Box */
+.callout {
+  background: #fdfaf4;
+  border-left: 4px solid var(--accent);
+  border-top: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0 8px 8px 0;
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+}
+
+.calloutTitle {
+  font-family: var(--tight);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  margin: 0 0 0.5rem;
+}
+
+.calloutText {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--mute);
+  margin: 0;
+}
+
+/* Data Table */
+.tableWrapper {
+  overflow-x: auto;
+  margin: 2rem 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper-card);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.table th {
+  background: var(--paper-2);
+  text-align: left;
+  padding: 0.85rem 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  border-bottom: 2px solid var(--line-heavy);
+}
+
+.table td {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--line);
+  color: #242220;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:hover td {
+  background: rgba(201, 102, 34, 0.04);
+}
+
+/* Navigation Footer */
+.subpageFooter {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--accent-deep);
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 0 1.5rem;
+  }
+  .cardGrid {
+    grid-template-columns: 1fr;
+  }
+  .table th, .table td {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.88rem;
+  }
+}

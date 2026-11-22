@@ -14,22 +14,72 @@ const verifiedMilestones = [
   {
     year: '1983',
     title: 'Brahmacharya Initiation',
-    detail: 'Completed intensive scriptural study in Advaita Vedanta at Sandeepany Sadhanalaya, Mumbai, under the Chinmaya Mission.',
+    detail: 'Poojya Swami Atmananda Saraswati (formerly Br. Chaitanya) was initiated into Brahmacharya under the Chinmaya Mission after intensive studies at Sandeepany Sadhanalaya, Mumbai.',
   },
   {
     year: '1987',
     title: 'Sanyas Deeksha',
-    detail: 'Embraced the sacred vows of Sanyas into the Dashanami Saraswati monastic order as a dedicated, full-time teacher of the Upanishads.',
+    detail: 'Embraced holy Sanyas into the Dashanami Saraswati monastic order on the banks of holy river Narmada as a dedicated teacher of Advaita Vedanta.',
   },
   {
     year: '1992',
     title: 'Founding of Vedanta Mission',
-    detail: 'Conceived and established Vedanta Mission as a non-profit spiritual and educational organization dedicated to the authentic transmission of Vedanta.',
+    detail: 'Established Vedanta Mission at Mumbai as a non-profit spiritual and educational institution dedicated to traditional Advaita Vedanta.',
+  },
+  {
+    year: '1993',
+    title: 'International Chaitanya Foundation',
+    detail: 'Registered International Chaitanya Foundation (ICF) in Mumbai under the Bombay Public Trust Act to support scriptural education and publication.',
   },
   {
     year: '1995',
     title: 'Indore Gurukula Establishment',
-    detail: 'Consecrated Vedanta Ashram and the monumental Sri Gangeshwar Mahadev Mandir in Sudama Nagar, Indore, initiating residential Gurukula training.',
+    detail: 'Established Vedanta Ashram at Sudama Nagar, Indore, as a traditional residential Gurukula for deep study of the Upanishads, Gita, and Brahma Sutras.',
+  },
+  {
+    year: '1995',
+    title: 'Monastic Initiations',
+    detail: 'Swamini Amitananda Saraswati and Swamini Samatananda Saraswati were initiated into Brahmacharya deeksha by Poojya Swami Atmananda Saraswati.',
+  },
+  {
+    year: '1996',
+    title: 'Vedanta Parmarthik Sewa Trust',
+    detail: 'Formally registered the public charitable trust Vedanta Parmarthik Sewa Trust (VPST) at Indore to oversee Ashram activities and welfare initiatives.',
+  },
+  {
+    year: '2005',
+    title: 'Sanyas Deeksha of Swaminis',
+    detail: 'Swamini Amitananda Saraswati, Swamini Samatananda Saraswati, and Swamini Poornananda Saraswati received holy Sanyas deeksha into the Saraswati monastic order.',
+  },
+  {
+    year: '2014',
+    title: 'Vedanta Sandesh Launch',
+    detail: 'Launched Vedanta Sandesh, the monthly English spiritual ezine featuring scriptural articles, Upanishadic reflections, and discourses.',
+  },
+  {
+    year: '2015',
+    title: 'Vedanta Piyush Launch',
+    detail: 'Launched Vedanta Piyush, the monthly Hindi spiritual ezine sharing classical Vedantic philosophy and devotional treatises.',
+  },
+  {
+    year: '2019',
+    title: 'Ashram Parivar Initiative',
+    detail: 'Inaugurated the Ashram Parivar devotee association to facilitate recurring spiritual participation and study across the global community.',
+  },
+  {
+    year: '2020',
+    title: 'MSR & Camp Discourses',
+    detail: 'Conducted intensive scriptural camps at Vedanta Ashram, including the Maha Shivratri Mandukya Karika camp and online Janmashtami Gita camps.',
+  },
+  {
+    year: '2023',
+    title: 'Sangyan Awareness Series',
+    detail: 'Published the three-volume Sangyan monograph series elucidating the profound rational foundations of Sanatan Dharma and Vedic wisdom.',
+  },
+  {
+    year: '2026',
+    title: 'Gita Janmashtami & Shravan Satra',
+    detail: 'Continued unbroken residential study with the Gita Janmashtami Camp and intensive scriptural shravan satras at the Indore Gurukula.',
   },
 ];
 
@@ -90,8 +140,8 @@ export default function AboutPage() {
           num,
           { color: 'transparent', WebkitTextStroke: '1.5px #f4f1ea' },
           {
-            color: '#e06328',
-            WebkitTextStroke: '1.5px #e06328',
+            color: '#C96622',
+            WebkitTextStroke: '1.5px #C96622',
             scrollTrigger: { trigger: num, start: 'top 75%', end: 'top 40%', scrub: true },
           }
         );
@@ -107,7 +157,7 @@ export default function AboutPage() {
         <div className={styles.heroBackdrop}>
           <img
             src={getAssetPath('/images/vmission/entrance/ashram-entrance-cinematic.jpg')}
-            alt="Courtyard and consecrated temple entrance of Vedanta Ashram, Indore"
+            alt="Courtyard and sacred temple entrance of Vedanta Ashram, Indore"
             className={styles.heroImg}
             data-about-hero-img
             loading="eager"
@@ -289,6 +339,7 @@ export default function AboutPage() {
 
       {/* 05. Trusts */}
       <section id="trusts" className={styles.trusts} aria-label="Registered Public Charitable Trusts">
+        <div id="parivar" />
         <div className="container">
           <div className={styles.intro}>
             <span className={styles.eyebrow} data-reveal>Governance &amp; Fiduciary Integrity</span>
@@ -305,9 +356,13 @@ export default function AboutPage() {
               <h3 className={styles.trustName}>Vedanta Parmarthik Seva Trust</h3>
               <p className={styles.trustSub}>वेदान्त पारमार्थिक सेवा ट्रस्ट · Indore, MP</p>
               <p className={styles.trustPurpose}>
-                The primary operational trust governing the facilities of Vedanta Ashram, Sri Gangeshwar Mahadev Mandir, Gurukula accommodation, and daily worship.
+                The primary operational trust governing the facilities of Vedanta Ashram, Shiv Mandir, Gurukula accommodation, and daily worship.
               </p>
               <dl className={styles.charter}>
+                <div className={styles.charterRow}>
+                  <dt>Registration</dt>
+                  <dd>Public Charitable Trust Reg. No. 1827</dd>
+                </div>
                 <div className={styles.charterRow}>
                   <dt>Jurisdiction</dt>
                   <dd>Registrar of Public Trusts, Indore, Madhya Pradesh</dd>
@@ -327,6 +382,10 @@ export default function AboutPage() {
                 The educational and publications trust dedicated to the global dissemination of Vedantic knowledge through free literature, monthly e-magazines, and digital audio-video archives.
               </p>
               <dl className={styles.charter}>
+                <div className={styles.charterRow}>
+                  <dt>Registration</dt>
+                  <dd>Public Charitable Trust Reg. No. 5046</dd>
+                </div>
                 <div className={styles.charterRow}>
                   <dt>Jurisdiction</dt>
                   <dd>Public Charitable Trust Registered in India</dd>

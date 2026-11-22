@@ -32,10 +32,10 @@ const GALLERY_ITEMS: GalleryItem[] = [
   },
   {
     id: 'gal-3',
-    src: '/images/vmission/ashram/gangeshwar-dome-closeup.jpg',
-    title: 'Sri Gangeshwar Mahadev Temple',
+    src: '/gangeshwar-dome-closeup.jpg',
+    title: 'Shiv Mandir',
     category: 'Sanctum',
-    caption: 'The consecrated Shivalingam at Sri Gangeshwar Mahadev Mandir on campus with daily Rudrabhishek and aartis.',
+    caption: 'The sacred Shivalingam at Shiv Mandir on campus with daily Rudrabhishek and aartis.',
     objectPosition: 'center 20%',
   },
   {

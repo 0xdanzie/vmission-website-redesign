@@ -6,7 +6,7 @@ export interface DatabaseTeachingRow {
   title: string;
   scripture: string;
   teacher: string;
-  format: 'Audio' | 'Video' | 'PDF' | 'E-Book';
+  format: 'Audio' | 'Video' | 'PDF' | 'E-Book' | 'Article';
   language: string;
   duration?: string | null;
   description: string;
@@ -25,6 +25,11 @@ export interface DatabaseTeachingRow {
   verification_status?: string | null;
   migration_status?: string | null;
   is_published?: boolean;
+  article_body?: string | null;
+  published_date?: string | null;
+  canonical_id?: string | null;
+  canonical_source?: string | null;
+  source_post_id?: number | null;
   created_at?: string;
   updated_at?: string;
 }
@@ -55,6 +60,11 @@ export function dbToTeaching(row: DatabaseTeachingRow): Teaching {
     verificationStatus: (row.verification_status as any) || undefined,
     migrationStatus: (row.migration_status as any) || undefined,
     is_published: row.is_published,
+    articleBody: row.article_body || undefined,
+    publishedDate: row.published_date || undefined,
+    canonicalId: row.canonical_id || undefined,
+    canonicalSource: row.canonical_source || undefined,
+    sourcePostId: row.source_post_id || undefined,
   };
 }
 

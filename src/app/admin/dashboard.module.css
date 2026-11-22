@@ -31,7 +31,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--vm-gerua, #C84E17);
+  color: var(--vm-brand-orange, #C96622);
   background: var(--vm-bhagwa-subtle, rgba(224, 99, 40, 0.08));
   padding: 3px 9px;
   border-radius: 4px;
@@ -70,7 +70,7 @@
 
 .btnActionPrimary {
   padding: 9px 18px;
-  background: var(--vm-bhagwa, #E06328);
+  background: var(--vm-brand-orange, #C96622);
   color: #FFFFFF;
   border-radius: 6px;
   font-size: 0.8125rem;
@@ -84,7 +84,7 @@
 }
 
 .btnActionPrimary:hover {
-  background: var(--vm-gerua, #C84E17);
+  background: var(--vm-brand-orange, #C96622);
   box-shadow: 0 2px 6px rgba(200, 78, 23, 0.35);
   transform: translateY(-1px);
 }
@@ -131,7 +131,7 @@
 }
 
 .kpiCard:hover {
-  border-color: var(--vm-bhagwa, #E06328);
+  border-color: var(--vm-brand-orange, #C96622);
   box-shadow: 0 4px 16px rgba(224, 99, 40, 0.1);
   transform: translateY(-1px);
 }
@@ -156,7 +156,7 @@
   height: 32px;
   border-radius: 8px;
   background: var(--vm-sand, #FAF6EE);
-  color: var(--vm-bhagwa, #E06328);
+  color: var(--vm-brand-orange, #C96622);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -194,7 +194,7 @@
 .kpiLink {
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--vm-gerua, #C84E17);
+  color: var(--vm-brand-orange, #C96622);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -203,7 +203,7 @@
 }
 
 .kpiLink:hover {
-  color: var(--vm-bhagwa, #E06328);
+  color: var(--vm-brand-orange, #C96622);
   gap: 8px;
 }
 
@@ -249,7 +249,7 @@
 .panelActionLink {
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--vm-gerua, #C84E17);
+  color: var(--vm-brand-orange, #C96622);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -258,7 +258,7 @@
 }
 
 .panelActionLink:hover {
-  color: var(--vm-bhagwa, #E06328);
+  color: var(--vm-brand-orange, #C96622);
 }
 
 /* Tables */
@@ -311,7 +311,7 @@
   height: 30px;
   border-radius: 50%;
   background: var(--vm-bhagwa-subtle, rgba(224, 99, 40, 0.08));
-  color: var(--vm-bhagwa, #E06328);
+  color: var(--vm-brand-orange, #C96622);
   font-weight: 700;
   font-size: 0.75rem;
   display: flex;
@@ -355,7 +355,7 @@
 .categoryBadge {
   font-size: 0.6875rem;
   font-weight: 600;
-  color: var(--vm-gerua, #C84E17);
+  color: var(--vm-brand-orange, #C96622);
   background: var(--vm-bhagwa-subtle, rgba(224, 99, 40, 0.08));
   padding: 2px 7px;
   border-radius: 4px;
@@ -409,7 +409,7 @@
 .protocolCard {
   background: var(--vm-ivory, #FDFBF7);
   border: 1px solid var(--vm-sand-border, #DFD7C7);
-  border-left: 3px solid var(--vm-bhagwa, #E06328);
+  border-left: 3px solid var(--vm-brand-orange, #C96622);
   border-radius: 8px;
   padding: 16px 20px;
   display: flex;
@@ -422,7 +422,7 @@
   height: 32px;
   border-radius: 50%;
   background: var(--vm-bhagwa-subtle, rgba(224, 99, 40, 0.08));
-  color: var(--vm-bhagwa, #E06328);
+  color: var(--vm-brand-orange, #C96622);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -459,7 +459,7 @@
   height: 44px;
   border-radius: 50%;
   background: #FFFFFF;
-  color: var(--vm-bhagwa, #E06328);
+  color: var(--vm-brand-orange, #C96622);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -496,7 +496,7 @@
   border-radius: 6px;
   font-size: 0.78125rem;
   font-weight: 600;
-  color: var(--vm-gerua, #C84E17);
+  color: var(--vm-brand-orange, #C96622);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -506,8 +506,8 @@
 
 .btnEmptyAction:hover {
   background: var(--vm-sand, #FAF6EE);
-  border-color: var(--vm-bhagwa, #E06328);
-  color: var(--vm-bhagwa, #E06328);
+  border-color: var(--vm-brand-orange, #C96622);
+  color: var(--vm-brand-orange, #C96622);
 }
 
 @media (max-width: 1024px) {

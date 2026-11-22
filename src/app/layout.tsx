@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     'Bhagavad Gita course',
     'Upanishad classes',
     'Tattva Bodha',
-    'Gangeshwar Mahadev Temple',
+    'Shiv Mandir',
     'Vedanta Sandesh',
   ],
   authors: [{ name: 'Vedanta Mission, Indore' }],
@@ -50,15 +50,15 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/brand/vedanta-mission/FAVICON/favicon.svg?v=2026', type: 'image/svg+xml' },
-      { url: '/favicon.svg?v=2026', type: 'image/svg+xml' },
-      { url: '/brand/vedanta-mission/FAVICON/favicon-32.png?v=2026', sizes: '32x32', type: 'image/png' },
-      { url: '/brand/vedanta-mission/FAVICON/favicon-16.png?v=2026', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon.ico?v=2026', sizes: 'any' },
+      { url: '/icon.svg?v=2', type: 'image/svg+xml' },
+      { url: '/favicon.svg?v=2', type: 'image/svg+xml' },
+      { url: '/brand/vedanta-mission/FAVICON/favicon-32.png?v=2', sizes: '32x32', type: 'image/png' },
+      { url: '/brand/vedanta-mission/FAVICON/favicon-16.png?v=2', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon.ico?v=2', sizes: 'any' },
     ],
-    shortcut: '/brand/vedanta-mission/FAVICON/favicon.svg?v=2026',
+    shortcut: '/favicon.svg?v=2',
     apple: [
-      { url: '/brand/vedanta-mission/APP-ICONS/apple-touch-icon.png?v=2026', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-icon.png?v=2', sizes: '180x180', type: 'image/png' },
     ],
   },
 };

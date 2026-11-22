@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import gsap from 'gsap';
 import Magnetic from '@/components/motion/Magnetic';
 import TiltCard from '@/components/motion/TiltCard';
@@ -23,7 +24,9 @@ const PATHWAY_ORDER = [
   'sangyan-sanatan-dharma',
 ];
 
-export default function LearnPage() {
+function LearnContent() {
+  const searchParams = useSearchParams();
+  const teacherParam = searchParams.get('teacher')?.toLowerCase();
   const [selectedFilter, setSelectedFilter] = useState('All Formats');
   const rootRef = useRef<HTMLDivElement>(null);
   const heroImgRef = useRef<HTMLImageElement>(null);
@@ -33,6 +36,12 @@ export default function LearnPage() {
   const filteredCourses = useMemo(() => {
     const list = courses.filter((c) => {
       if (c.is_published === false) return false;
+      if (teacherParam) {
+        const isMatch =
+          c.teacher.toLowerCase().includes(teacherParam) ||
+          c.faculty?.some((f) => f.toLowerCase().includes(teacherParam));
+        if (!isMatch) return false;
+      }
       if (selectedFilter === 'All Formats') return true;
       return c.format === selectedFilter;
     });
@@ -45,7 +54,7 @@ export default function LearnPage() {
       if (idxB !== -1) return 1;
       return 0;
     });
-  }, [courses, selectedFilter]);
+  }, [courses, selectedFilter, teacherParam]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -78,7 +87,7 @@ export default function LearnPage() {
           step.querySelector('[data-method-num]'),
           { color: 'rgba(11,11,11,0.1)' },
           {
-            color: '#e06328',
+            color: '#C96622',
             scrollTrigger: { trigger: step, start: 'top 70%', end: 'top 40%', scrub: true },
           }
         );
@@ -95,7 +104,7 @@ export default function LearnPage() {
           <img
             ref={heroImgRef}
             src={getAssetPath('/images/vmission/ashram/teaching-hall-interior.jpg')}
-            alt="The consecrated Vyasapeeth and Adi Shankaracharya shrine in the Teaching Hall at Vedanta Ashram, Indore"
+            alt="The revered Vyasapeeth and Adi Shankaracharya shrine in the Teaching Hall at Vedanta Ashram, Indore"
             className={styles.heroImg}
           />
           <div className={styles.heroShade} />
@@ -313,5 +322,13 @@ export default function LearnPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function LearnPage() {
+  return (
+    <Suspense fallback={<div className="container" style={{ padding: '4rem 0' }}>Loading courses...</div>}>
+      <LearnContent />
+    </Suspense>
   );
 }

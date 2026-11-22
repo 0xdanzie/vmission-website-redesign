@@ -34,8 +34,10 @@ export const CANONICAL_AUDIO_ARCHIVE: CanonicalAudioEntity[] = [
     "contentType": "audio-track",
     "parentCollection": "Direct Audio Upload",
     "isContainer": false,
-    "canonicalSource": "https://www.vmission.org.in/wp-content/uploads/2019/11/dm_02.mp3",
-    "alternateSources": [],
+    "canonicalSource": "/audio/dm-02-talk-2.mp3",
+    "alternateSources": [
+      "https://www.vmission.org.in/wp-content/uploads/2019/11/dm_02.mp3"
+    ],
     "category": "prakarana-granth",
     "categoryName": "Prakarana Granth",
     "teacher": "Swami Atmananda Saraswati",
@@ -57,8 +59,10 @@ export const CANONICAL_AUDIO_ARCHIVE: CanonicalAudioEntity[] = [
     "contentType": "audio-track",
     "parentCollection": "Direct Audio Upload",
     "isContainer": false,
-    "canonicalSource": "https://www.vmission.org.in/wp-content/uploads/2019/11/dm_01.mp3",
-    "alternateSources": [],
+    "canonicalSource": "/audio/dm-01-talk-1.mp3",
+    "alternateSources": [
+      "https://www.vmission.org.in/wp-content/uploads/2019/11/dm_01.mp3"
+    ],
     "category": "prakarana-granth",
     "categoryName": "Prakarana Granth",
     "teacher": "Swami Atmananda Saraswati",
@@ -80,8 +84,10 @@ export const CANONICAL_AUDIO_ARCHIVE: CanonicalAudioEntity[] = [
     "contentType": "audio-track",
     "parentCollection": "Direct Audio Upload",
     "isContainer": false,
-    "canonicalSource": "https://www.vmission.org.in/wp-content/uploads/2019/11/rotary_naitikta-talk.mp3",
-    "alternateSources": [],
+    "canonicalSource": "/audio/rotary-naitikta-talk.mp3",
+    "alternateSources": [
+      "https://www.vmission.org.in/wp-content/uploads/2019/11/rotary_naitikta-talk.mp3"
+    ],
     "category": "prakarana-granth",
     "categoryName": "Prakarana Granth",
     "teacher": "Swami Atmananda Saraswati",
@@ -103,8 +109,10 @@ export const CANONICAL_AUDIO_ARCHIVE: CanonicalAudioEntity[] = [
     "contentType": "audio-track",
     "parentCollection": "Direct Audio Upload",
     "isContainer": false,
-    "canonicalSource": "https://www.vmission.org.in/wp-content/uploads/2019/11/gita_dhyana-shlokas.mp3",
-    "alternateSources": [],
+    "canonicalSource": "/audio/gita-dhyana-shlokas.mp3",
+    "alternateSources": [
+      "https://www.vmission.org.in/wp-content/uploads/2019/11/gita_dhyana-shlokas.mp3"
+    ],
     "category": "bhagavad-gita",
     "categoryName": "Bhagavad Gita",
     "teacher": "Swami Atmananda Saraswati",
@@ -126,8 +134,10 @@ export const CANONICAL_AUDIO_ARCHIVE: CanonicalAudioEntity[] = [
     "contentType": "audio-track",
     "parentCollection": "Direct Audio Upload",
     "isContainer": false,
-    "canonicalSource": "https://www.vmission.org.in/wp-content/uploads/2019/11/audio-2.mp3",
-    "alternateSources": [],
+    "canonicalSource": "/audio/audio-2-impact-moderato.mp3",
+    "alternateSources": [
+      "https://www.vmission.org.in/wp-content/uploads/2019/11/audio-2.mp3"
+    ],
     "category": "prakarana-granth",
     "categoryName": "Prakarana Granth",
     "teacher": "Swami Atmananda Saraswati",
@@ -149,8 +159,10 @@ export const CANONICAL_AUDIO_ARCHIVE: CanonicalAudioEntity[] = [
     "contentType": "audio-track",
     "parentCollection": "Direct Audio Upload",
     "isContainer": false,
-    "canonicalSource": "https://www.vmission.org.in/wp-content/uploads/2019/11/audio-1.mp3",
-    "alternateSources": [],
+    "canonicalSource": "/audio/audio-1-impact-moderato.mp3",
+    "alternateSources": [
+      "https://www.vmission.org.in/wp-content/uploads/2019/11/audio-1.mp3"
+    ],
     "category": "prakarana-granth",
     "categoryName": "Prakarana Granth",
     "teacher": "Swami Atmananda Saraswati",
@@ -2758,8 +2770,8 @@ export const CANONICAL_AUDIO_ARCHIVE: CanonicalAudioEntity[] = [
     "isContainer": true,
     "canonicalSource": "https://drive.google.com/drive/folders/0Bx5B_i-1kYkCUTVfblZWZnM5YTQ?resourcekey=0-QECLuwfWj8TT3Mplu5Xt3w&usp=sharing",
     "alternateSources": [],
-    "category": "bhagavad-gita",
-    "categoryName": "Bhagavad Gita",
+    "category": "prakarana-granth",
+    "categoryName": "Prakarana Granth",
     "teacher": "Swami Atmananda Saraswati",
     "language": "Hindi",
     "year": 2014,
@@ -2781,8 +2793,8 @@ export const CANONICAL_AUDIO_ARCHIVE: CanonicalAudioEntity[] = [
     "isContainer": true,
     "canonicalSource": "https://drive.google.com/drive/folders/0Bx5B_i-1kYkCYVU2NzgyanVtT0E?resourcekey=0-6j9dkLinCKSqnZJ7sc36gA&usp=sharing",
     "alternateSources": [],
-    "category": "bhagavad-gita",
-    "categoryName": "Bhagavad Gita",
+    "category": "prakarana-granth",
+    "categoryName": "Prakarana Granth",
     "teacher": "Swami Atmananda Saraswati",
     "language": "Hindi",
     "year": 2014,
@@ -2804,8 +2816,8 @@ export const CANONICAL_AUDIO_ARCHIVE: CanonicalAudioEntity[] = [
     "isContainer": true,
     "canonicalSource": "https://drive.google.com/drive/folders/0Bx5B_i-1kYkCdUUwTVczT3pkdm8?resourcekey=0-NeQSIDRCZc8KQt3Kk7zYMg&usp=sharing",
     "alternateSources": [],
-    "category": "bhagavad-gita",
-    "categoryName": "Bhagavad Gita",
+    "category": "prakarana-granth",
+    "categoryName": "Prakarana Granth",
     "teacher": "Swami Atmananda Saraswati",
     "language": "Hindi",
     "year": 2015,
@@ -2827,8 +2839,8 @@ export const CANONICAL_AUDIO_ARCHIVE: CanonicalAudioEntity[] = [
     "isContainer": true,
     "canonicalSource": "https://drive.google.com/drive/folders/0Bx5B_i-1kYkCLUJSdWZDeDhuZDA?resourcekey=0-QBYXrDzQEKfqH8EBUveFDg&usp=sharing",
     "alternateSources": [],
-    "category": "bhagavad-gita",
-    "categoryName": "Bhagavad Gita",
+    "category": "prakarana-granth",
+    "categoryName": "Prakarana Granth",
     "teacher": "Swami Atmananda Saraswati",
     "language": "Hindi",
     "year": 2014,
@@ -3311,9 +3323,9 @@ export const CANONICAL_AUDIO_ARCHIVE: CanonicalAudioEntity[] = [
     "contentType": "audio-series",
     "parentCollection": "Prakarana Audio Talk",
     "isContainer": true,
-    "canonicalSource": "//drive.google.com/drive/folders/0Bx5B_i-1kYkCVWVFN1hWU2FuM2c?resourcekey=0-_Mrfw3vjdgN0dKzUtpVGAg&usp=sharing",
+    "canonicalSource": "https://drive.google.com/drive/folders/0Bx5B_i-1kYkCVWVFN1hWU2FuM2c?resourcekey=0-_Mrfw3vjdgN0dKzUtpVGAg&usp=sharing",
     "alternateSources": [
-      "//drive.google.com/drive/folders/0Bx5B_i-1kYkCVWVFN1hWU2FuM2c?resourcekey=0-_Mrfw3vjdgN0dKzUtpVGAg&usp=sharing"
+      "https://drive.google.com/drive/folders/0Bx5B_i-1kYkCVWVFN1hWU2FuM2c?resourcekey=0-_Mrfw3vjdgN0dKzUtpVGAg&usp=sharing"
     ],
     "category": "prakarana-granth",
     "categoryName": "Prakarana Granth",
@@ -7655,6 +7667,78 @@ export const CANONICAL_AUDIO_ARCHIVE: CanonicalAudioEntity[] = [
     "verificationStatus": "VERIFIED",
     "migrationStatus": "MIGRATE",
     "notes": "Authentic audio discourse series by Poojya Guruji or Swaminis (box). Preserved with source URL."
+  },
+  {
+    "canonicalId": "canonical-000764",
+    "title": "Inspiring Story: विवेक क महत्त्व (Swamini Amitanandaji)",
+    "contentType": "audio-track",
+    "parentCollection": "Inspiring Stories Audio",
+    "isContainer": false,
+    "canonicalSource": "https://u.pcloud.link/publink/show?code=sfP",
+    "alternateSources": [
+      "http://u.pc.cd/sfP"
+    ],
+    "category": "inspiring-stories",
+    "categoryName": "Inspiring Stories",
+    "teacher": "Swamini Amitananda Saraswati",
+    "language": "Hindi",
+    "hostType": "pCloud",
+    "isDirectMp3": false,
+    "legacyRecords": [
+      "legacy-wp-6983-02"
+    ],
+    "visibility": "PUBLIC",
+    "verificationStatus": "VERIFIED",
+    "migrationStatus": "MIGRATE",
+    "notes": "Authentic moral and spiritual audio discourse by Swamini Amitananda Saraswati. Preserved from legacy page 6983."
+  },
+  {
+    "canonicalId": "canonical-000765",
+    "title": "Inspiring Story: भगवान कि निष्ठुर दया (Swamini Amitanandaji)",
+    "contentType": "audio-track",
+    "parentCollection": "Inspiring Stories Audio",
+    "isContainer": false,
+    "canonicalSource": "https://u.pcloud.link/publink/show?code=sfP",
+    "alternateSources": [
+      "http://u.pc.cd/sfP"
+    ],
+    "category": "inspiring-stories",
+    "categoryName": "Inspiring Stories",
+    "teacher": "Swamini Amitananda Saraswati",
+    "language": "Hindi",
+    "hostType": "pCloud",
+    "isDirectMp3": false,
+    "legacyRecords": [
+      "legacy-wp-6983-03"
+    ],
+    "visibility": "PUBLIC",
+    "verificationStatus": "VERIFIED",
+    "migrationStatus": "MIGRATE",
+    "notes": "Authentic moral and spiritual audio discourse by Swamini Amitananda Saraswati. Preserved from legacy page 6983."
+  },
+  {
+    "canonicalId": "canonical-000766",
+    "title": "Inspiring Story: गधे द्वारा अफवाह (Swamini Amitanandaji)",
+    "contentType": "audio-track",
+    "parentCollection": "Inspiring Stories Audio",
+    "isContainer": false,
+    "canonicalSource": "https://u.pcloud.link/publink/show?code=sfP",
+    "alternateSources": [
+      "http://u.pc.cd/sfP"
+    ],
+    "category": "inspiring-stories",
+    "categoryName": "Inspiring Stories",
+    "teacher": "Swamini Amitananda Saraswati",
+    "language": "Hindi",
+    "hostType": "pCloud",
+    "isDirectMp3": false,
+    "legacyRecords": [
+      "legacy-wp-6983-06"
+    ],
+    "visibility": "PUBLIC",
+    "verificationStatus": "VERIFIED",
+    "migrationStatus": "MIGRATE",
+    "notes": "Authentic moral and spiritual audio discourse by Swamini Amitananda Saraswati. Preserved from legacy page 6983."
   }
 ];
 

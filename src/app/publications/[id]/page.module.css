@@ -87,7 +87,7 @@
 }
 
 .typeBadge {
-  background: var(--vm-gerua, #C84E17);
+  background: var(--vm-brand-orange, #C96622);
   color: #FFFFFF;
   font-family: var(--font-body, sans-serif);
   font-size: 0.75rem;
@@ -263,7 +263,7 @@
   justify-content: center;
   min-height: 48px;
   padding: 0.85rem 1.25rem;
-  background: var(--vm-gerua, #C84E17);
+  background: var(--vm-brand-orange, #C96622);
   color: #FFFFFF;
   font-family: var(--font-body, sans-serif);
   font-size: 0.95rem;
@@ -303,7 +303,7 @@
 
 .primaryDownloadBtn:focus-visible,
 .readOnlineBtn:focus-visible {
-  outline: 2px solid var(--vm-gerua, #C84E17);
+  outline: 2px solid var(--vm-brand-orange, #C96622);
   outline-offset: 2px;
 }
 
@@ -441,7 +441,7 @@
 .mirrorLinkText {
   font-family: var(--font-body, sans-serif);
   font-size: 0.82rem;
-  color: var(--vm-gerua, #C84E17);
+  color: var(--vm-brand-orange, #C96622);
   font-weight: 600;
 }
 
@@ -513,7 +513,7 @@
   font-family: var(--font-display, serif);
   font-size: 11px;
   font-weight: 700;
-  color: var(--vm-gerua, #C84E17);
+  color: var(--vm-brand-orange, #C96622);
   margin-bottom: 4px;
 }
 
@@ -534,7 +534,7 @@
 }
 
 .relatedLink:hover {
-  color: var(--vm-gerua, #C84E17);
+  color: var(--vm-brand-orange, #C96622);
 }
 
 .relatedActionRow {
@@ -553,7 +553,7 @@
 }
 
 .relatedBtn:hover {
-  color: var(--vm-gerua, #C84E17);
+  color: var(--vm-brand-orange, #C96622);
 }
 
 /* ==========================================================================

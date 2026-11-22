@@ -32,7 +32,7 @@ interface Props {
 const IMG = {
   entrance: getAssetPath('/images/vmission/entrance/ashram-entrance-cinematic.jpg'),
   facade: getAssetPath('/images/vmission/hero/ashram-facade-dome.jpg'),
-  dome: getAssetPath('/images/vmission/ashram/gangeshwar-dome-closeup.jpg'),
+  dome: getAssetPath('/gangeshwar-dome-closeup.jpg'),
   doors: getAssetPath('/images/vmission/ashram/sanctum-doors-threshold.jpg'),
   beyond: getAssetPath('/images/vmission/ashram/sanctum-interior-stage.jpg'),
 };
@@ -199,7 +199,7 @@ export default function AshramAscent({ onComplete }: Props) {
             >
               <img
                 src={IMG.entrance}
-                alt="Sri Gangeshwar Mahadev Sanctum Entrance at Vedanta Ashram"
+                alt="Shiv Mandir Sanctum Entrance at Vedanta Ashram"
                 className={styles.sceneImg}
                 loading="eager"
               />
@@ -221,7 +221,7 @@ export default function AshramAscent({ onComplete }: Props) {
                 <div className={styles.innerSanctumWrap}>
                   <img
                     src={IMG.beyond}
-                    alt="Sri Gangeshwar Mahadev Inner Sanctum"
+                    alt="Shiv Mandir Inner Sanctum"
                     className={styles.beyondImg}
                     loading="eager"
                   />
@@ -299,7 +299,7 @@ export default function AshramAscent({ onComplete }: Props) {
               </div>
 
               <div className={styles.hudBottomBar}>
-                <span>Consecrated Sri Gangeshwar Mahadev Sanctum</span>
+                <span>Sacred Shiv Mandir Sanctum</span>
                 <span>•</span>
                 <span>Advaita Vedanta Lineage</span>
               </div>

@@ -519,7 +519,7 @@ export default function AdminEventsPage() {
                   id="event-publish-checkbox"
                   checked={isPublished}
                   onChange={(e) => setIsPublished(e.target.checked)}
-                  style={{ width: '18px', height: '18px', accentColor: 'var(--vm-bhagwa, #E06328)', cursor: 'pointer' }}
+                  style={{ width: '18px', height: '18px', accentColor: 'var(--vm-brand-orange, #C96622)', cursor: 'pointer' }}
                 />
                 <label htmlFor="event-publish-checkbox" style={{ cursor: 'pointer', fontSize: '0.84375rem' }}>
                   <strong style={{ color: 'var(--vm-text, #221D1A)' }}>Publish live to public website</strong>

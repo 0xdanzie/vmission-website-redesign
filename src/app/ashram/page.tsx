@@ -24,8 +24,8 @@ export default function AshramPage() {
     {
       time: '07:30 – 08:30 AM',
       name: 'Mandir Upasana',
-      title: 'Sri Gangeshwar Mahadev Abhishek & Aarti',
-      desc: 'Consecrated Vedic worship, Rudrabhisheka, and morning camphor flame offerings at the monumental white Shivling sanctum, sanctifying the atmosphere.',
+      title: 'Shiv Mandir Abhishek & Aarti',
+      desc: 'Traditional Vedic worship, Rudrabhisheka, and morning camphor flame offerings at the monumental white Shivling sanctum, sanctifying the atmosphere.',
     },
     {
       time: '09:30 – 10:45 AM',
@@ -37,7 +37,7 @@ export default function AshramPage() {
       time: '12:00 – 01:00 PM',
       name: 'Bhiksha',
       title: 'Sattwic Annakshetra Prasad',
-      desc: 'Pure vegetarian consecrated meals served to monastics, resident students, and visiting pilgrims in the spirit of seva and mutual reverence.',
+      desc: 'Pure vegetarian sanctified meals (prasada) served to monastics, resident students, and visiting pilgrims in the spirit of seva and mutual reverence.',
     },
     {
       time: '03:30 – 05:00 PM',
@@ -49,17 +49,17 @@ export default function AshramPage() {
       time: '06:45 – 08:00 PM',
       name: 'Sandhya Aarti',
       title: 'Evening Mandir Worship & Mouna',
-      desc: 'The twilight worship at Gangeshwar Mahadev followed by Stotram recitation, devotional singing, and deep inward stillness (Mouna) before evening rest.',
+      desc: 'The twilight worship at Shiv Mandir followed by Stotram recitation, devotional singing, and deep inward stillness (Mouna) before evening rest.',
     },
   ];
 
   const ashramSpaces = [
     {
-      title: 'Sri Gangeshwar Mahadev Mandir',
-      subtitle: 'Consecrated Sanctum with Monumental Shivling Dome',
-      desc: 'The spiritual heart of Vedanta Ashram, featuring the unique monumental white Shivling crown, carved sanctum doors, and consecrated Shiva Linga where daily Vedic rituals and abhishekams are performed.',
-      image: '/images/vmission/ashram/gangeshwar-dome-closeup.jpg',
-      caption: 'The consecrated white Shivling architectural dome of Sri Gangeshwar Mahadev Mandir',
+      title: 'Shiv Mandir',
+      subtitle: 'Sacred Sanctum with Monumental Shivling Dome',
+      desc: 'The spiritual heart of Vedanta Ashram, featuring the unique monumental white Shivling crown, carved sanctum doors, and sacred Shiva Linga where daily Vedic rituals and abhishekams are performed.',
+      image: '/gangeshwar-dome-closeup.jpg',
+      caption: 'The sacred white Shivling architectural dome of Shiv Mandir',
     },
     {
       title: 'Pravachan Bhavan (Discourse Hall)',
@@ -147,27 +147,27 @@ export default function AshramPage() {
           <div className={styles.heroMain}>
             <h1 className={styles.heroTitle}>
               <span className={styles.lineMask} data-hero-line>
-                <span>Vedanta</span>
+                <span className={styles.titleWordWhite}>Vedanta</span>
               </span>{' '}
               <span className={styles.lineMask} data-hero-line>
-                <span>Ashram</span>
+                <span className={styles.titleWordOrange}>Ashram</span>
               </span>
             </h1>
 
             <div className={styles.heroFoot}>
               <div className={styles.heroCopy} data-hero-fade>
-                <p className={styles.heroSub}>Vedanta Ashram &amp; Sri Gangeshwar Mahadev Mandir</p>
+                <p className={styles.heroSub}>Vedanta Ashram &amp; Shiv Mandir</p>
                 <p className={styles.heroLead}>
                   Established in 1995 by Poojya Swami Atmananda Saraswati, Vedanta Ashram is a physical Gurukula in Indore where traditional Advaita Vedanta is contemplated, lived, and systematically taught in an environment of monastic peace.
                 </p>
                 <div className={styles.heroCtas}>
                   <Magnetic>
                     <a href="#mandir" className={styles.btnPrimary}>
-                      Sri Gangeshwar Mandir <span aria-hidden="true">↓</span>
+                      Shiv Mandir <span aria-hidden="true">↓</span>
                     </a>
                   </Magnetic>
                   <Magnetic>
-                    <a href="#rhythm" className={styles.btnGhost}>
+                    <a href="#routine" className={styles.btnGhost}>
                       Daily Contemplative Rhythm
                     </a>
                   </Magnetic>
@@ -186,16 +186,17 @@ export default function AshramPage() {
           <div className={styles.mandirGrid}>
             <div className={styles.mandirVisual}>
               <figure className={styles.mainFigure}>
-                <div className={styles.mainFrame} data-clip data-zoom>
+                <div className={styles.mainFrame} data-clip>
                   <img
-                    src={getAssetPath('/images/vmission/ashram/gangeshwar-dome-closeup.jpg')}
-                    alt="Consecrated white Shivling dome of Sri Gangeshwar Mahadev Mandir"
+                    src={getAssetPath('/gangeshwar-dome-closeup.jpg')}
+                    alt="The white Shiva Linga shaped dome of Shiv Mandir at Vedanta Ashram"
                     loading="eager"
+                    style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
                   />
                 </div>
                 <figcaption className={styles.caption}>
-                  <strong>Consecrated 1995</strong>
-                  <span>Sri Gangeshwar Mahadev Mandir — unique white Shivling spire</span>
+                  <strong>Vedanta Ashram Sanctum</strong>
+                  <span>Shiv Mandir — sculpted Shiva Linga spire</span>
                 </figcaption>
               </figure>
 
@@ -208,16 +209,16 @@ export default function AshramPage() {
                   />
                 </div>
                 <figcaption className={styles.caption}>
-                  Morning aarti and consecrated camphor lamp offerings
+                  Morning aarti and sacred camphor lamp offerings
                 </figcaption>
               </figure>
             </div>
 
             <div className={styles.mandirText}>
               <span className={styles.overline} data-reveal>Mandir &amp; Sanctum</span>
-              <h2 className={styles.h2} data-reveal>Sri Gangeshwar Mahadev Mandir</h2>
+              <h2 className={styles.h2} data-reveal>Shiv Mandir</h2>
               <p className={styles.lead} data-reveal>
-                The consecrated heart of the Indore campus, where Advaitic inquiry is grounded in classical devotional worship (Upasana).
+                The sacred heart of the Indore campus, dedicated to Lord Shiva, where Advaitic inquiry is grounded in classical devotional worship (Upasana).
               </p>
 
               <div className={styles.divider} data-reveal>
@@ -227,7 +228,7 @@ export default function AshramPage() {
 
               <div className={styles.narrative} data-stagger>
                 <p>
-                  Consecrated in 1995 alongside the founding of the Indore Ashram, Sri Gangeshwar Mahadev Mandir is crowned by a unique architectural feature: a monumental white sculpted Shivling forming the main spire (Shikhara) of the temple dome.
+                  Established alongside the founding of the Indore Ashram in 1995, the Shiv Mandir is crowned by a unique architectural feature: a monumental white sculpted dome in the sacred form of a Shiva Linga, visible across Sudama Nagar and documented in ashram archives.
                 </p>
                 <p>
                   In the traditional Advaita method, scriptural inquiry (Jnana-vichara) is supported by steady devotion and mental purification (Chitta-shuddhi). The temple serves as the focal point for morning and evening worship, Rudrabhisheka rituals, monthly Pradosha pujas, and annual Maha Shivaratri celebrations.
@@ -238,8 +239,8 @@ export default function AshramPage() {
                 <li className={styles.feature}>
                   <span className={styles.featureNum}>01</span>
                   <div>
-                    <h4>Monumental Shivling Dome</h4>
-                    <p>Architecturally distinct white Shivling spire visible across Sudama Nagar, signifying Lord Shiva as the embodiment of non-dual consciousness.</p>
+                    <h4>Shiva Linga Architectural Dome</h4>
+                    <p>Architecturally distinct white dome sculpted in the form of a Shiva Linga with Tripundra markings, signifying Lord Shiva as the embodiment of non-dual consciousness.</p>
                   </div>
                 </li>
                 <li className={styles.feature}>
@@ -263,9 +264,10 @@ export default function AshramPage() {
       </section>
 
       {/* ==================================================================
-          03 — DAILY RHYTHM (dark)
+          03 — DAILY RHYTHM & ACTIVITIES (dark)
           ================================================================== */}
-      <section id="rhythm" className={styles.rhythm}>
+      <section id="activities" className={styles.rhythm}>
+        <div id="routine" />
         <div className="container">
           <header className={styles.sectionHead}>
             <span className={styles.overlineLight} data-reveal>Monastic Dinacharya</span>
@@ -282,7 +284,6 @@ export default function AshramPage() {
             {dailyRhythm.map((item, idx) => (
               <article key={idx} className={styles.timelineRow} data-reveal>
                 <div className={styles.timeCol}>
-                  <span className={styles.timeDisplay}>{item.time}</span>
                   <span className={styles.timeName}>{item.name}</span>
                 </div>
                 <div className={styles.node} aria-hidden="true">
@@ -303,9 +304,9 @@ export default function AshramPage() {
       </section>
 
       {/* ==================================================================
-          04 — ASHRAM SPACES (alternating editorial rows)
+          04 — ASHRAM SPACES & FACILITIES (alternating editorial rows)
           ================================================================== */}
-      <section className={styles.spaces}>
+      <section id="facilities" className={styles.spaces}>
         <div className="container">
           <header className={styles.sectionHead}>
             <span className={styles.overline} data-reveal>Gurukula Campus</span>
@@ -339,21 +340,31 @@ export default function AshramPage() {
       {/* ==================================================================
           05 — ASHRAM PARIVAR
           ================================================================== */}
-      <section className={styles.community}>
+      <section id="parivar" className={styles.community}>
         <div className="container">
           <div className={styles.communityGrid}>
             <div className={styles.communityText}>
               <span className={styles.overline} data-reveal>Living Gurukula Family</span>
               <h2 className={styles.h2} data-reveal>The Ashram Parivar</h2>
+              <div className={styles.divider} data-reveal style={{ margin: '1.25rem 0 0.5rem' }}>
+                <span className={styles.devanagari} style={{ color: 'var(--accent)', fontWeight: 600 }}>।। धर्मो रक्षति रक्षित: ।।</span>
+                <span data-rule className={styles.rule} />
+              </div>
               <p className={styles.lead} data-reveal>
                 Vedanta Ashram is sustained by an intimate community of resident monks, renunciants (Brahmacharins), dedicated volunteers, and visiting spiritual seekers united in the common pursuit of Self-knowledge.
               </p>
               <div className={styles.narrative} data-stagger>
                 <p>
+                  Established by Poojya Guruji Swami Atmanandaji Saraswati on the Silver Jubilee of Vedanta Ashram, the Ashram Parivar unites devotees and disciples worldwide in the sacred cause of sustaining traditional Advaita Vedanta education without commercialization.
+                </p>
+                <p>
                   During annual Gita Jayanti shivirs, Guru Poornima festivals, and residential retreats, seekers from across India and abroad reside at the Ashram, participating in intensive scriptural inquiry and cooperative seva.
                 </p>
                 <p>
                   The kitchen operates on the principle of Sattwic Annakshetra—simple, freshly prepared vegetarian meals served with warmth and sanctity, nourishing both body and mind.
+                </p>
+                <p>
+                  In the ashram&apos;s early history, the Gruh Pravesh Pujan for the Sudama Nagar premises was conducted on Dasshera Day in 1992 by Sh Avinash &amp; Ritu Datta of Mumbai for the stay, studies, and sadhana of Poojya Guruji Sri Swami Atmananda and his disciples.
                 </p>
               </div>
 
@@ -406,6 +417,7 @@ export default function AshramPage() {
           06 — REACHING THE ASHRAM
           ================================================================== */}
       <section id="reach" className={styles.reach}>
+        <div id="location" />
         <div className="container">
           <header className={styles.sectionHead}>
             <span className={styles.overline} data-reveal>Pilgrim &amp; Visitor Guide</span>
@@ -439,10 +451,10 @@ export default function AshramPage() {
             <article className={styles.reachCard}>
               <span className={styles.reachIndex}>03 — Address</span>
               <h3>Campus Address</h3>
-              <p className={styles.reachLocation}>Vedanta Ashram &amp; Gangeshwar Mandir</p>
+              <p className={styles.reachLocation}>Vedanta Ashram &amp; Shiv Mandir</p>
               <p className={styles.reachDistance}>Sector E, Sudama Nagar, Indore, M.P. 452009</p>
               <p className={styles.reachDesc}>
-                Situated in Western Indore. Landmark: Sri Gangeshwar Mahadev Mandir (prominent white Shivling dome), easily recognized by local transport operators.
+                Situated in Western Indore. Landmark: Shiv Mandir (prominent white Shiva Linga dome), easily recognized by local transport operators.
               </p>
             </article>
           </div>

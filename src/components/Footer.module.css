@@ -10,7 +10,7 @@
   --ft-mute: rgba(244, 241, 234, 0.6);
   --ft-faint: rgba(244, 241, 234, 0.35);
   --ft-line: rgba(244, 241, 234, 0.12);
-  --ft-accent: #e06328;
+  --ft-accent: var(--vm-brand-orange, #C96622);
 
   position: relative;
   background: var(--ft-ink);

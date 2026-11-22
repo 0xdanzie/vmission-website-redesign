@@ -7,8 +7,8 @@
   --b-ink: #0b0b0b;
   --b-paper: #f3f1ec;
   --b-mute: #6c6861;
-  --b-accent: #e06328;
-  --b-accent-deep: #b8481a;
+  --b-accent: var(--vm-brand-orange, #C96622);
+  --b-accent-deep: var(--vm-brand-orange, #C96622);
 
   display: inline-flex;
   align-items: center;
@@ -43,9 +43,9 @@
 /* Saffron emphasis: residential retreats and audio */
 .residential,
 .audio {
-  background: rgba(224, 99, 40, 0.1);
-  border-color: rgba(224, 99, 40, 0.35);
-  color: var(--b-accent-deep);
+  background: rgba(201, 102, 34, 0.1);
+  border-color: rgba(201, 102, 34, 0.35);
+  color: var(--b-accent);
 }
 
 /* Registration states */

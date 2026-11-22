@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { events as defaultEvents, VMEvent } from '@/data/events';
 import { courses as defaultCourses, Course } from '@/data/courses';
 import { teachings as defaultTeachings, Teaching } from '@/data/teachings';
@@ -198,31 +198,57 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   const [isLoadingPublications, setIsLoadingPublications] = useState(true);
   const [isLoadingInquiries, setIsLoadingInquiries] = useState(true);
   const [isLoadingDonations, setIsLoadingDonations] = useState(true);
+  const activeUserIdRef = useRef<string | null>(null);
+  const authGenerationRef = useRef<number>(0);
+  const isMountedRef = useRef<boolean>(true);
+  const roleTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const refreshUserRole = async () => {
+  // Centralized, verified staff authorization resolver using server-confirmed getUser()
+  const resolveStaffRole = async (supabase: ReturnType<typeof createClient>): Promise<'admin' | 'editor' | null> => {
+    try {
+      // 1. Verify authenticated user identity with Supabase Auth server
+      const { data: { user }, error: authError } = await supabase.auth.getUser();
+      if (authError || !user) {
+        return null;
+      }
+
+      // 2. Query admin_profiles with server-confirmed user id
+      const { data: profile, error: profileError } = await supabase
+        .from('admin_profiles')
+        .select('role')
+        .eq('id', user.id)
+        .maybeSingle();
+
+      if (!profileError && profile && (profile.role === 'admin' || profile.role === 'editor')) {
+        return profile.role;
+      }
+      return null;
+    } catch (e) {
+      console.warn('Failed to resolve staff role:', e);
+      return null;
+    }
+  };
+
+  const refreshUserRole = async (expectedUserId?: string, generation?: number) => {
     if (!isSupabaseConfigured()) {
       setUserRole(null);
+      activeUserIdRef.current = null;
       return;
     }
     try {
       const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const { data: profile } = await supabase
-          .from('admin_profiles')
-          .select('role')
-          .eq('id', user.id)
-          .maybeSingle();
+      const verifiedRole = await resolveStaffRole(supabase);
+      // Guard against stale async resolution if identity, generation, or mount changed during fetch
+      if (!isMountedRef.current) return;
+      if (generation !== undefined && generation !== authGenerationRef.current) return;
+      if (expectedUserId && activeUserIdRef.current !== expectedUserId) return;
 
-        if (profile && (profile.role === 'admin' || profile.role === 'editor')) {
-          setUserRole(profile.role);
-          return;
-        }
-      }
-      setUserRole(null);
+      setUserRole(verifiedRole);
     } catch (e) {
       console.warn('Failed to load user role from admin_profiles:', e);
-      setUserRole(null);
+      if (isMountedRef.current) {
+        setUserRole(null);
+      }
     }
   };
 
@@ -326,6 +352,90 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  /**
+   * Stage 6B Forensic Remediation:
+   * Evaluates whether a remote Supabase publications dataset is complete, valid,
+   * and authoritative before allowing it to overwrite the canonical local archive.
+   */
+  const checkRemotePublicationsCompleteness = (
+    remote: Publication[],
+    canonical: Publication[]
+  ): { isComplete: boolean; reason?: string } => {
+    if (!remote || remote.length === 0) {
+      return { isComplete: false, reason: 'Remote dataset is empty' };
+    }
+
+    if (remote.length < canonical.length) {
+      return {
+        isComplete: false,
+        reason: `Remote dataset has fewer records (${remote.length}) than canonical local archive (${canonical.length})`,
+      };
+    }
+
+    // 1. Check for duplicate IDs or invalid entries in remote response
+    const seenIds = new Set<string>();
+    for (const item of remote) {
+      if (!item.id) {
+        return { isComplete: false, reason: 'Remote item missing publication ID' };
+      }
+      if (seenIds.has(item.id)) {
+        return { isComplete: false, reason: `Duplicate ID detected in remote dataset: ${item.id}` };
+      }
+      seenIds.add(item.id);
+    }
+
+    // 2. Canonical ID coverage check: ensure canonical IDs from local archive exist
+    const remoteCanonicalKeys = new Set<string>();
+    remote.forEach((p) => {
+      if (p.id) remoteCanonicalKeys.add(p.id);
+      if (p.canonicalId) remoteCanonicalKeys.add(p.canonicalId);
+    });
+
+    const missingCanonicalIds: string[] = [];
+    for (const item of canonical) {
+      const key = item.canonicalId || item.id;
+      if (key && !remoteCanonicalKeys.has(key) && !seenIds.has(item.id)) {
+        missingCanonicalIds.push(key);
+      }
+    }
+
+    if (missingCanonicalIds.length > 0) {
+      return {
+        isComplete: false,
+        reason: `Remote dataset is missing ${missingCanonicalIds.length} canonical IDs present in local archive (e.g. ${missingCanonicalIds.slice(0, 3).join(', ')})`,
+      };
+    }
+
+    // 3. Category coverage check
+    const requiredCategories: Publication['type'][] = [
+      'Vedanta Sandesh',
+      'Vedanta Piyush',
+      'E-Books',
+      'Study & Chant Texts',
+    ];
+    for (const cat of requiredCategories) {
+      if (!remote.some((p) => p.type === cat)) {
+        return { isComplete: false, reason: `Remote dataset missing category: ${cat}` };
+      }
+    }
+
+    // 4. Historical year coverage check
+    const canonicalYears = Array.from(
+      new Set(canonical.map((p) => p.year).filter((y): y is number => typeof y === 'number'))
+    );
+    const remoteYears = new Set(
+      remote.map((p) => p.year).filter((y): y is number => typeof y === 'number')
+    );
+
+    for (const yr of canonicalYears) {
+      if (!remoteYears.has(yr)) {
+        return { isComplete: false, reason: `Remote dataset missing historical year: ${yr}` };
+      }
+    }
+
+    return { isComplete: true };
+  };
+
   const refreshPublications = async () => {
     if (!isSupabaseConfigured()) {
       setIsLoadingPublications(false);
@@ -339,11 +449,28 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         .order('year', { ascending: false, nullsFirst: false })
         .order('created_at', { ascending: false });
 
-      if (!error && data && data.length > 0) {
-        setPublications(data.map(dbToPublication));
+      if (error) {
+        console.warn('Supabase fetch publications error, retaining canonical default:', error.message);
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        console.info('[DataContext] Supabase returned 0 publications, retaining canonical default dataset.');
+        return;
+      }
+
+      const remotePubs = data.map(dbToPublication);
+      const completeness = checkRemotePublicationsCompleteness(remotePubs, defaultPublications);
+
+      if (completeness.isComplete) {
+        setPublications(remotePubs);
+      } else {
+        console.info(
+          `[DataContext] Remote Supabase publications dataset is incomplete (${completeness.reason}). Retaining complete canonical local archive (${defaultPublications.length} records).`
+        );
       }
     } catch (e) {
-      console.warn('Supabase fetch publications error, using cached/default:', e);
+      console.warn('Supabase fetch publications error, retaining canonical default:', e);
     } finally {
       setIsLoadingPublications(false);
     }
@@ -354,21 +481,43 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       setIsLoadingInquiries(false);
       return;
     }
+    // Strict authentication & staff authorization gate:
+    // Requires an active session with verified admin or editor role before dispatching query
+    if (!userRole || (userRole !== 'admin' && userRole !== 'editor')) {
+      setIsLoadingInquiries(false);
+      return;
+    }
+    const currentGen = authGenerationRef.current;
+    const currentUid = activeUserIdRef.current;
     setIsLoadingInquiries(true);
     try {
       const supabase = createClient();
+      const verifiedRole = await resolveStaffRole(supabase);
+      if (!isMountedRef.current || currentGen !== authGenerationRef.current || currentUid !== activeUserIdRef.current) {
+        return;
+      }
+      if (!verifiedRole) {
+        setUserRole(null);
+        setIsLoadingInquiries(false);
+        return;
+      }
       const { data, error } = await supabase
         .from('inquiries')
         .select('*')
         .order('created_at', { ascending: false });
 
+      if (!isMountedRef.current || currentGen !== authGenerationRef.current || currentUid !== activeUserIdRef.current) {
+        return;
+      }
       if (!error && data) {
         setInquiries(data.map(dbToInquiry));
       }
     } catch (e) {
       console.warn('Supabase fetch inquiries error, using cached/default:', e);
     } finally {
-      setIsLoadingInquiries(false);
+      if (isMountedRef.current && currentGen === authGenerationRef.current) {
+        setIsLoadingInquiries(false);
+      }
     }
   };
 
@@ -377,12 +526,32 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       setIsLoadingDonations(false);
       return;
     }
+    // Strict authentication & staff authorization gate:
+    // Requires an active session with verified admin or editor role before dispatching query
+    if (!userRole || (userRole !== 'admin' && userRole !== 'editor')) {
+      setIsLoadingDonations(false);
+      return;
+    }
+    const currentGen = authGenerationRef.current;
+    const currentUid = activeUserIdRef.current;
     setIsLoadingDonations(true);
     try {
       const supabase = createClient();
+      const verifiedRole = await resolveStaffRole(supabase);
+      if (!isMountedRef.current || currentGen !== authGenerationRef.current || currentUid !== activeUserIdRef.current) {
+        return;
+      }
+      if (!verifiedRole) {
+        setUserRole(null);
+        setIsLoadingDonations(false);
+        return;
+      }
       // Route through secured RPC get_staff_donations to enforce role-based column filtering
       const { data, error } = await supabase.rpc('get_staff_donations');
 
+      if (!isMountedRef.current || currentGen !== authGenerationRef.current || currentUid !== activeUserIdRef.current) {
+        return;
+      }
       if (!error && data) {
         setDonations((data as DatabaseDonationRow[]).map(dbToDonation));
       } else if (error) {
@@ -391,7 +560,9 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     } catch (e) {
       console.warn('Supabase fetch donations error, using cached/default:', e);
     } finally {
-      setIsLoadingDonations(false);
+      if (isMountedRef.current && currentGen === authGenerationRef.current) {
+        setIsLoadingDonations(false);
+      }
     }
   };
 
@@ -453,15 +624,49 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     refreshCourses();
     refreshEvents();
     refreshPublications();
-    refreshInquiries();
-    refreshDonations();
+    // Inquiries and staff donations are gated behind authenticated userRole and not requested anonymously
 
     let authSubscription: { unsubscribe: () => void } | null = null;
     try {
       const supabase = createClient();
-      const { data } = supabase.auth.onAuthStateChange(() => {
-        refreshUserRole();
-        refreshDonations();
+      // Keep onAuthStateChange callback strictly synchronous to prevent Supabase SDK deadlocks
+      const { data } = supabase.auth.onAuthStateChange((event, session) => {
+        // Clear any pending role resolution timer
+        if (roleTimeoutRef.current) {
+          clearTimeout(roleTimeoutRef.current);
+          roleTimeoutRef.current = null;
+        }
+
+        const newUserId = session?.user?.id ?? null;
+        const isSameUser = newUserId !== null && newUserId === activeUserIdRef.current;
+
+        // If TOKEN_REFRESHED for the identical authenticated user, preserve active state without clearing
+        if (event === 'TOKEN_REFRESHED' && isSameUser) {
+          return;
+        }
+
+        // On sign-out or when authenticated identity changes:
+        if (event === 'SIGNED_OUT' || !session || !session.user || !isSameUser) {
+          // Increment generation to immediately invalidate any in-flight requests from prior identity
+          authGenerationRef.current += 1;
+          activeUserIdRef.current = newUserId;
+          setUserRole(null);
+          setInquiries(DEFAULT_INQUIRIES);
+          setDonations(DEFAULT_DONATIONS);
+          try {
+            localStorage.removeItem('vm_inquiries');
+            localStorage.removeItem('vm_donations');
+          } catch {}
+        }
+
+        if (session && session.user) {
+          const targetUserId = session.user.id;
+          const targetGen = authGenerationRef.current;
+          // Defer asynchronous role resolution outside the synchronous auth callback
+          roleTimeoutRef.current = setTimeout(() => {
+            refreshUserRole(targetUserId, targetGen);
+          }, 0);
+        }
       });
       authSubscription = data?.subscription ?? null;
     } catch (e) {
@@ -469,6 +674,11 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     }
 
     return () => {
+      isMountedRef.current = false;
+      if (roleTimeoutRef.current) {
+        clearTimeout(roleTimeoutRef.current);
+        roleTimeoutRef.current = null;
+      }
       authSubscription?.unsubscribe();
     };
   }, []);

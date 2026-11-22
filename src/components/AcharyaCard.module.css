@@ -113,7 +113,7 @@
 
 .link:hover {
   gap: 0.7rem;
-  color: var(--vm-saffron-hover, #f0753b);
+  color: var(--vm-brand-orange, #C96622);
 }
 
 .link:focus-visible {

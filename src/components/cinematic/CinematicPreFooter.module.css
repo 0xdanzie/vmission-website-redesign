@@ -8,7 +8,7 @@
   --pf-paper: #f4f1ea;
   --pf-mute: rgba(244, 241, 234, 0.66);
   --pf-line: rgba(244, 241, 234, 0.14);
-  --pf-accent: #e06328;
+  --pf-accent: var(--vm-brand-orange, #C96622);
 
   position: relative;
   padding: clamp(7rem, 13vw, 12rem) 0;

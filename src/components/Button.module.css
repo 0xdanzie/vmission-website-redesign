@@ -34,22 +34,22 @@
   background: var(--vm-gerua);
   color: #FFFFFF;
   border: 1.5px solid var(--vm-gerua);
-  box-shadow: 0 4px 14px rgba(200, 78, 23, 0.32);
+  box-shadow: 0 4px 14px rgba(201, 102, 34, 0.32);
 }
 .primary:hover:not(:disabled) {
   background: var(--vm-bhagwa);
   border-color: var(--vm-bhagwa);
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(224, 99, 40, 0.42);
+  box-shadow: 0 6px 18px rgba(201, 102, 34, 0.42);
 }
 
 .secondary {
   background: var(--vm-bhagwa-subtle);
   color: var(--vm-ochre);
-  border: 1.5px solid rgba(224, 99, 40, 0.25);
+  border: 1.5px solid rgba(201, 102, 34, 0.25);
 }
 .secondary:hover:not(:disabled) {
-  background: rgba(224, 99, 40, 0.16);
+  background: rgba(201, 102, 34, 0.16);
   border-color: var(--vm-bhagwa);
   transform: translateY(-1px);
 }
@@ -77,10 +77,10 @@
 
 /* Dark-surface tone: use on ink or photographic backgrounds */
 .onDark.primary {
-  background: var(--vm-bhagwa, #e06328);
-  border-color: var(--vm-bhagwa, #e06328);
+  background: var(--vm-bhagwa, #C96622);
+  border-color: var(--vm-bhagwa, #C96622);
   color: #0b0b0b;
-  box-shadow: 0 6px 18px rgba(224, 99, 40, 0.28);
+  box-shadow: 0 6px 18px rgba(201, 102, 34, 0.28);
 }
 .onDark.primary:hover:not(:disabled) {
   background: #f4f1ea;
@@ -103,6 +103,6 @@
   color: #f4f1ea;
 }
 .onDark.ghost:hover:not(:disabled) {
-  color: #e06328;
-  background: rgba(224, 99, 40, 0.12);
+  color: var(--vm-brand-orange, #C96622);
+  background: var(--vm-bhagwa-subtle, rgba(201, 102, 34, 0.12));
 }

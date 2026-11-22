@@ -198,7 +198,7 @@ export default function AdminContactPage() {
                             inq.status === 'Resolved'
                               ? 'var(--vm-forest, #2D4F38)'
                               : inq.status === 'In Review'
-                              ? 'var(--vm-gerua, #C84E17)'
+                              ? 'var(--vm-brand-orange, #C96622)'
                               : 'var(--vm-warning, #C07D1E)',
                         }}
                         value={inq.status}

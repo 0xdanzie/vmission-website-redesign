@@ -10,9 +10,9 @@
   --mute-dark: #9d988e;
   --line: rgba(11, 11, 11, 0.14);
   --line-dark: rgba(243, 241, 236, 0.16);
-  --accent: #e06328;
-  --accent-soft: #f0753b;
-  --accent-deep: #b8481a;
+  --accent: var(--vm-brand-orange, #C96622);
+  --accent-soft: var(--vm-brand-orange, #C96622);
+  --accent-deep: var(--vm-brand-orange, #C96622);
   --tight: 'Inter Tight', system-ui, sans-serif;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 

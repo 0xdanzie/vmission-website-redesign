@@ -9,7 +9,7 @@
   --fp-mute: rgba(244, 241, 234, 0.62);
   --fp-faint: rgba(244, 241, 234, 0.36);
   --fp-line: rgba(244, 241, 234, 0.12);
-  --fp-accent: #e06328;
+  --fp-accent: var(--vm-brand-orange, #C96622);
 
   position: relative;
   background: var(--fp-ink);

@@ -252,7 +252,7 @@ export default function AcharyaProfileClient({
 
                     <h3 className={styles.subHeading}>Establishment of Vedanta Mission &amp; Indore Gurukula</h3>
                     <p>
-                      In 1992, Swamiji conceived and founded Vedanta Mission as an educational and spiritual platform dedicated to transmitting Advaita Vedanta as a valid means of knowledge (<em>Pramana</em>). In 1995, Vedanta Ashram was established in Sudama Nagar, Indore, along with the consecration of Sri Gangeshwar Mahadev Mandir, providing a residential Gurukula for monastics and sincere seekers.
+                      In 1992, Swamiji conceived and founded Vedanta Mission as an educational and spiritual platform dedicated to transmitting Advaita Vedanta as a valid means of knowledge (<em>Pramana</em>). In 1995, Vedanta Ashram was established in Sudama Nagar, Indore, along with the founding of the Shiv Mandir, providing a residential Gurukula for monastics and sincere seekers.
                     </p>
 
                     <div className={styles.dividerWrap} data-reveal>

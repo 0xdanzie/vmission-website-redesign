@@ -86,9 +86,15 @@ export function AudioPlayerProvider({ children }: { children: React.ReactNode })
     dispatch({ type: 'PLAY', track });
     setTimeout(() => {
       if (audioRef.current) {
-        audioRef.current.src = getAssetPath(track.src || '/audio/demo-discourse.mp3');
-        audioRef.current.playbackRate = state.speed;
-        audioRef.current.play().catch(() => {});
+        const audioSource = track.src || track.audioUrl;
+        if (audioSource && audioSource.trim() !== '') {
+          audioRef.current.src = getAssetPath(audioSource);
+          audioRef.current.playbackRate = state.speed;
+          audioRef.current.play().catch(() => {});
+        } else {
+          audioRef.current.removeAttribute('src');
+          audioRef.current.load();
+        }
       }
     }, 50);
   }, [state.speed]);

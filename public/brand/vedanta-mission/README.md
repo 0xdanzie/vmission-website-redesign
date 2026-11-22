@@ -23,9 +23,7 @@ Use `FAVICON/favicon.svg` as the preferred scalable favicon. PNG and ICO fallbac
 - `WEB/vedanta-mission-mobile.svg` - approved emblem-only mark for constrained mobile navigation.
 
 ## Brand colors
-- Bhagwa: #E06328
-- Deep Gerua: #C84E17
-- Sacred Ochre: #A73C0E
+- Bhagwa (Official Brand Orange): #C96622
 - Midnight Walnut: #1E1916
 - Warm Temple Ivory: #FDFBF7
 - White: #FFFFFF

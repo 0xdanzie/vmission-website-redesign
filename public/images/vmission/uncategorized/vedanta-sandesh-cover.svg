@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800">
+  <defs>
+    <linearGradient id="coverBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FAF5EE" />
+      <stop offset="60%" stop-color="#F5EFE6" />
+      <stop offset="100%" stop-color="#EEDAC5" />
+    </linearGradient>
+    <linearGradient id="saffronHeader" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#D95D39" />
+      <stop offset="100%" stop-color="#9E381C" />
+    </linearGradient>
+    <linearGradient id="goldTrim" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C5A059" />
+      <stop offset="100%" stop-color="#E8D28A" />
+    </linearGradient>
+  </defs>
+
+  <!-- Magazine Base Page -->
+  <rect width="600" height="800" fill="url(#coverBg)" />
+  
+  <!-- Outer Editorial Border Frame -->
+  <rect x="20" y="20" width="560" height="760" fill="none" stroke="#DBC082" stroke-width="2" />
+  <rect x="26" y="26" width="548" height="748" fill="none" stroke="#9E381C" stroke-width="1" opacity="0.4" />
+
+  <!-- Corner Ornamental Motifs -->
+  <circle cx="26" cy="26" r="4" fill="#C5A059" />
+  <circle cx="574" cy="26" r="4" fill="#C5A059" />
+  <circle cx="26" cy="774" r="4" fill="#C5A059" />
+  <circle cx="574" cy="774" r="4" fill="#C5A059" />
+
+  <!-- Top Metadata Bar -->
+  <rect x="35" y="40" width="530" height="30" fill="#221D1A" rx="3" />
+  <text x="50" y="60" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#E8D28A" letter-spacing="1.5">VOL. XXVIII · ISSUE NO. 8</text>
+  <text x="550" y="60" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#FAF5EE" text-anchor="end" letter-spacing="1.5">SEPTEMBER 2026</text>
+
+  <!-- Masthead Section -->
+  <g transform="translate(300, 140)">
+    <!-- Sacred Om Header Crest -->
+    <circle cx="0" cy="-20" r="28" fill="none" stroke="#C5A059" stroke-width="1.5" stroke-dasharray="3 2" />
+    <circle cx="0" cy="-20" r="22" fill="#FAF5EE" stroke="#9E381C" stroke-width="1" />
+    <text x="0" y="-12" font-family="'Cinzel', Georgia, serif" font-size="22" font-weight="700" fill="#D95D39" text-anchor="middle">ॐ</text>
+
+    <!-- Magazine Title -->
+    <text x="0" y="45" font-family="'Cinzel', Georgia, serif" font-size="38" font-weight="800" fill="#221D1A" text-anchor="middle" letter-spacing="3">
+      VEDANTA SANDESH
+    </text>
+    
+    <!-- Sanskrit Subtitle -->
+    <text x="0" y="75" font-family="'Cormorant Garamond', serif" font-size="18" font-weight="600" fill="#9E381C" text-anchor="middle" letter-spacing="2">
+      वेदान्त सन्देश · मासिक ई-पत्रिका
+    </text>
+    <text x="0" y="98" font-family="'Inter', sans-serif" font-size="10" font-weight="600" text-transform="uppercase" fill="#5E564F" text-anchor="middle" letter-spacing="3">
+      Spreading Love &amp; Light by Revealing Oneness
+    </text>
+  </g>
+
+  <!-- Center Decorative Vedic Arch Image Frame -->
+  <g transform="translate(80, 270)">
+    <path d="M0 40 Q220 0 440 40 L440 320 L0 320 Z" fill="#241B16" stroke="#C5A059" stroke-width="2" />
+    
+    <!-- Inside Art: Sun Ray & Sacred Verse -->
+    <radialGradient id="sunVerse" cx="50%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#FFD6A5" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#241B16" stop-opacity="0" />
+    </radialGradient>
+    <rect x="0" y="0" width="440" height="320" fill="url(#sunVerse)" />
+
+    <text x="220" y="100" font-family="'Cormorant Garamond', Georgia, serif" font-size="24" font-weight="600" fill="#E8D28A" text-anchor="middle" font-style="italic">
+      &ldquo;सत्यं ज्ञानमनन्तं ब्रह्म&rdquo;
+    </text>
+
+    <!-- Lead Article Announcement -->
+    <rect x="30" y="160" width="380" height="120" fill="rgba(255,255,255,0.06)" rx="6" stroke="#C5A059" stroke-width="1" />
+    <text x="220" y="195" font-family="'Cinzel', serif" font-size="12" font-weight="700" fill="#D95D39" text-anchor="middle" letter-spacing="2">
+      SPECIAL FOCUS THIS ISSUE
+    </text>
+    <text x="220" y="225" font-family="'Cinzel', serif" font-size="16" font-weight="700" fill="#FAF5EE" text-anchor="middle">
+      Vivekachudamani: The Art of Discrimination
+    </text>
+    <text x="220" y="252" font-family="'Inter', sans-serif" font-size="12" fill="#DBC082" text-anchor="middle">
+      By Poojya Guruji Swami Atmananda Saraswati
+    </text>
+  </g>
+
+  <!-- Table of Contents Teaser -->
+  <g transform="translate(80, 620)">
+    <text x="0" y="20" font-family="'Cinzel', serif" font-size="11" font-weight="700" fill="#9E381C" letter-spacing="1.5">IN THIS ISSUE:</text>
+    <text x="0" y="45" font-family="'Inter', sans-serif" font-size="12" fill="#221D1A">• Taittiriya Upanishad — Bhrigu Valli Inquiry</text>
+    <text x="0" y="70" font-family="'Inter', sans-serif" font-size="12" fill="#221D1A">• Ashram Varta: Forthcoming Navaratri Gita Camp</text>
+    <text x="0" y="95" font-family="'Inter', sans-serif" font-size="12" fill="#221D1A">• Questions on Meditation Answered by Acharyas</text>
+  </g>
+
+  <!-- Footer Publisher Stamp -->
+  <rect x="20" y="740" width="560" height="40" fill="url(#saffronHeader)" />
+  <text x="300" y="765" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">
+    VEDANTA MISSION · VEDANTA ASHRAM, INDORE (M.P.)
+  </text>
+</svg>

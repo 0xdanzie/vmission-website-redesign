@@ -472,7 +472,7 @@ export default function AdminAcharyasPage() {
                     type="checkbox"
                     checked={isFounder}
                     onChange={(e) => setIsFounder(e.target.checked)}
-                    style={{ accentColor: 'var(--vm-bhagwa, #E06328)' }}
+                    style={{ accentColor: 'var(--vm-brand-orange, #C96622)' }}
                   />
                   <span style={{ color: 'var(--vm-text, #221D1A)' }}>Mark as Founder of Vedanta Mission</span>
                 </label>
@@ -494,7 +494,7 @@ export default function AdminAcharyasPage() {
                   id="acharya-publish-checkbox"
                   checked={isPublished}
                   onChange={(e) => setIsPublished(e.target.checked)}
-                  style={{ width: '18px', height: '18px', accentColor: 'var(--vm-bhagwa, #E06328)', cursor: 'pointer' }}
+                  style={{ width: '18px', height: '18px', accentColor: 'var(--vm-brand-orange, #C96622)', cursor: 'pointer' }}
                 />
                 <label htmlFor="acharya-publish-checkbox" style={{ cursor: 'pointer', fontSize: '0.84375rem' }}>
                   <strong style={{ color: 'var(--vm-text, #221D1A)' }}>Publish live to public website</strong>

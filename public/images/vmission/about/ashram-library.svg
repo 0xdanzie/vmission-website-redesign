@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="woodGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#543D2B" />
+      <stop offset="50%" stop-color="#3D2B1E" />
+      <stop offset="100%" stop-color="#2B1E14" />
+    </linearGradient>
+    <linearGradient id="bookRed" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9E381C" />
+      <stop offset="100%" stop-color="#BF4D2B" />
+    </linearGradient>
+    <linearGradient id="bookGold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C5A059" />
+      <stop offset="100%" stop-color="#E8D28A" />
+    </linearGradient>
+    <linearGradient id="bookDark" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#241B16" />
+      <stop offset="100%" stop-color="#3B2E26" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Warm Study Room -->
+  <rect width="800" height="600" fill="#FAF6EE" />
+
+  <!-- Wooden Bookcase Framework -->
+  <rect x="60" y="40" width="680" height="520" fill="url(#woodGrad)" rx="8" />
+  <rect x="80" y="60" width="640" height="480" fill="#241B16" />
+
+  <!-- Shelves -->
+  <rect x="80" y="180" width="640" height="16" fill="url(#woodGrad)" />
+  <rect x="80" y="310" width="640" height="16" fill="url(#woodGrad)" />
+  <rect x="80" y="440" width="640" height="16" fill="url(#woodGrad)" />
+
+  <!-- Top Shelf: Upanishads & Adi Shankara Bhashyas Volumes -->
+  <g transform="translate(100, 75)">
+    <rect x="0" y="0" width="28" height="105" fill="url(#bookRed)" rx="2" />
+    <text x="14" y="55" font-family="'Cinzel', serif" font-size="9" fill="#FFF" transform="rotate(-90 14 55)" text-anchor="middle">ईशावास्योपनिषद्</text>
+    
+    <rect x="32" y="0" width="30" height="105" fill="url(#bookGold)" rx="2" />
+    <text x="47" y="55" font-family="'Cinzel', serif" font-size="9" fill="#221D1A" transform="rotate(-90 47 55)" text-anchor="middle">कठोपनिषद् भाष्य</text>
+
+    <rect x="66" y="5" width="28" height="100" fill="url(#bookRed)" rx="2" />
+    <rect x="98" y="0" width="34" height="105" fill="url(#bookDark)" rx="2" />
+    <text x="115" y="55" font-family="'Cinzel', serif" font-size="9" fill="#E8D28A" transform="rotate(-90 115 55)" text-anchor="middle">माण्डूक्य कारिका</text>
+
+    <rect x="136" y="10" width="26" height="95" fill="url(#bookGold)" rx="2" />
+    <rect x="166" y="0" width="32" height="105" fill="url(#bookRed)" rx="2" />
+    <rect x="202" y="0" width="36" height="105" fill="url(#bookDark)" rx="2" />
+    <text x="220" y="55" font-family="'Cinzel', serif" font-size="9" fill="#FFF" transform="rotate(-90 220 55)" text-anchor="middle">तैत्तिरीयोपनिषद्</text>
+
+    <rect x="242" y="5" width="28" height="100" fill="url(#bookGold)" rx="2" />
+    <rect x="274" y="0" width="40" height="105" fill="url(#bookRed)" rx="2" />
+    <text x="294" y="55" font-family="'Cinzel', serif" font-size="9" fill="#FFF" transform="rotate(-90 294 55)" text-anchor="middle">छान्दोग्योपनिषद्</text>
+    
+    <rect x="318" y="0" width="44" height="105" fill="url(#bookDark)" rx="2" />
+    <text x="340" y="55" font-family="'Cinzel', serif" font-size="9" fill="#E8D28A" transform="rotate(-90 340 55)" text-anchor="middle">बृहदारण्यक भाष्य</text>
+  </g>
+
+  <!-- Middle Shelf: Bhagavad Gita Commentary Volumes -->
+  <g transform="translate(100, 205)">
+    <rect x="0" y="0" width="38" height="105" fill="url(#bookRed)" rx="2" />
+    <text x="19" y="55" font-family="'Cinzel', serif" font-size="9" fill="#FFF" transform="rotate(-90 19 55)" text-anchor="middle">गीता शांकरभाष्यम् I</text>
+    <rect x="42" y="0" width="38" height="105" fill="url(#bookRed)" rx="2" />
+    <text x="61" y="55" font-family="'Cinzel', serif" font-size="9" fill="#FFF" transform="rotate(-90 61 55)" text-anchor="middle">गीता शांकरभाष्यम् II</text>
+    <rect x="84" y="0" width="38" height="105" fill="url(#bookGold)" rx="2" />
+    <text x="103" y="55" font-family="'Cinzel', serif" font-size="9" fill="#221D1A" transform="rotate(-90 103 55)" text-anchor="middle">मधुसूदन सरस्वती टीका</text>
+    <rect x="126" y="5" width="32" height="100" fill="url(#bookDark)" rx="2" />
+    <rect x="162" y="0" width="36" height="105" fill="url(#bookRed)" rx="2" />
+    <rect x="202" y="0" width="42" height="105" fill="url(#bookDark)" rx="2" />
+    <text x="223" y="55" font-family="'Cinzel', serif" font-size="9" fill="#E8D28A" transform="rotate(-90 223 55)" text-anchor="middle">ब्रह्मसूत्र शांकरभाष्यम्</text>
+  </g>
+
+  <!-- Bottom Shelf: Traditional Wooden Book Stand (Rehal) & Open Manuscript -->
+  <g transform="translate(300, 360)">
+    <!-- Wooden Rehal / Book Rest -->
+    <path d="M40 70 L100 20 L160 70 L145 75 L100 35 L55 75 Z" fill="url(#woodGrad)" />
+    <!-- Open Scripture Pages -->
+    <path d="M50 35 Q100 15 100 30 Q100 15 150 35 L145 65 Q100 45 100 60 Q100 45 55 65 Z" fill="#FDFBF7" stroke="#DBC082" stroke-width="1.5" />
+    <!-- Devanagari Scripture Lines -->
+    <g stroke="#9E381C" stroke-width="1" opacity="0.6">
+      <line x1="65" y1="42" x2="92" y2="38" />
+      <line x1="65" y1="48" x2="90" y2="44" />
+      <line x1="65" y1="54" x2="92" y2="50" />
+      
+      <line x1="108" y1="38" x2="135" y2="42" />
+      <line x1="110" y1="44" x2="135" y2="48" />
+      <line x1="108" y1="50" x2="135" y2="54" />
+    </g>
+  </g>
+
+  <!-- Title Ribbon -->
+  <rect x="180" y="525" width="440" height="30" fill="rgba(34,29,26,0.85)" rx="4" />
+  <text x="400" y="545" font-family="'Cinzel', serif" font-size="13" font-weight="600" fill="#E8D28A" text-anchor="middle" letter-spacing="2">
+    VEDANTA ASHRAM SCRIPTURAL LIBRARY · INDORE
+  </text>
+</svg>

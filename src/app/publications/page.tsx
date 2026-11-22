@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useEffect, useRef, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import gsap from 'gsap';
 import { useData } from '@/context/DataContext';
-import { Publication } from '@/data/publications';
+import { Publication, getPublicationDateValue } from '@/data/publications';
 import PublicationModal from '@/components/PublicationModal';
 import Magnetic from '@/components/motion/Magnetic';
 import TiltCard from '@/components/motion/TiltCard';
@@ -27,17 +28,40 @@ const PUBLICATION_TYPES = [
 const INITIAL_BATCH_SIZE = 24;
 const BATCH_INCREMENT = 24;
 
-export default function PublicationsPage() {
+function PublicationsContent() {
   const { publications } = useData();
+  const searchParams = useSearchParams();
+  const typeParam = searchParams.get('type');
+  const langParam = searchParams.get('lang') || searchParams.get('language');
+  const initialType =
+    typeParam && (PUBLICATION_TYPES as readonly string[]).includes(typeParam)
+      ? typeParam
+      : 'All Archive';
+
   const rootRef = useRef<HTMLDivElement>(null);
   const heroImgRef = useRef<HTMLImageElement>(null);
   useScrollReveals(rootRef);
-  const [selectedType, setSelectedType] = useState<string>('All Archive');
+  const [selectedType, setSelectedType] = useState<string>(initialType);
+  const [selectedLang, setSelectedLang] = useState<string>(langParam ? langParam.toLowerCase() : 'All Languages');
   const [selectedEra, setSelectedEra] = useState<string>('All Eras');
   const [selectedYear, setSelectedYear] = useState<string>('All Years');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeModalPub, setActiveModalPub] = useState<Publication | null>(null);
   const [visibleCount, setVisibleCount] = useState<number>(INITIAL_BATCH_SIZE);
+
+  useEffect(() => {
+    if (typeParam && (PUBLICATION_TYPES as readonly string[]).includes(typeParam)) {
+      setSelectedType(typeParam);
+    }
+  }, [typeParam]);
+
+  useEffect(() => {
+    if (langParam) {
+      setSelectedLang(langParam.toLowerCase());
+    } else {
+      setSelectedLang('All Languages');
+    }
+  }, [langParam]);
 
   // =========================================================================
   // GATE 1 — AUTHORITATIVE DYNAMIC DATA DERIVATION (NEVER HARDCODED)
@@ -71,8 +95,8 @@ export default function PublicationsPage() {
       .map((p) => p.year)
       .filter((y): y is number => typeof y === 'number' && !isNaN(y));
     const uniqueYears = Array.from(new Set(validYears)).sort((a, b) => b - a);
-    const min = validYears.length > 0 ? Math.min(...validYears) : 2019;
-    const max = validYears.length > 0 ? Math.max(...validYears) : 2022;
+    const min = validYears.length > 0 ? Math.min(...validYears) : 2014;
+    const max = validYears.length > 0 ? Math.max(...validYears) : 2026;
     const era2020s = publicPublications.filter((p) => p.year && p.year >= 2020).length;
     const era2010s = publicPublications.filter((p) => p.year && p.year < 2020).length;
     return {
@@ -109,31 +133,43 @@ export default function PublicationsPage() {
     const verified = publicPublications.filter(
       (p) => p.type === 'Vedanta Sandesh' && resolvePublicationCover(p.id, p.type, p.coverImage)
     );
-    return verified.sort((a, b) => (b.year || 0) - (a.year || 0))[0] ||
-      publicPublications.filter((p) => p.type === 'Vedanta Sandesh')[0];
+    return (
+      verified.sort((a, b) => getPublicationDateValue(b) - getPublicationDateValue(a))[0] ||
+      publicPublications.filter((p) => p.type === 'Vedanta Sandesh')[0]
+    );
   }, [publicPublications]);
 
   const latestPiyush = useMemo(() => {
     const verified = publicPublications.filter(
       (p) => p.type === 'Vedanta Piyush' && resolvePublicationCover(p.id, p.type, p.coverImage)
     );
-    return verified.sort((a, b) => (b.year || 0) - (a.year || 0))[0] ||
-      publicPublications.filter((p) => p.type === 'Vedanta Piyush')[0];
+    return (
+      verified.sort((a, b) => getPublicationDateValue(b) - getPublicationDateValue(a))[0] ||
+      publicPublications.filter((p) => p.type === 'Vedanta Piyush')[0]
+    );
   }, [publicPublications]);
 
   // Reset pagination batch when filters change
   useEffect(() => {
     setVisibleCount(INITIAL_BATCH_SIZE);
-  }, [selectedType, selectedEra, selectedYear, searchQuery]);
+  }, [selectedType, selectedLang, selectedEra, selectedYear, searchQuery]);
 
   // =========================================================================
-  // GATE 5 — FILTERING ACROSS THE COMPLETE 250-RECORD DATASET
+  // GATE 5 — FILTERING ACROSS THE VERIFIED PUBLICATION DATASET
   // =========================================================================
   const filteredPublications = useMemo(() => {
     return publicPublications.filter((pub) => {
       // Type filter
       if (selectedType !== 'All Archive' && pub.type !== selectedType) {
         return false;
+      }
+      // Language filter (especially for E-Books language sub-filters)
+      if (selectedLang !== 'All Languages') {
+        const targetLang = selectedLang.toLowerCase();
+        const pubLang = pub.language?.toLowerCase() || '';
+        if (!pubLang.includes(targetLang)) {
+          return false;
+        }
       }
       // Era filter
       if (selectedEra === '2020s' && (!pub.year || pub.year < 2020)) {
@@ -162,7 +198,7 @@ export default function PublicationsPage() {
       }
       return true;
     });
-  }, [publicPublications, selectedType, selectedEra, selectedYear, searchQuery]);
+  }, [publicPublications, selectedType, selectedLang, selectedEra, selectedYear, searchQuery]);
 
   // Sliced items for safe progressive DOM mounting (Gate 5 performance optimization)
   const displayedPublications = useMemo(() => {
@@ -283,11 +319,11 @@ export default function PublicationsPage() {
                 setSelectedYear('All Years');
                 scrollToArchive();
               }}
-              title="View all canonical publications"
+              title="View all publications"
             >
               <span className={styles.registryNumber}>{totalCount}</span>
               <span className={styles.registryLabel}>Catalogued Works</span>
-              <span className={styles.registrySub}>All Canonical Entries</span>
+              <span className={styles.registrySub}>All Archival Works</span>
             </button>
 
             <button
@@ -363,7 +399,7 @@ export default function PublicationsPage() {
             <h2 id="vault-title" className={styles.h2}>Recovered Philosophical Treatises</h2>
             <div className={styles.rule} data-rule />
             <p className={styles.lead}>
-              Six foundational treatises and scriptural monographs authored by Pujya Swami Atmananda Saraswati, preserved with their authentic recovered original artwork and complete PDF scriptural texts.
+              {ebooksList.length > 0 ? `${ebooksList.length === 8 ? 'Eight' : ebooksList.length} foundational` : 'Foundational'} treatises and scriptural monographs authored by Pujya Swami Atmananda Saraswati, preserved with their authentic recovered original artwork and complete PDF scriptural texts.
             </p>
           </div>
 
@@ -385,7 +421,7 @@ export default function PublicationsPage() {
 
                   <div className={styles.vaultBody}>
                     <div className={styles.tagRow}>
-                      <span className={styles.tagAccent}>Canonical E-Book</span>
+                      <span className={styles.tagAccent}>Digital Edition</span>
                       <span className={styles.tag}>{book.language}</span>
                       {book.pageCount && <span className={styles.tag}>{book.pageCount} Pages</span>}
                     </div>
@@ -539,7 +575,7 @@ export default function PublicationsPage() {
                   scrollToArchive();
                 }}
               >
-                <span className={styles.eraName}>2020–2022 Archive</span>
+                <span className={styles.eraName}>2020s ({Math.min(2020, maxYear)}–{maxYear}) Archive</span>
                 <span className={styles.eraCount}>{eraCounts.era2020s} Issues</span>
               </button>
               <button
@@ -550,7 +586,7 @@ export default function PublicationsPage() {
                   scrollToArchive();
                 }}
               >
-                <span className={styles.eraName}>2019 Archive</span>
+                <span className={styles.eraName}>2010s ({minYear}–2019) Archive</span>
                 <span className={styles.eraCount}>{eraCounts.era2010s} Issues</span>
               </button>
             </div>
@@ -566,7 +602,7 @@ export default function PublicationsPage() {
             <h2 id="browser-title" className={styles.h2}>The Full Archive Catalogue</h2>
             <div className={styles.rule} data-rule />
             <p className={styles.lead}>
-              Browse all {totalCount} canonical issues, e-books, and classical texts. Each record retains its authentic verified cover image or ashram archival preservation plate.
+              Browse all {totalCount} published issues, e-books, and classical texts. Each record retains its authentic verified cover image or ashram archival preservation plate.
             </p>
           </div>
 
@@ -637,6 +673,29 @@ export default function PublicationsPage() {
                 )}
               </div>
             </div>
+
+            {selectedType === 'E-Books' && (
+              <div className={styles.subRow} style={{ marginTop: '0.6rem' }}>
+                <div className={styles.yearRow}>
+                  <span className={styles.filterLabel}>Language</span>
+                  {[
+                    { label: 'All Languages (8)', value: 'All Languages' },
+                    { label: 'Hindi (6)', value: 'hindi' },
+                    { label: 'English (8)', value: 'english' },
+                    { label: 'Gujarati (0)', value: 'gujarati' },
+                  ].map((item) => (
+                    <button
+                      key={item.value}
+                      type="button"
+                      className={`${styles.yearPill} ${(selectedLang === item.value || (item.value === 'All Languages' && selectedLang === 'All Languages')) ? styles.yearPillActive : ''}`}
+                      onClick={() => setSelectedLang(item.value)}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className={styles.resultsRow}>
@@ -644,11 +703,12 @@ export default function PublicationsPage() {
               Showing <strong>{Math.min(visibleCount, filteredPublications.length)}</strong> of{' '}
               <strong>{filteredPublications.length}</strong> matching records ({totalCount} total in corpus)
             </span>
-            {(selectedType !== 'All Archive' || selectedEra !== 'All Eras' || selectedYear !== 'All Years' || searchQuery) && (
+            {(selectedType !== 'All Archive' || selectedLang !== 'All Languages' || selectedEra !== 'All Eras' || selectedYear !== 'All Years' || searchQuery) && (
               <button
                 type="button"
                 onClick={() => {
                   setSelectedType('All Archive');
+                  setSelectedLang('All Languages');
                   setSelectedEra('All Eras');
                   setSelectedYear('All Years');
                   setSearchQuery('');
@@ -736,11 +796,16 @@ export default function PublicationsPage() {
             </>
           ) : (
             <div className={styles.empty}>
-              <p className={styles.emptyText}>No publications found matching the active filter criteria.</p>
+              <p className={styles.emptyText}>
+                {selectedType === 'E-Books' && selectedLang.includes('gujarati')
+                  ? 'No dedicated Gujarati e-books are currently cataloged in this collection. Please explore the Vedanta Piyush archive for monthly Gujarati spiritual publications.'
+                  : 'No publications found matching the active filter criteria.'}
+              </p>
               <Button
                 variant="outline"
                 onClick={() => {
                   setSelectedType('All Archive');
+                  setSelectedLang('All Languages');
                   setSelectedEra('All Eras');
                   setSelectedYear('All Years');
                   setSearchQuery('');
@@ -769,5 +834,27 @@ export default function PublicationsPage() {
         <PublicationModal publication={activeModalPub} onClose={() => setActiveModalPub(null)} />
       )}
     </div>
+  );
+}
+
+export default function PublicationsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div
+          className={styles.archive}
+          style={{
+            minHeight: '60vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          Loading Publications Archive...
+        </div>
+      }
+    >
+      <PublicationsContent />
+    </Suspense>
   );
 }

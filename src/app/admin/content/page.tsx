@@ -112,7 +112,7 @@ export default function AdminContentOverviewPage() {
                     height: '36px',
                     borderRadius: '8px',
                     background: 'var(--vm-sand, #FAF6EE)',
-                    color: 'var(--vm-bhagwa, #E06328)',
+                    color: 'var(--vm-brand-orange, #C96622)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',

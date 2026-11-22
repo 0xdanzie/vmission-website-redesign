@@ -17,7 +17,7 @@
 .hairlineProgress {
   height: 100%;
   width: 100%;
-  background: #e06328;
+  background: var(--vm-brand-orange, #C96622);
   transform-origin: left center;
   transform: scaleX(0);
   opacity: 0;

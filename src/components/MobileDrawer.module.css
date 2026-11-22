@@ -8,7 +8,7 @@
   --dr-paper: #f4f1ea;
   --dr-mute: rgba(244, 241, 234, 0.6);
   --dr-line: rgba(244, 241, 234, 0.12);
-  --dr-accent: #e06328;
+  --dr-accent: var(--vm-brand-orange, #C96622);
 
   position: fixed;
   top: 0;

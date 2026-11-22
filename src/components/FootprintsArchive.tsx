@@ -53,7 +53,7 @@ export default function FootprintsArchive() {
                 loading="lazy"
               />
               <div className={styles.imageOverlay}>
-                <span className={styles.canonicalTag}>{activeSlide.canonicalId}</span>
+                <span className={styles.canonicalTag}>Archival Slide</span>
                 <span className={styles.slideCounter}>
                   {currentIdx + 1} / {footprintSlides.length}
                 </span>

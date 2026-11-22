@@ -49,7 +49,7 @@ const ENQUIRY_PATHWAYS: PathwayItem[] = [
     topicValue: 'Ashram Visit / Stay',
     number: '04',
     title: 'Ashram',
-    desc: 'Planning a visit to Sri Gangeshwar Mahadev Mandir, requesting temporary guest accommodation, or meeting the Acharyas.',
+    desc: 'Planning a visit to Shiv Mandir, requesting temporary guest accommodation, or meeting the Acharyas.',
   },
 ];
 
@@ -220,7 +220,7 @@ export default function ContactPage() {
               </span>
             </h1>
             <p className={styles.heroLead} data-ct-hero-fade>
-              The doors of Vedanta Ashram are open to sincere seekers of Truth. Whether inquiring about traditional Vedantic study, forthcoming assemblies, publications, or planning a reverent visit to Sri Gangeshwar Mahadev Mandir, reach the Ashram through our direct channels.
+              The doors of Vedanta Ashram are open to sincere seekers of Truth. Whether inquiring about traditional Vedantic study, forthcoming assemblies, publications, or planning a reverent visit to Shiv Mandir, reach the Ashram through our direct channels.
             </p>
             <div className={styles.heroCtas} data-ct-hero-fade>
               <Magnetic strength={0.22}>
@@ -393,7 +393,7 @@ export default function ContactPage() {
               <span className={styles.templeRule} aria-hidden="true" data-ct-rule />
               <div className={styles.templeHoursTitle}>
                 <span aria-hidden="true">🕉️</span>
-                <span>Sri Gangeshwar Mahadev Mandir Darshan</span>
+                <span>Shiv Mandir Darshan</span>
               </div>
               <div className={styles.templeHoursTiming}>
                 Morning: <strong>6:30 AM – 12:00 PM IST</strong> &nbsp;|&nbsp; Evening: <strong>4:30 PM – 8:30 PM IST</strong>
@@ -446,6 +446,7 @@ export default function ContactPage() {
         className={styles.enquirySection}
         aria-label="Ashram Enquiry Form"
       >
+        <div id="form" />
         <div className={styles.formContainer}>
           <div className={styles.formBox} data-reveal>
             <div className={styles.formTitleRow}>
@@ -645,6 +646,7 @@ export default function ContactPage() {
 
       {/* 7.5 Visit the Ashram Section */}
       <section id="visit-ashram" className={styles.visitSection} data-ct-visit aria-labelledby="visit-ashram-title">
+        <div id="location" />
         <div className={styles.visitContainer}>
           <div className={styles.visitGrid}>
             <div data-reveal>
@@ -689,7 +691,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className={styles.travelTextTitle}>Local Access &amp; Landmark</h3>
                     <p className={styles.travelTextDesc}>
-                      Located inside <strong>Shankaracharya Gate</strong> in Sudama Nagar (Sector-E), situated along the ring road between Futi-Kothi and Hawa Bangla.
+                      Located inside <strong>Shankaracharya Gate</strong> in Sudama Nagar (Sector-E), situated along the ring road between Futi-Kothi and Hawa Bangla. For rural retreat camps, the campus is near Berchha Lake, approximately 18 km from Indore Junction along Khandwa Road.
                     </p>
                   </div>
                 </div>
@@ -738,7 +740,7 @@ export default function ContactPage() {
         description="Whether seeking guidance in scriptural study, participating in Ashram assemblies, or supporting educational seva, the Ashram office is available to assist you."
         ctas={[
           { label: 'Explore Teachings', href: '/teachings', variant: 'primary' },
-          { label: 'Support Through Seva', href: '/donate', variant: 'outline' },
+          { label: 'Make a Donation', href: '/donate', variant: 'outline' },
           { label: 'Forthcoming Events', href: '/events', variant: 'outline' },
         ]}
       />

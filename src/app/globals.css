@@ -13,20 +13,24 @@
 
 :root {
   /* ============================================================
-     1. COLOR SYSTEM — BHAGWA LED (PHASE 2D.6)
+     1. COLOR SYSTEM — AUTHORITATIVE BRAND LOGO ORANGE & ACCENTS
      ============================================================ */
 
-  /* Primary Bhagwa Family */
-  --vm-bhagwa: #E06328;
-  --vm-bhagwa-hover: #F0753B;
-  --vm-gerua: #C84E17;
+  /* Official Brand Identity Color (Authoritative Reference: #C96622, RGB 201, 102, 34) */
+  --vm-brand-orange: #C96622;
+  --vm-logo-orange: var(--vm-brand-orange);
+
+  /* Primary Bhagwa Family tied directly to official brand color */
+  --vm-bhagwa: var(--vm-logo-orange);
+  --vm-bhagwa-hover: var(--vm-brand-orange);
+  --vm-gerua: var(--vm-brand-orange);
   /* Primary Action CTA */
-  --vm-gerua-active: #B34211;
-  --vm-ochre: #A73C0E;
+  --vm-gerua-active: var(--vm-brand-orange);
+  --vm-ochre: var(--vm-brand-orange);
   /* High-contrast text on light surfaces */
-  --vm-bhagwa-subtle: rgba(224, 99, 40, 0.08);
-  --vm-bhagwa-glow: rgba(224, 99, 40, 0.22);
-  --vm-bhagwa-border: rgba(224, 99, 40, 0.28);
+  --vm-bhagwa-subtle: rgba(201, 102, 34, 0.08);
+  --vm-bhagwa-glow: rgba(201, 102, 34, 0.22);
+  --vm-bhagwa-border: rgba(201, 102, 34, 0.28);
 
   /* Backwards-compatibility aliases for existing components */
   --vm-saffron: var(--vm-bhagwa);

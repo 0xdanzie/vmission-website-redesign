@@ -8,7 +8,7 @@
   --paper: #f4f1ea;
   --paper-2: #ebe6da;
   --mute: #5c5750;
-  --accent: #e06328;
+  --accent: var(--vm-brand-orange, #C96622);
   --rule: rgba(11, 11, 11, 0.14);
   --rule-light: rgba(244, 241, 234, 0.2);
   --serif: var(--font-serif, 'Cormorant Garamond', serif);
@@ -1449,4 +1449,19 @@
 
 .spotifyBannerText {
   min-width: 0;
+}
+
+.articleBodyWrapper {
+  margin: 2rem 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.articleParagraph {
+  font-family: var(--serif);
+  font-size: 1.18rem;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  margin: 0;
 }

@@ -112,7 +112,7 @@ export default function Footer() {
             <h3 className={styles.colHeading}>Connect &amp; Support</h3>
             
             <Link href="/donate" className={styles.btnFooterDonate}>
-              Support Through Seva&nbsp;→
+              Make a Donation&nbsp;→
             </Link>
 
             <a

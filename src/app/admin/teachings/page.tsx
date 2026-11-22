@@ -37,7 +37,7 @@ export default function AdminTeachingsPage() {
   const [language, setLanguage] = useState<TeachingLanguage>('Hindi');
   const [duration, setDuration] = useState('48 mins');
   const [description, setDescription] = useState('');
-  const [src, setSrc] = useState('/audio/demo-discourse.mp3');
+  const [src, setSrc] = useState('');
   const [audioUrl, setAudioUrl] = useState('');
   const [youtubePlaylistId, setYoutubePlaylistId] = useState('');
   const [youtubeVideoId, setYoutubeVideoId] = useState('');
@@ -65,7 +65,7 @@ export default function AdminTeachingsPage() {
     setLanguage('Hindi');
     setDuration('45 mins');
     setDescription('');
-    setSrc('/audio/demo-discourse.mp3');
+    setSrc('');
     setAudioUrl('');
     setYoutubePlaylistId('');
     setYoutubeVideoId('');
@@ -85,7 +85,7 @@ export default function AdminTeachingsPage() {
     setLanguage(t.language);
     setDuration(t.duration || '');
     setDescription(t.description);
-    setSrc(t.src || '/audio/demo-discourse.mp3');
+    setSrc(t.src || '');
     setAudioUrl(t.audioUrl || '');
     setYoutubePlaylistId(t.youtubePlaylistId || '');
     setYoutubeVideoId(t.youtubeVideoId || '');
@@ -335,7 +335,7 @@ export default function AdminTeachingsPage() {
                     <td>
                       <span className={styles.regBadge} style={{
                         background: 'var(--vm-bhagwa-subtle, rgba(224, 99, 40, 0.08))',
-                        color: 'var(--vm-gerua, #C84E17)',
+                        color: 'var(--vm-brand-orange, #C96622)',
                         border: '1px solid rgba(224, 99, 40, 0.2)',
                       }}>
                         {t.format}
@@ -577,7 +577,7 @@ export default function AdminTeachingsPage() {
                   id="teaching-publish-checkbox"
                   checked={isPublished}
                   onChange={(e) => setIsPublished(e.target.checked)}
-                  style={{ width: '18px', height: '18px', accentColor: 'var(--vm-bhagwa, #E06328)', cursor: 'pointer' }}
+                  style={{ width: '18px', height: '18px', accentColor: 'var(--vm-brand-orange, #C96622)', cursor: 'pointer' }}
                 />
                 <label htmlFor="teaching-publish-checkbox" style={{ cursor: 'pointer', fontSize: '0.84375rem' }}>
                   <strong style={{ color: 'var(--vm-text, #221D1A)' }}>Publish live to public website</strong>

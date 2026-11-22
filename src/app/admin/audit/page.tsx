@@ -90,7 +90,7 @@ export default function AdminAuditPage() {
         padding: '16px 20px',
         background: 'var(--vm-ivory, #FDFBF7)',
         border: '1px solid var(--vm-sand-border, #DFD7C7)',
-        borderLeft: '3px solid var(--vm-bhagwa, #E06328)',
+        borderLeft: '3px solid var(--vm-brand-orange, #C96622)',
         borderRadius: '8px',
         fontSize: '0.8125rem',
         color: 'var(--vm-text-muted, #665D55)',
@@ -99,7 +99,7 @@ export default function AdminAuditPage() {
         alignItems: 'flex-start',
         gap: '12px',
       }}>
-        <div style={{ color: 'var(--vm-bhagwa, #E06328)', marginTop: '2px' }}>
+        <div style={{ color: 'var(--vm-brand-orange, #C96622)', marginTop: '2px' }}>
           <ShieldIcon size={16} />
         </div>
         <div>

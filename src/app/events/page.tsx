@@ -201,9 +201,9 @@ export default function EventsPage() {
         sublabel: 'Spiritual Discourses & Intensive Study Sessions',
         events: e2024_2025,
         visualInterruption: {
-          src: '/images/vmission/ashram/gangeshwar-dome-closeup.jpg',
-          alt: 'Shri Gangeshwar Mahadev Mandir dome, Vedanta Ashram, Indore',
-          caption: 'Ashram Venue: Shri Gangeshwar Mahadev Mandir, Vedanta Ashram, Indore',
+          src: '/gangeshwar-dome-closeup.jpg',
+          alt: 'Shiv Mandir dome, Vedanta Ashram, Indore',
+          caption: 'Ashram Venue: Shiv Mandir, Vedanta Ashram, Indore',
           focalPoint: { x: 50, y: 15 },
         },
       },
@@ -337,6 +337,7 @@ export default function EventsPage() {
       {/* 02. Active gathering spotlight */}
       {focalGathering && (
         <section className={styles.focal} id="active-gathering" aria-labelledby="focal-kicker">
+          <div id="forthcoming" />
           <div className="container">
             <div className={styles.focalTop} data-reveal>
               <span id="focal-kicker" className={styles.overline}>Spotlight · Active Gathering</span>
@@ -436,6 +437,9 @@ export default function EventsPage() {
 
       {/* 03. Archive */}
       <section className={styles.archive} id="archive" aria-labelledby="archive-title">
+        <div id="earlier" />
+        <div id="album" />
+        <div id="gallery" />
         <div className="container">
           <div className={styles.archiveIntro} data-reveal>
             <span className={styles.overline}>Living Chronicle of Vedanta Pravachana</span>

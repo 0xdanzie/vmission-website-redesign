@@ -10,8 +10,8 @@
   --x-mute: #6c6861;
   --x-faint: #9d988e;
   --x-line: rgba(11, 11, 11, 0.14);
-  --x-accent: #e06328;
-  --x-accent-deep: #b8481a;
+  --x-accent: var(--vm-brand-orange, #C96622);
+  --x-accent-deep: var(--vm-brand-orange, #C96622);
   --x-ease: cubic-bezier(0.16, 1, 0.3, 1);
 
   position: relative;

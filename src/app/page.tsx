@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,6 +11,9 @@ import TiltCard from '@/components/motion/TiltCard';
 import { useData } from '@/context/DataContext';
 import { getAssetPath } from '@/utils/assetPath';
 import CinematicEntryOverlay from '@/components/cinematic/CinematicEntryOverlay';
+import VedantaTeachingsSlider from '@/components/VedantaTeachingsSlider';
+import { resolvePublicationCover } from '@/lib/media-identity';
+import { PUBLICATIONS, getPublicationDateValue } from '@/data/publications';
 import styles from './page.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -39,11 +42,34 @@ function Words({ text }: { text: string }) {
 }
 
 export default function HomePage() {
-  const { events, teachings } = useData();
+  const { events, teachings, publications: contextPublications } = useData();
   const rootRef = useRef<HTMLDivElement>(null);
 
   const upcomingEvents = events.filter((e) => !e.isPast).slice(0, 2);
   const featuredTeachings = teachings.slice(0, 3);
+
+  const allPublications =
+    contextPublications && contextPublications.length > 0 ? contextPublications : PUBLICATIONS;
+
+  const latestSandesh = useMemo(() => {
+    const verified = allPublications.filter(
+      (p) => p.type === 'Vedanta Sandesh' && resolvePublicationCover(p.id, p.type, p.coverImage)
+    );
+    return (
+      verified.sort((a, b) => getPublicationDateValue(b) - getPublicationDateValue(a))[0] ||
+      allPublications.find((p) => p.type === 'Vedanta Sandesh')
+    );
+  }, [allPublications]);
+
+  const latestPiyush = useMemo(() => {
+    const verified = allPublications.filter(
+      (p) => p.type === 'Vedanta Piyush' && resolvePublicationCover(p.id, p.type, p.coverImage)
+    );
+    return (
+      verified.sort((a, b) => getPublicationDateValue(b) - getPublicationDateValue(a))[0] ||
+      allPublications.find((p) => p.type === 'Vedanta Piyush')
+    );
+  }, [allPublications]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -191,52 +217,82 @@ export default function HomePage() {
       <CinematicEntryOverlay />
 
       {/* ==================================================================
-          01 — ARRIVAL
+          01 — ARRIVAL: ARCHITECTURAL DIPTYCH HERO (CONCEPT 4)
           ================================================================== */}
       <section className={styles.hero} data-hero>
-        <div className={styles.heroMedia}>
-          <img
-            data-hero-img
-            src={getAssetPath('/images/vmission/hero/vmission-hero-cinematic.jpg')}
-            alt="Vedanta Mission Ashram, Sri Gangeshwar Mahadev Shivling Dome in Indore"
-            className={styles.heroImg}
-            loading="eager"
-          />
-          <div className={styles.heroShade} />
-        </div>
+        <div className={styles.heroContainer}>
+          {/* Column 1: Left Content Panel */}
+          <div className={styles.heroContentColumn}>
+            <h1 className={styles.heroTitle}>
+              <span className={styles.lineMask} data-hero-line>
+                <span>Vedanta</span>
+              </span>
+              <span className={styles.lineMask} data-hero-line>
+                <span>Mission</span>
+              </span>
+            </h1>
 
-        <div className={styles.heroInner}>
-          <h1 className={styles.heroTitle}>
-            <span className={styles.lineMask} data-hero-line>
-              <span>Vedanta</span>
-            </span>{' '}
-            <span className={styles.lineMask} data-hero-line>
-              <span>Mission</span>
-            </span>
-          </h1>
-
-          <div className={styles.heroFoot}>
             <p className={styles.heroSanskrit} data-hero-fade>
               सत्यं ज्ञानमनन्तं ब्रह्म
             </p>
-            <div className={styles.heroCopy} data-hero-fade>
-              <p className={styles.heroDescription}>
-                A residential Gurukula in Indore, Central India, dedicated to the systematic study of the Upanishads, Bhagavad Gita, and Brahma Sutras under the guidance of Poojya Swami Atmananda Saraswati.
-              </p>
-              <div className={styles.heroCtas}>
-                <Magnetic>
-                  <Link href="/teachings" className={styles.btnPrimary} data-cursor-text="Listen">
-                    Explore the Teachings
-                    <span aria-hidden="true">→</span>
-                  </Link>
-                </Magnetic>
-                <Magnetic>
-                  <Link href="/ashram" className={styles.btnGhost}>
-                    About the Ashram
-                  </Link>
-                </Magnetic>
-              </div>
+
+            <p className={styles.heroDescription} data-hero-fade>
+              A residential Gurukula in Indore, Central India, dedicated to the systematic study of the Upanishads, Bhagavad Gita, and Brahma Sutras under the guidance of Poojya Swami Atmananda Saraswati.
+            </p>
+
+            <div className={`${styles.heroCtas} ${styles.heroCtasDesktop}`} data-hero-fade>
+              <Magnetic>
+                <Link href="/teachings" className={styles.btnPrimary} data-cursor-text="Listen">
+                  Explore the Teachings
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </Magnetic>
+              <Magnetic>
+                <Link href="/ashram" className={styles.btnGhost}>
+                  About the Ashram
+                </Link>
+              </Magnetic>
             </div>
+          </div>
+
+          {/* Diptych Frame Group (Middle & Right Columns on Desktop, Stacked on Mobile) */}
+          <div className={styles.heroDiptych}>
+            {/* Column 2: Architectural Photograph (Owner's Portrait Photo) */}
+            <div className={styles.diptychFrameArch}>
+              <img
+                data-hero-img
+                src={getAssetPath('/images/vmission/hero/ashram-building-portrait.jpg')}
+                alt="Vedanta Ashram Indore with sacred white Shiva dome, golden Shiva emblem, saffron flag, and Hindi signage"
+                className={styles.imgArch}
+                loading="eager"
+              />
+            </div>
+
+            {/* Column 3: Community Photograph (Poojya Guruji & Monastics) */}
+            <div className={styles.diptychFrameCommunity}>
+              <img
+                data-hero-img
+                src={getAssetPath('/images/vmission/hero/ashram-community.png')}
+                alt="Poojya Swami Atmananda Saraswati with Ashram monastics and disciples"
+                className={styles.imgCommunity}
+                loading="eager"
+              />
+            </div>
+          </div>
+
+          {/* Mobile CTAs: Appears below the diptych photos on mobile, matching Concept 4 reference */}
+          <div className={`${styles.heroCtas} ${styles.heroCtasMobile}`} data-hero-fade>
+            <Magnetic>
+              <Link href="/teachings" className={styles.btnPrimary} data-cursor-text="Listen">
+                Explore the Teachings
+                <span aria-hidden="true">→</span>
+              </Link>
+            </Magnetic>
+            <Magnetic>
+              <Link href="/ashram" className={styles.btnGhost}>
+                About the Ashram
+              </Link>
+            </Magnetic>
           </div>
         </div>
 
@@ -245,7 +301,7 @@ export default function HomePage() {
             {[...MARQUEE, ...MARQUEE].map((item, i) => (
               <span key={`${item}-${i}`}>
                 {item}
-                <i>✦</i>
+                <i>◆</i>
               </span>
             ))}
           </div>
@@ -258,9 +314,9 @@ export default function HomePage() {
       <section className={styles.ashram}>
         <div className="container">
           <header className={styles.sectionHead}>
-            <span className={styles.eyebrow} data-reveal>Ashram &amp; Mandir · Est. 1995</span>
+            <span className={styles.eyebrow} data-reveal>Ashram Est. 1992 · Mandir Dedicated 1995</span>
             <h2 className={styles.h2} data-reveal>
-              Sri Gangeshwar Mahadev <em>&amp; Vedanta Ashram</em>
+              Shiv Mandir <em>&amp; Vedanta Ashram</em>
             </h2>
             <p className={styles.lead} data-reveal>
               Nestled in Indore, Central India, Vedanta Ashram is a living residential Gurukula where full-time Brahmacharis and visiting seekers dedicate themselves to traditional Vedic study, daily worship, and contemplative silence.
@@ -269,22 +325,23 @@ export default function HomePage() {
 
           <div className={styles.ashramGrid}>
             <figure className={styles.landmark}>
-              <div className={styles.landmarkFrame} data-clip data-zoom>
+              <div className={styles.landmarkFrame} data-clip>
                 <img
-                  src={getAssetPath('/images/vmission/ashram/gangeshwar-dome-closeup.jpg')}
-                  alt="Sri Gangeshwar Mahadev Monumental Shivling Dome at Vedanta Ashram"
+                  src={getAssetPath('/gangeshwar-dome-closeup.jpg')}
+                  alt="Shiv Mandir Monumental Shivling Dome at Vedanta Ashram"
                   loading="lazy"
+                  style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
                 />
               </div>
               <figcaption className={styles.caption}>
-                <strong>Sri Gangeshwar Mahadev Mandir</strong>
+                <strong>Shiv Mandir</strong>
                 <span>Towering white architectural emblem of contemplative stillness</span>
               </figcaption>
             </figure>
 
             <div className={styles.ashramCol}>
               <p className={styles.bodyLarge} data-reveal>
-                At the heart of the Ashram rises the unique white dome structure modeled as a monumental Shiva Linga, consecrated in 1995. It stands as a living testament to the primordial Guru, Lord Shiva, whose grace guides all sincere inquirers toward non-dual Self-knowledge.
+                At the heart of the Ashram rises the unique white dome structure modeled as a monumental Shiva Linga, dedicated in 1995. It stands as a living testament to the primordial Guru, Lord Shiva, whose grace guides all sincere inquirers toward non-dual Self-knowledge.
               </p>
 
               <div className={styles.schedule} data-reveal>
@@ -295,14 +352,12 @@ export default function HomePage() {
                 <div data-rule className={styles.rule} />
                 <ul className={styles.scheduleList}>
                   <li className={styles.scheduleRow}>
-                    <span className={styles.time}>07:00 AM</span>
                     <div>
                       <strong>Morning Vedic Abhishek &amp; Shiva Sahasranama</strong>
                       <span>Traditional Bilva offerings, Stotram chanting, and morning prayers</span>
                     </div>
                   </li>
                   <li className={styles.scheduleRow}>
-                    <span className={styles.time}>06:30 PM</span>
                     <div>
                       <strong>Sandhya Aarti &amp; Silent Upanishadic Reflection</strong>
                       <span>Evening lamp offering, Stotram singing, and contemplative meditation</span>
@@ -327,7 +382,7 @@ export default function HomePage() {
                   <div className={styles.vignetteImg} data-zoom>
                     <img
                       src={getAssetPath('/images/vmission/worship/morning-aarti.jpg')}
-                      alt="Morning Aarti at Sri Gangeshwar Temple"
+                      alt="Morning Aarti at Shiv Mandir"
                       loading="lazy"
                     />
                   </div>
@@ -455,7 +510,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className={styles.provenance}>Canonical Ashram Archive · Riverside Satsang</div>
+        <div className={styles.provenance}>Ashram Archival Collection · Riverside Satsang</div>
       </section>
 
       {/* ==================================================================
@@ -522,6 +577,27 @@ export default function HomePage() {
       </section>
 
       {/* ==================================================================
+          05B — ESSENTIAL VEDANTA TEACHINGS (Cinematic Visual Slider)
+          ================================================================== */}
+      <section className={styles.teachingsSliderSection}>
+        <div className={styles.sliderContainer}>
+          <header className={styles.sectionHeadCenter}>
+            <span className={styles.eyebrow} data-reveal>Living Wisdom · Visual Exposition</span>
+            <h2 className={styles.h2} data-reveal>
+              Essential Teachings <em>of Advaita Vedanta</em>
+            </h2>
+            <p className={styles.lead} data-reveal>
+              A visual contemplation on the unbroken Guru Parampara, Upanishadic Mahavakyas, and the eternal vision of Non-duality.
+            </p>
+          </header>
+
+          <div data-reveal>
+            <VedantaTeachingsSlider />
+          </div>
+        </div>
+      </section>
+
+      {/* ==================================================================
           06 — LITERARY HERITAGE
           ================================================================== */}
       <section className={styles.publications}>
@@ -537,55 +613,143 @@ export default function HomePage() {
           </header>
 
           <div className={styles.covers} data-stagger>
-            <TiltCard className={styles.pubCard}>
-              <div className={`${styles.cover} ${styles.coverInk}`}>
-                <span className={styles.coverBadge}>English &amp; Hindi · Continuous since 2000</span>
-                <div className={styles.coverBody}>
-                  <div className={styles.coverEmblem}>ॐ</div>
-                  <h4>VEDANTA SANDESH</h4>
-                  <p>A Monthly Journal of Advaita Vedanta</p>
-                  <span className={styles.coverIssue}>March 2026 Issue</span>
-                </div>
-              </div>
-              <div className={styles.pubDetails}>
-                <h3>Vedanta Sandesh</h3>
-                <p>
-                  Published continuously every month for over a quarter century. Features verse-by-verse Gita commentaries, Upanishadic reflections, and articles by Swami Atmananda Saraswati.
-                </p>
-                <div className={styles.pubMeta}>
-                  <span>300+ Issues Archived</span>
-                  <span>Free Global PDF Access</span>
-                </div>
-                <Link href="/publications" className={styles.textLink}>
-                  Read Current Issue &amp; Archives →
-                </Link>
-              </div>
-            </TiltCard>
+            {latestSandesh && (() => {
+              const coverSrc = resolvePublicationCover(latestSandesh.id, latestSandesh.type, latestSandesh.coverImage);
+              return (
+                <TiltCard className={styles.pubCard}>
+                  <div className={styles.coverContainer}>
+                    <span className={styles.coverBadge}>English &amp; Hindi · Continuous since 2000</span>
+                    <div className={styles.coverFrame}>
+                      {coverSrc ? (
+                        <img
+                          src={coverSrc}
+                          alt={`Official cover of ${latestSandesh.title}`}
+                          className={styles.coverImg}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className={`${styles.cover} ${styles.coverInk}`}>
+                          <div className={styles.coverBody}>
+                            <div className={styles.coverEmblem}>ॐ</div>
+                            <h4>VEDANTA SANDESH</h4>
+                            <p>A Monthly Journal of Advaita Vedanta</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div className={styles.pubDetails}>
+                    <h3>Vedanta Sandesh</h3>
+                    <p className={styles.pubIssueTitle}>
+                      {latestSandesh.title} · {latestSandesh.month} {latestSandesh.year}
+                    </p>
+                    <p>
+                      {latestSandesh.description ||
+                        'Published continuously every month for over a quarter century. Features verse-by-verse Gita commentaries, Upanishadic reflections, and articles by Swami Atmananda Saraswati.'}
+                    </p>
+                    <div className={styles.pubMeta}>
+                      <span>300+ Issues Archived</span>
+                      <span>Free Global PDF Access</span>
+                      <span>{latestSandesh.month} {latestSandesh.year} Edition</span>
+                    </div>
+                    <div className={styles.pubActions}>
+                      <a
+                        href={latestSandesh.downloadUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.pubActionPrimary}
+                        aria-label={`Download ${latestSandesh.title} PDF issue`}
+                      >
+                        Download PDF (Free) ↗
+                      </a>
+                      {latestSandesh.readOnlineUrl && (
+                        <a
+                          href={latestSandesh.readOnlineUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.pubActionGhost}
+                          aria-label={`Read ${latestSandesh.title} online flipbook`}
+                        >
+                          Read Flipbook ↗
+                        </a>
+                      )}
+                    </div>
+                    <Link href="/publications?type=Vedanta+Sandesh" className={styles.pubArchiveLink}>
+                      Browse Sandesh Archives (175 Issues) →
+                    </Link>
+                  </div>
+                </TiltCard>
+              );
+            })()}
 
-            <TiltCard className={styles.pubCard}>
-              <div className={`${styles.cover} ${styles.coverPaper}`}>
-                <span className={styles.coverBadgeDark}>Hindi &amp; Gujarati · Monthly</span>
-                <div className={styles.coverBody}>
-                  <div className={styles.coverEmblemDark}>वेदान्त</div>
-                  <h4>VEDANTA PIYUSH</h4>
-                  <p>Spiritual Reflections in Regional Languages</p>
-                  <span className={styles.coverIssueDark}>Monthly Edition</span>
-                </div>
-              </div>
-              <div className={styles.pubDetails}>
-                <h3>Vedanta Piyush</h3>
-                <p>
-                  A dedicated regional language monthly publication offering lucid elucidations of Sanskrit verses, traditional Stotrams, and practical sadhana guidance for regional seekers.
-                </p>
-                <div className={styles.pubMeta}>
-                  <span>Complete Digital Edition</span>
-                  <span>Free Distribution</span>
-                </div>
-                <Link href="/publications" className={styles.textLink}>
-                  Browse Piyush Archives →
-                </Link>
-              </div>
-            </TiltCard>
+            {latestPiyush && (() => {
+              const coverSrc = resolvePublicationCover(latestPiyush.id, latestPiyush.type, latestPiyush.coverImage);
+              return (
+                <TiltCard className={styles.pubCard}>
+                  <div className={styles.coverContainer}>
+                    <span className={styles.coverBadge}>Hindi &amp; Gujarati · Monthly Edition</span>
+                    <div className={styles.coverFrame}>
+                      {coverSrc ? (
+                        <img
+                          src={coverSrc}
+                          alt={`Official cover of ${latestPiyush.title}`}
+                          className={styles.coverImg}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className={`${styles.cover} ${styles.coverPaper}`}>
+                          <div className={styles.coverBody}>
+                            <div className={styles.coverEmblemDark}>वेदान्त</div>
+                            <h4>VEDANTA PIYUSH</h4>
+                            <p>Spiritual Reflections in Regional Languages</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div className={styles.pubDetails}>
+                    <h3>Vedanta Piyush</h3>
+                    <p className={styles.pubIssueTitle}>
+                      {latestPiyush.title} · {latestPiyush.month} {latestPiyush.year}
+                    </p>
+                    <p>
+                      {latestPiyush.description ||
+                        'A dedicated regional language monthly publication offering lucid elucidations of Sanskrit verses, traditional Stotrams, and practical sadhana guidance for regional seekers.'}
+                    </p>
+                    <div className={styles.pubMeta}>
+                      <span>150+ Issues Archived</span>
+                      <span>Free Distribution</span>
+                      <span>{latestPiyush.month} {latestPiyush.year} Edition</span>
+                    </div>
+                    <div className={styles.pubActions}>
+                      <a
+                        href={latestPiyush.downloadUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.pubActionPrimary}
+                        aria-label={`Download ${latestPiyush.title} PDF issue`}
+                      >
+                        Download PDF (Free) ↗
+                      </a>
+                      {latestPiyush.readOnlineUrl && (
+                        <a
+                          href={latestPiyush.readOnlineUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.pubActionGhost}
+                          aria-label={`Read ${latestPiyush.title} online flipbook`}
+                        >
+                          Read Flipbook ↗
+                        </a>
+                      )}
+                    </div>
+                    <Link href="/publications?type=Vedanta+Piyush" className={styles.pubArchiveLink}>
+                      Browse Piyush Archives (157 Issues) →
+                    </Link>
+                  </div>
+                </TiltCard>
+              );
+            })()}
           </div>
         </div>
       </section>
@@ -631,7 +795,7 @@ export default function HomePage() {
             </h2>
             <div className={styles.sevaGrid}>
               <p className={styles.sevaText} data-reveal>
-                Vedanta Mission is sustained by the voluntary offerings of devotees and seekers. Your seva directly supports full-time Vedanta Brahmacharis, daily Annadanam, the free global distribution of spiritual literature, and the maintenance of Sri Gangeshwar Mahadev Mandir.
+                Vedanta Mission is sustained by the voluntary offerings of devotees and seekers. Your seva directly supports full-time Vedanta Brahmacharis, daily Annadanam, the free global distribution of spiritual literature, and the maintenance of the Shiv Mandir.
               </p>
               <div className={styles.sevaActions} data-reveal>
                 <Magnetic>

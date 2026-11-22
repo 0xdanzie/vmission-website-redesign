@@ -7,7 +7,7 @@
   --paper: #f4f1ea;
   --paper-2: #ebe6da;
   --mute: #5c5750;
-  --accent: #e06328;
+  --accent: var(--vm-brand-orange, #C96622);
   --rule: rgba(11, 11, 11, 0.14);
   --serif: var(--font-serif, 'Cormorant Garamond', serif);
 

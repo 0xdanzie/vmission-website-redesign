@@ -251,7 +251,7 @@ export default function AdminCoursesPage() {
                     <td>
                       <span className={styles.regBadge} style={{
                         background: 'var(--vm-bhagwa-subtle, rgba(224, 99, 40, 0.08))',
-                        color: 'var(--vm-gerua, #C84E17)',
+                        color: 'var(--vm-brand-orange, #C96622)',
                         border: '1px solid rgba(224, 99, 40, 0.2)',
                       }}>
                         {c.format}
@@ -407,7 +407,7 @@ export default function AdminCoursesPage() {
                   id="course-publish-checkbox"
                   checked={isPublished}
                   onChange={(e) => setIsPublished(e.target.checked)}
-                  style={{ width: '18px', height: '18px', accentColor: 'var(--vm-bhagwa, #E06328)', cursor: 'pointer' }}
+                  style={{ width: '18px', height: '18px', accentColor: 'var(--vm-brand-orange, #C96622)', cursor: 'pointer' }}
                 />
                 <label htmlFor="course-publish-checkbox" style={{ cursor: 'pointer', fontSize: '0.84375rem' }}>
                   <strong style={{ color: 'var(--vm-text, #221D1A)' }}>Publish live to public website</strong>

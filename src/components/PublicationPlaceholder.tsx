@@ -26,7 +26,7 @@ export default function PublicationPlaceholder({ publication, className = '', va
       catClass = styles.catPiyush;
       break;
     case 'E-Books':
-      seriesName = 'CANONICAL E-BOOK';
+      seriesName = 'DIGITAL E-BOOK';
       seriesSublabel = publication.author ? `By ${publication.author}` : 'Vedanta Publication Series';
       catClass = styles.catEbook;
       break;

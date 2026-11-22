@@ -3,19 +3,19 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Connect with the Ashram | Contact Vedanta Mission, Indore',
   description:
-    'Reach Vedanta Ashram in Indore. Physical address, visit guidelines, Sri Gangeshwar Mahadev Mandir darshan hours, office helplines, or submit an institutional inquiry.',
+    'Reach Vedanta Ashram in Indore. Physical address, visit guidelines, Shiv Mandir darshan hours, office helplines, or submit an institutional inquiry.',
   keywords: [
     'Contact Vedanta Ashram',
     'Vedanta Mission Indore',
     'Vedanta Ashram directions',
-    'Sri Gangeshwar Mahadev Mandir darshan hours',
+    'Shiv Mandir darshan hours',
     'Swami Atmananda Saraswati contact',
     'Sudama Nagar Indore ashram',
   ],
   openGraph: {
     title: 'Connect with the Ashram | Contact Vedanta Mission, Indore',
     description:
-      'Reach Vedanta Ashram in Indore. Physical address, visit guidelines, Sri Gangeshwar Mahadev Mandir darshan hours, office helplines, or submit an institutional inquiry.',
+      'Reach Vedanta Ashram in Indore. Physical address, visit guidelines, Shiv Mandir darshan hours, office helplines, or submit an institutional inquiry.',
     url: 'https://vmission.org.in/contact/',
     siteName: 'Vedanta Mission',
     locale: 'en_IN',

@@ -11,9 +11,9 @@
   --mute-dark: #9d988e;
   --line: rgba(11, 11, 11, 0.14);
   --line-dark: rgba(243, 241, 236, 0.16);
-  --accent: #e06328;
-  --accent-soft: #f0753b;
-  --accent-deep: #b8481a;
+  --accent: var(--vm-brand-orange, #C96622);
+  --accent-soft: var(--vm-brand-orange, #C96622);
+  --accent-deep: var(--vm-brand-orange, #C96622);
   --tight: 'Inter Tight', system-ui, sans-serif;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -21,6 +21,10 @@
   color: var(--ink);
   font-family: var(--font-ui);
   overflow-x: clip;
+}
+
+.ashram section[id] {
+  scroll-margin-top: calc(var(--nav-height, 76px) + 2rem);
 }
 
 /* Global h1–h6 rule forces a dark colour. Headings inherit their section's colour. */
@@ -270,7 +274,7 @@
   inset: 0;
   background:
     linear-gradient(180deg, rgba(11, 11, 11, 0.7) 0%, rgba(11, 11, 11, 0.2) 32%, rgba(11, 11, 11, 0.92) 100%),
-    linear-gradient(90deg, rgba(11, 11, 11, 0.65) 0%, transparent 68%);
+    linear-gradient(90deg, rgba(11, 11, 11, 0.76) 0%, rgba(11, 11, 11, 0.45) 40%, transparent 72%);
 }
 
 .heroInner {
@@ -294,6 +298,14 @@
   line-height: 0.88;
   letter-spacing: -0.065em;
   margin: 0 0 clamp(2rem, 5vh, 3.5rem);
+}
+
+.titleWordWhite {
+  color: var(--paper, #f4f1ea);
+}
+
+.titleWordOrange {
+  color: var(--vm-brand-orange, #C96622);
 }
 
 .heroTitle .lineMask {
@@ -380,10 +392,21 @@
 }
 
 .mainFrame {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 16 / 10;
+  max-height: 540px;
+  background: var(--paper-2);
+  display: block;
+  overflow: hidden;
 }
 
-.mainFrame img,
+.mainFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
 .secondaryFrame img,
 .spaceImg img,
 .communityFrame img {
@@ -391,10 +414,6 @@
   height: 100%;
   object-fit: cover;
   display: block;
-}
-
-.mainFrame img {
-  object-position: center 20%;
 }
 
 .secondaryFrame img {
@@ -411,14 +430,15 @@
 
 .secondaryFigure {
   position: absolute;
-  right: -12%;
-  bottom: -14%;
-  width: 56%;
+  right: -5%;
+  bottom: -10%;
+  width: 42%;
   margin: 0;
   background: var(--paper);
-  padding: 0.6rem;
+  padding: 0.5rem;
   border: 1px solid var(--line);
   border-radius: calc(var(--vm-radius-image, 16px) + 4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
 }
 
 .secondaryFrame {
@@ -547,11 +567,19 @@
 }
 
 .timeName {
-  font-size: 0.7rem;
+  font-family: var(--tight);
+  font-size: clamp(0.78rem, 1.1vw, 0.92rem);
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--mute-dark);
+  color: var(--accent-soft);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.75rem;
+  background: rgba(224, 90, 43, 0.1);
+  border: 1px solid rgba(224, 90, 43, 0.25);
+  border-radius: 999px;
+  width: fit-content;
 }
 
 .node {

@@ -155,12 +155,12 @@ export default function CinematicEntryOverlay() {
         <div className={styles.atmosphereRefinement} />
       </div>
 
-      {/* Layer 2: Consecrated White Shivling with Realistic Contact Shadow */}
+      {/* Layer 2: Sacred White Shivling with Realistic Contact Shadow */}
       <div className={styles.shivlingLayer}>
         <div className={styles.shivlingWrapper}>
           <img
             src={shivlingSrc}
-            alt="Sri Gangeshwar Mahadev Shivling"
+            alt="Shiv Mandir Shivling"
             className={styles.shivlingImg}
             loading="eager"
             fetchPriority="high"

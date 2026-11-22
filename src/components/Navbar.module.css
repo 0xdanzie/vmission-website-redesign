@@ -7,7 +7,7 @@
   --nb-paper: #f4f1ea;
   --nb-mute: rgba(244, 241, 234, 0.6);
   --nb-line: rgba(244, 241, 234, 0.14);
-  --nb-accent: #e06328;
+  --nb-accent: var(--vm-brand-orange, #C96622);
 
   position: fixed;
   top: 0;
@@ -203,26 +203,168 @@
 .actions {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.75rem;
   flex-shrink: 0;
 }
 
-.btnContact {
-  padding: 0.55rem 0.9rem;
+.contactDropdownWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.btnContactGroup {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--nb-line);
+  border-radius: 999px;
+  background: transparent;
+  transition: border-color 0.25s ease;
+}
+
+.btnContactGroup:hover,
+.btnContactGroup:focus-within,
+.btnContactActive {
+  border-color: var(--nb-accent);
+}
+
+.btnContactLabel {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.5rem 0.55rem 0.95rem;
+  font-family: var(--font-ui, 'Plus Jakarta Sans', sans-serif);
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--nb-paper);
   text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.btnContactLabel:hover,
+.btnContactLabel:focus-visible {
+  color: var(--nb-accent);
+}
+
+.btnContactTrigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.8rem 0.55rem 0.25rem;
+  background: transparent;
+  border: none;
+  color: var(--nb-paper);
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.btnContactTrigger:hover,
+.btnContactTrigger:focus-visible {
+  color: var(--nb-accent);
+}
+
+.btnContact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.9rem;
+  font-family: var(--font-ui, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--nb-paper);
+  background: transparent;
   border: 1px solid var(--nb-line);
   border-radius: 999px;
+  cursor: pointer;
   transition: border-color 0.25s ease, color 0.25s ease;
 }
 
 .btnContact:hover,
-.btnContact:focus-visible {
-  border-color: var(--nb-paper);
+.btnContact:focus-visible,
+.btnContactActive {
+  border-color: var(--nb-accent);
+  color: var(--nb-accent);
+}
+
+.contactDropdownPanel {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  min-width: 290px;
+  background: var(--nb-ink);
+  border: 1px solid var(--nb-line);
+  border-top: 2px solid var(--nb-accent);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.65);
+  animation: nbDropIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  z-index: 1002;
+  border-radius: 4px;
+  padding: 0.5rem 0;
+}
+
+.contactDropdownItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.7rem 1.15rem;
+  text-decoration: none;
+  color: var(--nb-paper);
+  transition: background 0.2s ease, padding-left 0.25s ease;
+}
+
+.contactDropdownItem:hover,
+.contactDropdownItem:focus-visible {
+  background: rgba(244, 241, 234, 0.06);
+  padding-left: 1.45rem;
+}
+
+.contactDropdownLabel {
+  font-family: 'Inter Tight', var(--font-ui, sans-serif);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--nb-paper);
+}
+
+.contactDropdownDesc {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--nb-mute);
+}
+
+/* Subchildren pill list in Dropdown panels */
+.subChildrenList {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+  padding: 0;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.subChildPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--nb-accent);
+  background: rgba(224, 90, 43, 0.1);
+  border: 1px solid rgba(224, 90, 43, 0.25);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.subChildPill:hover,
+.subChildPill:focus-visible {
+  background: var(--nb-accent);
+  color: var(--nb-ink);
+  border-color: var(--nb-accent);
 }
 
 .btnDonate {
@@ -296,7 +438,8 @@
     display: none;
   }
 
-  .btnContact {
+  .btnContact,
+  .contactDropdownWrapper {
     display: none;
   }
 
@@ -310,6 +453,12 @@
 @media (max-width: 560px) {
   .inner {
     min-height: 64px;
+  }
+
+  .brandPrimary img {
+    height: 46px !important;
+    width: auto !important;
+    max-width: 154px;
   }
 
   .btnDonate {

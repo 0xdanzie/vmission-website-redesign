@@ -178,7 +178,7 @@ export default async function PublicationDetailPage({ params }: PageProps) {
             <div className={styles.detailsCol}>
               <div className={styles.synopsisCard}>
                 <span className={styles.sectionOverline}>Archive Folio &amp; Synopsis</span>
-                <h2 className={styles.synopsisTitle}>About this Canonical Edition</h2>
+                <h2 className={styles.synopsisTitle}>About this Edition</h2>
                 <p className={styles.synopsisText}>
                   {publication.description ||
                     'An authentic monthly journal or treatise preserving the living commentaries and discourses of Pujya Swami Atmananda Saraswati and the traditional Acharyas of Vedanta Ashram, Indore.'}

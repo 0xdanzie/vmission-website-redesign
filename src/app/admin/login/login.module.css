@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   background: var(--vm-sand, #FAF6EE);
-  background-image: radial-gradient(circle at 50% 20%, rgba(224, 99, 40, 0.04) 0%, transparent 65%);
+  background-image: radial-gradient(circle at 50% 20%, rgba(201, 102, 34, 0.04) 0%, transparent 65%);
   padding: var(--space-6, 24px) var(--space-4, 16px);
   font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
 }
@@ -60,7 +60,7 @@
 .securityNotice {
   background: var(--vm-ivory, #FDFBF7);
   border: 1px solid var(--vm-sand-border, #DFD7C7);
-  border-left: 3px solid var(--vm-bhagwa, #E06328);
+  border-left: 3px solid var(--vm-brand-orange, #C96622);
   border-radius: 6px;
   padding: 10px 14px;
   display: flex;
@@ -69,7 +69,7 @@
 }
 
 .noticeIcon {
-  color: var(--vm-bhagwa, #E06328);
+  color: var(--vm-brand-orange, #C96622);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -132,7 +132,7 @@
 
 .input:focus {
   outline: none;
-  border-color: var(--vm-bhagwa, #E06328);
+  border-color: var(--vm-brand-orange, #C96622);
   box-shadow: 0 0 0 3px rgba(224, 99, 40, 0.15);
 }
 
@@ -145,7 +145,7 @@
 .submitBtn {
   margin-top: 6px;
   padding: 11px 18px;
-  background: var(--vm-bhagwa, #E06328);
+  background: var(--vm-brand-orange, #C96622);
   color: #FFFFFF;
   border: none;
   border-radius: 6px;
@@ -161,7 +161,7 @@
 }
 
 .submitBtn:hover:not(:disabled) {
-  background: var(--vm-gerua, #C84E17);
+  background: var(--vm-brand-orange, #C96622);
   box-shadow: 0 3px 8px rgba(200, 78, 23, 0.35);
   transform: translateY(-1px);
 }
@@ -183,7 +183,7 @@
 
 .returnLink {
   font-size: 0.8125rem;
-  color: var(--vm-gerua, #C84E17);
+  color: var(--vm-brand-orange, #C96622);
   text-decoration: none;
   font-weight: 600;
   display: inline-flex;
@@ -194,7 +194,7 @@
 }
 
 .returnLink:hover {
-  color: var(--vm-bhagwa, #E06328);
+  color: var(--vm-brand-orange, #C96622);
   text-decoration: underline;
 }
 

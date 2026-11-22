@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <radialGradient id="portraitGlow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FAF2E8" />
+      <stop offset="60%" stop-color="#EEDAC5" />
+      <stop offset="100%" stop-color="#D4BA92" />
+    </radialGradient>
+    <linearGradient id="robeSaffron" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D95D39" />
+      <stop offset="100%" stop-color="#9E381C" />
+    </linearGradient>
+  </defs>
+
+  <rect width="500" height="500" fill="url(#portraitGlow)" />
+  <circle cx="250" cy="250" r="235" fill="none" stroke="#C5A059" stroke-width="3" />
+  <circle cx="250" cy="250" r="225" fill="none" stroke="#D95D39" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.6" />
+
+  <!-- Meditative Aura Halo -->
+  <circle cx="250" cy="190" r="130" fill="#FFF5E8" opacity="0.6" />
+
+  <!-- Traditional Sannyasi Saffron Robes Shoulders -->
+  <path d="M120 480 Q160 330 250 330 Q340 330 380 480 Z" fill="url(#robeSaffron)" />
+  <!-- Fold Drapes -->
+  <path d="M160 380 Q250 420 340 380" fill="none" stroke="#7A2B14" stroke-width="3" opacity="0.6" />
+  <path d="M190 420 Q250 450 310 420" fill="none" stroke="#7A2B14" stroke-width="2.5" opacity="0.6" />
+
+  <!-- Head & Facial Contour -->
+  <ellipse cx="250" cy="210" rx="65" ry="75" fill="#E8CDB5" />
+  
+  <!-- Sannyasi Shaved Head Silhouette with Dignified Contour -->
+  <path d="M185 200 C185 125 315 125 315 200 Z" fill="#DDBFA4" />
+
+  <!-- Gentle Meditative Eyes (Downcast in Self-Inquiry) -->
+  <path d="M210 205 Q225 215 240 205" fill="none" stroke="#4A3B32" stroke-width="2.5" stroke-linecap="round" />
+  <path d="M260 205 Q275 215 290 205" fill="none" stroke="#4A3B32" stroke-width="2.5" stroke-linecap="round" />
+  
+  <!-- Eyebrows -->
+  <path d="M205 195 Q225 188 245 195" fill="none" stroke="#685547" stroke-width="2.5" stroke-linecap="round" />
+  <path d="M255 195 Q275 188 295 195" fill="none" stroke="#685547" stroke-width="2.5" stroke-linecap="round" />
+
+  <!-- Sacred Tripundra / Tilak on Forehead -->
+  <line x1="230" y1="165" x2="270" y2="165" stroke="#FAF5EE" stroke-width="3" stroke-linecap="round" />
+  <line x1="228" y1="172" x2="272" y2="172" stroke="#FAF5EE" stroke-width="3" stroke-linecap="round" />
+  <line x1="230" y1="179" x2="270" y2="179" stroke="#FAF5EE" stroke-width="3" stroke-linecap="round" />
+  <circle cx="250" cy="172" r="3" fill="#D95D39" />
+
+  <!-- Nose & Compassionate Smile -->
+  <path d="M250 205 L247 232 L255 232" fill="none" stroke="#B8977E" stroke-width="2" stroke-linecap="round" />
+  <path d="M232 250 Q250 262 268 250" fill="none" stroke="#8A5A44" stroke-width="2.5" stroke-linecap="round" />
+
+  <!-- Rudraksha Mala Around Neck -->
+  <path d="M200 330 Q250 370 300 330" fill="none" stroke="#5A2E1A" stroke-width="6" stroke-dasharray="8 6" stroke-linecap="round" />
+
+  <!-- Bottom Name Banner -->
+  <rect x="75" y="440" width="350" height="36" fill="#221D1A" rx="4" stroke="#C5A059" stroke-width="1.5" />
+  <text x="250" y="463" font-family="'Cinzel', Georgia, serif" font-size="13" font-weight="700" fill="#E8D28A" text-anchor="middle" letter-spacing="1">
+    POOJYA SWAMI ATMANANDA SARASWATI
+  </text>
+</svg>

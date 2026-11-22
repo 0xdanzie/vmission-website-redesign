@@ -70,8 +70,8 @@ export default function CourseDetailClient({ course }: { course: Course }) {
       }
       : isSangyan
         ? {
-          img: '/images/vmission/ashram/gangeshwar-dome-closeup.jpg',
-          alt: 'Shri Gangeshwar Mahadev Mandir Shikhara and Sanctum, Indore',
+          img: '/gangeshwar-dome-closeup.jpg',
+          alt: 'Shiv Mandir Shikhara and Sanctum, Indore',
           caption: 'Vedic Cultural Foundation',
           sub: 'Community Study Circle',
         }

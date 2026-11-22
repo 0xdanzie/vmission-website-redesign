@@ -45,7 +45,7 @@
 /* Primary / Action Buttons */
 .btnAdd {
   padding: 8px 18px;
-  background: var(--vm-bhagwa, #E06328);
+  background: var(--vm-brand-orange, #C96622);
   color: #FFFFFF;
   border-radius: 6px;
   font-size: 0.84375rem;
@@ -61,7 +61,7 @@
 }
 
 .btnAdd:hover:not(:disabled) {
-  background: var(--vm-gerua, #C84E17);
+  background: var(--vm-brand-orange, #C96622);
   box-shadow: 0 2px 6px rgba(200, 78, 23, 0.35);
   transform: translateY(-1px);
 }
@@ -128,7 +128,7 @@
 .categoryBadge {
   display: inline-block;
   font-size: 0.6875rem;
-  color: var(--vm-gerua, #C84E17);
+  color: var(--vm-brand-orange, #C96622);
   font-weight: 600;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -352,7 +352,7 @@
 
 .btnSave {
   padding: 8px 20px;
-  background: var(--vm-bhagwa, #E06328);
+  background: var(--vm-brand-orange, #C96622);
   color: #FFFFFF;
   border: none;
   border-radius: 6px;
@@ -367,7 +367,7 @@
 }
 
 .btnSave:hover:not(:disabled) {
-  background: var(--vm-gerua, #C84E17);
+  background: var(--vm-brand-orange, #C96622);
   box-shadow: 0 2px 6px rgba(200, 78, 23, 0.35);
 }
 

@@ -10,7 +10,7 @@
   --t-mute: #6c6861;
   --t-faint: #9d988e;
   --t-line: rgba(11, 11, 11, 0.14);
-  --t-accent: #e06328;
+  --t-accent: var(--vm-brand-orange, #C96622);
   --t-ease: cubic-bezier(0.16, 1, 0.3, 1);
 
   position: relative;
@@ -55,7 +55,7 @@
 /* Currently playing */
 .activeCard {
   border-color: var(--t-accent) !important;
-  box-shadow: 0 0 0 1px var(--t-accent), 0 26px 40px -30px rgba(224, 99, 40, 0.6) !important;
+  box-shadow: 0 0 0 1px var(--t-accent), 0 26px 40px -30px rgba(201, 102, 34, 0.6) !important;
 }
 
 .activeCard::before {

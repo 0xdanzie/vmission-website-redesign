@@ -37,7 +37,7 @@ const SEVA_CATEGORIES: SevaCategory[] = [
     id: 'pooja',
     title: 'Pooja & Abhisheka',
     icon: '🪔',
-    desc: 'Support daily Archana and Rudrabhishek offerings at Sri Gangeshwar Mahadev Mandir, as well as pujas on auspicious Ashram festivals or personal family occasions.',
+    desc: 'Support daily Archana and Rudrabhishek offerings at Shiv Mandir, as well as pujas on auspicious Ashram festivals or personal family occasions.',
     offerings: [
       {
         id: 'pooja-bday',
@@ -1030,8 +1030,8 @@ ${donorName}`;
 
           <figure className={styles.heroFigure} data-dn-hero-img>
             <img
-              src={getAssetPath('/images/vmission/ashram/gangeshwar-dome-closeup.jpg')}
-              alt="Sri Gangeshwar Mahadev Mandir dome and sanctum at Vedanta Ashram"
+              src={getAssetPath('/gangeshwar-dome-closeup.jpg')}
+              alt="Shiv Mandir dome and sanctum at Vedanta Ashram"
               className={styles.heroImg}
             />
           </figure>

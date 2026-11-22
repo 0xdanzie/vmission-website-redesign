@@ -20,6 +20,17 @@ interface EventMediaResult {
 }
 
 function getVerifiedEventMedia(event: VMEvent): EventMediaResult | null {
+  // 0. Event-specific localized legacy photograph
+  if (event.localImagePath || event.imageUrl) {
+    const src = event.localImagePath || event.imageUrl!;
+    return {
+      src,
+      alt: event.title,
+      caption: `Archival Photo: ${event.title}`,
+      focalPoint: { x: 50, y: 50 },
+    };
+  }
+
   const idLower = event.id.toLowerCase();
   const titleLower = event.title.toLowerCase();
   const cityLower = event.city.toLowerCase();
@@ -64,9 +75,9 @@ function getVerifiedEventMedia(event: VMEvent): EventMediaResult | null {
     }
     if (event.type === 'Celebration') {
       return {
-        src: '/images/vmission/ashram/gangeshwar-dome-closeup.jpg',
-        alt: 'Shri Gangeshwar Mahadev Mandir dome, Vedanta Ashram, Indore',
-        caption: 'Ashram Venue: Shri Gangeshwar Mahadev Mandir, Vedanta Ashram, Indore',
+        src: '/gangeshwar-dome-closeup.jpg',
+        alt: 'Shiv Mandir dome, Vedanta Ashram, Indore',
+        caption: 'Ashram Venue: Shiv Mandir, Vedanta Ashram, Indore',
         focalPoint: { x: 50, y: 15 },
       };
     }

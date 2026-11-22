@@ -275,8 +275,8 @@ function TeachingsLibrary() {
       <section className={styles.hero} data-hero aria-label="Jnana Ganga — The Living Stream of Vedanta">
         <div className={styles.heroMedia}>
           <Image
-            src="/images/vmission/ashram/teaching-hall-interior.jpg"
-            alt="Teaching sanctum and spiritual library of Vedanta Ashram, Indore"
+            src="/images/vmission/acharyas/guruji-teaching-closeup.jpg"
+            alt="Poojya Swami Atmananda Saraswati delivering Vedantic discourse at Vedanta Ashram"
             fill
             priority
             sizes="100vw"

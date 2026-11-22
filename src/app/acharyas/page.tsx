@@ -11,6 +11,7 @@ import Magnetic from '@/components/motion/Magnetic';
 import TiltCard from '@/components/motion/TiltCard';
 import { useScrollReveals } from '@/components/motion/useScrollReveals';
 import CinematicPreFooter from '@/components/cinematic/CinematicPreFooter';
+import { lineageMasters } from '@/data/acharyas';
 import styles from './page.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -207,6 +208,21 @@ export default function AcharyasPage() {
               </div>
             ))}
           </div>
+
+          <div className={styles.points} style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))', marginTop: 'clamp(2.5rem, 5vw, 4rem)' }}>
+            {lineageMasters.map((master) => (
+              <div key={master.id} className={styles.point} data-lineage-point>
+                <span className={styles.pointNum}>{master.role}</span>
+                <div className={styles.pointBarWrap}>
+                  <span className={styles.pointBar} data-point-bar />
+                </div>
+                <h3 className={styles.pointTitle}>{master.name}</h3>
+                <p className={styles.pointText}>
+                  {master.description} {master.historicalContext}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -251,7 +267,7 @@ export default function AcharyasPage() {
               <div className={styles.prose} data-reveal>
                 <p>{founder.shortBio}</p>
                 <p>
-                  Having completed intensive study of the Upanishads, Bhagavad Gita, and Brahma Sutras with Shankaracharya commentaries at Sandeepany Sadhanalaya in Mumbai, Swamiji dedicated his life to propagating unadulterated Advaita. Under his guidance, the Indore Ashram and its consecrated Sri Gangeshwar Mahadev Mandir have grown into a respected spiritual centre for residential study retreats, monthly journals, and scriptural publications.
+                  Having completed intensive study of the Upanishads, Bhagavad Gita, and Brahma Sutras with Shankaracharya commentaries at Sandeepany Sadhanalaya in Mumbai, Swamiji dedicated his life to propagating unadulterated Advaita. Under his guidance, the Indore Ashram and its sacred Shiv Mandir have grown into a respected spiritual centre for residential study retreats, monthly journals, and scriptural publications.
                 </p>
               </div>
 

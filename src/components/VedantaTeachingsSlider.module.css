@@ -1,0 +1,368 @@
+/* ============================================================
+   VEDANTA TEACHINGS CINEMATIC 16:9 SLIDER
+   Full-Width Restrained Editorial Showcase
+   ============================================================ */
+
+.sliderRoot {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  outline: none;
+}
+
+.sliderRoot:focus-visible {
+  outline: 2px solid var(--vm-brand-orange, #C96622);
+  outline-offset: 4px;
+}
+
+/* Visually hidden screen-reader announcement */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- 16:9 CINEMATIC STAGE ---------- */
+.stageFrame {
+  position: relative;
+  width: 100%;
+  border-radius: clamp(12px, 1.6vw, 18px);
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 30%, #1e1713 0%, #0c0907 100%);
+  border: 1px solid rgba(201, 102, 34, 0.28);
+  box-shadow:
+    0 24px 64px -14px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.stageAspect {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1672 / 941;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slideItem {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.985);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.slideActive {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  z-index: 3;
+}
+
+.slidePrev {
+  z-index: 2;
+}
+
+.slideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  border-radius: inherit;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ---------- SIDE NAVIGATION BUTTONS ---------- */
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: clamp(42px, 3.5vw, 54px);
+  height: clamp(42px, 3.5vw, 54px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(14, 11, 9, 0.75);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+}
+
+.navBtn:hover {
+  background: var(--vm-brand-orange, #C96622);
+  border-color: var(--vm-brand-orange, #C96622);
+  color: #ffffff;
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 8px 24px rgba(201, 102, 34, 0.4);
+}
+
+.navBtn:focus-visible {
+  outline: 2px solid var(--vm-brand-orange, #C96622);
+  outline-offset: 3px;
+}
+
+.navBtnPrev {
+  left: clamp(0.75rem, 2vw, 1.75rem);
+}
+
+.navBtnNext {
+  right: clamp(0.75rem, 2vw, 1.75rem);
+}
+
+.navIcon {
+  width: clamp(20px, 1.6vw, 26px);
+  height: clamp(20px, 1.6vw, 26px);
+  stroke: currentColor;
+}
+
+/* ---------- EDITORIAL CONTROLS BAR ---------- */
+.controlsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.5rem 0;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Counter */
+.counterBox {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-family: var(--tight);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  min-width: 70px;
+}
+
+.counterCurrent {
+  color: var(--vm-brand-orange, #C96622);
+  font-size: 1.35rem;
+}
+
+.counterDivider {
+  color: var(--line, rgba(11, 11, 11, 0.2));
+  font-weight: 400;
+}
+
+.counterTotal {
+  color: var(--mute, #5c5750);
+  font-size: 0.95rem;
+}
+
+/* Dots Group */
+.dotsGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
+.dotBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.dotBtn:focus-visible {
+  outline: 2px solid var(--vm-brand-orange, #C96622);
+  outline-offset: 2px;
+  border-radius: 999px;
+}
+
+.dotPill {
+  display: block;
+  width: 14px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--line, rgba(11, 11, 11, 0.18));
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dotBtn:hover .dotPill {
+  background: var(--mute, #5c5750);
+}
+
+.dotActive .dotPill {
+  width: 38px;
+  background: var(--vm-brand-orange, #C96622);
+  box-shadow: 0 0 10px rgba(201, 102, 34, 0.45);
+}
+
+/* Play/Pause Control */
+.pauseBox {
+  min-width: 70px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.playPauseBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid var(--line, rgba(11, 11, 11, 0.16));
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.playPauseBtn:hover {
+  border-color: var(--vm-brand-orange, #C96622);
+  color: var(--vm-brand-orange, #C96622);
+  background: rgba(201, 102, 34, 0.06);
+}
+
+.playPauseBtn:focus-visible {
+  outline: 2px solid var(--vm-brand-orange, #C96622);
+  outline-offset: 2px;
+}
+
+.controlIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.controlText {
+  line-height: 1;
+}
+
+/* ---------- RESPONSIVE BREAKPOINTS ---------- */
+@media (max-width: 768px) {
+  .sliderRoot {
+    max-width: 100%;
+    gap: 0.85rem;
+  }
+
+  .stageFrame {
+    border-radius: 10px;
+  }
+
+  .navBtn {
+    width: 38px;
+    height: 38px;
+    background: rgba(14, 11, 9, 0.82);
+  }
+
+  .navBtnPrev {
+    left: 0.4rem;
+  }
+
+  .navBtnNext {
+    right: 0.4rem;
+  }
+
+  .controlsBar {
+    padding: 0.25rem 0.2rem 0;
+    gap: 0.75rem;
+  }
+
+  .counterBox {
+    font-size: 1rem;
+    min-width: auto;
+  }
+
+  .counterCurrent {
+    font-size: 1.15rem;
+  }
+
+  .dotPill {
+    width: 8px;
+    height: 3px;
+  }
+
+  .dotActive .dotPill {
+    width: 22px;
+  }
+
+  .playPauseBtn {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.72rem;
+  }
+
+  .pauseBox {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .controlsBar {
+    justify-content: space-between;
+  }
+
+  .dotsGroup {
+    order: 3;
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+
+  .counterBox {
+    order: 1;
+  }
+
+  .pauseBox {
+    order: 2;
+  }
+}
+
+/* ---------- PREFERS REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .slideItem {
+    transition: opacity 0.2s ease;
+    transform: none !important;
+  }
+
+  .navBtn {
+    transition: none;
+    transform: translateY(-50%) !important;
+  }
+
+  .navBtn:hover {
+    transform: translateY(-50%) !important;
+  }
+
+  .dotPill {
+    transition: none;
+  }
+}

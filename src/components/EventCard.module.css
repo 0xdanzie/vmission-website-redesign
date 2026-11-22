@@ -9,7 +9,7 @@
   --card-paper-2: #e7e4dc;
   --card-mute: #6c6861;
   --card-line: rgba(11, 11, 11, 0.14);
-  --card-accent: #e06328;
+  --card-accent: var(--vm-brand-orange, #C96622);
   --card-ease: cubic-bezier(0.16, 1, 0.3, 1);
 
   position: relative;
